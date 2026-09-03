@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>כניסה לחשבון — כיוון</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');
+
+    :root {
+      --navy: #121a37;
+      --ink: #1d2746;
+      --teal: #0b9d78;
+      --coral: #ff6e61;
+      --yellow: #ffd25d;
+      --cloud: #f6f8fe;
+      --line: #e4e9f4;
+      --muted: #6c7691;
+      --white: #fff;
+      --shadow: 0 22px 52px rgba(20, 34, 75, .12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Heebo, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 91% 9%, #ddfff1 0, transparent 28%),
+        radial-gradient(circle at 5% 92%, #fff1d4 0, transparent 30%),
+        var(--cloud);
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    .nav {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy);
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: -1.3px;
+      text-decoration: none;
+    }
+
+    .mark {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 10px 10px 10px 2px;
+      color: #fff;
+      background: var(--coral);
+      transform: rotate(-5deg);
+    }
+
+    .nav-link {
+      color: var(--teal);
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: calc(100vh - 150px);
+      display: grid;
+      grid-template-columns: 1fr 460px;
+      gap: 70px;
+      align-items: center;
+      padding: 25px 0 70px;
+    }
+
+    .intro-label {
+      color: var(--teal);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .intro h1 {
+      margin: 10px 0 14px;
+      color: var(--navy);
+      font-size: 58px;
+      line-height: 1.04;
+      letter-spacing: -2.5px;
+    }
+
+    .intro h1 em {
+      color: var(--coral);
+      font-style: normal;
+    }
+
+    .intro p {
+      max-width: 470px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .login-card {
+      padding: 30px;
+      border: 1px solid #fff;
+      border-radius: 27px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .login-card h2 {
+      margin: 0 0 5px;
+      color: var(--navy);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .sub {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      color: #4e5b76;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      outline: none;
+      color: var(--ink);
+      background: #fff;
+      font: inherit;
+    }
+
+    .field input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px #dff7ed;
+    }
+
+    .password-row {
+      position: relative;
+    }
+
+    .show-password {
+      position: absolute;
+      top: 50%;
+      left: 11px;
+      border: 0;
+      color: var(--teal);
+      background: transparent;
+      font-family: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+
+    .button {
+      width: 100%;
+      margin-top: 8px;
+      padding: 13px 17px;
+      border: 0;
+      border-radius: 12px;
+      color: #fff;
+      background: var(--navy);
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: #202d57;
+    }
+
+    .button:disabled {
+      opacity: .65;
+      cursor: wait;
+    }
+
+    .forgot {
+      display: inline-block;
+      margin-top: 14px;
+      border: 0;
+      color: var(--teal);
+      background: transparent;
+      font-family: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .message {
+      display: none;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 11px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .message.show {
+      display: block;
+    }
+
+    .message.error {
+      color: #9e2f2a;
+      background: #fff0ef;
+    }
+
+    .message.success {
+      color: #08785c;
+      background: #e4faef;
+    }
+
+    .join {
+      margin: 22px 0 0;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .join a {
+      color: var(--teal);
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .security-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+      color: #54607a;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .security-icon {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      flex: 0 0 29px;
+      border-radius: 50%;
+      color: #08785c;
+      background: #dcf8ed;
+    }
+
+    @media (max-width: 780px) {
+      .page {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding-top: 15px;
+      }
+
+      .intro {
+        text-align: center;
+      }
+
+      .intro h1 {
+        font-size: 43px;
+      }
+
+      .intro p {
+        margin-inline: auto;
+      }
+
+      .login-card {
+        max-width: 460px;
+        width: 100%;
+        margin: auto;
+      }
+
+      .nav {
+        height: 68px;
+      }
+    }
+
+    @media (max-width: 410px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .intro h1 {
+        font-size: 38px;
+      }
+
+      .login-card {
+        padding: 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="container nav">
+    <a class="brand" href="index.html">
+      <span class="mark">↗</span>
+      כיוון
+    </a>
+
+    <a class="nav-link" href="index.html">
+      עמוד הבית
+    </a>
+  </nav>
+
+  <main class="container page">
+    <section class="intro">
+      <div class="intro-label">טוב לראות אותך שוב</div>
+
+      <h1>
+        ממשיכים בדיוק<br>
+        מה<em>כיוון</em> שלך.
+      </h1>
+
+      <p>
+        הכניסה לחשבון מחזירה אותך לפרופיל האישי,
+        לפרטים ששמרת ולכל האפשרויות באתר.
+      </p>
+
+      <div class="security-note">
+        <span class="security-icon">✓</span>
+        החשבון והסיסמה נשמרים בצורה מאובטחת באמצעות Firebase
+      </div>
+    </section>
+
+    <section class="login-card">
+      <h2>כניסה לחשבון</h2>
+
+      <p class="sub">
+        הזינו את האימייל והסיסמה שאיתם נרשמתם.
+      </p>
+
+      <form id="login-form">
+        <div class="field">
+          <label for="email">אימייל</label>
+
+          <input
+            id="email"
+            type="email"
+            autocomplete="email"
+            placeholder="name@email.com"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="password">סיסמה</label>
+
+          <div class="password-row">
+            <input
+              id="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="הסיסמה שלך"
+              minlength="6"
+              required
+            >
+
+            <button
+              class="show-password"
+              id="show-password"
+              type="button"
+            >
+              הצגה
+            </button>
+          </div>
+        </div>
+
+        <button class="button" id="login-button" type="submit">
+          כניסה לאזור שלי ←
+        </button>
+
+        <button class="forgot" id="forgot-password" type="button">
+          שכחתי את הסיסמה
+        </button>
+
+        <div class="message" id="message"></div>
+      </form>
+
+      <p class="join">
+        עדיין אין לך חשבון?
+        <a href="join.html">להרשמה ופתיחת פרופיל</a>
+      </p>
+    </section>
+  </main>
+
+  <script type="module">
+    import {
+      auth,
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail,
+      onAuthStateChanged
+    } from "./firebase.js";
+
+    const form = document.getElementById("login-form");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const loginButton = document.getElementById("login-button");
+    const forgotButton = document.getElementById("forgot-password");
+    const showPasswordButton =
+      document.getElementById("show-password");
+    const message = document.getElementById("message");
+
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = "message show " + type;
+    }
+
+    function errorMessage(code) {
+      const messages = {
+        "auth/invalid-email": "כתובת האימייל אינה תקינה.",
+        "auth/invalid-credential":
+          "האימייל או הסיסמה אינם נכונים.",
+        "auth/user-disabled":
+          "החשבון הזה הושבת.",
+        "auth/too-many-requests":
+          "בוצעו יותר מדי ניסיונות. נסו שוב מאוחר יותר.",
+        "auth/network-request-failed":
+          "לא הצלחנו להתחבר לאינטרנט."
+      };
+
+      return messages[code] ||
+        "לא הצלחנו להיכנס לחשבון. בדקו את הפרטים ונסו שוב.";
+    }
+
+    showPasswordButton.addEventListener("click", () => {
+      const hidden = passwordInput.type === "password";
+
+      passwordInput.type = hidden ? "text" : "password";
+      showPasswordButton.textContent = hidden ? "הסתרה" : "הצגה";
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      loginButton.disabled = true;
+      loginButton.textContent = "נכנסים לחשבון...";
+
+      try {
+        await signInWithEmailAndPassword(
+          auth,
+          emailInput.value.trim(),
+          passwordInput.value
+        );
+
+        showMessage("הכניסה הצליחה. מעבירים אותך לאזור האישי...", "success");
+
+        window.location.href = "dashboard.html";
+      } catch (error) {
+        showMessage(errorMessage(error.code), "error");
+
+        loginButton.disabled = false;
+        loginButton.textContent = "כניסה לאזור שלי ←";
+      }
+    });
+
+    forgotButton.addEventListener("click", async () => {
+      const email = emailInput.value.trim();
+
+      if (!email) {
+        showMessage(
+          "כתבו קודם את כתובת האימייל שלכם.",
+          "error"
+        );
+
+        emailInput.focus();
+        return;
+      }
+
+      forgotButton.disabled = true;
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+
+        showMessage(
+          "שלחנו לאימייל קישור לבחירת סיסמה חדשה.",
+          "success"
+        );
+      } catch (error) {
+        showMessage(errorMessage(error.code), "error");
+      } finally {
+        forgotButton.disabled = false;
+      }
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        window.location.href = "dashboard.html";
+      }
+    });
+  </script>
+</body>
+</html>

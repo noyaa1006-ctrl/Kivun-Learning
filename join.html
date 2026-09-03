@@ -2,331 +2,484 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>בונים פרופיל — כיוון</title>
 
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap");
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');
 
     :root {
-      --navy:#121a37;
-      --ink:#1d2746;
-      --teal:#0b9d78;
-      --coral:#ff6e61;
-      --yellow:#ffd25d;
-      --cloud:#f6f8fe;
-      --line:#e4e9f4;
-      --muted:#6c7691;
-      --shadow:0 22px 52px rgba(20,34,75,.12);
+      --navy: #121a37;
+      --ink: #1d2746;
+      --teal: #0b9d78;
+      --coral: #ff6e61;
+      --yellow: #ffd25d;
+      --cloud: #f6f8fe;
+      --line: #e4e9f4;
+      --muted: #6c7691;
+      --white: #fff;
+      --shadow: 0 22px 52px rgba(20, 34, 75, .12);
     }
 
-    * { box-sizing:border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
-      min-height:100vh;
-      margin:0;
+      margin: 0;
+      min-height: 100vh;
+      font-family: Heebo, Arial, sans-serif;
+      color: var(--ink);
       background:
-        radial-gradient(circle at 91% 9%,#ddfff1 0,transparent 28%),
-        radial-gradient(circle at 5% 92%,#fff1d4 0,transparent 30%),
+        radial-gradient(circle at 91% 9%, #ddfff1 0, transparent 28%),
+        radial-gradient(circle at 5% 92%, #fff1d4 0, transparent 30%),
         var(--cloud);
-      color:var(--ink);
-      font-family:Heebo,Arial,sans-serif;
     }
 
     .container {
-      width:min(1120px,calc(100% - 40px));
-      margin:auto;
+      width: min(1120px, calc(100% - 40px));
+      margin: auto;
     }
 
     .nav {
-      height:80px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .brand {
-      display:flex;
-      align-items:center;
-      gap:8px;
-      color:var(--navy);
-      font-size:29px;
-      font-weight:900;
-      text-decoration:none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy);
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: -1.3px;
+      text-decoration: none;
     }
 
     .mark {
-      width:29px;
-      height:29px;
-      display:grid;
-      place-items:center;
-      border-radius:10px 10px 10px 2px;
-      background:var(--coral);
-      color:#fff;
-      transform:rotate(-5deg);
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 10px 10px 10px 2px;
+      color: #fff;
+      background: var(--coral);
+      transform: rotate(-5deg);
+    }
+
+    .login {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
     }
 
     .login a {
-      color:var(--teal);
-      font-size:14px;
-      font-weight:800;
-      text-decoration:none;
+      color: var(--teal);
+      text-decoration: none;
     }
 
     .page {
-      display:grid;
-      grid-template-columns:.85fr 1.15fr;
-      gap:48px;
-      align-items:start;
-      padding:30px 0 70px;
-    }
-
-    .intro {
-      position:sticky;
-      top:25px;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 52px;
+      align-items: center;
+      padding: 32px 0 70px;
     }
 
     .intro h1 {
-      margin:10px 0 13px;
-      color:var(--navy);
-      font-size:54px;
-      line-height:1.04;
-      letter-spacing:-2.5px;
+      margin: 10px 0 13px;
+      color: var(--navy);
+      font-size: 54px;
+      line-height: 1.04;
+      letter-spacing: -2.5px;
     }
 
     .intro h1 em {
-      color:var(--coral);
-      font-style:normal;
+      color: var(--coral);
+      font-style: normal;
     }
 
     .intro p {
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.65;
+      max-width: 450px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.65;
     }
 
     .benefits {
-      padding:0;
-      list-style:none;
+      margin: 26px 0;
+      padding: 0;
+      list-style: none;
     }
 
     .benefits li {
-      margin:12px 0;
-      color:#54607a;
-      font-weight:700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 12px 0;
+      color: #54607a;
+      font-weight: 700;
     }
 
     .check {
-      display:inline-grid;
-      place-items:center;
-      width:25px;
-      height:25px;
-      margin-left:8px;
-      border-radius:50%;
-      background:#dcf8ed;
-      color:#078361;
+      display: grid;
+      place-items: center;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      color: #078361;
+      background: #dcf8ed;
+      font-size: 13px;
     }
 
     .form-card {
-      border-radius:27px;
-      padding:27px;
-      background:#fff;
-      box-shadow:var(--shadow);
+      padding: 27px;
+      border: 1px solid #fff;
+      border-radius: 27px;
+      background: #fff;
+      box-shadow: var(--shadow);
     }
 
     .progress {
-      display:flex;
-      gap:7px;
-      margin-bottom:24px;
+      display: flex;
+      gap: 7px;
+      margin-bottom: 24px;
     }
 
     .progress i {
-      height:5px;
-      flex:1;
-      border-radius:99px;
-      background:#e5eaf4;
+      height: 5px;
+      flex: 1;
+      border-radius: 99px;
+      background: #e5eaf4;
     }
 
-    .progress i.active { background:var(--teal); }
+    .progress i.active {
+      background: var(--teal);
+    }
 
     .step-title {
-      margin:0 0 4px;
-      font-size:27px;
-      font-weight:900;
+      margin: 0 0 4px;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -1px;
     }
 
     .sub {
-      margin:0 0 20px;
-      color:var(--muted);
-      font-size:14px;
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
     }
 
     .roles {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:11px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 11px;
     }
 
     .role {
-      border:1.5px solid var(--line);
-      border-radius:16px;
-      padding:16px;
-      background:#fff;
-      color:var(--ink);
-      font:inherit;
-      text-align:right;
-      cursor:pointer;
+      padding: 15px;
+      border: 1.5px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      font-family: inherit;
+      text-align: right;
+      cursor: pointer;
+      transition: .18s;
     }
 
     .role:hover,
     .role.selected {
-      border-color:var(--teal);
-      background:#effdf7;
+      border-color: var(--teal);
+      background: #effdf7;
     }
 
-    .role b,
+    .role .icon {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 25px;
+    }
+
+    .role b {
+      display: block;
+      font-size: 17px;
+    }
+
     .role span {
-      display:block;
-    }
-
-    .role b { font-size:17px; }
-
-    .role span {
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .role-icon {
-      margin-bottom:7px;
-      font-size:25px!important;
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
     }
 
     .fields {
-      display:grid;
-      gap:13px;
-    }
-
-    .two {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
+      display: grid;
+      gap: 12px;
     }
 
     .field label {
-      display:block;
-      margin-bottom:6px;
-      color:#4e5b76;
-      font-size:13px;
-      font-weight:800;
+      display: block;
+      margin: 0 0 6px;
+      color: #4e5b76;
+      font-size: 13px;
+      font-weight: 800;
     }
 
     .field input,
     .field textarea,
     .field select {
-      width:100%;
-      border:1px solid var(--line);
-      border-radius:11px;
-      padding:12px;
-      background:#fff;
-      color:var(--ink);
-      font:inherit;
-      outline:0;
-    }
-
-    .field textarea {
-      min-height:90px;
-      resize:vertical;
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      outline: 0;
+      color: var(--ink);
+      background: #fff;
+      font: inherit;
     }
 
     .field input:focus,
     .field textarea:focus,
     .field select:focus {
-      border-color:var(--teal);
-      box-shadow:0 0 0 3px #dff7ed;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px #dff7ed;
     }
 
-    .photo-box {
-      display:flex;
-      align-items:center;
-      gap:14px;
-      border:1px dashed #bdc7da;
-      border-radius:15px;
-      padding:13px;
+    .field textarea {
+      min-height: 84px;
+      resize: vertical;
     }
 
-    .photo-preview {
-      width:72px;
-      height:72px;
-      flex:none;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      border-radius:18px;
-      background:linear-gradient(135deg,#ff9d6e,#c64f62);
-      color:#fff;
-      font-size:27px;
-      font-weight:900;
-    }
-
-    .photo-preview img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 11px;
     }
 
     .button-row {
-      display:flex;
-      gap:10px;
-      margin-top:22px;
+      display: flex;
+      gap: 10px;
+      margin-top: 22px;
     }
 
     .button {
-      border:0;
-      border-radius:12px;
-      padding:13px 17px;
-      font:inherit;
-      font-weight:900;
-      cursor:pointer;
+      padding: 13px 17px;
+      border: 0;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .button:disabled {
+      opacity: .65;
+      cursor: wait;
     }
 
     .primary {
-      flex:1;
-      background:var(--navy);
-      color:#fff;
+      flex: 1;
+      color: #fff;
+      background: var(--navy);
     }
 
     .secondary {
-      background:#f1f4fa;
-      color:#5e6a84;
+      color: #5e6a84;
+      background: #f1f4fa;
     }
 
     .notice {
-      margin:6px 0 0;
-      color:var(--muted);
-      font-size:12px;
+      margin: 13px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
     }
 
-    .done {
-      border-radius:15px;
-      padding:18px;
-      background:#e4faef;
-      color:#08785c;
-      font-weight:800;
+    .message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 11px;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.5;
     }
 
-    .hidden { display:none!important; }
-
-    @media(max-width:780px) {
-      .page { grid-template-columns:1fr; }
-      .intro { position:static;text-align:center; }
-      .intro h1 { font-size:43px; }
+    .message.show {
+      display: block;
     }
 
-    @media(max-width:480px) {
-      .container { width:min(100% - 28px,1120px); }
-      .two,.roles { grid-template-columns:1fr; }
-      .form-card { padding:20px; }
-      .intro h1 { font-size:38px; }
+    .message.error {
+      color: #9e2f2a;
+      background: #fff0ef;
+    }
+
+    .message.success {
+      color: #08785c;
+      background: #e4faef;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .preview {
+      padding: 20px;
+      border-radius: 25px;
+      color: #fff;
+      background: var(--navy);
+      box-shadow: 15px 17px 0 var(--yellow);
+      transform: rotate(2deg);
+      transition: .2s;
+    }
+
+    .preview-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #cbd5ee;
+      font-size: 12px;
+    }
+
+    .preview-card,
+    .student-preview {
+      margin-top: 14px;
+      padding: 17px;
+      border-radius: 17px;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    .avatar {
+      display: grid;
+      place-items: center;
+      width: 62px;
+      height: 62px;
+      border-radius: 17px;
+      color: #fff;
+      background: linear-gradient(135deg, #ff9d6e, #c64f62);
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .profile-head {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .profile-head b {
+      font-size: 19px;
+    }
+
+    .profile-head span {
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .preview-card p {
+      margin: 13px 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .profile-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .profile-tags i {
+      padding: 5px 7px;
+      border-radius: 7px;
+      color: #08785c;
+      background: #e5faf0;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 800;
+    }
+
+    .profile-price {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      font-weight: 900;
+    }
+
+    .profile-price small {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .goal {
+      margin-top: 12px;
+      padding: 11px;
+      border-radius: 12px;
+      color: #33415f;
+      background: #f2f7ff;
+      font-size: 14px;
+    }
+
+    @media (max-width: 780px) {
+      .page {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding-top: 10px;
+      }
+
+      .intro {
+        text-align: center;
+      }
+
+      .intro h1 {
+        font-size: 43px;
+      }
+
+      .intro p {
+        margin-inline: auto;
+      }
+
+      .benefits {
+        display: inline-block;
+        text-align: right;
+      }
+
+      .preview {
+        max-width: 440px;
+        margin: auto;
+      }
+
+      .nav {
+        height: 68px;
+      }
+    }
+
+    @media (max-width: 410px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .roles,
+      .two {
+        grid-template-columns: 1fr;
+      }
+
+      .form-card {
+        padding: 20px;
+      }
+
+      .intro h1 {
+        font-size: 38px;
+      }
     }
   </style>
 </head>
@@ -339,15 +492,14 @@
     </a>
 
     <span class="login">
-      <a href="index.html">עמוד הבית</a>
-      ·
-      <a href="dashborad.html">האזור שלי</a>
+      כבר יש לך חשבון?
+      <a href="login.html">כניסה</a>
     </span>
   </nav>
 
   <main class="container page">
     <section class="intro">
-      <div style="color:var(--teal);font-weight:900">
+      <div style="color:var(--teal);font-weight:900;font-size:14px">
         הפרופיל שלך מתחיל כאן
       </div>
 
@@ -357,82 +509,69 @@
       </h1>
 
       <p>
-        כל אחד בוחר וכותב את הפרטים שמתאימים לו —
-        בלי רשימות מקצועות מוגבלות.
+        כמה פרטים קצרים, ואפשר להתחיל למצוא את ההתאמה
+        הנכונה — או לתת לתלמידים למצוא אותך.
       </p>
 
       <ul class="benefits">
-        <li><span class="check">✓</span>פרופיל אישי</li>
-        <li><span class="check">✓</span>מקצועות לבחירתך</li>
-        <li><span class="check">✓</span>שליטה מלאה בפרטים</li>
+        <li><span class="check">✓</span> חשבון אישי אמיתי</li>
+        <li><span class="check">✓</span> שליטה מלאה בפרטים</li>
+        <li><span class="check">✓</span> שמירה מאובטחת של המשתמש</li>
       </ul>
     </section>
 
-    <section class="form-card">
-      <div class="progress">
-        <i class="active"></i>
-        <i></i>
-        <i></i>
-      </div>
-
-      <div id="step-1">
-        <h2 class="step-title">איך נעים להכיר?</h2>
-        <p class="sub">בחרו את סוג הפרופיל שתרצו לפתוח.</p>
-
-        <div class="roles">
-          <button
-            class="role selected"
-            data-role="student"
-            type="button"
-          >
-            <span class="role-icon">◎</span>
-            <b>תלמיד/ה או הורה</b>
-            <span>לחפש מורים ומקצועות</span>
-          </button>
-
-          <button
-            class="role"
-            data-role="teacher"
-            type="button"
-          >
-            <span class="role-icon">↗</span>
-            <b>מורה/מדריך/ה</b>
-            <span>ליצור פרופיל מקצועי</span>
-          </button>
+    <section>
+      <div class="form-card">
+        <div class="progress">
+          <i class="active"></i>
+          <i></i>
+          <i></i>
         </div>
 
-        <div class="button-row">
-          <button
-            class="button primary"
-            id="next-1"
-            type="button"
-          >
-            ממשיכים לפרטים ←
-          </button>
-        </div>
-      </div>
+        <div id="step-1">
+          <h2 class="step-title">איך נעים להכיר?</h2>
 
-      <form id="step-2" class="hidden">
-        <h2 class="step-title">הפרטים שלך</h2>
+          <p class="sub">
+            בחרו את סוג החשבון.
+          </p>
 
-        <p class="sub">
-          אפשר יהיה לערוך אותם בהמשך באזור האישי.
-        </p>
+          <div class="roles">
+            <button class="role selected" data-role="student" type="button">
+              <span class="icon">◎</span>
+              <b>תלמיד/ה או הורה</b>
+              <span>למצוא מורה וללמוד בדרך שמתאימה לך</span>
+            </button>
 
-        <div class="fields">
-          <div class="photo-box">
-            <div class="photo-preview" id="photo-preview">כ</div>
-
-            <div class="field" style="width:100%">
-              <label for="photo">תמונת פרופיל</label>
-              <input id="photo" type="file" accept="image/*">
-            </div>
+            <button class="role" data-role="teacher" type="button">
+              <span class="icon">↗</span>
+              <b>מורה/מדריך/ה</b>
+              <span>ליצור פרופיל ולהופיע ברשימת המורים</span>
+            </button>
           </div>
 
-          <div class="two">
+          <div class="button-row">
+            <button class="button primary" id="next-1" type="button">
+              ממשיכים לפרטים ←
+            </button>
+          </div>
+        </div>
+
+        <form id="step-2" class="hidden">
+          <h2 class="step-title">פותחים חשבון</h2>
+
+          <p class="sub">
+            האימייל, הסיסמה והטלפון נשמרים באופן פרטי.
+          </p>
+
+          <div class="fields">
             <div class="field">
               <label for="name">שם מלא</label>
-              <input id="name" required placeholder="השם שלך">
+              <input
+                id="name"
+                required
+                autocomplete="name"
+                placeholder="למשל: דנה לוי"
+              >
             </div>
 
             <div class="field">
@@ -441,126 +580,138 @@
                 id="email"
                 type="email"
                 required
+                autocomplete="email"
                 placeholder="name@email.com"
               >
             </div>
-          </div>
 
-          <div class="two">
             <div class="field">
-              <label for="phone">טלפון</label>
+              <label for="password">סיסמה</label>
               <input
-                id="phone"
-                type="tel"
+                id="password"
+                type="password"
                 required
-                placeholder="050-0000000"
+                minlength="6"
+                autocomplete="new-password"
+                placeholder="לפחות 6 תווים"
               >
             </div>
 
-            <div class="field">
-              <label for="city">עיר</label>
-              <input
-                id="city"
-                required
-                placeholder="למשל: תל אביב"
-              >
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="password">סיסמה</label>
-            <input
-              id="password"
-              type="password"
-              required
-              minlength="8"
-              placeholder="לפחות 8 תווים"
-            >
-          </div>
-        </div>
-
-        <p class="notice">
-          בגרסה הנוכחית הסיסמה אינה נשמרת.
-        </p>
-
-        <div class="button-row">
-          <button
-            class="button secondary back"
-            type="button"
-          >
-            חזרה
-          </button>
-
-          <button class="button primary">
-            לבניית הפרופיל ←
-          </button>
-        </div>
-      </form>
-
-      <form id="step-3" class="hidden">
-        <h2 class="step-title" id="profile-title">
-          בונים פרופיל תלמיד/ה
-        </h2>
-
-        <p class="sub">
-          כתבו את הבחירות האישיות שלכם.
-        </p>
-
-        <div class="fields">
-          <div class="field">
-            <label for="subjects" id="subjects-label">
-              אילו מקצועות רוצים ללמוד?
-            </label>
-
-            <input
-              id="subjects"
-              required
-              placeholder="למשל: אנגלית, מתמטיקה, פסיכומטרי"
-            >
-
-            <p class="notice">
-              אפשר לכתוב כמה מקצועות ולהפריד בפסיקים.
-            </p>
-          </div>
-
-          <div id="student-fields" class="fields">
             <div class="two">
               <div class="field">
-                <label for="level">רמה או כיתה</label>
+                <label for="phone">טלפון</label>
                 <input
-                  id="level"
-                  placeholder="למשל: כיתה י״א, 5 יח״ל"
+                  id="phone"
+                  type="tel"
+                  autocomplete="tel"
+                  placeholder="050-0000000"
                 >
               </div>
 
               <div class="field">
-                <label for="learning-style">
-                  סגנון למידה מועדף
-                </label>
+                <label for="city">עיר או אזור</label>
+                <input
+                  id="city"
+                  placeholder="למשל: תל אביב"
+                >
+              </div>
+            </div>
+          </div>
+
+          <p class="notice">
+            הסיסמה נשמרת בצורה מאובטחת ב־Firebase ואינה
+            נשמרת בתוך הפרופיל.
+          </p>
+
+          <div class="button-row">
+            <button class="button secondary back" type="button">
+              חזרה
+            </button>
+
+            <button class="button primary" type="submit">
+              לבניית הפרופיל ←
+            </button>
+          </div>
+        </form>
+
+        <form id="step-3" class="hidden">
+          <h2 class="step-title" id="profile-title">
+            בונים את הפרופיל
+          </h2>
+
+          <p class="sub" id="profile-sub">
+            כתבו בעצמכם מה תרצו ללמוד.
+          </p>
+
+          <div class="fields" id="student-fields">
+            <div class="field">
+              <label for="student-subjects">
+                אילו מקצועות רוצים ללמוד?
+              </label>
+
+              <input
+                id="student-subjects"
+                placeholder="למשל: מתמטיקה, אנגלית ופיזיקה"
+              >
+            </div>
+
+            <div class="two">
+              <div class="field">
+                <label for="student-level">רמה או כיתה</label>
+
+                <input
+                  id="student-level"
+                  placeholder="למשל: כיתה י׳, 5 יח״ל"
+                >
+              </div>
+
+              <div class="field">
+                <label for="learning-style">איך נוח לך ללמוד?</label>
 
                 <input
                   id="learning-style"
-                  placeholder="למשל: רגוע, מסודר וברור"
+                  placeholder="למשל: הסברים ותרגול"
                 >
               </div>
             </div>
 
             <div class="field">
-              <label for="goal">מה מטרת הלמידה?</label>
+              <label for="student-goal">מה המטרה שלך?</label>
 
               <textarea
-                id="goal"
-                placeholder="ספרו מה תרצו להשיג"
+                id="student-goal"
+                placeholder="למשל: להתכונן לבגרות ולהרגיש בטוחה יותר בחומר"
               ></textarea>
+            </div>
+
+            <div class="field">
+              <label for="student-availability">ימים ושעות נוחים</label>
+
+              <input
+                id="student-availability"
+                placeholder="למשל: ראשון ורביעי אחר הצהריים"
+              >
             </div>
           </div>
 
-          <div id="teacher-fields" class="fields hidden">
+          <div class="fields hidden" id="teacher-fields">
+            <div class="field">
+              <label for="teacher-subjects">
+                אילו מקצועות את/ה מלמד/ת?
+              </label>
+
+              <input
+                id="teacher-subjects"
+                placeholder="למשל: מתמטיקה, פיזיקה ומדעי המחשב"
+              >
+            </div>
+
             <div class="two">
               <div class="field">
-                <label for="price">מחיר לשעה</label>
+                <label for="teacher-price">מחיר לשעה</label>
+
                 <input
-                  id="price"
+                  id="teacher-price"
                   type="number"
                   min="0"
                   placeholder="120"
@@ -568,9 +719,7 @@
               </div>
 
               <div class="field">
-                <label for="experience">
-                  ניסיון בהוראה
-                </label>
+                <label for="experience">ניסיון בהוראה</label>
 
                 <input
                   id="experience"
@@ -583,213 +732,228 @@
               <label for="format">אופן השיעור</label>
 
               <select id="format">
-                <option>אונליין</option>
-                <option>פרונטלי</option>
-                <option>גם וגם</option>
+                <option value="אונליין">אונליין</option>
+                <option value="פרונטלי">פרונטלי</option>
+                <option value="גם אונליין וגם פרונטלי">
+                  גם אונליין וגם פרונטלי
+                </option>
               </select>
             </div>
 
             <div class="field">
-              <label for="bio">
-                ניסיון, הכשרה ושיטת הוראה
+              <label for="teacher-bio">
+                ניסיון, לימודים ושיטת הוראה — במילים שלך
               </label>
 
               <textarea
-                id="bio"
-                placeholder="ספרו לתלמידים איך אתם מלמדים"
+                id="teacher-bio"
+                placeholder="ספרו על עצמכם, על הניסיון שלכם ועל הדרך שבה אתם מלמדים"
               ></textarea>
+            </div>
+
+            <div class="field">
+              <label for="teacher-availability">
+                ימים ושעות זמינים
+              </label>
+
+              <input
+                id="teacher-availability"
+                placeholder="למשל: ימים א׳–ה׳ בשעות הערב"
+              >
             </div>
           </div>
 
-          <div class="field">
-            <label for="availability">
-              ימים ושעות זמינות
-            </label>
+          <div class="message" id="message"></div>
 
-            <textarea
-              id="availability"
-              placeholder="למשל: ראשון ושלישי 16:00–20:00"
-            ></textarea>
+          <div class="button-row">
+            <button class="button secondary back" type="button">
+              חזרה
+            </button>
+
+            <button class="button primary" id="create-button" type="submit">
+              יצירת החשבון והפרופיל ←
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <aside class="preview">
+      <div class="preview-top">
+        <b>תצוגה מקדימה</b>
+        <span id="preview-status">פרופיל תלמיד/ה</span>
+      </div>
+
+      <div class="student-preview" id="student-preview">
+        <div
+          style="font-weight:900;font-size:18px"
+          id="student-name-preview"
+        >
+          נעים להכיר!
+        </div>
+
+        <div class="goal">
+          <b>המטרה שלך</b><br>
+          <span id="student-goal-preview">
+            למצוא מורה שמתאים לך בדיוק
+          </span>
+        </div>
+      </div>
+
+      <div class="preview-card hidden" id="teacher-preview">
+        <div class="profile-head">
+          <div class="avatar" id="initial">כ</div>
+
+          <div>
+            <b id="teacher-name-preview">השם שלך</b><br>
+            <span>● פרופיל חדש</span>
           </div>
         </div>
 
-        <div class="button-row">
-          <button
-            class="button secondary back"
-            type="button"
-          >
-            חזרה
-          </button>
+        <p id="teacher-bio-preview">
+          כאן יוצגו הניסיון ושיטת ההוראה שלך.
+        </p>
 
-          <button class="button primary">
-            שמירת הפרופיל ←
-          </button>
-        </div>
-      </form>
-
-      <div id="step-4" class="hidden">
-        <h2 class="step-title">הפרופיל שלך מוכן ✦</h2>
-
-        <div class="done">
-          הפרטים נשמרו. אפשר לערוך אותם בכל זמן
-          באזור האישי.
+        <div class="profile-tags">
+          <i id="teacher-subject-preview">מקצועות</i>
+          <i id="experience-preview">ניסיון</i>
+          <i id="format-preview">אונליין</i>
         </div>
 
-        <div class="button-row">
-          <button
-            class="button primary"
-            onclick="location.href='dashborad.html'"
-          >
-            מעבר לאזור האישי ←
-          </button>
+        <div class="profile-price">
+          <span id="price-preview">מחיר יופיע כאן</span>
+          <small>לשעה</small>
         </div>
       </div>
-    </section>
+    </aside>
   </main>
 
-  <script>
+  <script type="module">
+    import {
+      auth,
+      db,
+      createUserWithEmailAndPassword,
+      updateProfile,
+      doc,
+      setDoc,
+      serverTimestamp
+    } from "./firebase.js";
+
     let role = "student";
     let step = 1;
-    let photoData = "";
 
-    const dots =
-      document.querySelectorAll(".progress i");
+    const dots = document.querySelectorAll(".progress i");
 
-    const steps = {
-      1: document.getElementById("step-1"),
-      2: document.getElementById("step-2"),
-      3: document.getElementById("step-3"),
-      4: document.getElementById("step-4")
-    };
+    const blocks = [
+      null,
+      document.getElementById("step-1"),
+      document.getElementById("step-2"),
+      document.getElementById("step-3")
+    ];
+
+    const studentFields =
+      document.getElementById("student-fields");
+
+    const teacherFields =
+      document.getElementById("teacher-fields");
+
+    const message =
+      document.getElementById("message");
+
+    const createButton =
+      document.getElementById("create-button");
+
+    function value(id) {
+      return document.getElementById(id).value.trim();
+    }
 
     function showStep(number) {
       step = number;
 
-      Object.entries(steps).forEach(
-        ([key, element]) => {
-          element.classList.toggle(
-            "hidden",
-            Number(key) !== number
-          );
+      blocks.forEach((block, index) => {
+        if (index && block) {
+          block.classList.toggle("hidden", index !== number);
         }
-      );
+      });
 
       dots.forEach((dot, index) => {
-        dot.classList.toggle(
-          "active",
-          index < number
+        dot.classList.toggle("active", index < number);
+      });
+    }
+
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = "message show " + type;
+    }
+
+    function switchRole(newRole) {
+      role = newRole;
+
+      document.querySelectorAll(".role").forEach((element) => {
+        element.classList.toggle(
+          "selected",
+          element.dataset.role === role
         );
       });
 
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
+      const isTeacher = role === "teacher";
+
+      studentFields.classList.toggle("hidden", isTeacher);
+      teacherFields.classList.toggle("hidden", !isTeacher);
+
+      document
+        .getElementById("student-preview")
+        .classList.toggle("hidden", isTeacher);
+
+      document
+        .getElementById("teacher-preview")
+        .classList.toggle("hidden", !isTeacher);
+
+      document.getElementById("preview-status").textContent =
+        isTeacher ? "פרופיל מורה" : "פרופיל תלמיד/ה";
+
+      document.getElementById("profile-title").textContent =
+        isTeacher ? "בונים פרופיל מורה" : "בונים את הפרופיל";
+
+      document.getElementById("profile-sub").textContent =
+        isTeacher
+          ? "הפרטים הציבוריים שהתלמידים יראו באתר."
+          : "כתבו בעצמכם מה תרצו ללמוד.";
+    }
+
+    function firebaseError(code) {
+      const messages = {
+        "auth/email-already-in-use":
+          "כבר קיים חשבון עם כתובת האימייל הזאת. אפשר לעבור לעמוד הכניסה.",
+        "auth/invalid-email":
+          "כתובת האימייל אינה תקינה.",
+        "auth/weak-password":
+          "הסיסמה קצרה מדי. השתמשו בלפחות 6 תווים.",
+        "auth/network-request-failed":
+          "לא הצלחנו להתחבר לאינטרנט.",
+        "auth/operation-not-allowed":
+          "ההרשמה עדיין אינה פעילה ב־Firebase."
+      };
+
+      return messages[code] ||
+        "לא הצלחנו ליצור את החשבון. בדקו את הפרטים ונסו שוב.";
+    }
+
+    document.querySelectorAll(".role").forEach((element) => {
+      element.addEventListener("click", () => {
+        switchRole(element.dataset.role);
       });
-    }
-
-    function chooseRole(newRole) {
-      role = newRole;
-
-      document.querySelectorAll(".role").forEach(
-        (button) => {
-          button.classList.toggle(
-            "selected",
-            button.dataset.role === role
-          );
-        }
-      );
-
-      const isTeacher =
-        role === "teacher";
-
-      document
-        .getElementById("student-fields")
-        .classList
-        .toggle("hidden", isTeacher);
-
-      document
-        .getElementById("teacher-fields")
-        .classList
-        .toggle("hidden", !isTeacher);
-
-      document
-        .getElementById("profile-title")
-        .textContent = isTeacher
-          ? "בונים פרופיל מורה"
-          : "בונים פרופיל תלמיד/ה";
-
-      document
-        .getElementById("subjects-label")
-        .textContent = isTeacher
-          ? "אילו מקצועות מלמדים?"
-          : "אילו מקצועות רוצים ללמוד?";
-    }
-
-    document.querySelectorAll(".role").forEach(
-      (button) => {
-        button.addEventListener("click", () => {
-          chooseRole(button.dataset.role);
-        });
-      }
-    );
+    });
 
     document
       .getElementById("next-1")
-      .addEventListener(
-        "click",
-        () => showStep(2)
-      );
+      .addEventListener("click", () => showStep(2));
 
-    document.querySelectorAll(".back").forEach(
-      (button) => {
-        button.addEventListener(
-          "click",
-          () => showStep(step - 1)
-        );
-      }
-    );
-
-    document
-      .getElementById("name")
-      .addEventListener("input", (event) => {
-        if (!photoData) {
-          document
-            .getElementById("photo-preview")
-            .textContent =
-              event.target.value
-                .trim()
-                .charAt(0) || "כ";
-        }
+    document.querySelectorAll(".back").forEach((button) => {
+      button.addEventListener("click", () => {
+        showStep(step - 1);
       });
-
-    document
-      .getElementById("photo")
-      .addEventListener("change", (event) => {
-        const file = event.target.files[0];
-
-        if (!file) return;
-
-        if (file.size > 1500000) {
-          alert("בחרו תמונה שגודלה עד 1.5MB");
-          event.target.value = "";
-          return;
-        }
-
-        const reader = new FileReader();
-
-        reader.onload = () => {
-          photoData = reader.result;
-
-          document
-            .getElementById("photo-preview")
-            .innerHTML =
-              '<img src="' +
-              photoData +
-              '" alt="תמונת פרופיל">';
-        };
-
-        reader.readAsDataURL(file);
-      });
+    });
 
     document
       .getElementById("step-2")
@@ -800,112 +964,216 @@
 
     document
       .getElementById("step-3")
-      .addEventListener("submit", (event) => {
+      .addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        const profile = {
-          id:String(Date.now()),
-          role:role,
+        const name = value("name");
+        const email = value("email");
+        const password =
+          document.getElementById("password").value;
 
-          name:document
-            .getElementById("name")
-            .value
-            .trim(),
+        if (role === "teacher" && !value("teacher-subjects")) {
+          showMessage(
+            "כתבו לפחות מקצוע אחד שאתם מלמדים.",
+            "error"
+          );
+          return;
+        }
 
-          email:document
-            .getElementById("email")
-            .value
-            .trim(),
+        if (role === "student" && !value("student-subjects")) {
+          showMessage(
+            "כתבו לפחות מקצוע אחד שתרצו ללמוד.",
+            "error"
+          );
+          return;
+        }
 
-          phone:document
-            .getElementById("phone")
-            .value
-            .trim(),
+        createButton.disabled = true;
+        createButton.textContent = "יוצרים את החשבון...";
 
-          city:document
-            .getElementById("city")
-            .value
-            .trim(),
+        try {
+          const credential =
+            await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
 
-          photo:photoData,
+          const user = credential.user;
 
-          subjects:document
-            .getElementById("subjects")
-            .value
-            .trim(),
+          await updateProfile(user, {
+            displayName: name
+          });
 
-          subject:document
-            .getElementById("subjects")
-            .value
-            .trim(),
+          const privateProfile = {
+            name,
+            email,
+            phone: value("phone"),
+            city: value("city"),
+            role,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          };
 
-          availability:document
-            .getElementById("availability")
-            .value
-            .trim(),
+          if (role === "student") {
+            privateProfile.subjects =
+              value("student-subjects");
 
-          level:role === "student"
-            ? document
-                .getElementById("level")
-                .value
-                .trim()
-            : "",
+            privateProfile.level =
+              value("student-level");
 
-          learningStyle:role === "student"
-            ? document
-                .getElementById("learning-style")
-                .value
-                .trim()
-            : "",
+            privateProfile.learningStyle =
+              value("learning-style");
 
-          goal:role === "student"
-            ? document
-                .getElementById("goal")
-                .value
-                .trim()
-            : "",
+            privateProfile.goal =
+              value("student-goal");
 
-          price:role === "teacher"
-            ? document
-                .getElementById("price")
-                .value
-            : "",
+            privateProfile.availability =
+              value("student-availability");
+          } else {
+            privateProfile.subjects =
+              value("teacher-subjects");
 
-          experience:role === "teacher"
-            ? document
-                .getElementById("experience")
-                .value
-                .trim()
-            : "",
+            privateProfile.price =
+              value("teacher-price");
 
-          format:role === "teacher"
-            ? document
-                .getElementById("format")
-                .value
-            : "",
+            privateProfile.experience =
+              value("experience");
 
-          bio:role === "teacher"
-            ? document
-                .getElementById("bio")
-                .value
-                .trim()
-            : "",
+            privateProfile.format =
+              document.getElementById("format").value;
 
-          verified:false,
-          createdAt:new Date().toISOString()
-        };
+            privateProfile.bio =
+              value("teacher-bio");
 
-        localStorage.setItem(
-          "kivunProfile",
-          JSON.stringify(profile)
-        );
+            privateProfile.availability =
+              value("teacher-availability");
+          }
 
-        localStorage.setItem(
-          "kivunLoggedIn",
-          "true"
-        );
+          await setDoc(
+            doc(db, "users", user.uid),
+            privateProfile
+          );
 
-        showStep(4);
+          if (role === "teacher") {
+            const publicTeacherProfile = {
+              uid: user.uid,
+              name,
+              city: value("city"),
+              subjects: value("teacher-subjects"),
+              price: value("teacher-price"),
+              experience: value("experience"),
+              format:
+                document.getElementById("format").value,
+              bio: value("teacher-bio"),
+              availability:
+                value("teacher-availability"),
+              verified: false,
+              createdAt: serverTimestamp(),
+              updatedAt: serverTimestamp()
+            };
+
+            await setDoc(
+              doc(db, "teachers", user.uid),
+              publicTeacherProfile
+            );
+          }
+
+          showMessage(
+            "החשבון והפרופיל נוצרו בהצלחה!",
+            "success"
+          );
+
+          window.setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 800);
+        } catch (error) {
+          console.error(error);
+
+          showMessage(
+            firebaseError(error.code),
+            "error"
+          );
+
+          createButton.disabled = false;
+          createButton.textContent =
+            "יצירת החשבון והפרופיל ←";
+        }
+      });
+
+    document
+      .getElementById("name")
+      .addEventListener("input", (event) => {
+        const name = event.target.value || "השם שלך";
+
+        document.getElementById(
+          "student-name-preview"
+        ).textContent = name + ", נעים להכיר!";
+
+        document.getElementById(
+          "teacher-name-preview"
+        ).textContent = name;
+
+        document.getElementById(
+          "initial"
+        ).textContent = name.charAt(0) || "כ";
+      });
+
+    document
+      .getElementById("student-goal")
+      .addEventListener("input", (event) => {
+        document.getElementById(
+          "student-goal-preview"
+        ).textContent =
+          event.target.value ||
+          "למצוא מורה שמתאים לך בדיוק";
+      });
+
+    document
+      .getElementById("teacher-subjects")
+      .addEventListener("input", (event) => {
+        document.getElementById(
+          "teacher-subject-preview"
+        ).textContent =
+          event.target.value || "מקצועות";
+      });
+
+    document
+      .getElementById("teacher-bio")
+      .addEventListener("input", (event) => {
+        document.getElementById(
+          "teacher-bio-preview"
+        ).textContent =
+          event.target.value ||
+          "כאן יוצגו הניסיון ושיטת ההוראה שלך.";
+      });
+
+    document
+      .getElementById("teacher-price")
+      .addEventListener("input", (event) => {
+        document.getElementById(
+          "price-preview"
+        ).textContent =
+          event.target.value
+            ? "₪" + event.target.value
+            : "מחיר יופיע כאן";
+      });
+
+    document
+      .getElementById("experience")
+      .addEventListener("input", (event) => {
+        document.getElementById(
+          "experience-preview"
+        ).textContent =
+          event.target.value || "ניסיון";
+      });
+
+    document
+      .getElementById("format")
+      .addEventListener("change", (event) => {
+        document.getElementById(
+          "format-preview"
+        ).textContent = event.target.value;
       });
   </script>
 </body>
