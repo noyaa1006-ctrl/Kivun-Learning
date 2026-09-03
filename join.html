@@ -184,13 +184,14 @@
       background:#effdf7;
     }
 
-    .role b {
-      display:block;
-      font-size:17px;
-    }
-
+    .role b,
     .role span {
       display:block;
+    }
+
+    .role b { font-size:17px; }
+
+    .role span {
       color:var(--muted);
       font-size:12px;
     }
@@ -273,8 +274,6 @@
       object-fit:cover;
     }
 
-    .photo-box input { width:100%; }
-
     .button-row {
       display:flex;
       gap:10px;
@@ -302,7 +301,7 @@
     }
 
     .notice {
-      margin:13px 0 0;
+      margin:6px 0 0;
       color:var(--muted);
       font-size:12px;
     }
@@ -342,7 +341,7 @@
     <span class="login">
       <a href="index.html">עמוד הבית</a>
       ·
-      <a href="dashboard.html">האזור שלי</a>
+      <a href="dashborad.html">האזור שלי</a>
     </span>
   </nav>
 
@@ -378,10 +377,7 @@
 
       <div id="step-1">
         <h2 class="step-title">איך נעים להכיר?</h2>
-
-        <p class="sub">
-          בחרו את סוג הפרופיל שתרצו לפתוח.
-        </p>
+        <p class="sub">בחרו את סוג הפרופיל שתרצו לפתוח.</p>
 
         <div class="roles">
           <button
@@ -538,7 +534,10 @@
               </div>
 
               <div class="field">
-                <label for="learning-style">סגנון למידה מועדף</label>
+                <label for="learning-style">
+                  סגנון למידה מועדף
+                </label>
+
                 <input
                   id="learning-style"
                   placeholder="למשל: רגוע, מסודר וברור"
@@ -548,6 +547,7 @@
 
             <div class="field">
               <label for="goal">מה מטרת הלמידה?</label>
+
               <textarea
                 id="goal"
                 placeholder="ספרו מה תרצו להשיג"
@@ -568,7 +568,10 @@
               </div>
 
               <div class="field">
-                <label for="experience">ניסיון בהוראה</label>
+                <label for="experience">
+                  ניסיון בהוראה
+                </label>
+
                 <input
                   id="experience"
                   placeholder="למשל: 4 שנות ניסיון"
@@ -587,17 +590,21 @@
             </div>
 
             <div class="field">
-              <label for="bio">ניסיון, הכשרה ושיטת הוראה</label>
+              <label for="bio">
+                ניסיון, הכשרה ושיטת הוראה
+              </label>
 
               <textarea
                 id="bio"
-                placeholder="ספרו לתלמידים איך אתם מלמדים ומה הניסיון שלכם"
+                placeholder="ספרו לתלמידים איך אתם מלמדים"
               ></textarea>
             </div>
           </div>
 
           <div class="field">
-            <label for="availability">ימים ושעות זמינות</label>
+            <label for="availability">
+              ימים ושעות זמינות
+            </label>
 
             <textarea
               id="availability"
@@ -624,13 +631,14 @@
         <h2 class="step-title">הפרופיל שלך מוכן ✦</h2>
 
         <div class="done">
-          הפרטים נשמרו. אפשר לערוך אותם בכל זמן באזור האישי.
+          הפרטים נשמרו. אפשר לערוך אותם בכל זמן
+          באזור האישי.
         </div>
 
         <div class="button-row">
           <button
             class="button primary"
-            onclick="location.href='dashboard.html'"
+            onclick="location.href='dashborad.html'"
           >
             מעבר לאזור האישי ←
           </button>
@@ -644,7 +652,8 @@
     let step = 1;
     let photoData = "";
 
-    const dots = document.querySelectorAll(".progress i");
+    const dots =
+      document.querySelectorAll(".progress i");
 
     const steps = {
       1: document.getElementById("step-1"),
@@ -656,85 +665,106 @@
     function showStep(number) {
       step = number;
 
-      Object.entries(steps).forEach(([key, element]) => {
-        element.classList.toggle(
-          "hidden",
-          Number(key) !== number
+      Object.entries(steps).forEach(
+        ([key, element]) => {
+          element.classList.toggle(
+            "hidden",
+            Number(key) !== number
+          );
+        }
+      );
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle(
+          "active",
+          index < number
         );
       });
 
-      dots.forEach((dot, index) => {
-        dot.classList.toggle("active", index < number);
-      });
-
       window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+        top:0,
+        behavior:"smooth"
       });
     }
 
     function chooseRole(newRole) {
       role = newRole;
 
-      document.querySelectorAll(".role").forEach((button) => {
-        button.classList.toggle(
-          "selected",
-          button.dataset.role === role
-        );
-      });
+      document.querySelectorAll(".role").forEach(
+        (button) => {
+          button.classList.toggle(
+            "selected",
+            button.dataset.role === role
+          );
+        }
+      );
 
-      const isTeacher = role === "teacher";
+      const isTeacher =
+        role === "teacher";
 
       document
         .getElementById("student-fields")
-        .classList.toggle("hidden", isTeacher);
+        .classList
+        .toggle("hidden", isTeacher);
 
       document
         .getElementById("teacher-fields")
-        .classList.toggle("hidden", !isTeacher);
+        .classList
+        .toggle("hidden", !isTeacher);
 
-      document.getElementById("profile-title").textContent =
-        isTeacher
+      document
+        .getElementById("profile-title")
+        .textContent = isTeacher
           ? "בונים פרופיל מורה"
           : "בונים פרופיל תלמיד/ה";
 
-      document.getElementById("subjects-label").textContent =
-        isTeacher
+      document
+        .getElementById("subjects-label")
+        .textContent = isTeacher
           ? "אילו מקצועות מלמדים?"
           : "אילו מקצועות רוצים ללמוד?";
     }
 
-    document.querySelectorAll(".role").forEach((button) => {
-      button.addEventListener("click", () => {
-        chooseRole(button.dataset.role);
-      });
-    });
-
-    document.getElementById("next-1").addEventListener(
-      "click",
-      () => showStep(2)
-    );
-
-    document.querySelectorAll(".back").forEach((button) => {
-      button.addEventListener(
-        "click",
-        () => showStep(step - 1)
-      );
-    });
-
-    document.getElementById("name").addEventListener(
-      "input",
-      (event) => {
-        if (!photoData) {
-          document.getElementById("photo-preview").textContent =
-            event.target.value.trim().charAt(0) || "כ";
-        }
+    document.querySelectorAll(".role").forEach(
+      (button) => {
+        button.addEventListener("click", () => {
+          chooseRole(button.dataset.role);
+        });
       }
     );
 
-    document.getElementById("photo").addEventListener(
-      "change",
-      (event) => {
+    document
+      .getElementById("next-1")
+      .addEventListener(
+        "click",
+        () => showStep(2)
+      );
+
+    document.querySelectorAll(".back").forEach(
+      (button) => {
+        button.addEventListener(
+          "click",
+          () => showStep(step - 1)
+        );
+      }
+    );
+
+    document
+      .getElementById("name")
+      .addEventListener("input", (event) => {
+        if (!photoData) {
+          document
+            .getElementById("photo-preview")
+            .textContent =
+              event.target.value
+                .trim()
+                .charAt(0) || "כ";
+        }
+      });
+
+    document
+      .getElementById("photo")
+      .addEventListener("change", (event) => {
         const file = event.target.files[0];
 
         if (!file) return;
@@ -750,64 +780,119 @@
         reader.onload = () => {
           photoData = reader.result;
 
-          document.getElementById("photo-preview").innerHTML =
-            '<img src="' +
-            photoData +
-            '" alt="תמונת פרופיל">';
+          document
+            .getElementById("photo-preview")
+            .innerHTML =
+              '<img src="' +
+              photoData +
+              '" alt="תמונת פרופיל">';
         };
 
         reader.readAsDataURL(file);
-      }
-    );
+      });
 
-    document.getElementById("step-2").addEventListener(
-      "submit",
-      (event) => {
+    document
+      .getElementById("step-2")
+      .addEventListener("submit", (event) => {
         event.preventDefault();
         showStep(3);
-      }
-    );
+      });
 
-    document.getElementById("step-3").addEventListener(
-      "submit",
-      (event) => {
+    document
+      .getElementById("step-3")
+      .addEventListener("submit", (event) => {
         event.preventDefault();
 
         const profile = {
-          id: String(Date.now()),
-          role,
-          name: document.getElementById("name").value.trim(),
-          email: document.getElementById("email").value.trim(),
-          phone: document.getElementById("phone").value.trim(),
-          city: document.getElementById("city").value.trim(),
-          photo: photoData,
-          subjects: document
+          id:String(Date.now()),
+          role:role,
+
+          name:document
+            .getElementById("name")
+            .value
+            .trim(),
+
+          email:document
+            .getElementById("email")
+            .value
+            .trim(),
+
+          phone:document
+            .getElementById("phone")
+            .value
+            .trim(),
+
+          city:document
+            .getElementById("city")
+            .value
+            .trim(),
+
+          photo:photoData,
+
+          subjects:document
             .getElementById("subjects")
             .value
             .trim(),
-          subject: document
+
+          subject:document
             .getElementById("subjects")
             .value
             .trim(),
-          level: document.getElementById("level").value.trim(),
-          learningStyle: document
-            .getElementById("learning-style")
-            .value
-            .trim(),
-          goal: document.getElementById("goal").value.trim(),
-          price: document.getElementById("price").value,
-          experience: document
-            .getElementById("experience")
-            .value
-            .trim(),
-          format: document.getElementById("format").value,
-          bio: document.getElementById("bio").value.trim(),
-          availability: document
+
+          availability:document
             .getElementById("availability")
             .value
             .trim(),
-          verified: false,
-          createdAt: new Date().toISOString()
+
+          level:role === "student"
+            ? document
+                .getElementById("level")
+                .value
+                .trim()
+            : "",
+
+          learningStyle:role === "student"
+            ? document
+                .getElementById("learning-style")
+                .value
+                .trim()
+            : "",
+
+          goal:role === "student"
+            ? document
+                .getElementById("goal")
+                .value
+                .trim()
+            : "",
+
+          price:role === "teacher"
+            ? document
+                .getElementById("price")
+                .value
+            : "",
+
+          experience:role === "teacher"
+            ? document
+                .getElementById("experience")
+                .value
+                .trim()
+            : "",
+
+          format:role === "teacher"
+            ? document
+                .getElementById("format")
+                .value
+            : "",
+
+          bio:role === "teacher"
+            ? document
+                .getElementById("bio")
+                .value
+                .trim()
+            : "",
+
+          verified:false,
+          createdAt:new Date().toISOString()
         };
 
         localStorage.setItem(
@@ -815,11 +900,13 @@
           JSON.stringify(profile)
         );
 
-        localStorage.setItem("kivunLoggedIn", "true");
+        localStorage.setItem(
+          "kivunLoggedIn",
+          "true"
+        );
 
         showStep(4);
-      }
-    );
+      });
   </script>
 </body>
 </html>
