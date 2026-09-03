@@ -1,6 +1,1063 @@
 <!doctype html>
-<html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>האזור שלי — כיוון</title><style>
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');:root{--navy:#121a37;--ink:#1c2746;--teal:#0b9d78;--coral:#ff6e61;--cloud:#f6f8fe;--line:#e5eaf4;--muted:#69738d;--shadow:0 16px 42px rgba(23,37,78,.1)}*{box-sizing:border-box}.hidden{display:none!important}body{margin:0;background:var(--cloud);color:var(--ink);font-family:Heebo,Arial,sans-serif}.container{width:min(1120px,calc(100% - 40px));margin:auto}.nav{height:76px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:27px;font-weight:900;color:var(--navy);text-decoration:none;display:flex;gap:8px;align-items:center}.mark{display:grid;place-items:center;width:28px;height:28px;border-radius:10px 10px 10px 2px;background:var(--coral);color:#fff;transform:rotate(-5deg)}.nav-links{display:flex;gap:19px}.nav-links a{font-size:14px;color:var(--muted);font-weight:800;text-decoration:none}.nav-links a.active{color:var(--teal)}.banner{background:var(--navy);border-radius:25px;padding:29px 31px;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:20px}.banner h1{font-size:32px;margin:0;letter-spacing:-1.5px}.banner p{color:#c4d0e8;margin:4px 0 0}.avatar{width:56px;height:56px;border-radius:17px;background:linear-gradient(135deg,#ff9d6e,#c64f62);display:grid;place-items:center;color:#fff;font-size:23px;font-weight:900}.layout{display:grid;grid-template-columns:225px 1fr;gap:24px;margin:25px 0 70px}.side{height:max-content;background:#fff;border-radius:19px;padding:10px;box-shadow:0 8px 27px rgba(23,37,78,.05)}.side button{width:100%;text-align:right;border:0;background:transparent;border-radius:11px;padding:11px;font:inherit;font-size:14px;font-weight:800;color:#68738d;cursor:pointer}.side button.active,.side button:hover{background:#e7faf1;color:#087c5f}.card{background:#fff;border-radius:20px;padding:23px;box-shadow:0 8px 27px rgba(23,37,78,.05)}.card h2{font-size:21px;margin:0 0 5px}.card p{margin:0 0 18px;color:var(--muted);font-size:14px}.form{display:grid;gap:14px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-weight:800;font-size:13px;color:#4f5d78;margin-bottom:6px}.field input,.field textarea,.field select{font:inherit;width:100%;border:1px solid var(--line);border-radius:11px;padding:11px;outline:0;color:var(--ink)}.field textarea{min-height:113px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--teal);box-shadow:0 0 0 3px #e1f8ee}.save{border:0;border-radius:11px;background:var(--navy);color:white;padding:13px 17px;font:inherit;font-size:14px;font-weight:900;cursor:pointer;margin-top:5px}.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.quick a{background:#fff;text-decoration:none;color:var(--ink);border-radius:17px;padding:17px;box-shadow:0 8px 27px rgba(23,37,78,.05);font-weight:900}.quick span{display:block;color:var(--muted);font-size:12px;font-weight:600;margin-top:4px}.success{display:none;background:#e5faf0;color:#087c5f;border-radius:10px;padding:10px;margin-top:13px;font-weight:800;font-size:14px}.success.show{display:block}.empty{text-align:center;padding:33px 5px}.empty h2{font-size:26px}.start{display:inline-block;background:var(--coral);color:white;border-radius:11px;padding:12px 17px;text-decoration:none;font-weight:900;margin-top:4px}@media(max-width:720px){.nav-links{gap:10px}.nav-links a{font-size:12px}.banner{padding:22px;align-items:start}.banner h1{font-size:27px}.layout{grid-template-columns:1fr}.side{display:flex;overflow:auto}.side button{white-space:nowrap}.quick{grid-template-columns:1fr}.two{grid-template-columns:1fr}.container{width:min(100% - 28px,1120px)}}
-</style></head><body><nav class="container nav"><a class="brand" href="index.html"><span class="mark">↗</span>כיוון</a><div class="nav-links"><a href="index.html">בית</a><a href="matches.html">התאמות</a><a href="dashboard.html" class="active">האזור שלי</a></div></nav><main class="container"><section class="banner"><div><h1 id="welcome">היי, בוא/י נבנה את הכיוון שלך.</h1><p id="banner-text">כאן אפשר לערוך את הפרופיל שלך ולגשת לכל מה שצריך.</p></div><div class="avatar" id="avatar">כ</div></section><div class="layout"><aside class="side"><button class="active" data-pane="profile">עריכת פרופיל</button><button data-pane="pages">מעבר מהיר</button></aside><section><div id="profile-pane" class="card"><h2>עריכת הפרופיל</h2><p>כל שינוי נשמר בדפדפן ומופיע מיד בפרופיל הציבורי שלך.</p><form class="form" id="edit-form"><div class="two"><div class="field"><label>שם מלא</label><input id="name" placeholder="השם שלך"></div><div class="field"><label>סוג חשבון</label><select id="role"><option value="teacher">מורה/מדריך/ה</option><option value="student">תלמיד/ה או הורה</option></select></div></div><div class="two"><div class="field"><label>מקצוע / מה מחפשים ללמוד</label><input id="subject" placeholder="למשל: מתמטיקה 5 יח״ל"></div><div class="field"><label>מחיר לשעה (למורים)</label><input id="price" type="number" placeholder="120"></div></div><div class="two"><div class="field"><label>ניסיון בהוראה</label><input id="experience" placeholder="למשל: 4 שנות ניסיון"></div><div class="field"><label>אופן השיעור</label><select id="format"><option>אונליין</option><option>פרונטלי</option><option>גם וגם</option></select></div></div><div class="field"><label>ניסיון, תארים ושיטת הוראה — חופשי</label><textarea id="bio" placeholder="כאן אפשר לכתוב הכול: ניסיון, תארים, מה מיוחד בך ואיך נראים השיעורים שלך."></textarea></div><button class="save">שמירת השינויים</button></form><div class="success" id="success">הפרופיל נשמר. <a href="teacher-profile.html" style="color:#087c5f">לצפייה בפרופיל הציבורי ←</a></div></div><div id="pages-pane" class="hidden"><div class="quick"><a href="index.html">עמוד הבית<span>הסיפור של כיוון</span></a><a href="join.html">בניית פרופיל<span>פתיחת חשבון חדש</span></a><a href="matches.html">התאמות<span>חיפוש מורים מדויקים</span></a><a href="teacher-profile.html">הפרופיל הציבורי<span>כך תלמידים רואים מורה</span></a><a href="dashboard.html">האזור שלי<span>עריכה וניהול פרטים</span></a></div></div></section></div></main><script>
-const stored=JSON.parse(localStorage.getItem('kivunProfile')||'{}');const ids=['name','role','subject','price','experience','format','bio'];ids.forEach(id=>{const field=document.getElementById(id);if(stored[id])field.value=stored[id]});function fill(){const name=document.getElementById('name').value||'חבר/ה';document.getElementById('welcome').textContent='היי '+name+', זה האזור שלך.';document.getElementById('avatar').textContent=name[0]}fill();document.getElementById('edit-form').addEventListener('submit',e=>{e.preventDefault();const profile={};ids.forEach(id=>profile[id]=document.getElementById(id).value);profile.level=stored.level||'';profile.goal=stored.goal||'';localStorage.setItem('kivunProfile',JSON.stringify(profile));fill();document.getElementById('success').classList.add('show')});document.querySelectorAll('.side button').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.side button').forEach(x=>x.classList.remove('active'));button.classList.add('active');const pages=button.dataset.pane==='pages';document.getElementById('profile-pane').classList.toggle('hidden',pages);document.getElementById('pages-pane').classList.toggle('hidden',!pages)}));
-</script></body></html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
+
+  <title>האזור שלי — כיוון</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap");
+
+    :root {
+      --navy:#121a37;
+      --ink:#1c2746;
+      --teal:#0b9d78;
+      --coral:#ff6e61;
+      --cloud:#f6f8fe;
+      --line:#e5eaf4;
+      --muted:#69738d;
+      --shadow:0 16px 42px rgba(23,37,78,.1);
+    }
+
+    * {
+      box-sizing:border-box;
+    }
+
+    .hidden {
+      display:none!important;
+    }
+
+    body {
+      margin:0;
+      background:var(--cloud);
+      color:var(--ink);
+      font-family:Heebo,Arial,sans-serif;
+    }
+
+    .container {
+      width:min(1120px,calc(100% - 40px));
+      margin:auto;
+    }
+
+    .nav {
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:var(--navy);
+      font-size:27px;
+      font-weight:900;
+      text-decoration:none;
+    }
+
+    .mark {
+      width:28px;
+      height:28px;
+      display:grid;
+      place-items:center;
+      border-radius:10px 10px 10px 2px;
+      background:var(--coral);
+      color:#fff;
+      transform:rotate(-5deg);
+    }
+
+    .nav-links {
+      display:flex;
+      align-items:center;
+      gap:19px;
+    }
+
+    .nav-links a,
+    .logout {
+      border:0;
+      background:none;
+      color:var(--muted);
+      font:inherit;
+      font-size:14px;
+      font-weight:800;
+      text-decoration:none;
+      cursor:pointer;
+    }
+
+    .nav-links a.active {
+      color:var(--teal);
+    }
+
+    .logout {
+      color:#d94d43;
+    }
+
+    .banner {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      border-radius:25px;
+      padding:29px 31px;
+      background:var(--navy);
+      color:#fff;
+    }
+
+    .banner h1 {
+      margin:0;
+      font-size:32px;
+      letter-spacing:-1.5px;
+    }
+
+    .banner p {
+      margin:4px 0 0;
+      color:#c4d0e8;
+    }
+
+    .avatar {
+      width:72px;
+      height:72px;
+      flex:none;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      border-radius:20px;
+      background:linear-gradient(135deg,#ff9d6e,#c64f62);
+      color:#fff;
+      font-size:27px;
+      font-weight:900;
+    }
+
+    .avatar img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .layout {
+      display:grid;
+      grid-template-columns:225px 1fr;
+      gap:24px;
+      margin:25px 0 70px;
+    }
+
+    .side {
+      height:max-content;
+      border-radius:19px;
+      padding:10px;
+      background:#fff;
+      box-shadow:0 8px 27px rgba(23,37,78,.05);
+    }
+
+    .side button {
+      width:100%;
+      border:0;
+      border-radius:11px;
+      padding:11px;
+      background:transparent;
+      color:#68738d;
+      font:inherit;
+      font-size:14px;
+      font-weight:800;
+      text-align:right;
+      cursor:pointer;
+    }
+
+    .side button.active,
+    .side button:hover {
+      background:#e7faf1;
+      color:#087c5f;
+    }
+
+    .card {
+      border-radius:20px;
+      padding:23px;
+      background:#fff;
+      box-shadow:0 8px 27px rgba(23,37,78,.05);
+    }
+
+    .card h2 {
+      margin:0 0 5px;
+      font-size:21px;
+    }
+
+    .card > p {
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .form {
+      display:grid;
+      gap:14px;
+    }
+
+    .two {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .field label {
+      display:block;
+      margin-bottom:6px;
+      color:#4f5d78;
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:11px;
+      padding:11px;
+      color:var(--ink);
+      font:inherit;
+      outline:0;
+    }
+
+    .field textarea {
+      min-height:105px;
+      resize:vertical;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color:var(--teal);
+      box-shadow:0 0 0 3px #e1f8ee;
+    }
+
+    .photo-editor {
+      display:flex;
+      align-items:center;
+      gap:15px;
+      border:1px dashed #bdc7da;
+      border-radius:15px;
+      padding:14px;
+    }
+
+    .photo-editor .field {
+      width:100%;
+    }
+
+    .small-note {
+      margin:5px 0 0;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .save {
+      border:0;
+      border-radius:11px;
+      padding:13px 17px;
+      background:var(--navy);
+      color:#fff;
+      font:inherit;
+      font-size:14px;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .success {
+      display:none;
+      border-radius:10px;
+      padding:11px;
+      background:#e5faf0;
+      color:#087c5f;
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .success.show {
+      display:block;
+    }
+
+    .quick {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+
+    .quick a {
+      border-radius:17px;
+      padding:17px;
+      background:#fff;
+      color:var(--ink);
+      font-weight:900;
+      text-decoration:none;
+      box-shadow:0 8px 27px rgba(23,37,78,.05);
+    }
+
+    .quick span {
+      display:block;
+      margin-top:4px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:600;
+    }
+
+    .profile-summary {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+
+    .summary-item {
+      border:1px solid var(--line);
+      border-radius:13px;
+      padding:13px;
+      background:#fafbfe;
+    }
+
+    .summary-item small {
+      display:block;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .summary-item strong {
+      display:block;
+      margin-top:3px;
+    }
+
+    .empty {
+      padding:45px 20px;
+      text-align:center;
+    }
+
+    .empty h2 {
+      margin:0 0 8px;
+      font-size:26px;
+    }
+
+    .empty p {
+      color:var(--muted);
+    }
+
+    .start {
+      display:inline-block;
+      border-radius:11px;
+      padding:12px 17px;
+      background:var(--coral);
+      color:#fff;
+      font-weight:900;
+      text-decoration:none;
+    }
+
+    @media(max-width:720px) {
+      .nav {
+        align-items:flex-start;
+        padding:15px 0;
+      }
+
+      .nav-links {
+        flex-wrap:wrap;
+        justify-content:flex-end;
+        gap:9px;
+      }
+
+      .nav-links a,
+      .logout {
+        font-size:12px;
+      }
+
+      .banner {
+        align-items:flex-start;
+        padding:22px;
+      }
+
+      .banner h1 {
+        font-size:27px;
+      }
+
+      .layout {
+        grid-template-columns:1fr;
+      }
+
+      .side {
+        display:flex;
+        overflow:auto;
+      }
+
+      .side button {
+        white-space:nowrap;
+      }
+
+      .two,
+      .quick,
+      .profile-summary {
+        grid-template-columns:1fr;
+      }
+
+      .container {
+        width:min(100% - 28px,1120px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="container nav">
+    <a class="brand" href="index.html">
+      <span class="mark">↗</span>
+      כיוון
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">בית</a>
+      <a href="matches.html">התאמות</a>
+      <a href="dashboard.html" class="active">האזור שלי</a>
+
+      <button class="logout" id="logout" type="button">
+        התנתקות
+      </button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section id="content"></section>
+  </main>
+
+  <script>
+    const content =
+      document.getElementById("content");
+
+    let profile;
+
+    try {
+      profile = JSON.parse(
+        localStorage.getItem("kivunProfile") || "null"
+      );
+    } catch {
+      profile = null;
+    }
+
+    if (!profile) {
+      showEmptyProfile();
+    } else {
+      showDashboard();
+    }
+
+    function escapeHtml(value = "") {
+      const element = document.createElement("div");
+      element.textContent = value;
+      return element.innerHTML;
+    }
+
+    function showEmptyProfile() {
+      document.getElementById("logout").classList.add("hidden");
+
+      content.innerHTML = `
+        <section class="card empty">
+          <h2>עדיין לא נוצר פרופיל</h2>
+
+          <p>
+            כדי להיכנס לאזור האישי צריך קודם לפתוח
+            פרופיל תלמיד/ה, הורה או מורה.
+          </p>
+
+          <a class="start" href="join.html">
+            לפתיחת פרופיל ←
+          </a>
+        </section>
+      `;
+    }
+
+    function showDashboard() {
+      const isTeacher =
+        profile.role === "teacher";
+
+      const name =
+        escapeHtml(profile.name || "חבר/ה");
+
+      const initial =
+        escapeHtml(
+          (profile.name || "כ").trim().charAt(0)
+        );
+
+      const photoContent = profile.photo
+        ? `<img src="${profile.photo}" alt="תמונת הפרופיל">`
+        : initial;
+
+      content.innerHTML = `
+        <section class="banner">
+          <div>
+            <h1 id="welcome">
+              היי ${name}, זה האזור שלך.
+            </h1>
+
+            <p id="banner-text">
+              כאן אפשר לערוך את הפרופיל ולנהל את
+              הפרטים שלך.
+            </p>
+          </div>
+
+          <div class="avatar" id="banner-avatar">
+            ${photoContent}
+          </div>
+        </section>
+
+        <div class="layout">
+          <aside class="side">
+            <button
+              class="active"
+              data-pane="profile"
+              type="button"
+            >
+              עריכת פרופיל
+            </button>
+
+            <button
+              data-pane="summary"
+              type="button"
+            >
+              סיכום הפרופיל
+            </button>
+
+            <button
+              data-pane="pages"
+              type="button"
+            >
+              מעבר מהיר
+            </button>
+          </aside>
+
+          <section>
+            <div id="profile-pane" class="card">
+              <h2>עריכת הפרופיל</h2>
+
+              <p>
+                כל שינוי שתשמרו יופיע בפרופיל שלכם.
+              </p>
+
+              <form class="form" id="edit-form">
+                <div class="photo-editor">
+                  <div class="avatar" id="photo-preview">
+                    ${photoContent}
+                  </div>
+
+                  <div class="field">
+                    <label for="photo">
+                      החלפת תמונת פרופיל
+                    </label>
+
+                    <input
+                      id="photo"
+                      type="file"
+                      accept="image/*"
+                    >
+
+                    <div class="small-note">
+                      מומלץ לבחור תמונה עד 1.5MB.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="two">
+                  <div class="field">
+                    <label for="name">שם מלא</label>
+
+                    <input
+                      id="name"
+                      required
+                      value="${escapeHtml(profile.name)}"
+                    >
+                  </div>
+
+                  <div class="field">
+                    <label for="email">אימייל</label>
+
+                    <input
+                      id="email"
+                      type="email"
+                      required
+                      value="${escapeHtml(profile.email)}"
+                    >
+                  </div>
+                </div>
+
+                <div class="two">
+                  <div class="field">
+                    <label for="phone">טלפון</label>
+
+                    <input
+                      id="phone"
+                      type="tel"
+                      value="${escapeHtml(profile.phone)}"
+                    >
+                  </div>
+
+                  <div class="field">
+                    <label for="city">עיר</label>
+
+                    <input
+                      id="city"
+                      value="${escapeHtml(profile.city)}"
+                    >
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="subjects">
+                    ${
+                      isTeacher
+                        ? "המקצועות שאני מלמד/ת"
+                        : "המקצועות שאני רוצה ללמוד"
+                    }
+                  </label>
+
+                  <input
+                    id="subjects"
+                    required
+                    value="${escapeHtml(
+                      profile.subjects ||
+                      profile.subject
+                    )}"
+                    placeholder="אפשר להפריד מקצועות בפסיקים"
+                  >
+                </div>
+
+                ${
+                  isTeacher
+                    ? teacherFields()
+                    : studentFields()
+                }
+
+                <div class="field">
+                  <label for="availability">
+                    ימים ושעות זמינות
+                  </label>
+
+                  <textarea
+                    id="availability"
+                    placeholder="למשל: ראשון ושלישי 16:00–20:00"
+                  >${escapeHtml(profile.availability)}</textarea>
+                </div>
+
+                <button class="save" type="submit">
+                  שמירת השינויים
+                </button>
+
+                <div
+                  class="success"
+                  id="success"
+                  role="status"
+                >
+                  הפרופיל נשמר בהצלחה.
+                </div>
+              </form>
+            </div>
+
+            <div
+              id="summary-pane"
+              class="card hidden"
+            >
+              <h2>סיכום הפרופיל</h2>
+
+              <p>
+                כך נראים הפרטים ששמרת כרגע.
+              </p>
+
+              <div
+                class="profile-summary"
+                id="profile-summary"
+              ></div>
+            </div>
+
+            <div
+              id="pages-pane"
+              class="hidden"
+            >
+              <div class="quick">
+                <a href="index.html">
+                  עמוד הבית
+                  <span>חזרה לעמוד הראשי</span>
+                </a>
+
+                <a href="matches.html">
+                  התאמות
+                  <span>צפייה ברשימת המורים</span>
+                </a>
+
+                <a href="join.html">
+                  פתיחת פרופיל חדש
+                  <span>יצירת פרופיל אחר במכשיר</span>
+                </a>
+
+                ${
+                  isTeacher
+                    ? `
+                      <a href="teacher-profile.html">
+                        הפרופיל הציבורי
+                        <span>כך תלמידים רואים אותך</span>
+                      </a>
+                    `
+                    : ""
+                }
+              </div>
+            </div>
+          </section>
+        </div>
+      `;
+
+      activateDashboard(isTeacher);
+      renderSummary();
+    }
+
+    function teacherFields() {
+      return `
+        <div class="two">
+          <div class="field">
+            <label for="price">מחיר לשעה</label>
+
+            <input
+              id="price"
+              type="number"
+              min="0"
+              value="${escapeHtml(profile.price)}"
+            >
+          </div>
+
+          <div class="field">
+            <label for="experience">
+              ניסיון בהוראה
+            </label>
+
+            <input
+              id="experience"
+              value="${escapeHtml(profile.experience)}"
+            >
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="format">אופן השיעור</label>
+
+          <select id="format">
+            <option ${
+              profile.format === "אונליין"
+                ? "selected"
+                : ""
+            }>אונליין</option>
+
+            <option ${
+              profile.format === "פרונטלי"
+                ? "selected"
+                : ""
+            }>פרונטלי</option>
+
+            <option ${
+              profile.format === "גם וגם"
+                ? "selected"
+                : ""
+            }>גם וגם</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="bio">
+            ניסיון, הכשרה ושיטת הוראה
+          </label>
+
+          <textarea id="bio">${escapeHtml(
+            profile.bio
+          )}</textarea>
+        </div>
+      `;
+    }
+
+    function studentFields() {
+      return `
+        <div class="two">
+          <div class="field">
+            <label for="level">
+              רמה או כיתה
+            </label>
+
+            <input
+              id="level"
+              value="${escapeHtml(profile.level)}"
+            >
+          </div>
+
+          <div class="field">
+            <label for="learning-style">
+              סגנון למידה מועדף
+            </label>
+
+            <input
+              id="learning-style"
+              value="${escapeHtml(
+                profile.learningStyle
+              )}"
+            >
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="goal">
+            מטרת הלמידה
+          </label>
+
+          <textarea id="goal">${escapeHtml(
+            profile.goal
+          )}</textarea>
+        </div>
+      `;
+    }
+
+    function activateDashboard(isTeacher) {
+      let newPhoto = profile.photo || "";
+
+      document
+        .getElementById("photo")
+        .addEventListener("change", (event) => {
+          const file = event.target.files[0];
+
+          if (!file) return;
+
+          if (file.size > 1500000) {
+            alert("בחרו תמונה שגודלה עד 1.5MB");
+            event.target.value = "";
+            return;
+          }
+
+          const reader = new FileReader();
+
+          reader.onload = () => {
+            newPhoto = reader.result;
+
+            document
+              .getElementById("photo-preview")
+              .innerHTML =
+                `<img src="${newPhoto}" alt="תמונת הפרופיל">`;
+          };
+
+          reader.readAsDataURL(file);
+        });
+
+      document
+        .getElementById("edit-form")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          profile.name =
+            document.getElementById("name").value.trim();
+
+          profile.email =
+            document.getElementById("email").value.trim();
+
+          profile.phone =
+            document.getElementById("phone").value.trim();
+
+          profile.city =
+            document.getElementById("city").value.trim();
+
+          profile.subjects =
+            document.getElementById("subjects").value.trim();
+
+          profile.subject = profile.subjects;
+
+          profile.availability =
+            document
+              .getElementById("availability")
+              .value
+              .trim();
+
+          profile.photo = newPhoto;
+
+          if (isTeacher) {
+            profile.price =
+              document.getElementById("price").value;
+
+            profile.experience =
+              document
+                .getElementById("experience")
+                .value
+                .trim();
+
+            profile.format =
+              document.getElementById("format").value;
+
+            profile.bio =
+              document.getElementById("bio").value.trim();
+          } else {
+            profile.level =
+              document.getElementById("level").value.trim();
+
+            profile.learningStyle =
+              document
+                .getElementById("learning-style")
+                .value
+                .trim();
+
+            profile.goal =
+              document.getElementById("goal").value.trim();
+          }
+
+          localStorage.setItem(
+            "kivunProfile",
+            JSON.stringify(profile)
+          );
+
+          localStorage.setItem(
+            "kivunLoggedIn",
+            "true"
+          );
+
+          updateHeader();
+          renderSummary();
+
+          document
+            .getElementById("success")
+            .classList
+            .add("show");
+
+          window.setTimeout(() => {
+            document
+              .getElementById("success")
+              .classList
+              .remove("show");
+          }, 2500);
+        });
+
+      document
+        .querySelectorAll(".side button")
+        .forEach((button) => {
+          button.addEventListener("click", () => {
+            document
+              .querySelectorAll(".side button")
+              .forEach((item) => {
+                item.classList.remove("active");
+              });
+
+            button.classList.add("active");
+
+            const selectedPane =
+              button.dataset.pane;
+
+            document
+              .getElementById("profile-pane")
+              .classList.toggle(
+                "hidden",
+                selectedPane !== "profile"
+              );
+
+            document
+              .getElementById("summary-pane")
+              .classList.toggle(
+                "hidden",
+                selectedPane !== "summary"
+              );
+
+            document
+              .getElementById("pages-pane")
+              .classList.toggle(
+                "hidden",
+                selectedPane !== "pages"
+              );
+          });
+        });
+    }
+
+    function updateHeader() {
+      document.getElementById("welcome").textContent =
+        "היי " +
+        (profile.name || "חבר/ה") +
+        ", זה האזור שלך.";
+
+      const avatar =
+        document.getElementById("banner-avatar");
+
+      if (profile.photo) {
+        avatar.innerHTML =
+          `<img src="${profile.photo}" alt="תמונת הפרופיל">`;
+      } else {
+        avatar.textContent =
+          (profile.name || "כ").trim().charAt(0);
+      }
+    }
+
+    function renderSummary() {
+      const summary =
+        document.getElementById("profile-summary");
+
+      if (!summary) return;
+
+      const isTeacher =
+        profile.role === "teacher";
+
+      const items = [
+        ["סוג הפרופיל", isTeacher ? "מורה/מדריך/ה" : "תלמיד/ה או הורה"],
+        ["שם", profile.name || "לא צוין"],
+        ["טלפון", profile.phone || "לא צוין"],
+        ["עיר", profile.city || "לא צוינה"],
+        [
+          isTeacher ? "מקצועות הוראה" : "מקצועות ללמידה",
+          profile.subjects || profile.subject || "לא צוינו"
+        ],
+        ["זמינות", profile.availability || "לא צוינה"]
+      ];
+
+      if (isTeacher) {
+        items.push(
+          ["ניסיון", profile.experience || "לא צוין"],
+          [
+            "אופן השיעור",
+            profile.format || "לא צוין"
+          ],
+          [
+            "מחיר לשעה",
+            profile.price
+              ? "₪" + profile.price
+              : "לא צוין"
+          ]
+        );
+      } else {
+        items.push(
+          ["רמה או כיתה", profile.level || "לא צוינה"],
+          [
+            "סגנון למידה",
+            profile.learningStyle || "לא צוין"
+          ],
+          ["מטרה", profile.goal || "לא צוינה"]
+        );
+      }
+
+      summary.innerHTML = items
+        .map(
+          ([label, value]) => `
+            <div class="summary-item">
+              <small>${escapeHtml(label)}</small>
+              <strong>${escapeHtml(value)}</strong>
+            </div>
+          `
+        )
+        .join("");
+    }
+
+    document
+      .getElementById("logout")
+      .addEventListener("click", () => {
+        const confirmed = confirm(
+          "להתנתק מהאזור האישי?"
+        );
+
+        if (!confirmed) return;
+
+        localStorage.removeItem("kivunLoggedIn");
+        window.location.href = "index.html";
+      });
+  </script>
+</body>
+</html>
