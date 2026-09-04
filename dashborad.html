@@ -122,11 +122,18 @@
       width: 56px;
       height: 56px;
       flex: 0 0 56px;
+      overflow: hidden;
       border-radius: 17px;
       color: #fff;
       background: linear-gradient(135deg, #ff9d6e, #c64f62);
       font-size: 23px;
       font-weight: 900;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .layout {
@@ -231,6 +238,38 @@
       resize: vertical;
     }
 
+    .photo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .photo-preview {
+      display: grid;
+      place-items: center;
+      width: 82px;
+      height: 82px;
+      flex: 0 0 82px;
+      overflow: hidden;
+      border-radius: 20px;
+      color: #fff;
+      background: linear-gradient(135deg, #ff9d6e, #c64f62);
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .photo-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-help {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
     .save {
       margin-top: 5px;
       padding: 13px 17px;
@@ -296,11 +335,6 @@
       background: #fff0ef;
     }
 
-    .profile-link {
-      color: #087c5f;
-      font-weight: 900;
-    }
-
     .loading {
       padding: 45px;
       color: var(--muted);
@@ -309,7 +343,7 @@
 
     @media (max-width: 720px) {
       .nav-links {
-        gap: 10px;
+        gap: 9px;
       }
 
       .nav-links a,
@@ -344,6 +378,11 @@
         grid-template-columns: 1fr;
       }
 
+      .photo-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
       .container {
         width: min(100% - 28px, 1120px);
       }
@@ -362,6 +401,7 @@
       <a href="index.html">בית</a>
       <a href="matches.html">מורים</a>
       <a href="dashboard.html" class="active">האזור שלי</a>
+
       <button class="logout" id="logout-button" type="button">
         התנתקות
       </button>
@@ -401,9 +441,8 @@
           <h2>עריכת הפרופיל</h2>
 
           <p>
-            השינויים נשמרים בחשבון שלך ב־Firebase.
-            פרטים פרטיים כמו אימייל וטלפון אינם מוצגים
-            בפרופיל הציבורי.
+            השינויים נשמרים בחשבון שלך. אימייל וטלפון
+            אינם מוצגים בפרופיל הציבורי.
           </p>
 
           <form class="form" id="edit-form">
@@ -431,17 +470,29 @@
 
               <div class="field">
                 <label for="phone">טלפון פרטי</label>
-                <input
-                  id="phone"
-                  type="tel"
-                  placeholder="050-0000000"
-                >
+                <input id="phone" type="tel" placeholder="050-0000000">
               </div>
             </div>
 
             <div class="field">
               <label for="city">עיר או אזור</label>
               <input id="city" placeholder="למשל: תל אביב">
+            </div>
+
+            <div class="field">
+              <label for="photo">תמונת פרופיל</label>
+
+              <div class="photo-row">
+                <div class="photo-preview" id="photo-preview">כ</div>
+
+                <div>
+                  <input id="photo" type="file" accept="image/*">
+
+                  <p class="photo-help">
+                    בטלפון אפשר לבחור מהגלריה או לצלם תמונה חדשה.
+                  </p>
+                </div>
+              </div>
             </div>
 
             <div id="student-fields">
@@ -451,20 +502,16 @@
                     אילו מקצועות רוצים ללמוד?
                   </label>
 
-                  <input
-                    id="student-subjects"
-                    placeholder="למשל: מתמטיקה, אנגלית ופיזיקה"
-                  >
+                  <input id="student-subjects"
+                         placeholder="למשל: מתמטיקה, אנגלית ופיזיקה">
                 </div>
 
                 <div class="two">
                   <div class="field">
                     <label for="student-level">רמה או כיתה</label>
 
-                    <input
-                      id="student-level"
-                      placeholder="למשל: כיתה י׳, 5 יח״ל"
-                    >
+                    <input id="student-level"
+                           placeholder="למשל: כיתה י׳, 5 יח״ל">
                   </div>
 
                   <div class="field">
@@ -472,20 +519,16 @@
                       איך נוח לך ללמוד?
                     </label>
 
-                    <input
-                      id="learning-style"
-                      placeholder="למשל: הסברים ותרגול"
-                    >
+                    <input id="learning-style"
+                           placeholder="למשל: הסברים ותרגול">
                   </div>
                 </div>
 
                 <div class="field">
                   <label for="student-goal">המטרה שלך</label>
 
-                  <textarea
-                    id="student-goal"
-                    placeholder="מה תרצו להשיג בלמידה?"
-                  ></textarea>
+                  <textarea id="student-goal"
+                            placeholder="מה תרצו להשיג בלמידה?"></textarea>
                 </div>
 
                 <div class="field">
@@ -493,10 +536,8 @@
                     ימים ושעות נוחים
                   </label>
 
-                  <input
-                    id="student-availability"
-                    placeholder="למשל: ראשון ורביעי אחר הצהריים"
-                  >
+                  <input id="student-availability"
+                         placeholder="למשל: ראשון ורביעי אחר הצהריים">
                 </div>
               </div>
             </div>
@@ -508,31 +549,21 @@
                     אילו מקצועות את/ה מלמד/ת?
                   </label>
 
-                  <input
-                    id="teacher-subjects"
-                    placeholder="למשל: מתמטיקה, פיזיקה ומדעי המחשב"
-                  >
+                  <input id="teacher-subjects"
+                         placeholder="למשל: מתמטיקה ופיזיקה">
                 </div>
 
                 <div class="two">
                   <div class="field">
                     <label for="price">מחיר לשעה</label>
-
-                    <input
-                      id="price"
-                      type="number"
-                      min="0"
-                      placeholder="120"
-                    >
+                    <input id="price" type="number" min="0"
+                           placeholder="120">
                   </div>
 
                   <div class="field">
                     <label for="experience">ניסיון בהוראה</label>
-
-                    <input
-                      id="experience"
-                      placeholder="למשל: 4 שנות ניסיון"
-                    >
+                    <input id="experience"
+                           placeholder="למשל: 4 שנות ניסיון">
                   </div>
                 </div>
 
@@ -549,14 +580,10 @@
                 </div>
 
                 <div class="field">
-                  <label for="bio">
-                    ניסיון, לימודים ושיטת הוראה
-                  </label>
+                  <label for="bio">ניסיון ושיטת הוראה</label>
 
-                  <textarea
-                    id="bio"
-                    placeholder="ספרו על עצמכם ועל הדרך שבה אתם מלמדים"
-                  ></textarea>
+                  <textarea id="bio"
+                            placeholder="ספרו על עצמכם ועל הדרך שבה אתם מלמדים"></textarea>
                 </div>
 
                 <div class="field">
@@ -564,10 +591,8 @@
                     ימים ושעות זמינים
                   </label>
 
-                  <input
-                    id="teacher-availability"
-                    placeholder="למשל: ימים א׳–ה׳ בשעות הערב"
-                  >
+                  <input id="teacher-availability"
+                         placeholder="למשל: ימים א׳–ה׳ בערב">
                 </div>
               </div>
             </div>
@@ -594,7 +619,7 @@
 
             <a id="public-profile-link" href="teacher-profile.html">
               הפרופיל הציבורי
-              <span>כך תלמידים רואים את פרופיל המורה</span>
+              <span>כך תלמידים רואים את הפרופיל</span>
             </a>
 
             <a href="dashboard.html">
@@ -634,7 +659,8 @@
       document.getElementById("public-profile-link");
 
     let currentUser = null;
-    let currentProfile = null;
+    let currentProfile = {};
+    let photoData = "";
 
     function value(id) {
       return document.getElementById(id).value.trim();
@@ -647,6 +673,92 @@
     function showMessage(text, type) {
       message.textContent = text;
       message.className = "message show " + type;
+    }
+
+    function resizePhoto(file) {
+      return new Promise((resolve, reject) => {
+        if (!file.type.startsWith("image/")) {
+          reject(new Error("הקובץ שבחרת אינו תמונה."));
+          return;
+        }
+
+        if (file.size > 8 * 1024 * 1024) {
+          reject(new Error("התמונה גדולה מדי."));
+          return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          const image = new Image();
+
+          image.onload = () => {
+            const size = 360;
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+
+            canvas.width = size;
+            canvas.height = size;
+
+            const sourceSize = Math.min(
+              image.naturalWidth,
+              image.naturalHeight
+            );
+
+            const sourceX =
+              (image.naturalWidth - sourceSize) / 2;
+
+            const sourceY =
+              (image.naturalHeight - sourceSize) / 2;
+
+            context.drawImage(
+              image,
+              sourceX,
+              sourceY,
+              sourceSize,
+              sourceSize,
+              0,
+              0,
+              size,
+              size
+            );
+
+            resolve(canvas.toDataURL("image/jpeg", 0.72));
+          };
+
+          image.onerror = () => {
+            reject(new Error("לא הצלחנו לפתוח את התמונה."));
+          };
+
+          image.src = reader.result;
+        };
+
+        reader.onerror = () => {
+          reject(new Error("לא הצלחנו לקרוא את התמונה."));
+        };
+
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function showPhoto(photo, name) {
+      const boxes = [
+        document.getElementById("avatar"),
+        document.getElementById("photo-preview")
+      ];
+
+      boxes.forEach((box) => {
+        box.innerHTML = "";
+
+        if (photo && photo.startsWith("data:image/")) {
+          const image = document.createElement("img");
+          image.src = photo;
+          image.alt = "תמונת הפרופיל";
+          box.appendChild(image);
+        } else {
+          box.textContent = (name || "כ").charAt(0);
+        }
+      });
     }
 
     function updateRoleFields() {
@@ -664,6 +776,7 @@
 
     function fillProfile(profile) {
       currentProfile = profile;
+      photoData = profile.photo || "";
 
       setValue("name", profile.name);
       setValue("email", profile.email || currentUser.email);
@@ -692,8 +805,7 @@
       document.getElementById("welcome").textContent =
         "היי " + name + ", זה האזור שלך.";
 
-      document.getElementById("avatar").textContent =
-        name.charAt(0) || "כ";
+      showPhoto(photoData, name);
 
       publicProfileLink.href =
         "teacher-profile.html?id=" +
@@ -704,6 +816,35 @@
       loading.classList.add("hidden");
       profilePane.classList.remove("hidden");
     }
+
+    document
+      .getElementById("photo")
+      .addEventListener("change", async (event) => {
+        const file = event.target.files[0];
+
+        if (!file) {
+          return;
+        }
+
+        try {
+          photoData = await resizePhoto(file);
+          showPhoto(photoData, value("name"));
+          showMessage(
+            "התמונה מוכנה. לחצי על שמירת השינויים.",
+            "success"
+          );
+        } catch (error) {
+          showMessage(error.message, "error");
+        }
+      });
+
+    document
+      .getElementById("name")
+      .addEventListener("input", () => {
+        if (!photoData) {
+          showPhoto("", value("name"));
+        }
+      });
 
     roleField.addEventListener("change", updateRoleFields);
 
@@ -765,16 +906,13 @@
           email: currentUser.email,
           phone: value("phone"),
           city: value("city"),
+          photo: photoData,
           role,
-          createdAt:
-            currentProfile.createdAt || serverTimestamp(),
           updatedAt: serverTimestamp()
         };
 
         if (role === "teacher") {
-          privateProfile.subjects =
-            value("teacher-subjects");
-
+          privateProfile.subjects = value("teacher-subjects");
           privateProfile.price = value("price");
           privateProfile.experience = value("experience");
           privateProfile.format =
@@ -783,18 +921,10 @@
           privateProfile.availability =
             value("teacher-availability");
         } else {
-          privateProfile.subjects =
-            value("student-subjects");
-
-          privateProfile.level =
-            value("student-level");
-
-          privateProfile.learningStyle =
-            value("learning-style");
-
-          privateProfile.goal =
-            value("student-goal");
-
+          privateProfile.subjects = value("student-subjects");
+          privateProfile.level = value("student-level");
+          privateProfile.learningStyle = value("learning-style");
+          privateProfile.goal = value("student-goal");
           privateProfile.availability =
             value("student-availability");
         }
@@ -813,15 +943,14 @@
           const publicTeacherProfile = {
             uid: currentUser.uid,
             name,
+            photo: photoData,
             city: value("city"),
             subjects: value("teacher-subjects"),
             price: value("price"),
             experience: value("experience"),
-            format:
-              document.getElementById("format").value,
+            format: document.getElementById("format").value,
             bio: value("bio"),
-            availability:
-              value("teacher-availability"),
+            availability: value("teacher-availability"),
             verified: false,
             updatedAt: serverTimestamp()
           };
@@ -845,13 +974,11 @@
         document.getElementById("welcome").textContent =
           "היי " + name + ", זה האזור שלך.";
 
-        document.getElementById("avatar").textContent =
-          name.charAt(0) || "כ";
-
+        showPhoto(photoData, name);
         updateRoleFields();
 
         showMessage(
-          "השינויים נשמרו בהצלחה.",
+          "התמונה והפרטים נשמרו בהצלחה.",
           "success"
         );
       } catch (error) {

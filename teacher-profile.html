@@ -1,6 +1,678 @@
 <!doctype html>
-<html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>פרופיל מורה — כיוון</title><style>
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');:root{--navy:#121a37;--ink:#1c2746;--teal:#0b9d78;--coral:#ff6e61;--yellow:#ffd25d;--cloud:#f6f8fe;--line:#e5eaf4;--muted:#69738d;--white:#fff;--shadow:0 16px 42px rgba(23,37,78,.1)}*{box-sizing:border-box}body{margin:0;background:var(--cloud);color:var(--ink);font-family:Heebo,Arial,sans-serif}.container{width:min(1100px,calc(100% - 40px));margin:auto}.nav{height:76px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:27px;font-weight:900;color:var(--navy);text-decoration:none;display:flex;gap:8px;align-items:center}.mark{display:grid;place-items:center;width:28px;height:28px;border-radius:10px 10px 10px 2px;background:var(--coral);color:#fff;transform:rotate(-5deg)}.back{font-weight:700;color:var(--muted);text-decoration:none}.cover{height:165px;background:linear-gradient(115deg,#1e315c,#1e766d 58%,#f3c65b);border-radius:27px 27px 0 0;position:relative;overflow:hidden}.cover:after{content:"";position:absolute;width:270px;height:270px;border:45px solid rgba(255,255,255,.16);border-radius:50%;left:-60px;top:-110px}.profile{background:#fff;border-radius:0 0 27px 27px;padding:0 35px 27px;box-shadow:var(--shadow);position:relative}.avatar{position:relative;margin-top:-55px;width:112px;height:112px;border:6px solid white;border-radius:27px;background:linear-gradient(135deg,#fa9d6e,#c64f62);display:grid;place-items:center;color:#fff;font-size:38px;font-weight:900;box-shadow:0 8px 18px #283a6040}.top{display:flex;justify-content:space-between;align-items:end;gap:25px}.name{margin:12px 0 3px;font-size:34px;line-height:1}.verified{color:var(--teal);font-size:14px;font-weight:900}.headline{color:var(--muted);font-size:16px}.actions{display:flex;gap:10px}.button{border:0;border-radius:12px;padding:12px 17px;font:inherit;font-size:14px;font-weight:900;cursor:pointer}.primary{background:var(--navy);color:#fff}.light{background:#eff3fb;color:#52607d}.stats{display:flex;gap:27px;border-top:1px solid var(--line);margin-top:21px;padding-top:17px}.stat b{display:block;font-size:19px}.stat span{font-size:12px;color:var(--muted);font-weight:700}.layout{display:grid;grid-template-columns:1fr 335px;gap:25px;margin:26px 0 75px}.card{background:#fff;border-radius:20px;padding:23px;box-shadow:0 8px 26px rgba(23,37,78,.05)}.card+.card{margin-top:17px}.card h2{margin:0 0 12px;font-size:21px}.card p{margin:0;color:var(--muted);font-size:15px;line-height:1.7}.tags{display:flex;gap:7px;flex-wrap:wrap}.tag{background:#e8faf1;color:#087c5f;border-radius:9px;padding:7px 10px;font-size:13px;font-weight:800}.review{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}.review:first-of-type{border:0;padding-top:0}.review-top{display:flex;justify-content:space-between;font-size:14px;font-weight:900}.stars{color:#db9300}.review p{font-size:14px;margin-top:5px}.booking{position:sticky;top:18px}.price{font-size:29px;font-weight:900}.price small{font-size:13px;color:var(--muted);font-weight:600}.mini{font-size:13px;color:var(--muted);margin:3px 0 17px}.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.slot{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 4px;text-align:center;font:inherit;font-size:12px;font-weight:800;color:#53607d;cursor:pointer}.slot.selected{background:#e2f9ef;color:#087b5e;border-color:#9edcc8}.booking .primary{width:100%;margin-top:15px}.secure{font-size:12px;color:var(--muted);text-align:center;margin:11px 0 0}.message{display:none;background:#e5faf0;color:#087c5f;padding:11px;border-radius:10px;text-align:center;font-size:13px;font-weight:800;margin-top:10px}@media(max-width:750px){.top{align-items:start;flex-direction:column}.profile{padding:0 19px 21px}.actions{width:100%}.actions .button{flex:1}.layout{grid-template-columns:1fr}.booking{position:static;order:-1}.name{font-size:30px}.stats{gap:18px}.cover{height:130px}.avatar{width:96px;height:96px;font-size:32px}.container{width:min(100% - 28px,1100px)}}
-</style></head><body><nav class="container nav"><a class="brand" href="index.html"><span class="mark">↗</span>כיוון</a><a class="back" href="dashboard.html">האזור שלי</a></nav><main class="container"><section class="profile"><div class="cover"></div><div class="top"><div><div class="avatar" id="avatar">נ</div><h1 class="name" id="name">נועם לוי <span class="verified">● מאומת</span></h1><div class="headline" id="headline">מורה למתמטיקה 4–5 יח״ל · מלמד/ת אונליין</div></div><div class="actions"><button class="button light" id="chat">שולחים הודעה</button><button class="button primary" id="book-top">קובעים שיעור</button></div></div><div class="stats"><div class="stat"><b>4.9 ★</b><span>48 דירוגים מאומתים</span></div><div class="stat"><b>6 שנים</b><span>ניסיון בהוראה</span></div><div class="stat"><b>186</b><span>שיעורים בכיוון</span></div></div></section><section class="layout"><div><article class="card"><h2>קצת עליי</h2><p id="bio">אני נועם, מורה למתמטיקה שמאמין/ה שכל תלמיד יכול להבין — כשמפרקים את החומר לקצב ולדרך שמתאימים לו. בשיעורים שלי עובדים בלי לחץ, אבל עם מטרה ברורה ותרגול מדויק לקראת הבגרות.</p></article><article class="card"><h2>מה נלמד יחד?</h2><div class="tags" id="tags"><span class="tag">מתמטיקה 4 יח״ל</span><span class="tag">מתמטיקה 5 יח״ל</span><span class="tag">הכנה לבגרות</span><span class="tag">חיזוק ביטחון</span></div></article><article class="card"><h2>מה תלמידים מספרים</h2><div class="review"><div class="review-top"><span>דנה, כיתה י״ב</span><span class="stars">★★★★★</span></div><p>נועם הסביר/ה לי את החומר בצורה שכבר לא מפחידה. הגעתי מוכנה הרבה יותר למבחן.</p></div><div class="review"><div class="review-top"><span>אורי, כיתה י״א</span><span class="stars">★★★★★</span></div><p>סבלני/ת, ברור/ה ומאוד מסודר/ת. כל שיעור נתן לי משהו להמשיך איתו.</p></div></article></div><aside class="card booking"><h2>קובעים שיעור ניסיון</h2><div class="price" id="price">₪120 <small>לשעה</small></div><p class="mini">בחרו זמן שמתאים לכם. התשלום המאובטח מתבצע רק אחרי אישור ההזמנה.</p><div class="slots"><button class="slot selected">א׳<br>18:00</button><button class="slot">ג׳<br>19:00</button><button class="slot">ד׳<br>17:30</button></div><button class="button primary" id="book">לבקש את המועד הזה ←</button><p class="secure">✓ ביטול חינם עד 24 שעות לפני השיעור</p><div class="message" id="message"></div></aside></section></main><script>
-const data=JSON.parse(localStorage.getItem('kivunProfile')||'null'),qs=new URLSearchParams(location.search);if(data&&data.role==='teacher'){const n=data.name||'השם שלך';document.getElementById('name').innerHTML=n+' <span class="verified">● מורה בתהליך אימות</span>';document.getElementById('avatar').textContent=n[0];document.getElementById('bio').textContent=data.bio||'זה הפרופיל הציבורי שלך. השלימו את הפרטים במסך ההצטרפות כדי לספר לתלמידים איך אתם מלמדים.';document.getElementById('headline').textContent=(data.subject||'המקצוע שלך')+' · '+(data.format||'אונליין');if(data.price)document.getElementById('price').innerHTML='₪'+data.price+' <small>לשעה</small>';if(data.subject)document.getElementById('tags').innerHTML='<span class="tag">'+data.subject+'</span><span class="tag">'+(data.experience||'ניסיון בהוראה')+'</span><span class="tag">'+(data.format||'אונליין')+'</span>'}else if(qs.get('teacher')){const n=qs.get('teacher');document.getElementById('name').innerHTML=n+' <span class="verified">● מאומת</span>';document.getElementById('avatar').textContent=n[0]};document.querySelectorAll('.slot').forEach(s=>s.onclick=()=>{document.querySelectorAll('.slot').forEach(x=>x.classList.remove('selected'));s.classList.add('selected')});function show(t){const box=document.getElementById('message');box.textContent=t;box.style.display='block'}document.getElementById('book').onclick=()=>show('הבקשה נשלחה למורה. נחזור אליכם עם אישור בקרוב.');document.getElementById('book-top').onclick=()=>document.querySelector('.booking').scrollIntoView({behavior:'smooth'});document.getElementById('chat').onclick=()=>show('חלון הצ׳אט ייפתח לאחר הרשמה לחשבון.');
-</script></body></html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>פרופיל מורה — כיוון</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');
+
+    :root {
+      --navy: #121a37;
+      --ink: #1c2746;
+      --teal: #0b9d78;
+      --coral: #ff6e61;
+      --yellow: #ffd25d;
+      --cloud: #f6f8fe;
+      --line: #e5eaf4;
+      --muted: #69738d;
+      --white: #fff;
+      --shadow: 0 16px 42px rgba(23, 37, 78, .1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cloud);
+      font-family: Heebo, Arial, sans-serif;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    .nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy);
+      font-size: 27px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .mark {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 10px 10px 10px 2px;
+      color: #fff;
+      background: var(--coral);
+      transform: rotate(-5deg);
+    }
+
+    .back {
+      color: var(--muted);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .cover {
+      position: relative;
+      height: 165px;
+      overflow: hidden;
+      border-radius: 27px 27px 0 0;
+      background:
+        linear-gradient(115deg, #1e315c, #1e766d 58%, #f3c65b);
+    }
+
+    .cover::after {
+      position: absolute;
+      top: -110px;
+      left: -60px;
+      width: 270px;
+      height: 270px;
+      border: 45px solid rgba(255, 255, 255, .16);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .profile {
+      position: relative;
+      padding: 0 35px 27px;
+      border-radius: 0 0 27px 27px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .identity {
+      min-width: 0;
+    }
+
+    .avatar {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 112px;
+      height: 112px;
+      margin-top: -55px;
+      overflow: hidden;
+      border: 6px solid #fff;
+      border-radius: 27px;
+      color: #fff;
+      background: linear-gradient(135deg, #fa9d6e, #c64f62);
+      box-shadow: 0 8px 18px #283a6040;
+      font-size: 38px;
+      font-weight: 900;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .name {
+      margin: 12px 0 3px;
+      font-size: 34px;
+      line-height: 1.15;
+    }
+
+    .status {
+      display: inline-block;
+      margin-right: 7px;
+      padding: 4px 8px;
+      border-radius: 7px;
+      color: #8a6308;
+      background: #fff5d9;
+      font-size: 12px;
+      font-weight: 900;
+      vertical-align: middle;
+    }
+
+    .status.verified {
+      color: var(--teal);
+      background: #e5faf0;
+    }
+
+    .headline {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 17px;
+      border: 0;
+      border-radius: 12px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 900;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .primary {
+      color: #fff;
+      background: var(--navy);
+    }
+
+    .light {
+      color: #52607d;
+      background: #eff3fb;
+    }
+
+    .details-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      margin-top: 21px;
+      padding-top: 17px;
+      border-top: 1px solid var(--line);
+    }
+
+    .detail b {
+      display: block;
+      color: var(--navy);
+      font-size: 17px;
+    }
+
+    .detail span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 335px;
+      gap: 25px;
+      margin: 26px 0 75px;
+    }
+
+    .card {
+      padding: 23px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 8px 26px rgba(23, 37, 78, .05);
+    }
+
+    .card + .card {
+      margin-top: 17px;
+    }
+
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: 21px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      padding: 7px 10px;
+      border-radius: 9px;
+      color: #087c5f;
+      background: #e8faf1;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .contact {
+      position: sticky;
+      top: 18px;
+      height: max-content;
+    }
+
+    .price {
+      margin-bottom: 3px;
+      color: var(--navy);
+      font-size: 29px;
+      font-weight: 900;
+    }
+
+    .price small {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .mini {
+      margin: 3px 0 17px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .availability {
+      margin: 15px 0;
+      padding: 12px;
+      border-radius: 11px;
+      color: #52607d;
+      background: #f3f6fb;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .contact .primary {
+      width: 100%;
+      text-align: center;
+    }
+
+    .notice {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .state {
+      margin-bottom: 70px;
+      padding: 50px 25px;
+      border-radius: 25px;
+      color: var(--muted);
+      background: #fff;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .state h1 {
+      margin: 8px 0;
+      color: var(--navy);
+    }
+
+    .state-icon {
+      color: var(--teal);
+      font-size: 40px;
+      font-weight: 900;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 750px) {
+      .top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .profile {
+        padding: 0 19px 21px;
+      }
+
+      .actions {
+        width: 100%;
+      }
+
+      .actions .button {
+        flex: 1;
+        text-align: center;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .contact {
+        position: static;
+        order: -1;
+      }
+
+      .name {
+        font-size: 30px;
+      }
+
+      .details-line {
+        gap: 18px;
+      }
+
+      .cover {
+        height: 130px;
+      }
+
+      .avatar {
+        width: 96px;
+        height: 96px;
+        font-size: 32px;
+      }
+
+      .container {
+        width: min(100% - 28px, 1100px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="container nav">
+    <a class="brand" href="index.html">
+      <span class="mark">↗</span>
+      כיוון
+    </a>
+
+    <a class="back" href="matches.html">
+      חזרה לרשימת המורים
+    </a>
+  </nav>
+
+  <main class="container">
+    <div id="loading" class="state">
+      <div class="state-icon">◎</div>
+      <h1>טוענים את הפרופיל</h1>
+      <p>רק רגע...</p>
+    </div>
+
+    <div id="not-found" class="state hidden">
+      <div class="state-icon">!</div>
+      <h1>הפרופיל לא נמצא</h1>
+
+      <p>
+        ייתכן שהקישור אינו תקין או שהפרופיל עדיין לא פורסם.
+      </p>
+
+      <a class="button primary" href="matches.html">
+        חזרה לרשימת המורים
+      </a>
+    </div>
+
+    <div id="profile-content" class="hidden">
+      <section class="profile">
+        <div class="cover"></div>
+
+        <div class="top">
+          <div class="identity">
+            <div class="avatar" id="avatar">כ</div>
+
+            <h1 class="name">
+              <span id="name"></span>
+              <span class="status" id="status"></span>
+            </h1>
+
+            <div class="headline" id="headline"></div>
+          </div>
+
+          <div class="actions">
+            <a class="button light" href="matches.html">
+              למורים נוספים
+            </a>
+
+            <a
+              class="button primary hidden"
+              id="edit-profile"
+              href="dashboard.html"
+            >
+              עריכת הפרופיל
+            </a>
+          </div>
+        </div>
+
+        <div class="details-line">
+          <div class="detail">
+            <b id="city">טרם צוין</b>
+            <span>עיר או אזור</span>
+          </div>
+
+          <div class="detail">
+            <b id="experience">טרם צוין</b>
+            <span>ניסיון בהוראה</span>
+          </div>
+
+          <div class="detail">
+            <b id="format">טרם צוין</b>
+            <span>אופן השיעור</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <div>
+          <article class="card">
+            <h2>קצת עליי</h2>
+            <p id="bio"></p>
+          </article>
+
+          <article class="card">
+            <h2>מה נלמד יחד?</h2>
+            <div class="tags" id="tags"></div>
+          </article>
+
+          <article class="card">
+            <h2>חשוב לדעת</h2>
+
+            <p>
+              הפרטים בעמוד נכתבו על ידי המורה.
+              סימון אימות מופיע רק לאחר בדיקה אמיתית.
+              האתר אינו מציג דירוגים או ביקורות שלא נכתבו
+              לאחר שיעורים אמיתיים.
+            </p>
+          </article>
+        </div>
+
+        <aside class="card contact">
+          <h2>פרטי השיעור</h2>
+
+          <div class="price" id="price"></div>
+
+          <p class="mini">
+            ניתן לקרוא על המורה ולבדוק אם סגנון הלמידה מתאים לך.
+          </p>
+
+          <div class="availability">
+            <b>זמינות:</b><br>
+            <span id="availability"></span>
+          </div>
+
+          <a class="button primary" href="login.html">
+            כניסה לחשבון כדי ליצור קשר
+          </a>
+
+          <p class="notice">
+            אפשרות לשליחת הודעות ולקביעת שיעורים תתווסף
+            בהמשך דרך מערכת מאובטחת.
+          </p>
+        </aside>
+      </section>
+    </div>
+  </main>
+
+  <script type="module">
+    import {
+      auth,
+      db,
+      onAuthStateChanged,
+      doc,
+      getDoc
+    } from "./firebase.js";
+
+    const parameters =
+      new URLSearchParams(window.location.search);
+
+    const teacherId = parameters.get("id");
+
+    const loading = document.getElementById("loading");
+    const notFound = document.getElementById("not-found");
+    const profileContent =
+      document.getElementById("profile-content");
+
+    let loadedTeacher = null;
+
+    function showNotFound() {
+      loading.classList.add("hidden");
+      profileContent.classList.add("hidden");
+      notFound.classList.remove("hidden");
+    }
+
+    function setText(id, text, fallback = "טרם צוין") {
+      document.getElementById(id).textContent =
+        text || fallback;
+    }
+
+    function showPhoto(photo, name) {
+      const avatar = document.getElementById("avatar");
+
+      avatar.innerHTML = "";
+
+      if (photo && photo.startsWith("data:image/")) {
+        const image = document.createElement("img");
+        image.src = photo;
+        image.alt = "תמונת הפרופיל של " + name;
+        avatar.appendChild(image);
+      } else {
+        avatar.textContent = name.charAt(0) || "כ";
+      }
+    }
+
+    function showSubjects(subjects) {
+      const tags = document.getElementById("tags");
+      tags.innerHTML = "";
+
+      const subjectList = String(subjects || "")
+        .split(",")
+        .map((subject) => subject.trim())
+        .filter(Boolean);
+
+      if (!subjectList.length) {
+        subjectList.push("המקצועים טרם צוינו");
+      }
+
+      subjectList.forEach((subject) => {
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = subject;
+        tags.appendChild(tag);
+      });
+    }
+
+    function renderTeacher(teacher) {
+      loadedTeacher = teacher;
+
+      const name = teacher.name || "מורה בכיוון";
+      const subjects =
+        teacher.subjects || "המקצועים טרם צוינו";
+      const format =
+        teacher.format || "אופן השיעור טרם צוין";
+
+      setText("name", name);
+      setText("city", teacher.city);
+      setText("experience", teacher.experience);
+      setText("format", teacher.format);
+      setText(
+        "bio",
+        teacher.bio,
+        "המורה עדיין לא הוסיף/ה תיאור אישי."
+      );
+      setText(
+        "availability",
+        teacher.availability,
+        "הזמינות טרם צוינה"
+      );
+
+      document.getElementById("headline").textContent =
+        subjects + " · " + format;
+
+      const status = document.getElementById("status");
+
+      status.textContent = teacher.verified
+        ? "✓ מורה מאומת/ת"
+        : "ממתין/ה לאימות";
+
+      status.classList.toggle(
+        "verified",
+        teacher.verified === true
+      );
+
+      document.getElementById("price").innerHTML =
+        teacher.price
+          ? "₪" +
+            Number(teacher.price).toLocaleString("he-IL") +
+            ' <small>לשעה</small>'
+          : '<small>המחיר טרם צוין</small>';
+
+      showPhoto(teacher.photo || "", name);
+      showSubjects(subjects);
+
+      document.title = name + " — כיוון";
+
+      loading.classList.add("hidden");
+      notFound.classList.add("hidden");
+      profileContent.classList.remove("hidden");
+    }
+
+    async function loadTeacher() {
+      if (!teacherId) {
+        showNotFound();
+        return;
+      }
+
+      try {
+        const teacherSnapshot = await getDoc(
+          doc(db, "teachers", teacherId)
+        );
+
+        if (!teacherSnapshot.exists()) {
+          showNotFound();
+          return;
+        }
+
+        renderTeacher({
+          id: teacherSnapshot.id,
+          ...teacherSnapshot.data()
+        });
+      } catch (error) {
+        console.error(error);
+        showNotFound();
+      }
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      if (user && user.uid === teacherId) {
+        document
+          .getElementById("edit-profile")
+          .classList.remove("hidden");
+      }
+    });
+
+    loadTeacher();
+  </script>
+</body>
+</html>
