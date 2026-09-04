@@ -3,178 +3,89 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>בונים פרופיל — כיוון</title>
+  <title>יצירת פרופיל — כיוון</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap");
 
-    :root {
-      --navy: #121a37;
-      --ink: #1d2746;
-      --teal: #0b9d78;
-      --coral: #ff6e61;
-      --yellow: #ffd25d;
-      --cloud: #f6f8fe;
-      --line: #e4e9f4;
-      --muted: #6c7691;
-      --white: #fff;
-      --shadow: 0 22px 52px rgba(20, 34, 75, .12);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      min-height: 100vh;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 91% 9%, #ddfff1 0, transparent 28%),
-        radial-gradient(circle at 5% 92%, #fff1d4 0, transparent 30%),
-        var(--cloud);
+      color: #1d2746;
+      background: #f6f8fe;
       font-family: Heebo, Arial, sans-serif;
     }
 
     .container {
-      width: min(1120px, calc(100% - 40px));
+      width: min(1050px, calc(100% - 30px));
       margin: auto;
     }
 
-    .nav {
-      height: 80px;
+    nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      min-height: 75px;
+    }
+
+    nav a {
+      color: #0b9d78;
+      font-weight: 800;
+      text-decoration: none;
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--navy);
-      font-size: 29px;
+      color: #121a37;
+      font-size: 28px;
       font-weight: 900;
-      letter-spacing: -1.3px;
-      text-decoration: none;
     }
 
-    .mark {
+    main {
       display: grid;
-      place-items: center;
-      width: 29px;
-      height: 29px;
-      border-radius: 10px 10px 10px 2px;
-      color: #fff;
-      background: var(--coral);
-      transform: rotate(-5deg);
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      align-items: start;
+      padding: 35px 0 70px;
     }
 
-    .login {
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .login a {
-      color: var(--teal);
-      text-decoration: none;
-    }
-
-    .page {
-      display: grid;
-      grid-template-columns: 1.08fr .92fr;
-      gap: 52px;
-      align-items: center;
-      padding: 32px 0 70px;
+    .intro {
+      padding-top: 60px;
     }
 
     .intro h1 {
-      margin: 10px 0 13px;
-      color: var(--navy);
-      font-size: 54px;
-      line-height: 1.04;
-      letter-spacing: -2.5px;
+      margin: 8px 0;
+      color: #121a37;
+      font-size: 50px;
+      line-height: 1.1;
     }
 
-    .intro h1 em {
-      color: var(--coral);
-      font-style: normal;
-    }
+    .intro h1 span { color: #ff6e61; }
 
     .intro p {
-      max-width: 450px;
-      color: var(--muted);
+      color: #69738d;
       font-size: 18px;
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
-    .benefits {
-      margin: 26px 0;
-      padding: 0;
-      list-style: none;
+    .card {
+      padding: 28px;
+      border-radius: 25px;
+      background: white;
+      box-shadow: 0 20px 45px rgba(23, 37, 78, .11);
     }
 
-    .benefits li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 12px 0;
-      color: #54607a;
-      font-weight: 700;
-    }
-
-    .check {
-      display: grid;
-      place-items: center;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      color: #078361;
-      background: #dcf8ed;
-      font-size: 13px;
-    }
-
-    .form-card {
-      padding: 27px;
-      border: 1px solid #fff;
-      border-radius: 27px;
-      background: #fff;
-      box-shadow: var(--shadow);
-    }
-
-    .progress {
-      display: flex;
-      gap: 7px;
-      margin-bottom: 24px;
-    }
-
-    .progress i {
-      height: 5px;
-      flex: 1;
-      border-radius: 99px;
-      background: #e5eaf4;
-    }
-
-    .progress i.active {
-      background: var(--teal);
-    }
-
-    .step-title {
-      margin: 0 0 4px;
-      font-size: 26px;
-      font-weight: 900;
-      letter-spacing: -1px;
+    h2 {
+      margin: 0 0 5px;
+      color: #121a37;
     }
 
     .sub {
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: 14px;
+      margin: 0 0 20px;
+      color: #69738d;
     }
 
-    .roles {
+    .roles, .two {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 11px;
@@ -182,97 +93,67 @@
 
     .role {
       padding: 15px;
-      border: 1.5px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-      font-family: inherit;
-      text-align: right;
+      border: 2px solid #e4e9f4;
+      border-radius: 14px;
+      background: white;
+      font: inherit;
+      font-weight: 800;
       cursor: pointer;
     }
 
-    .role:hover,
     .role.selected {
-      border-color: var(--teal);
+      border-color: #0b9d78;
+      color: #08785c;
       background: #effdf7;
-    }
-
-    .role .icon {
-      display: block;
-      margin-bottom: 7px;
-      font-size: 25px;
-    }
-
-    .role b {
-      display: block;
-      font-size: 17px;
-    }
-
-    .role span {
-      display: block;
-      margin-top: 2px;
-      color: var(--muted);
-      font-size: 12px;
     }
 
     .fields {
       display: grid;
-      gap: 12px;
+      gap: 13px;
     }
 
-    .field label {
+    label {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       color: #4e5b76;
       font-size: 13px;
       font-weight: 800;
     }
 
-    .field input,
-    .field textarea,
-    .field select {
+    input, select, textarea {
       width: 100%;
       padding: 12px;
-      border: 1px solid var(--line);
+      border: 1px solid #e4e9f4;
       border-radius: 11px;
-      outline: 0;
-      color: var(--ink);
-      background: #fff;
+      outline: none;
       font: inherit;
     }
 
-    .field input:focus,
-    .field textarea:focus,
-    .field select:focus {
-      border-color: var(--teal);
+    input:focus, select:focus, textarea:focus {
+      border-color: #0b9d78;
       box-shadow: 0 0 0 3px #dff7ed;
     }
 
-    .field textarea {
-      min-height: 84px;
+    textarea {
+      min-height: 90px;
       resize: vertical;
-    }
-
-    .two {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 11px;
     }
 
     .photo-row {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 13px;
     }
 
     .photo-preview {
       display: grid;
       place-items: center;
-      width: 68px;
-      height: 68px;
-      flex: 0 0 68px;
+      width: 70px;
+      height: 70px;
+      flex: 0 0 70px;
       overflow: hidden;
-      border-radius: 17px;
-      color: #fff;
+      border-radius: 18px;
+      color: white;
       background: linear-gradient(135deg, #ff9d6e, #c64f62);
       font-size: 25px;
       font-weight: 900;
@@ -284,528 +165,241 @@
       object-fit: cover;
     }
 
-    .button-row {
+    .buttons {
       display: flex;
       gap: 10px;
-      margin-top: 22px;
+      margin-top: 20px;
     }
 
-    .button {
+    button {
       padding: 13px 17px;
       border: 0;
-      border-radius: 12px;
+      border-radius: 11px;
       font-family: inherit;
-      font-size: 15px;
       font-weight: 900;
       cursor: pointer;
     }
 
-    .button:disabled {
-      opacity: .65;
-      cursor: wait;
-    }
-
     .primary {
       flex: 1;
-      color: #fff;
-      background: var(--navy);
+      color: white;
+      background: #121a37;
     }
 
     .secondary {
-      color: #5e6a84;
-      background: #f1f4fa;
+      color: #69738d;
+      background: #f0f3fa;
     }
 
-    .notice {
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.45;
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
     }
 
     .message {
       display: none;
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 11px;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .message.show {
-      display: block;
-    }
-
-    .message.error {
-      color: #9e2f2a;
-      background: #fff0ef;
-    }
-
-    .message.success {
-      color: #08785c;
-      background: #e4faef;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .preview {
-      padding: 20px;
-      border-radius: 25px;
-      color: #fff;
-      background: var(--navy);
-      box-shadow: 15px 17px 0 var(--yellow);
-      transform: rotate(2deg);
-    }
-
-    .preview-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: #cbd5ee;
-      font-size: 12px;
-    }
-
-    .preview-card,
-    .student-preview {
       margin-top: 14px;
-      padding: 17px;
-      border-radius: 17px;
-      color: var(--ink);
-      background: #fff;
-    }
-
-    .avatar {
-      display: grid;
-      place-items: center;
-      width: 62px;
-      height: 62px;
-      overflow: hidden;
-      border-radius: 17px;
-      color: #fff;
-      background: linear-gradient(135deg, #ff9d6e, #c64f62);
-      font-size: 24px;
-      font-weight: 900;
-    }
-
-    .avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .profile-head {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-    }
-
-    .profile-head b {
-      font-size: 19px;
-    }
-
-    .profile-head span {
-      color: var(--teal);
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .preview-card p {
-      margin: 13px 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .profile-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .profile-tags i {
-      padding: 5px 7px;
-      border-radius: 7px;
-      color: #08785c;
-      background: #e5faf0;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 800;
-    }
-
-    .profile-price {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid var(--line);
-      font-weight: 900;
-    }
-
-    .goal {
-      margin-top: 12px;
       padding: 11px;
-      border-radius: 12px;
-      color: #33415f;
-      background: #f2f7ff;
-      font-size: 14px;
+      border-radius: 10px;
+      font-weight: 800;
     }
 
-    @media (max-width: 780px) {
-      .page {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        padding-top: 10px;
-      }
+    .message.show { display: block; }
+    .message.error { color: #9e2f2a; background: #fff0ef; }
+    .message.success { color: #08785c; background: #e5faf0; }
+    .hidden { display: none !important; }
 
-      .intro {
-        text-align: center;
-      }
-
-      .intro h1 {
-        font-size: 43px;
-      }
-
-      .intro p {
-        margin-inline: auto;
-      }
-
-      .benefits {
-        display: inline-block;
-        text-align: right;
-      }
-
-      .preview {
-        max-width: 440px;
-        margin: auto;
-      }
+    @media (max-width: 750px) {
+      main { grid-template-columns: 1fr; }
+      .intro { padding-top: 10px; text-align: center; }
+      .intro h1 { font-size: 39px; }
     }
 
-    @media (max-width: 410px) {
-      .container {
-        width: min(100% - 28px, 1120px);
-      }
-
-      .roles,
-      .two {
-        grid-template-columns: 1fr;
-      }
-
-      .form-card {
-        padding: 20px;
-      }
-
-      .intro h1 {
-        font-size: 38px;
-      }
+    @media (max-width: 430px) {
+      .two, .roles { grid-template-columns: 1fr; }
+      .card { padding: 20px; }
+      .photo-row { align-items: flex-start; flex-direction: column; }
     }
   </style>
 </head>
 
 <body>
-  <nav class="container nav">
-    <a class="brand" href="index.html">
-      <span class="mark">↗</span>
-      כיוון
-    </a>
-
-    <span class="login">
-      כבר יש לך חשבון?
-      <a href="login.html">כניסה</a>
-    </span>
+  <nav class="container">
+    <div class="brand">כיוון ↗</div>
+    <div>כבר יש לך חשבון? <a href="login.html">כניסה</a></div>
   </nav>
 
-  <main class="container page">
+  <main class="container">
     <section class="intro">
-      <div style="color:var(--teal);font-weight:900;font-size:14px">
-        הפרופיל שלך מתחיל כאן
-      </div>
-
-      <h1>
-        בואו נבנה את<br>
-        <em>הכיוון</em> שלך.
-      </h1>
-
+      <b style="color:#0b9d78">הפרופיל שלך מתחיל כאן</b>
+      <h1>בואו נבנה את<br><span>הכיוון</span> שלך.</h1>
       <p>
-        כמה פרטים קצרים, ואפשר להתחיל למצוא את ההתאמה
-        הנכונה — או לתת לתלמידים למצוא אותך.
+        בוחרים מקצועות מתוך הרשימה ויוצרים פרופיל אישי.
+        תלמידים יכולים למצוא מורים ומורים יכולים להופיע באתר.
       </p>
-
-      <ul class="benefits">
-        <li><span class="check">✓</span> חשבון אישי אמיתי</li>
-        <li><span class="check">✓</span> שליטה מלאה בפרטים</li>
-        <li><span class="check">✓</span> שמירה מאובטחת של המשתמש</li>
-      </ul>
     </section>
 
-    <section>
-      <div class="form-card">
-        <div class="progress">
-          <i class="active"></i>
-          <i></i>
-          <i></i>
+    <section class="card">
+      <div id="step-one">
+        <h2>איך נעים להכיר?</h2>
+        <p class="sub">בחרו את סוג החשבון.</p>
+
+        <div class="roles">
+          <button class="role selected" data-role="student" type="button">
+            תלמיד/ה או הורה
+          </button>
+
+          <button class="role" data-role="teacher" type="button">
+            מורה/מדריך/ה
+          </button>
         </div>
 
-        <div id="step-1">
-          <h2 class="step-title">איך נעים להכיר?</h2>
-          <p class="sub">בחרו את סוג החשבון.</p>
-
-          <div class="roles">
-            <button class="role selected" data-role="student" type="button">
-              <span class="icon">◎</span>
-              <b>תלמיד/ה או הורה</b>
-              <span>למצוא מורה וללמוד בדרך שמתאימה לך</span>
-            </button>
-
-            <button class="role" data-role="teacher" type="button">
-              <span class="icon">↗</span>
-              <b>מורה/מדריך/ה</b>
-              <span>ליצור פרופיל ולהופיע ברשימת המורים</span>
-            </button>
-          </div>
-
-          <div class="button-row">
-            <button class="button primary" id="next-1" type="button">
-              ממשיכים לפרטים ←
-            </button>
-          </div>
-        </div>
-
-        <form id="step-2" class="hidden">
-          <h2 class="step-title">פותחים חשבון</h2>
-
-          <p class="sub">
-            האימייל, הסיסמה והטלפון נשמרים באופן פרטי.
-          </p>
-
-          <div class="fields">
-            <div class="field">
-              <label for="name">שם מלא</label>
-              <input id="name" required autocomplete="name"
-                     placeholder="למשל: דנה לוי">
-            </div>
-
-            <div class="field">
-              <label for="email">אימייל</label>
-              <input id="email" type="email" required
-                     autocomplete="email"
-                     placeholder="name@email.com">
-            </div>
-
-            <div class="field">
-              <label for="password">סיסמה</label>
-              <input id="password" type="password" required
-                     minlength="6" autocomplete="new-password"
-                     placeholder="לפחות 6 תווים">
-            </div>
-
-            <div class="two">
-              <div class="field">
-                <label for="phone">טלפון</label>
-                <input id="phone" type="tel" autocomplete="tel"
-                       placeholder="050-0000000">
-              </div>
-
-              <div class="field">
-                <label for="city">עיר או אזור</label>
-                <input id="city" placeholder="למשל: תל אביב">
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="photo">תמונת פרופיל</label>
-
-              <div class="photo-row">
-                <div class="photo-preview" id="photo-preview">כ</div>
-
-                <input id="photo" type="file" accept="image/*">
-              </div>
-
-              <p class="notice">
-                בטלפון אפשר לבחור תמונה מהגלריה או לצלם חדשה.
-              </p>
-            </div>
-          </div>
-
-          <p class="notice">
-            הסיסמה נשמרת בצורה מאובטחת ב־Firebase ואינה
-            נשמרת בפרופיל.
-          </p>
-
-          <div class="button-row">
-            <button class="button secondary back" type="button">
-              חזרה
-            </button>
-
-            <button class="button primary" type="submit">
-              לבניית הפרופיל ←
-            </button>
-          </div>
-        </form>
-
-        <form id="step-3" class="hidden">
-          <h2 class="step-title" id="profile-title">
-            בונים את הפרופיל
-          </h2>
-
-          <p class="sub" id="profile-sub">
-            כתבו בעצמכם מה תרצו ללמוד.
-          </p>
-
-          <div class="fields" id="student-fields">
-            <div class="field">
-              <label for="student-subjects">
-                אילו מקצועות רוצים ללמוד?
-              </label>
-
-              <input id="student-subjects"
-                     placeholder="למשל: מתמטיקה, אנגלית ופיזיקה">
-            </div>
-
-            <div class="two">
-              <div class="field">
-                <label for="student-level">רמה או כיתה</label>
-                <input id="student-level"
-                       placeholder="למשל: כיתה י׳, 5 יח״ל">
-              </div>
-
-              <div class="field">
-                <label for="learning-style">איך נוח לך ללמוד?</label>
-                <input id="learning-style"
-                       placeholder="למשל: הסברים ותרגול">
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="student-goal">מה המטרה שלך?</label>
-              <textarea id="student-goal"
-                        placeholder="למשל: להתכונן לבגרות ולהרגיש בטוחה יותר בחומר"></textarea>
-            </div>
-
-            <div class="field">
-              <label for="student-availability">ימים ושעות נוחים</label>
-              <input id="student-availability"
-                     placeholder="למשל: ראשון ורביעי אחר הצהריים">
-            </div>
-          </div>
-
-          <div class="fields hidden" id="teacher-fields">
-            <div class="field">
-              <label for="teacher-subjects">
-                אילו מקצועות את/ה מלמד/ת?
-              </label>
-
-              <input id="teacher-subjects"
-                     placeholder="למשל: מתמטיקה, פיזיקה ומדעי המחשב">
-            </div>
-
-            <div class="two">
-              <div class="field">
-                <label for="teacher-price">מחיר לשעה</label>
-                <input id="teacher-price" type="number" min="0"
-                       placeholder="120">
-              </div>
-
-              <div class="field">
-                <label for="experience">ניסיון בהוראה</label>
-                <input id="experience"
-                       placeholder="למשל: 4 שנות ניסיון">
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="format">אופן השיעור</label>
-
-              <select id="format">
-                <option value="אונליין">אונליין</option>
-                <option value="פרונטלי">פרונטלי</option>
-                <option value="גם אונליין וגם פרונטלי">
-                  גם אונליין וגם פרונטלי
-                </option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="teacher-bio">
-                ניסיון, לימודים ושיטת הוראה — במילים שלך
-              </label>
-
-              <textarea id="teacher-bio"
-                        placeholder="ספרו על עצמכם, על הניסיון שלכם ועל הדרך שבה אתם מלמדים"></textarea>
-            </div>
-
-            <div class="field">
-              <label for="teacher-availability">
-                ימים ושעות זמינים
-              </label>
-
-              <input id="teacher-availability"
-                     placeholder="למשל: ימים א׳–ה׳ בשעות הערב">
-            </div>
-          </div>
-
-          <div class="message" id="message"></div>
-
-          <div class="button-row">
-            <button class="button secondary back" type="button">
-              חזרה
-            </button>
-
-            <button class="button primary" id="create-button" type="submit">
-              יצירת החשבון והפרופיל ←
-            </button>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <aside class="preview">
-      <div class="preview-top">
-        <b>תצוגה מקדימה</b>
-        <span id="preview-status">פרופיל תלמיד/ה</span>
-      </div>
-
-      <div class="student-preview" id="student-preview">
-        <div style="font-weight:900;font-size:18px"
-             id="student-name-preview">
-          נעים להכיר!
-        </div>
-
-        <div class="goal">
-          <b>המטרה שלך</b><br>
-          <span id="student-goal-preview">
-            למצוא מורה שמתאים לך בדיוק
-          </span>
+        <div class="buttons">
+          <button class="primary" id="continue" type="button">
+            ממשיכים לפרטים ←
+          </button>
         </div>
       </div>
 
-      <div class="preview-card hidden" id="teacher-preview">
-        <div class="profile-head">
-          <div class="avatar" id="initial">כ</div>
+      <form id="account-form" class="hidden">
+        <h2>פותחים חשבון</h2>
+        <p class="sub">מלאו את פרטי החשבון.</p>
+
+        <div class="fields">
+          <div>
+            <label for="name">שם מלא</label>
+            <input id="name" required autocomplete="name">
+          </div>
 
           <div>
-            <b id="teacher-name-preview">השם שלך</b><br>
-            <span>● פרופיל חדש</span>
+            <label for="email">אימייל</label>
+            <input id="email" type="email" required autocomplete="email">
+          </div>
+
+          <div>
+            <label for="password">סיסמה</label>
+            <input id="password" type="password" minlength="6"
+                   required autocomplete="new-password">
+          </div>
+
+          <div class="two">
+            <div>
+              <label for="phone">טלפון</label>
+              <input id="phone" type="tel" autocomplete="tel">
+            </div>
+
+            <div>
+              <label for="city">עיר או אזור</label>
+              <input id="city">
+            </div>
+          </div>
+
+          <div>
+            <label for="photo">תמונת פרופיל</label>
+
+            <div class="photo-row">
+              <div class="photo-preview" id="photo-preview">כ</div>
+              <input id="photo" type="file" accept="image/*">
+            </div>
           </div>
         </div>
 
-        <p id="teacher-bio-preview">
-          כאן יוצגו הניסיון ושיטת ההוראה שלך.
-        </p>
+        <div class="buttons">
+          <button class="secondary" id="back-one" type="button">חזרה</button>
+          <button class="primary" type="submit">המשך לפרופיל ←</button>
+        </div>
+      </form>
 
-        <div class="profile-tags">
-          <i id="teacher-subject-preview">מקצועות</i>
-          <i id="experience-preview">ניסיון</i>
-          <i id="format-preview">אונליין</i>
+      <form id="profile-form" class="hidden">
+        <h2>בונים את הפרופיל</h2>
+        <p class="sub">בחרו מקצוע אחד או יותר מתוך הרשימה.</p>
+
+        <div id="student-fields" class="fields">
+          <div>
+            <label for="student-subjects">אילו מקצועות רוצים ללמוד?</label>
+            <input id="student-subjects">
+          </div>
+
+          <div class="two">
+            <div>
+              <label for="student-level">רמה או כיתה</label>
+              <input id="student-level" placeholder="למשל: כיתה י׳, 5 יח״ל">
+            </div>
+
+            <div>
+              <label for="learning-style">איך נוח לך ללמוד?</label>
+              <select id="learning-style">
+                <option value="">בחירה</option>
+                <option>הסברים ותרגול</option>
+                <option>למידה חזותית</option>
+                <option>למידה בקצב מהיר</option>
+                <option>למידה רגועה ומסודרת</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="student-goal">מה המטרה שלך?</label>
+            <textarea id="student-goal"></textarea>
+          </div>
+
+          <div>
+            <label for="student-availability">ימים ושעות נוחים</label>
+            <input id="student-availability">
+          </div>
         </div>
 
-        <div class="profile-price">
-          <span id="price-preview">מחיר יופיע כאן</span>
-          <small>לשעה</small>
+        <div id="teacher-fields" class="fields hidden">
+          <div>
+            <label for="teacher-subjects">אילו מקצועות מלמדים?</label>
+            <input id="teacher-subjects">
+          </div>
+
+          <div class="two">
+            <div>
+              <label for="teacher-price">מחיר לשעה</label>
+              <input id="teacher-price" type="number" min="0">
+            </div>
+
+            <div>
+              <label for="experience">ניסיון בהוראה</label>
+              <input id="experience" placeholder="למשל: 4 שנות ניסיון">
+            </div>
+          </div>
+
+          <div>
+            <label for="format">אופן השיעור</label>
+            <select id="format">
+              <option value="אונליין">אונליין</option>
+              <option value="פרונטלי">פרונטלי</option>
+              <option value="גם אונליין וגם פרונטלי">
+                גם אונליין וגם פרונטלי
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <label for="teacher-bio">ניסיון ושיטת הוראה</label>
+            <textarea id="teacher-bio"></textarea>
+          </div>
+
+          <div>
+            <label for="teacher-availability">ימים ושעות זמינים</label>
+            <input id="teacher-availability">
+          </div>
         </div>
-      </div>
-    </aside>
+
+        <div class="message" id="message"></div>
+
+        <div class="buttons">
+          <button class="secondary" id="back-two" type="button">חזרה</button>
+
+          <button class="primary" id="create-button" type="submit">
+            יצירת החשבון והפרופיל ←
+          </button>
+        </div>
+      </form>
+    </section>
   </main>
 
   <script type="module">
@@ -820,45 +414,26 @@
     } from "./firebase.js";
 
     let role = "student";
-    let step = 1;
     let photoData = "";
 
-    const dots = document.querySelectorAll(".progress i");
-
-    const blocks = [
-      null,
-      document.getElementById("step-1"),
-      document.getElementById("step-2"),
-      document.getElementById("step-3")
-    ];
-
-    const studentFields =
-      document.getElementById("student-fields");
-
-    const teacherFields =
-      document.getElementById("teacher-fields");
-
+    const stepOne = document.getElementById("step-one");
+    const accountForm = document.getElementById("account-form");
+    const profileForm = document.getElementById("profile-form");
+    const studentFields = document.getElementById("student-fields");
+    const teacherFields = document.getElementById("teacher-fields");
     const message = document.getElementById("message");
-
-    const createButton =
-      document.getElementById("create-button");
+    const createButton = document.getElementById("create-button");
 
     function value(id) {
       return document.getElementById(id).value.trim();
     }
 
-    function showStep(number) {
-      step = number;
-
-      blocks.forEach((block, index) => {
-        if (index && block) {
-          block.classList.toggle("hidden", index !== number);
-        }
+    function show(element) {
+      [stepOne, accountForm, profileForm].forEach(item => {
+        item.classList.add("hidden");
       });
 
-      dots.forEach((dot, index) => {
-        dot.classList.toggle("active", index < number);
-      });
+      element.classList.remove("hidden");
     }
 
     function showMessage(text, type) {
@@ -866,410 +441,188 @@
       message.className = "message show " + type;
     }
 
-    function switchRole(newRole) {
-      role = newRole;
+    document.querySelectorAll(".role").forEach(button => {
+      button.addEventListener("click", () => {
+        role = button.dataset.role;
 
-      document.querySelectorAll(".role").forEach((element) => {
-        element.classList.toggle(
-          "selected",
-          element.dataset.role === role
-        );
+        document.querySelectorAll(".role").forEach(item => {
+          item.classList.toggle("selected", item === button);
+        });
+
+        studentFields.classList.toggle("hidden", role === "teacher");
+        teacherFields.classList.toggle("hidden", role !== "teacher");
       });
+    });
 
-      const isTeacher = role === "teacher";
+    document.getElementById("continue").onclick = () => show(accountForm);
+    document.getElementById("back-one").onclick = () => show(stepOne);
+    document.getElementById("back-two").onclick = () => show(accountForm);
 
-      studentFields.classList.toggle("hidden", isTeacher);
-      teacherFields.classList.toggle("hidden", !isTeacher);
+    accountForm.addEventListener("submit", event => {
+      event.preventDefault();
+      show(profileForm);
+    });
 
-      document
-        .getElementById("student-preview")
-        .classList.toggle("hidden", isTeacher);
+    document.getElementById("name").addEventListener("input", event => {
+      if (!photoData) {
+        document.getElementById("photo-preview").textContent =
+          event.target.value.charAt(0) || "כ";
+      }
+    });
 
-      document
-        .getElementById("teacher-preview")
-        .classList.toggle("hidden", !isTeacher);
+    document.getElementById("photo").addEventListener("change", event => {
+      const file = event.target.files[0];
+      if (!file) return;
 
-      document.getElementById("preview-status").textContent =
-        isTeacher ? "פרופיל מורה" : "פרופיל תלמיד/ה";
+      if (!file.type.startsWith("image/")) {
+        alert("יש לבחור קובץ תמונה.");
+        return;
+      }
 
-      document.getElementById("profile-title").textContent =
-        isTeacher ? "בונים פרופיל מורה" : "בונים את הפרופיל";
+      const reader = new FileReader();
 
-      document.getElementById("profile-sub").textContent =
-        isTeacher
-          ? "הפרטים הציבוריים שהתלמידים יראו באתר."
-          : "כתבו בעצמכם מה תרצו ללמוד.";
-    }
+      reader.onload = () => {
+        const image = new Image();
 
-    function resizePhoto(file) {
-      return new Promise((resolve, reject) => {
-        if (!file.type.startsWith("image/")) {
-          reject(new Error("הקובץ שבחרת אינו תמונה."));
-          return;
-        }
+        image.onload = () => {
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+          const size = 360;
+          const crop = Math.min(image.width, image.height);
 
-        if (file.size > 8 * 1024 * 1024) {
-          reject(new Error("התמונה גדולה מדי. בחרי תמונה אחרת."));
-          return;
-        }
+          canvas.width = size;
+          canvas.height = size;
 
-        const reader = new FileReader();
+          context.drawImage(
+            image,
+            (image.width - crop) / 2,
+            (image.height - crop) / 2,
+            crop,
+            crop,
+            0,
+            0,
+            size,
+            size
+          );
 
-        reader.onload = () => {
-          const image = new Image();
+          photoData = canvas.toDataURL("image/jpeg", 0.72);
 
-          image.onload = () => {
-            const size = 360;
-            const canvas = document.createElement("canvas");
-            const context = canvas.getContext("2d");
-
-            canvas.width = size;
-            canvas.height = size;
-
-            const sourceSize = Math.min(
-              image.naturalWidth,
-              image.naturalHeight
-            );
-
-            const sourceX =
-              (image.naturalWidth - sourceSize) / 2;
-
-            const sourceY =
-              (image.naturalHeight - sourceSize) / 2;
-
-            context.drawImage(
-              image,
-              sourceX,
-              sourceY,
-              sourceSize,
-              sourceSize,
-              0,
-              0,
-              size,
-              size
-            );
-
-            resolve(
-              canvas.toDataURL("image/jpeg", 0.72)
-            );
-          };
-
-          image.onerror = () => {
-            reject(new Error("לא הצלחנו לפתוח את התמונה."));
-          };
-
-          image.src = reader.result;
+          document.getElementById("photo-preview").innerHTML =
+            `<img src="${photoData}" alt="תמונת פרופיל">`;
         };
 
-        reader.onerror = () => {
-          reject(new Error("לא הצלחנו לקרוא את התמונה."));
-        };
-
-        reader.readAsDataURL(file);
-      });
-    }
-
-    function showPhotoPreview(photo) {
-      const preview = document.getElementById("photo-preview");
-      const teacherPreview = document.getElementById("initial");
-
-      [preview, teacherPreview].forEach((box) => {
-        box.innerHTML = "";
-
-        const image = document.createElement("img");
-        image.src = photo;
-        image.alt = "תצוגה מקדימה של תמונת הפרופיל";
-
-        box.appendChild(image);
-      });
-    }
-
-    function firebaseError(code) {
-      const messages = {
-        "auth/email-already-in-use":
-          "כבר קיים חשבון עם כתובת האימייל הזאת. עברו לעמוד הכניסה.",
-        "auth/invalid-email":
-          "כתובת האימייל אינה תקינה.",
-        "auth/weak-password":
-          "הסיסמה קצרה מדי. השתמשו בלפחות 6 תווים.",
-        "auth/network-request-failed":
-          "לא הצלחנו להתחבר לאינטרנט.",
-        "auth/operation-not-allowed":
-          "ההרשמה עדיין אינה פעילה ב־Firebase.",
-        "permission-denied":
-          "אין הרשאה לשמור את הפרופיל."
+        image.src = reader.result;
       };
 
-      return messages[code] ||
-        "לא הצלחנו ליצור את החשבון. בדקו את הפרטים ונסו שוב.";
-    }
-
-    document
-      .getElementById("photo")
-      .addEventListener("change", async (event) => {
-        const file = event.target.files[0];
-
-        if (!file) {
-          return;
-        }
-
-        try {
-          photoData = await resizePhoto(file);
-          showPhotoPreview(photoData);
-        } catch (error) {
-          photoData = "";
-          showMessage(error.message, "error");
-        }
-      });
-
-    document.querySelectorAll(".role").forEach((element) => {
-      element.addEventListener("click", () => {
-        switchRole(element.dataset.role);
-      });
+      reader.readAsDataURL(file);
     });
 
-    document
-      .getElementById("next-1")
-      .addEventListener("click", () => showStep(2));
+    profileForm.addEventListener("submit", async event => {
+      event.preventDefault();
 
-    document.querySelectorAll(".back").forEach((button) => {
-      button.addEventListener("click", () => {
-        showStep(step - 1);
-      });
-    });
+      const subjects = role === "teacher"
+        ? value("teacher-subjects")
+        : value("student-subjects");
 
-    document
-      .getElementById("step-2")
-      .addEventListener("submit", (event) => {
-        event.preventDefault();
-        showStep(3);
-      });
+      if (!subjects) {
+        showMessage("צריך לבחור לפחות מקצוע אחד.", "error");
+        return;
+      }
 
-    document
-      .getElementById("step-3")
-      .addEventListener("submit", async (event) => {
-        event.preventDefault();
+      createButton.disabled = true;
+      createButton.textContent = "יוצרים את החשבון...";
 
+      try {
+        const credential = await createUserWithEmailAndPassword(
+          auth,
+          value("email"),
+          document.getElementById("password").value
+        );
+
+        const user = credential.user;
         const name = value("name");
-        const email = value("email");
-        const password =
-          document.getElementById("password").value;
 
-        if (role === "teacher" && !value("teacher-subjects")) {
-          showMessage(
-            "כתבו לפחות מקצוע אחד שאתם מלמדים.",
-            "error"
-          );
-          return;
+        await updateProfile(user, { displayName: name });
+
+        const profile = {
+          uid: user.uid,
+          name,
+          email: value("email"),
+          phone: value("phone"),
+          city: value("city"),
+          photo: photoData,
+          role,
+          subjects,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        };
+
+        if (role === "student") {
+          profile.level = value("student-level");
+          profile.learningStyle =
+            document.getElementById("learning-style").value;
+          profile.goal = value("student-goal");
+          profile.availability = value("student-availability");
+        } else {
+          profile.price = Number(value("teacher-price")) || 0;
+          profile.experience = value("experience");
+          profile.format = document.getElementById("format").value;
+          profile.bio = value("teacher-bio");
+          profile.availability = value("teacher-availability");
         }
 
-        if (role === "student" && !value("student-subjects")) {
-          showMessage(
-            "כתבו לפחות מקצוע אחד שתרצו ללמוד.",
-            "error"
-          );
-          return;
-        }
+        await setDoc(doc(db, "users", user.uid), profile);
 
-        createButton.disabled = true;
-        createButton.textContent = "יוצרים את החשבון...";
-
-        try {
-          const credential =
-            await createUserWithEmailAndPassword(
-              auth,
-              email,
-              password
-            );
-
-          const user = credential.user;
-
-          await updateProfile(user, {
-            displayName: name
-          });
-
-          const privateProfile = {
+        if (role === "teacher") {
+          await setDoc(doc(db, "teachers", user.uid), {
+            uid: user.uid,
             name,
-            email,
-            phone: value("phone"),
-            city: value("city"),
-            photo: photoData,
-            role,
+            city: profile.city,
+            photo: profile.photo,
+            subjects: profile.subjects,
+            price: profile.price,
+            experience: profile.experience,
+            format: profile.format,
+            bio: profile.bio,
+            availability: profile.availability,
+            verified: false,
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp()
-          };
-
-          if (role === "student") {
-            privateProfile.subjects =
-              value("student-subjects");
-
-            privateProfile.level =
-              value("student-level");
-
-            privateProfile.learningStyle =
-              value("learning-style");
-
-            privateProfile.goal =
-              value("student-goal");
-
-            privateProfile.availability =
-              value("student-availability");
-          } else {
-            privateProfile.subjects =
-              value("teacher-subjects");
-
-            privateProfile.price =
-              value("teacher-price");
-
-            privateProfile.experience =
-              value("experience");
-
-            privateProfile.format =
-              document.getElementById("format").value;
-
-            privateProfile.bio =
-              value("teacher-bio");
-
-            privateProfile.availability =
-              value("teacher-availability");
-          }
-
-          await setDoc(
-            doc(db, "users", user.uid),
-            privateProfile
-          );
-
-          if (role === "teacher") {
-            const publicTeacherProfile = {
-              uid: user.uid,
-              name,
-              photo: photoData,
-              city: value("city"),
-              subjects: value("teacher-subjects"),
-              price: value("teacher-price"),
-              experience: value("experience"),
-              format:
-                document.getElementById("format").value,
-              bio: value("teacher-bio"),
-              availability:
-                value("teacher-availability"),
-              verified: false,
-              createdAt: serverTimestamp(),
-              updatedAt: serverTimestamp()
-            };
-
-            await setDoc(
-              doc(db, "teachers", user.uid),
-              publicTeacherProfile
-            );
-          }
-
-          showMessage(
-            "החשבון והפרופיל נוצרו בהצלחה!",
-            "success"
-          );
-
-          window.setTimeout(() => {
-            if (role === "teacher") {
-              window.location.href =
-                "teacher-profile.html?id=" +
-                encodeURIComponent(user.uid);
-            } else {
-              window.location.href = "dashboard.html";
-            }
-          }, 700);
-        } catch (error) {
-          console.error(error);
-
-          showMessage(
-            firebaseError(error.code),
-            "error"
-          );
-
-          createButton.disabled = false;
-          createButton.textContent =
-            "יצירת החשבון והפרופיל ←";
+          });
         }
-      });
 
-    document
-      .getElementById("name")
-      .addEventListener("input", (event) => {
-        const name = event.target.value || "השם שלך";
+        showMessage("החשבון והפרופיל נוצרו בהצלחה!", "success");
 
-        document.getElementById(
-          "student-name-preview"
-        ).textContent = name + ", נעים להכיר!";
+        setTimeout(() => {
+          window.location.href = role === "teacher"
+            ? `teacher-profile.html?id=${encodeURIComponent(user.uid)}`
+            : "dashboard.html";
+        }, 600);
+      } catch (error) {
+        console.error(error);
 
-        document.getElementById(
-          "teacher-name-preview"
-        ).textContent = name;
+        const errors = {
+          "auth/email-already-in-use":
+            "כבר קיים חשבון עם האימייל הזה.",
+          "auth/invalid-email":
+            "כתובת האימייל אינה תקינה.",
+          "auth/weak-password":
+            "הסיסמה צריכה להכיל לפחות 6 תווים.",
+          "auth/network-request-failed":
+            "לא הצלחנו להתחבר לאינטרנט."
+        };
 
-        if (!photoData) {
-          document.getElementById("initial").textContent =
-            name.charAt(0) || "כ";
+        showMessage(
+          errors[error.code] || "לא הצלחנו ליצור את החשבון. נסו שוב.",
+          "error"
+        );
 
-          document.getElementById("photo-preview").textContent =
-            name.charAt(0) || "כ";
-        }
-      });
-
-    document
-      .getElementById("student-goal")
-      .addEventListener("input", (event) => {
-        document.getElementById(
-          "student-goal-preview"
-        ).textContent =
-          event.target.value ||
-          "למצוא מורה שמתאים לך בדיוק";
-      });
-
-    document
-      .getElementById("teacher-subjects")
-      .addEventListener("input", (event) => {
-        document.getElementById(
-          "teacher-subject-preview"
-        ).textContent =
-          event.target.value || "מקצועות";
-      });
-
-    document
-      .getElementById("teacher-bio")
-      .addEventListener("input", (event) => {
-        document.getElementById(
-          "teacher-bio-preview"
-        ).textContent =
-          event.target.value ||
-          "כאן יוצגו הניסיון ושיטת ההוראה שלך.";
-      });
-
-    document
-      .getElementById("teacher-price")
-      .addEventListener("input", (event) => {
-        document.getElementById(
-          "price-preview"
-        ).textContent =
-          event.target.value
-            ? "₪" + event.target.value
-            : "מחיר יופיע כאן";
-      });
-
-    document
-      .getElementById("experience")
-      .addEventListener("input", (event) => {
-        document.getElementById(
-          "experience-preview"
-        ).textContent =
-          event.target.value || "ניסיון";
-      });
-
-    document
-      .getElementById("format")
-      .addEventListener("change", (event) => {
-        document.getElementById(
-          "format-preview"
-        ).textContent = event.target.value;
-      });
+        createButton.disabled = false;
+        createButton.textContent = "יצירת החשבון והפרופיל ←";
+      }
+    });
   </script>
+
+  <script type="module" src="./subject-picker.js"></script>
 </body>
 </html>
