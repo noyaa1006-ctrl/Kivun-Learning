@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="he" dir="rtl">
 <head>
@@ -152,11 +153,27 @@
     }
 
     .card h2 { margin:0 0 5px; }
-    .sub { margin:0 0 20px; color:var(--muted); }
+
+    .sub {
+      margin:0 0 20px;
+      color:var(--muted);
+    }
 
     .form {
       display:grid;
       gap:14px;
+    }
+
+    .profile-section {
+      padding:17px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#fbfcff;
+    }
+
+    .profile-section h3 {
+      margin:0 0 14px;
+      color:var(--navy);
     }
 
     .two {
@@ -193,7 +210,7 @@
     }
 
     textarea {
-           min-height:95px;
+      min-height:95px;
       resize:vertical;
     }
 
@@ -212,11 +229,6 @@
       font:inherit;
       font-weight:900;
       cursor:pointer;
-    }
-
-    .button:disabled {
-      color:#08785c;
-      background:#e5faf0;
     }
 
     .button.danger {
@@ -240,10 +252,33 @@
     .message.success { color:#08785c; background:#e5faf0; }
     .message.error { color:#9e2f2a; background:#fff0ef; }
 
-    .loading {
-      padding:45px;
+    .loading,.empty {
+      padding:38px;
       color:var(--muted);
       text-align:center;
+    }
+
+    .request-tabs {
+      display:flex;
+      gap:8px;
+      margin-bottom:18px;
+    }
+
+    .request-tab {
+      padding:9px 13px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      color:var(--muted);
+      background:#fff;
+      font:inherit;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .request-tab.active {
+      color:#08785c;
+      border-color:#bcebd9;
+      background:#e5faf0;
     }
 
     .requests {
@@ -266,12 +301,12 @@
     }
 
     .request h3 {
-      margin:0 0 3px;
+      margin:0 0 4px;
       color:var(--navy);
     }
 
     .request p {
-      margin:9px 0;
+      margin:10px 0;
       color:#5d6881;
       line-height:1.6;
     }
@@ -279,7 +314,7 @@
     .request-info {
       display:flex;
       flex-wrap:wrap;
-      gap:8px;
+      gap:9px;
       color:var(--muted);
       font-size:13px;
       font-weight:700;
@@ -311,10 +346,10 @@
       margin-top:13px;
     }
 
-    .empty {
-      padding:35px;
-      color:var(--muted);
-      text-align:center;
+    .public-link {
+      color:var(--teal);
+      font-weight:800;
+      text-decoration:none;
     }
 
     @media(max-width:720px) {
@@ -331,7 +366,12 @@
       }
 
       .two { grid-template-columns:1fr; }
-      .photo-row { align-items:flex-start; flex-direction:column; }
+
+      .photo-row {
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
       .nav-links { gap:8px; }
       .nav-links a,.logout { font-size:12px; }
     }
@@ -356,7 +396,7 @@
     <section class="banner">
       <div>
         <h1 id="welcome">טוענים את האזור שלך...</h1>
-        <p id="banner-text">כאן מנהלים את הפרופיל והבקשות.</p>
+        <p id="banner-text">כאן מנהלים את הפרופילים והבקשות.</p>
       </div>
 
       <div class="avatar" id="avatar">כ</div>
@@ -364,11 +404,11 @@
 
     <div class="layout">
       <aside class="menu">
-        <button class="active" dataShelf="profile" type="button">
+        <button class="active" data-pane="profile" type="button">
           עריכת פרופיל
         </button>
 
-        <button dataShelf="requests" type="button">
+        <button data-pane="requests" type="button">
           בקשות ושיעורים
         </button>
       </aside>
@@ -380,7 +420,10 @@
 
         <div class="card hidden" id="profile-pane">
           <h2>עריכת הפרופיל</h2>
-          <p class="sub">השינויים נשמרים בחשבון שלך.</p>
+
+          <p class="sub">
+            חשבון אחד יכול לשמש ללמידה, להוראה או לשניהם.
+          </p>
 
           <form class="form" id="edit-form">
             <div class="two">
@@ -395,6 +438,7 @@
                 <select id="role">
                   <option value="student">תלמיד/ה או הורה</option>
                   <option value="teacher">מורה/מדריך/ה</option>
+                  <option value="both">גם תלמיד/ה וגם מורה</option>
                 </select>
               </div>
             </div>
@@ -425,96 +469,108 @@
               </div>
             </div>
 
-            <div class="form" id="student-fields">
-              <div>
-                <label for="student-subjects">
-                  מקצועות שרוצים ללמוד
-                </label>
-                <input id="student-subjects">
-              </div>
+            <section class="profile-section" id="student-section">
+              <h3>פרופיל הלמידה שלי</h3>
 
-              <div class="two">
+              <div class="form">
                 <div>
-                  <label for="student-level">רמה או כיתה</label>
-                  <input id="student-level">
+                  <label for="student-subjects">
+                    מקצועות שרוצים ללמוד
+                  </label>
+                  <input id="student-subjects">
+                </div>
+
+                <div class="two">
+                  <div>
+                    <label for="student-level">רמה או כיתה</label>
+                    <input id="student-level">
+                  </div>
+
+                  <div>
+                    <label for="learning-style">
+                      איך נוח לך ללמוד?
+                    </label>
+
+                    <select id="learning-style">
+                      <option value="">בחירה</option>
+                      <option>הסברים ותרגול</option>
+                      <option>למידה חזותית</option>
+                      <option>למידה בקצב מהיר</option>
+                      <option>למידה רגועה ומסודרת</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div>
-                  <label for="learning-style">איך נוח לך ללמוד?</label>
+                  <label for="student-goal">המטרה שלך</label>
+                  <textarea id="student-goal"></textarea>
+                </div>
 
-                  <select id="learning-style">
-                    <option value="">בחירה</option>
-                    <option>הסברים ותרגול</option>
-                    <option>למידה חזותית</option>
-                    <option>למידה בקצב מהיר</option>
-                    <option>למידה רגועה ומסודרת</option>
+                <div>
+                  <label for="student-availability">
+                    ימים ושעות נוחים
+                  </label>
+                  <input id="student-availability">
+                </div>
+              </div>
+            </section>
+
+            <section class="profile-section hidden" id="teacher-section">
+              <h3>פרופיל ההוראה שלי</h3>
+
+              <div class="form">
+                <div>
+                  <label for="teacher-subjects">
+                    מקצועות שמלמדים
+                  </label>
+                  <input id="teacher-subjects">
+                </div>
+
+                <div class="two">
+                  <div>
+                    <label for="price">מחיר לשעה</label>
+                    <input id="price" type="number" min="0">
+                  </div>
+
+                  <div>
+                    <label for="experience">ניסיון בהוראה</label>
+                    <input id="experience">
+                  </div>
+                </div>
+
+                <div>
+                  <label for="format">אופן השיעור</label>
+
+                  <select id="format">
+                    <option value="אונליין">אונליין</option>
+                    <option value="פרונטלי">פרונטלי</option>
+                    <option value="גם אונליין וגם פרונטלי">
+                      גם אונליין וגם פרונטלי
+                    </option>
                   </select>
                 </div>
-              </div>
 
-              <div>
-                <label for="student-goal">המטרה שלך</label>
-                <textarea id="student-goal"></textarea>
-              </div>
-
-              <div>
-                <label for="student-availability">
-                  ימים ושעות נוחים
-                </label>
-                <input id="student-availability">
-              </div>
-            </div>
-
-            <div class="form hidden" id="teacher-fields">
-              <div>
-                <label for="teacher-subjects">
-                  מקצועות שמלמדים
-                </label>
-                <input id="teacher-subjects">
-              </div>
-
-              <div class="two">
                 <div>
-                  <label for="price">מחיר לשעה</label>
-                  <input id="price" type="number" min="0">
+                  <label for="bio">ניסיון ושיטת הוראה</label>
+                  <textarea id="bio"></textarea>
                 </div>
 
                 <div>
-                  <label for="experience">ניסיון בהוראה</label>
-                  <input id="experience">
+                  <label for="teacher-availability">
+                    ימים ושעות זמינים
+                  </label>
+
+                  <input id="teacher-availability"
+                         placeholder="למשל: ראשון 16:00–20:00">
                 </div>
+
+                <a class="public-link"
+                   id="public-profile-link"
+                   href="teacher-profile.html">
+                  צפייה בפרופיל הציבורי שלי
+                </a>
               </div>
-
-              <div>
-                <label for="format">אופן השיעור</label>
-
-                <select id="format">
-                  <option value="אונליין">אונליין</option>
-                  <option value="פרונטלי">פרונטלי</option>
-                  <option value="גם אונליין וגם פרונטלי">
-                    גם אונליין וגם פרונטלי
-                  </option>
-                </select>
-              </div>
-
-              <div>
-                <label for="bio">ניסיון ושיטת הוראה</label>
-                <textarea id="bio"></textarea>
-              </div>
-
-              <div>
-                <label for="teacher-availability">
-                  ימים ושעות זמינים
-                </label>
-
-                <input id="teacher-availability"
-                       placeholder="למשל: ראשון 16:00–20:00, שלישי 17:00–21:00">
-              </div>
-
-              <a id="public-profile-link" href="teacher-profile.html">
-                צפייה בפרופיל הציבורי שלי
-              </a>
-            </div>
+            </section>
 
             <div class="message" id="profile-message"></div>
 
@@ -525,11 +581,26 @@
         </div>
 
         <div class="card hidden" id="requests-pane">
-          <h2 id="requests-title">בקשות ושיעורים</h2>
+          <h2>בקשות ושיעורים</h2>
 
-          <p class="sub" id="requests-subtitle">
-            כאן יופיעו הבקשות שלך.
+          <p class="sub">
+            בקשות ששלחת ובקשות שקיבלת מופיעות כאן.
           </p>
+
+          <div class="request-tabs">
+            <button class="request-tab active"
+                    data-request-mode="outgoing"
+                    type="button">
+              בקשות ששלחתי
+            </button>
+
+            <button class="request-tab"
+                    id="incoming-tab"
+                    data-request-mode="incoming"
+                    type="button">
+              בקשות שקיבלתי
+            </button>
+          </div>
 
           <div class="requests" id="requests-list">
             <div class="loading">טוענים בקשות...</div>
@@ -563,15 +634,17 @@
     const requestsPane = document.getElementById("requests-pane");
     const editForm = document.getElementById("edit-form");
     const roleField = document.getElementById("role");
-    const studentFields = document.getElementById("student-fields");
-    const teacherFields = document.getElementById("teacher-fields");
+    const studentSection = document.getElementById("student-section");
+    const teacherSection = document.getElementById("teacher-section");
     const saveButton = document.getElementById("save-button");
     const profileMessage = document.getElementById("profile-message");
     const requestsList = document.getElementById("requests-list");
+    const incomingTab = document.getElementById("incoming-tab");
 
     let currentUser = null;
     let currentProfile = {};
     let photoData = "";
+    let requestMode = "outgoing";
 
     function value(id) {
       return document.getElementById(id).value.trim();
@@ -579,6 +652,19 @@
 
     function setValue(id,newValue) {
       document.getElementById(id).value = newValue || "";
+    }
+
+    function hasStudentRole(role = roleField.value) {
+      return role === "student" || role === "both";
+    }
+
+    function hasTeacherRole(role = roleField.value) {
+      return role === "teacher" || role === "both";
+    }
+
+    function rolesFor(role) {
+      if(role === "both") return ["student","teacher"];
+      return [role];
     }
 
     function safe(value) {
@@ -615,27 +701,27 @@
       });
     }
 
-    function updateRole() {
-      const isTeacher = roleField.value === "teacher";
+    function updateRoleSections() {
+      const student = hasStudentRole();
+      const teacher = hasTeacherRole();
 
-      studentFields.classList.toggle("hidden",isTeacher);
-      teacherFields.classList.toggle("hidden",!isTeacher);
+      studentSection.classList.toggle("hidden",!student);
+      teacherSection.classList.toggle("hidden",!teacher);
+      incomingTab.classList.toggle("hidden",!teacher);
 
-      document.getElementById("requests-title").textContent =
-        isTeacher ? "בקשות מתלמידים" : "הבקשות ששלחתי";
-
-      document.getElementById("requests-subtitle").textContent =
-        isTeacher
-          ? "כאן אפשר לאשר או לדחות בקשות לשיעור."
-          : "כאן אפשר לעקוב אחרי מצב הבקשות ששלחת.";
+      if(!teacher && requestMode === "incoming") {
+        requestMode = "outgoing";
+      }
 
       document.getElementById("banner-text").textContent =
-        isTeacher
-          ? "כאן מנהלים את פרופיל המורה והבקשות מתלמידים."
-          : "כאן מנהלים את פרופיל הלמידה והבקשות ששלחת.";
+        roleField.value === "both"
+          ? "כאן מנהלים גם את הלמידה וגם את ההוראה."
+          : teacher
+            ? "כאן מנהלים את פרופיל המורה והבקשות."
+            : "כאן מנהלים את פרופיל הלמידה והבקשות.";
     }
 
-    function refreshPickers() {
+    function refreshSubjectPickers() {
       ["student-subjects","teacher-subjects"].forEach(id => {
         document.getElementById(id).dispatchEvent(
           new Event("subject-picker-refresh")
@@ -654,20 +740,21 @@
 
       roleField.value = profile.role || "student";
 
-      if(roleField.value === "teacher") {
-        setValue("teacher-subjects",profile.subjects);
-        setValue("price",profile.price);
-        setValue("experience",profile.experience);
-        setValue("format",profile.format || "אונליין");
-        setValue("bio",profile.bio);
-        setValue("teacher-availability",profile.availability);
-      } else {
-        setValue("student-subjects",profile.subjects);
-        setValue("student-level",profile.level);
-        setValue("learning-style",profile.learningStyle);
-        setValue("student-goal",profile.goal);
-        setValue("student-availability",profile.availability);
-      }
+      const studentProfile = profile.studentProfile || profile;
+      const teacherProfile = profile.teacherProfile || profile;
+
+      setValue("student-subjects",studentProfile.subjects);
+      setValue("student-level",studentProfile.level);
+      setValue("learning-style",studentProfile.learningStyle);
+      setValue("student-goal",studentProfile.goal);
+      setValue("student-availability",studentProfile.availability);
+
+      setValue("teacher-subjects",teacherProfile.subjects);
+      setValue("price",teacherProfile.price);
+      setValue("experience",teacherProfile.experience);
+      setValue("format",teacherProfile.format || "אונליין");
+      setValue("bio",teacherProfile.bio);
+      setValue("teacher-availability",teacherProfile.availability);
 
       const name = profile.name || currentUser.displayName || "חבר/ה";
 
@@ -678,12 +765,12 @@
         `teacher-profile.html?id=${encodeURIComponent(currentUser.uid)}`;
 
       showPhoto(photoData,name);
-      updateRole();
+      updateRoleSections();
 
       loading.classList.add("hidden");
       profilePane.classList.remove("hidden");
 
-      setTimeout(refreshPickers,0);
+      setTimeout(refreshSubjectPickers,0);
     }
 
     document.querySelectorAll(".menu button").forEach(button => {
@@ -694,19 +781,28 @@
 
         button.classList.add("active");
 
-        const showRequests =
-          button.getAttribute("dataShelf") === "requests";
+        const requests = button.dataset.pane === "requests";
 
-        profilePane.classList.toggle("hidden",showRequests);
-        requestsPane.classList.toggle("hidden",!showRequests);
+        profilePane.classList.toggle("hidden",requests);
+        requestsPane.classList.toggle("hidden",!requests);
 
-        if(showRequests) {
-          loadRequests();
-        }
+        if(requests) loadRequests();
       });
     });
 
-    roleField.addEventListener("change",updateRole);
+    document.querySelectorAll(".request-tab").forEach(button => {
+      button.addEventListener("click",() => {
+        requestMode = button.dataset.requestMode;
+
+        document.querySelectorAll(".request-tab").forEach(item => {
+          item.classList.toggle("active",item === button);
+        });
+
+        loadRequests();
+      });
+    });
+
+    roleField.addEventListener("change",updateRoleSections);
 
     document.getElementById("logout-button")
       .addEventListener("click",async () => {
@@ -769,12 +865,22 @@
       event.preventDefault();
 
       const role = roleField.value;
-      const subjects = role === "teacher"
-        ? value("teacher-subjects")
-        : value("student-subjects");
+      const student = hasStudentRole(role);
+      const teacher = hasTeacherRole(role);
 
-      if(!subjects) {
-        showMessage("צריך לבחור לפחות מקצוע אחד.","error");
+      if(student && !value("student-subjects")) {
+        showMessage(
+          "צריך לבחור לפחות מקצוע אחד ללמידה.",
+          "error"
+        );
+        return;
+      }
+
+      if(teacher && !value("teacher-subjects")) {
+        showMessage(
+          "צריך לבחור לפחות מקצוע אחד להוראה.",
+          "error"
+        );
         return;
       }
 
@@ -782,6 +888,28 @@
       saveButton.textContent = "שומרים...";
 
       try {
+        const studentProfile = student
+          ? {
+              subjects:value("student-subjects"),
+              level:value("student-level"),
+              learningStyle:
+                document.getElementById("learning-style").value,
+              goal:value("student-goal"),
+              availability:value("student-availability")
+            }
+          : null;
+
+        const teacherProfile = teacher
+          ? {
+              subjects:value("teacher-subjects"),
+              price:Number(value("price")) || 0,
+              experience:value("experience"),
+              format:document.getElementById("format").value,
+              bio:value("bio"),
+              availability:value("teacher-availability")
+            }
+          : null;
+
         const profile = {
           uid:currentUser.uid,
           name:value("name"),
@@ -790,23 +918,11 @@
           city:value("city"),
           photo:photoData,
           role,
-          subjects,
+          roles:rolesFor(role),
+          studentProfile,
+          teacherProfile,
           updatedAt:serverTimestamp()
         };
-
-        if(role === "teacher") {
-          profile.price = Number(value("price")) || 0;
-          profile.experience = value("experience");
-          profile.format = document.getElementById("format").value;
-          profile.bio = value("bio");
-          profile.availability = value("teacher-availability");
-        } else {
-          profile.level = value("student-level");
-          profile.learningStyle =
-            document.getElementById("learning-style").value;
-          profile.goal = value("student-goal");
-          profile.availability = value("student-availability");
-        }
 
         await updateProfile(currentUser,{
           displayName:profile.name
@@ -818,7 +934,7 @@
           {merge:true}
         );
 
-        if(role === "teacher") {
+        if(teacher) {
           await setDoc(
             doc(db,"teachers",currentUser.uid),
             {
@@ -826,21 +942,20 @@
               name:profile.name,
               city:profile.city,
               photo:profile.photo,
-              subjects:profile.subjects,
-              price:profile.price,
-              experience:profile.experience,
-              format:profile.format,
-              bio:profile.bio,
-              availability:profile.availability,
+              subjects:teacherProfile.subjects,
+              price:teacherProfile.price,
+              experience:teacherProfile.experience,
+              format:teacherProfile.format,
+              bio:teacherProfile.bio,
+              availability:teacherProfile.availability,
+              acceptingStudents:true,
               verified:false,
               updatedAt:serverTimestamp()
             },
             {merge:true}
           );
         } else {
-          await deleteDoc(
-            doc(db,"teachers",currentUser.uid)
-          );
+          await deleteDoc(doc(db,"teachers",currentUser.uid));
         }
 
         currentProfile = profile;
@@ -849,7 +964,7 @@
           `היי ${profile.name}, זה האזור שלך.`;
 
         showPhoto(photoData,profile.name);
-        updateRole();
+        updateRoleSections();
         showMessage("הפרטים נשמרו בהצלחה.","success");
       } catch(error) {
         console.error(error);
@@ -866,28 +981,29 @@
       return "ממתינה";
     }
 
-    function renderRequest(requestData) {
-      const isTeacher = currentProfile.role === "teacher";
-      const personName = isTeacher
-        ? requestData.studentName
-        : requestData.teacherName;
+    function requestCard(request) {
+      const incoming = requestMode === "incoming";
 
-      const actions = isTeacher &&
-        requestData.status === "pending"
+      const name = incoming
+        ? request.studentName
+        : request.teacherName;
+
+      const actions =
+        incoming && request.status === "pending"
           ? `
             <div class="request-actions">
               <button class="button request-action"
-                      data-id="${safe(requestData.id)}"
+                      data-id="${safe(request.id)}"
                       data-status="accepted"
                       type="button">
-                אישור הבקשה
+                אישור
               </button>
 
               <button class="button danger request-action"
-                      data-id="${safe(requestData.id)}"
+                      data-id="${safe(request.id)}"
                       data-status="declined"
                       type="button">
-                דחיית הבקשה
+                דחייה
               </button>
             </div>
           `
@@ -897,20 +1013,20 @@
         <article class="request">
           <div class="request-top">
             <div>
-              <h3>${safe(personName || "משתמש/ת בכיוון")}</h3>
+              <h3>${safe(name || "משתמש/ת בכיוון")}</h3>
 
               <div class="request-info">
-                <span>מקצוע: ${safe(requestData.subject)}</span>
-                <span>זמן מועדף: ${safe(requestData.preferredTime)}</span>
+                <span>מקצוע: ${safe(request.subject)}</span>
+                <span>זמן: ${safe(request.preferredTime)}</span>
               </div>
             </div>
 
-            <span class="status ${safe(requestData.status)}">
-              ${statusText(requestData.status)}
+            <span class="status ${safe(request.status)}">
+              ${statusText(request.status)}
             </span>
           </div>
 
-          <p>${safe(requestData.message)}</p>
+          <p>${safe(request.message)}</p>
           ${actions}
         </article>
       `;
@@ -923,7 +1039,7 @@
         '<div class="loading">טוענים בקשות...</div>';
 
       try {
-        const field = currentProfile.role === "teacher"
+        const field = requestMode === "incoming"
           ? "teacherId"
           : "studentId";
 
@@ -940,23 +1056,21 @@
         }));
 
         requests.sort((first,second) => {
-          const firstTime =
-            first.createdAt?.seconds || 0;
-
-          const secondTime =
-            second.createdAt?.seconds || 0;
-
-          return secondTime-firstTime;
+          return (
+            (second.createdAt?.seconds || 0) -
+            (first.createdAt?.seconds || 0)
+          );
         });
 
         requestsList.innerHTML = requests.length
-          ? requests.map(renderRequest).join("")
+          ? requests.map(requestCard).join("")
           : `
             <div class="empty">
-              עדיין אין כאן בקשות.<br>
-              ${currentProfile.role === "teacher"
-                ? "בקשות מתלמידים יופיעו כאן."
-                : "אפשר לבחור מורה ולשלוח לו בקשה."}
+              ${
+                requestMode === "incoming"
+                  ? "עדיין לא התקבלו בקשות מתלמידים."
+                  : "עדיין לא שלחת בקשות למורים."
+              }
             </div>
           `;
 
@@ -967,7 +1081,7 @@
 
               try {
                 await updateDoc(
-                  doc(db,"requests",button.dataset.dataset.id),
+                  doc(db,"requests",button.dataset.id),
                   {
                     status:button.dataset.status,
                     updatedAt:serverTimestamp()
@@ -988,7 +1102,6 @@
         requestsList.innerHTML = `
           <div class="message show error">
             לא הצלחנו לטעון את הבקשות.
-            ודאי שפרסמת את כללי Firestore החדשים.
           </div>
         `;
       }
@@ -1014,14 +1127,15 @@
                 uid:user.uid,
                 name:user.displayName || "",
                 email:user.email || "",
-                role:"student"
+                role:"student",
+                roles:["student"]
               }
         );
       } catch(error) {
         console.error(error);
 
         loading.textContent =
-          "לא הצלחנו לטעון את הפרופיל. נסי לרענן את העמוד.";
+          "לא הצלחנו לטעון את הפרופיל. נסי לרענן.";
       }
     });
   </script>
