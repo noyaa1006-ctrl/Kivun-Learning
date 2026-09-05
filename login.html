@@ -29,12 +29,12 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Heebo, Arial, sans-serif;
       color: var(--ink);
       background:
         radial-gradient(circle at 91% 9%, #ddfff1 0, transparent 28%),
         radial-gradient(circle at 5% 92%, #fff1d4 0, transparent 30%),
         var(--cloud);
+      font-family: Heebo, Arial, sans-serif;
     }
 
     .container {
@@ -294,8 +294,8 @@
       }
 
       .login-card {
-        max-width: 460px;
         width: 100%;
+        max-width: 460px;
         margin: auto;
       }
 
@@ -342,8 +342,8 @@
       </h1>
 
       <p>
-        הכניסה לחשבון מחזירה אותך לפרופיל האישי,
-        לפרטים ששמרת ולכל האפשרויות באתר.
+        הזינו אימייל וסיסמה כדי להיכנס לכל חשבון קיים.
+        אפשר לעבור בין חשבונות גם אם התחברתם קודם לחשבון אחר.
       </p>
 
       <div class="security-note">
@@ -417,8 +417,7 @@
     import {
       auth,
       signInWithEmailAndPassword,
-      sendPasswordResetEmail,
-      onAuthStateChanged
+      sendPasswordResetEmail
     } from "./firebase.js";
 
     const form = document.getElementById("login-form");
@@ -437,13 +436,18 @@
 
     function errorMessage(code) {
       const messages = {
-        "auth/invalid-email": "כתובת האימייל אינה תקינה.",
+        "auth/invalid-email":
+          "כתובת האימייל אינה תקינה.",
+
         "auth/invalid-credential":
           "האימייל או הסיסמה אינם נכונים.",
+
         "auth/user-disabled":
           "החשבון הזה הושבת.",
+
         "auth/too-many-requests":
           "בוצעו יותר מדי ניסיונות. נסו שוב מאוחר יותר.",
+
         "auth/network-request-failed":
           "לא הצלחנו להתחבר לאינטרנט."
       };
@@ -456,10 +460,11 @@
       const hidden = passwordInput.type === "password";
 
       passwordInput.type = hidden ? "text" : "password";
-      showPasswordButton.textContent = hidden ? "הסתרה" : "הצגה";
+      showPasswordButton.textContent =
+        hidden ? "הסתרה" : "הצגה";
     });
 
-    form.addEventListener("submit", async (event) => {
+    form.addEventListener("submit", async event => {
       event.preventDefault();
 
       loginButton.disabled = true;
@@ -472,11 +477,19 @@
           passwordInput.value
         );
 
-        showMessage("הכניסה הצליחה. מעבירים אותך לאזור האישי...", "success");
+        showMessage(
+          "הכניסה הצליחה. מעבירים אותך לאזור האישי...",
+          "success"
+        );
 
         window.location.href = "dashboard.html";
       } catch (error) {
-        showMessage(errorMessage(error.code), "error");
+        console.error(error);
+
+        showMessage(
+          errorMessage(error.code),
+          "error"
+        );
 
         loginButton.disabled = false;
         loginButton.textContent = "כניסה לאזור שלי ←";
@@ -506,15 +519,14 @@
           "success"
         );
       } catch (error) {
-        showMessage(errorMessage(error.code), "error");
+        console.error(error);
+
+        showMessage(
+          errorMessage(error.code),
+          "error"
+        );
       } finally {
         forgotButton.disabled = false;
-      }
-    });
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        window.location.href = "dashboard.html";
       }
     });
   </script>
