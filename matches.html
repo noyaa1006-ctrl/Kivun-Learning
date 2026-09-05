@@ -1,27 +1,704 @@
 <!doctype html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ההתאמות שלך — כיוון</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ההתאמות שלך — כיוון</title>
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap');
-    :root{--navy:#121a37;--ink:#1c2746;--teal:#10a37f;--coral:#ff6e61;--yellow:#ffd25d;--cloud:#f6f8fe;--line:#e6eaf4;--muted:#6c7691;--white:#fff;--shadow:0 16px 40px rgba(26,39,76,.1)}*{box-sizing:border-box}body{margin:0;background:var(--cloud);color:var(--ink);font-family:Heebo,Arial,sans-serif}.container{width:min(1180px,calc(100% - 40px));margin:auto}.nav{height:78px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:28px;font-weight:900;letter-spacing:-1.2px;color:var(--navy);text-decoration:none;display:flex;gap:8px;align-items:center}.mark{background:var(--coral);border-radius:10px 10px 10px 2px;color:#fff;width:28px;height:28px;display:grid;place-items:center;font-size:18px;transform:rotate(-5deg)}.back{color:var(--muted);font-weight:700;text-decoration:none}.header{background:#fff;border-bottom:1px solid var(--line);padding:42px 0 30px}.breadcrumb{color:var(--teal);font-size:14px;font-weight:800}.header h1{margin:9px 0 7px;font-size:43px;letter-spacing:-1.8px;line-height:1.1;color:var(--navy)}.header p{margin:0;color:var(--muted);font-size:17px}.layout{display:grid;grid-template-columns:280px 1fr;gap:28px;padding:34px 0 75px}.filters{background:#fff;border-radius:21px;padding:20px;height:max-content;box-shadow:0 7px 25px rgba(26,39,76,.05)}.filters h2{font-size:19px;margin:0 0 16px}.label{font-size:13px;color:var(--muted);font-weight:700;margin:17px 0 8px}.input{border:1px solid var(--line);border-radius:11px;padding:10px;font-weight:700;font-size:14px;display:flex;justify-content:space-between}.chips{display:flex;flex-wrap:wrap;gap:7px}.chip{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 9px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;color:#58647d}.chip.on{background:#e3f8ef;border-color:#bcebd9;color:#08785c}.range{width:100%;accent-color:var(--teal)}.price-row{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}.reset{margin-top:20px;background:none;border:0;color:var(--teal);font:inherit;font-size:14px;font-weight:800;cursor:pointer}.list-head{display:flex;align-items:center;justify-content:space-between;margin:3px 0 16px}.list-head b{font-size:16px}.sort{background:white;border:1px solid var(--line);border-radius:10px;padding:8px 11px;font:inherit;color:var(--muted);font-weight:700}.card{background:#fff;border:1px solid transparent;border-radius:22px;padding:18px;display:grid;grid-template-columns:125px 1fr auto;gap:19px;align-items:center;box-shadow:0 8px 25px rgba(26,39,76,.05);transition:.2s}.card+.card{margin-top:14px}.card:hover{border-color:#c7eddf;transform:translateY(-2px);box-shadow:var(--shadow)}.portrait{height:123px;border-radius:16px;color:#fff;font-size:23px;font-weight:900;display:flex;align-items:end;padding:10px;background:linear-gradient(135deg,#fa9d6e,#c64f62)}.p2{background:linear-gradient(135deg,#a2d7ea,#5474c1)}.p3{background:linear-gradient(135deg,#abd99a,#258e83)}.p4{background:linear-gradient(135deg,#d3a7e5,#9a5db2)}.tag{display:inline-block;font-size:12px;color:#08785c;font-weight:900;background:#e5faf0;padding:5px 8px;border-radius:7px;margin-left:5px}.card h2{margin:6px 0 2px;font-size:22px}.verified{color:var(--teal);font-size:13px;font-weight:800}.about{margin:5px 0 9px;color:var(--muted);font-size:14px;line-height:1.45}.details{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:#66708a;font-weight:700}.details span{display:flex;gap:4px;align-items:center}.side{text-align:left;align-self:stretch;display:flex;flex-direction:column;justify-content:space-between;min-width:105px}.fit{color:#08785c;font-size:13px;font-weight:900}.price{font-size:19px;font-weight:900;color:var(--navy)}.price small{font-size:12px;color:var(--muted)}.choose{border:0;border-radius:10px;background:var(--navy);color:white;padding:10px 13px;font:inherit;font-size:13px;font-weight:800;cursor:pointer}.reason{background:#fff8e7;border-radius:12px;padding:12px 13px;margin-top:14px;color:#79570b;font-size:14px;font-weight:700;display:none}.reason.show{display:block}.toast{position:fixed;bottom:22px;left:22px;background:var(--navy);color:#fff;padding:13px 18px;border-radius:12px;box-shadow:var(--shadow);display:none;font-weight:700}.toast.show{display:block}@media(max-width:760px){.layout{grid-template-columns:1fr;padding-top:20px}.filters{display:flex;gap:10px;overflow:auto;padding:13px}.filters h2,.label,.input,.range,.price-row,.reset{display:none}.chips{flex-wrap:nowrap}.chip{white-space:nowrap}.header{padding:28px 0 23px}.header h1{font-size:35px}.card{grid-template-columns:86px 1fr;gap:12px;padding:12px}.portrait{height:90px;font-size:17px}.side{grid-column:1/-1;flex-direction:row;align-items:center;margin-top:0}.side .choose{margin-right:auto}.card h2{font-size:19px}.about{font-size:13px}.details{font-size:12px}.container{width:min(100% - 28px,1180px)}}
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');
+
+    :root {
+      --navy:#121a37;
+      --ink:#1c2746;
+      --teal:#10a37f;
+      --coral:#ff6e61;
+      --cloud:#f6f8fe;
+      --line:#e6eaf4;
+      --muted:#6c7691;
+      --shadow:0 16px 40px rgba(26,39,76,.1);
+    }
+
+    * { box-sizing:border-box; }
+
+    body {
+      margin:0;
+      color:var(--ink);
+      background:var(--cloud);
+      font-family:Heebo,Arial,sans-serif;
+    }
+
+    .container {
+      width:min(1180px,calc(100% - 40px));
+      margin:auto;
+    }
+
+    .nav {
+      height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:var(--navy);
+      font-size:28px;
+      font-weight:900;
+      text-decoration:none;
+    }
+
+    .mark {
+      display:grid;
+      place-items:center;
+      width:28px;
+      height:28px;
+      border-radius:10px 10px 10px 2px;
+      color:#fff;
+      background:var(--coral);
+      transform:rotate(-5deg);
+    }
+
+    .back {
+      color:var(--muted);
+      font-weight:700;
+      text-decoration:none;
+    }
+
+    .header {
+      padding:42px 0 30px;
+      border-bottom:1px solid var(--line);
+      background:#fff;
+    }
+
+    .breadcrumb {
+      color:var(--teal);
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .header h1 {
+      margin:9px 0 7px;
+      color:var(--navy);
+      font-size:43px;
+      line-height:1.1;
+    }
+
+    .header p {
+      margin:0;
+      color:var(--muted);
+      font-size:17px;
+    }
+
+    .layout {
+      display:grid;
+      grid-template-columns:280px 1fr;
+      gap:28px;
+      padding:34px 0 75px;
+    }
+
+    .filters {
+      height:max-content;
+      padding:20px;
+      border-radius:21px;
+      background:#fff;
+      box-shadow:0 7px 25px rgba(26,39,76,.05);
+    }
+
+    .filters h2 { margin:0 0 16px; font-size:19px; }
+
+    .label {
+      margin:17px 0 8px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .chips {
+      display:flex;
+      flex-wrap:wrap;
+      gap:7px;
+    }
+
+    .chip {
+      padding:7px 9px;
+      border:1px solid var(--line);
+      border-radius:9px;
+      color:#58647d;
+      background:#fff;
+      font:inherit;
+      font-size:13px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .chip.on {
+      color:#08785c;
+      border-color:#bcebd9;
+      background:#e3f8ef;
+    }
+
+    .sort {
+      padding:9px 11px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      color:var(--muted);
+      background:#fff;
+      font:inherit;
+      font-weight:700;
+    }
+
+    .range {
+      width:100%;
+      accent-color:var(--teal);
+    }
+
+    .price-row {
+      display:flex;
+      justify-content:space-between;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .reset {
+      margin-top:20px;
+      border:0;
+      color:var(--teal);
+      background:none;
+      font:inherit;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .list-head {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin:3px 0 16px;
+    }
+
+    .card {
+      display:grid;
+      grid-template-columns:125px 1fr auto;
+      gap:19px;
+      align-items:center;
+      padding:18px;
+      border:1px solid transparent;
+      border-radius:22px;
+      background:#fff;
+      box-shadow:0 8px 25px rgba(26,39,76,.05);
+      transition:.2s;
+    }
+
+    .card + .card { margin-top:14px; }
+
+    .card:hover {
+      border-color:#c7eddf;
+      box-shadow:var(--shadow);
+      transform:translateY(-2px);
+    }
+
+    .portrait {
+      display:flex;
+      align-items:flex-end;
+      height:123px;
+      overflow:hidden;
+      padding:10px;
+      border-radius:16px;
+      color:#fff;
+      background:linear-gradient(135deg,#fa9d6e,#c64f62);
+      font-size:23px;
+      font-weight:900;
+    }
+
+    .portrait img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:12px;
+    }
+
+    .p2 { background:linear-gradient(135deg,#a2d7ea,#5474c1); }
+    .p3 { background:linear-gradient(135deg,#abd99a,#258e83); }
+    .p4 { background:linear-gradient(135deg,#d3a7e5,#9a5db2); }
+
+    .tag {
+      display:inline-block;
+      margin-left:5px;
+      padding:5px 8px;
+      border-radius:7px;
+      color:#08785c;
+      background:#e5faf0;
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .verified {
+      color:var(--teal);
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .card h2 { margin:6px 0 2px; font-size:22px; }
+
+    .about {
+      margin:5px 0 9px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .details {
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      color:#66708a;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .side {
+      align-self:stretch;
+      display:flex;
+      min-width:110px;
+      flex-direction:column;
+      justify-content:space-between;
+      text-align:left;
+    }
+
+    .fit {
+      color:#08785c;
+      font-size:13px;
+      font-weight:900;
+    }
+
+    .price {
+      color:var(--navy);
+      font-size:19px;
+      font-weight:900;
+    }
+
+    .price small { color:var(--muted); font-size:12px; }
+
+    .choose {
+      padding:10px 13px;
+      border:0;
+      border-radius:10px;
+      color:white;
+      background:var(--navy);
+      font:inherit;
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .reason {
+      display:none;
+      margin-top:14px;
+      padding:12px 13px;
+      border-radius:12px;
+      color:#79570b;
+      background:#fff8e7;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .reason.show { display:block; }
+
+    .empty {
+      padding:35px;
+      border-radius:20px;
+      color:var(--muted);
+      background:#fff;
+      text-align:center;
+    }
+
+    @media(max-width:760px) {
+      .layout {
+        grid-template-columns:1fr;
+        padding-top:20px;
+      }
+
+      .filters {
+        display:block;
+        padding:16px;
+      }
+
+      .header { padding:28px 0 23px; }
+      .header h1 { font-size:34px; }
+
+      .card {
+        grid-template-columns:86px 1fr;
+        gap:12px;
+        padding:12px;
+      }
+
+      .portrait {
+        height:90px;
+        padding:7px;
+        font-size:17px;
+      }
+
+      .side {
+        grid-column:1/-1;
+        flex-direction:row;
+        align-items:center;
+      }
+
+      .side .choose { margin-right:auto; }
+      .card h2 { font-size:19px; }
+      .about { font-size:13px; }
+
+      .container {
+        width:min(100% - 28px,1180px);
+      }
+    }
   </style>
 </head>
+
 <body>
-  <nav class="container nav"><a class="brand" href="index.html"><span class="mark">↗</span>כיוון</a><a class="back" href="dashboard.html">האזור שלי</a></nav>
-  <header class="header"><div class="container"><div class="breadcrumb">ההתאמה שלך · מתמטיקה 4–5 יח״ל</div><h1>4 מורים שמרגישים בדיוק בכיוון.</h1><p>סידרנו אותם לפי ההתאמה למטרה שלך: ביטחון לקראת הבגרות, בשעות הערב ובדרך נעימה וברורה.</p></div></header>
-  <main class="container layout"><aside class="filters"><h2>לדייק את ההתאמה</h2><div class="label">מקצוע ורמה</div><div class="input">מתמטיקה · 4–5 יח״ל <span>⌄</span></div><div class="label">סגנון הוראה</div><div class="chips"><button class="chip on">סבלני/ת</button><button class="chip">ממוקד בגרות</button><button class="chip">בגובה העיניים</button></div><div class="label">אופן השיעור</div><div class="chips"><button class="chip on">אונליין</button><button class="chip">פרונטלי</button></div><div class="label">מחיר לשעה</div><input class="range" type="range" min="80" max="200" value="150"><div class="price-row"><span>₪80</span><b id="range-value">עד ₪150</b></div><button class="reset">איפוס סינונים</button></aside>
-  <section><div class="list-head"><b>4 התאמות נמצאו</b><select class="sort" aria-label="מיון"><option>ההתאמה הגבוהה ביותר</option><option>מחיר נמוך לגבוה</option><option>הדירוג הגבוה ביותר</option></select></div>
-    <article class="card"><div class="portrait">נועם</div><div><span class="tag">94% התאמה</span><span class="verified">● מורה מאומת</span><h2>נועם לוי</h2><p class="about">מורה למתמטיקה שיודע לפרק לחץ לתרגילים קטנים וברורים. 6 שנות ניסיון והכנה לבגרות.</p><div class="details"><span>★★★★★ 4.9 (48)</span><span>◷ פנוי/ה השבוע</span><span>⌂ אונליין</span></div><div class="reason">✦ למה נועם? ניסיון ב־5 יח״ל, זמינות בערב וסגנון “בגובה העיניים” שביקשת.</div></div><div class="side"><span class="fit">בחירה מעולה</span><span class="price">₪120 <small>/ שעה</small></span><button class="choose" data-name="נועם">לפרופיל</button></div></article>
-    <article class="card"><div class="portrait p2">מאיה</div><div><span class="tag">91% התאמה</span><span class="verified">● מורה מאומת</span><h2>מאיה כהן</h2><p class="about">מורה לפיזיקה ומתמטיקה עם שיטה סופר־מסודרת; מצוינת לתלמידים שרוצים תוכנית ברורה עד הבגרות.</p><div class="details"><span>★★★★★ 5.0 (31)</span><span>◷ פנויה ביום ג׳</span><span>⌂ אונליין</span></div><div class="reason">✦ למה מאיה? היא מתמחה בהכנה לבגרות ומלמדת בשעות שמתאימות לך.</div></div><div class="side"><span class="fit">תוכנית מסודרת</span><span class="price">₪135 <small>/ שעה</small></span><button class="choose" data-name="מאיה">לפרופיל</button></div></article>
-    <article class="card"><div class="portrait p3">עומר</div><div><span class="tag">88% התאמה</span><span class="verified">● מורה מאומת</span><h2>עומר גבע</h2><p class="about">מורה צעיר ומנוסה שמלמד מתמטיקה בדרך פשוטה ומחבר בין החומר למה שמרגיש הגיוני.</p><div class="details"><span>★★★★★ 4.8 (67)</span><span>◷ פנוי/ה היום</span><span>⌂ אונליין / פרונטלי</span></div><div class="reason">✦ למה עומר? זמינות מיידית, מחיר שמתאים לתקציב ודגש על הבנה ולא שינון.</div></div><div class="side"><span class="fit">זמין היום</span><span class="price">₪110 <small>/ שעה</small></span><button class="choose" data-name="עומר">לפרופיל</button></div></article>
-    <article class="card"><div class="portrait p4">שירה</div><div><span class="tag">84% התאמה</span><span class="verified">● מורה מאומת</span><h2>שירה זיו</h2><p class="about">בוגרת תואר במתמטיקה, אוהבת לבנות ביטחון ולמצוא יחד עם התלמיד את הדרך המדויקת לפתרון.</p><div class="details"><span>★★★★★ 4.9 (22)</span><span>◷ פנויה ביום ד׳</span><span>⌂ אונליין</span></div><div class="reason">✦ למה שירה? היא מתמחה בחיזוק ביטחון לפני מבחנים ומתאימה לשעות הערב.</div></div><div class="side"><span class="fit">לחיזוק ביטחון</span><span class="price">₪125 <small>/ שעה</small></span><button class="choose" data-name="שירה">לפרופיל</button></div></article>
-  </section></main><div class="toast" id="toast"></div>
-  <script>
-    const range=document.querySelector('.range'), value=document.getElementById('range-value'), toast=document.getElementById('toast');
-    range.addEventListener('input',()=>value.textContent='עד ₪'+range.value);
-    document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('on')));
-    document.querySelectorAll('.card').forEach(card=>card.addEventListener('click',e=>{if(!e.target.classList.contains('choose'))card.querySelector('.reason').classList.toggle('show')}));
-    document.querySelectorAll('.choose').forEach(btn=>btn.addEventListener('click',()=>location.href='teacher-profile.html?teacher='+encodeURIComponent(btn.dataset.name)));
+  <nav class="container nav">
+    <a class="brand" href="index.html">
+      <span class="mark">↗</span>
+      כיוון
+    </a>
+
+    <a class="back" href="dashboard.html">האזור שלי</a>
+  </nav>
+
+  <header class="header">
+    <div class="container">
+      <div class="breadcrumb">ההתאמות שלך</div>
+
+      <h1 id="title">מחפשים את המורים שבכיוון שלך...</h1>
+
+      <p>
+        מורים אמיתיים שנרשמו לאתר לצד פרופילי הדגמה
+        המסומנים בבירור.
+      </p>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <aside class="filters">
+      <h2>לדייק את ההתאמה</h2>
+
+      <div class="label">מקצוע</div>
+
+      <select id="subject" class="sort" style="width:100%">
+        <option value="">כל המקצועות</option>
+      </select>
+
+      <div class="label">אופן השיעור</div>
+
+      <div class="chips">
+        <button class="chip" data-format="אונליין" type="button">
+          אונליין
+        </button>
+
+        <button class="chip" data-format="פרונטלי" type="button">
+          פרונטלי
+        </button>
+      </div>
+
+      <div class="label">מחיר לשעה</div>
+
+      <input id="price-range" class="range"
+             type="range" min="0" max="300" value="300">
+
+      <div class="price-row">
+        <span>₪0</span>
+        <b id="range-value">עד ₪300</b>
+      </div>
+
+      <button class="reset" id="reset" type="button">
+        איפוס סינונים
+      </button>
+    </aside>
+
+    <section>
+      <div class="list-head">
+        <b id="count">טוענים מורים...</b>
+
+        <select id="sort" class="sort">
+          <option value="match">ההתאמה הגבוהה ביותר</option>
+          <option value="low">מחיר נמוך לגבוה</option>
+          <option value="high">מחיר גבוה לנמוך</option>
+          <option value="rating">הדירוג הגבוה ביותר</option>
+        </select>
+      </div>
+
+      <div id="teachers"></div>
+    </section>
+  </main>
+
+  <script type="module">
+    import {
+      db,
+      auth,
+      collection,
+      getDocs,
+      doc,
+      getDoc,
+      onAuthStateChanged
+    } from "./firebase.js";
+
+    import {
+      SUBJECTS,
+      DEMO_TEACHERS,
+      normalizeList,
+      calculateMatch
+    } from "./catalog.js";
+
+    const list = document.getElementById("teachers");
+    const subject = document.getElementById("subject");
+    const price = document.getElementById("price-range");
+    const sort = document.getElementById("sort");
+
+    let teachers = [];
+    let student = {};
+    let selectedFormat = "";
+
+    SUBJECTS.forEach(item => {
+      subject.add(new Option(item, item));
+    });
+
+    function safe(value) {
+      return String(value ?? "").replace(
+        /[&<>'"]/g,
+        character => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          "'": "&#39;",
+          '"': "&quot;"
+        })[character]
+      );
+    }
+
+    function createCard(teacher, index) {
+      const isDemo = teacher.isDemo === true;
+      const id = teacher.id || teacher.uid;
+      const match = calculateMatch(student, teacher);
+      const firstName = (teacher.name || "מורה").split(" ")[0];
+
+      const portrait = teacher.photo
+        ? `<img src="${safe(teacher.photo)}"
+                alt="תמונת הפרופיל של ${safe(teacher.name)}">`
+        : safe(firstName);
+
+      return `
+        <article class="card">
+          <div class="portrait p${index % 4 + 1}">
+            ${portrait}
+          </div>
+
+          <div>
+            <span class="tag">${match}% התאמה</span>
+
+            <span class="verified">
+              ● ${isDemo ? "פרופיל הדגמה" : "מורה רשום/ה"}
+            </span>
+
+            <h2>${safe(teacher.name || "מורה בכיוון")}</h2>
+
+            <p class="about">
+              ${safe(teacher.bio || "פרופיל מורה חדש בכיוון.")}
+            </p>
+
+            <div class="details">
+              <span>★ ${safe(teacher.rating || "חדש")}</span>
+
+              <span>
+                ◷ ${safe(teacher.availability || "יש לתאם")}
+              </span>
+
+              <span>⌂ ${safe(teacher.format || "לא צוין")}</span>
+            </div>
+
+            <div class="reason">
+              ✦ מקצועות:
+              ${safe(normalizeList(teacher.subjects).join(", "))}
+            </div>
+          </div>
+
+          <div class="side">
+            <span class="fit">
+              ${isDemo ? "להתרשמות" : "פרופיל פעיל"}
+            </span>
+
+            <span class="price">
+              ₪${Number(teacher.price) || 0}
+              <small>/ שעה</small>
+            </span>
+
+            <button class="choose"
+                    data-id="${safe(id)}"
+                    type="button">
+              לפרופיל
+            </button>
+          </div>
+        </article>
+      `;
+    }
+
+    function render() {
+      let results = teachers.filter(teacher => {
+        const subjects = normalizeList(teacher.subjects);
+        const teacherFormat = String(teacher.format || "");
+        const teacherPrice = Number(teacher.price) || 0;
+
+        const matchesSubject =
+          !subject.value || subjects.includes(subject.value);
+
+        const matchesFormat =
+          !selectedFormat ||
+          teacherFormat.includes(selectedFormat);
+
+        const matchesPrice =
+          teacherPrice <= Number(price.value);
+
+        return matchesSubject && matchesFormat && matchesPrice;
+      });
+
+      results.sort((first, second) => {
+        if (sort.value === "low") {
+          return Number(first.price) - Number(second.price);
+        }
+
+        if (sort.value === "high") {
+          return Number(second.price) - Number(first.price);
+        }
+
+        if (sort.value === "rating") {
+          return Number(second.rating) - Number(first.rating);
+        }
+
+        return (
+          calculateMatch(student, second) -
+          calculateMatch(student, first)
+        );
+      });
+
+      document.getElementById("count").textContent =
+        `${results.length} התאמות נמצאו`;
+
+      document.getElementById("title").textContent =
+        results.length
+          ? `${results.length} מורים שמרגישים בדיוק בכיוון.`
+          : "לא נמצאו מורים בסינון הזה";
+
+      list.innerHTML = results.length
+        ? results.map(createCard).join("")
+        : `
+          <div class="empty">
+            לא נמצאו מורים מתאימים לסינון הזה.<br>
+            נסו להעלות את המחיר או לאפס את הסינונים.
+          </div>
+        `;
+
+      list.querySelectorAll(".choose").forEach(button => {
+        button.addEventListener("click", () => {
+          window.location.href =
+            `teacher-profile.html?id=${
+              encodeURIComponent(button.dataset.id)
+            }`;
+        });
+      });
+
+      list.querySelectorAll(".card").forEach(card => {
+        card.addEventListener("click", event => {
+          if (!event.target.closest(".choose")) {
+            card.querySelector(".reason")
+              ?.classList.toggle("show");
+          }
+        });
+      });
+    }
+
+    price.addEventListener("input", () => {
+      document.getElementById("range-value").textContent =
+        `עד ₪${price.value}`;
+
+      render();
+    });
+
+    subject.addEventListener("change", render);
+    sort.addEventListener("change", render);
+
+    document.querySelectorAll("[data-format]").forEach(button => {
+      button.addEventListener("click", () => {
+        selectedFormat =
+          selectedFormat === button.dataset.format
+            ? ""
+            : button.dataset.format;
+
+        document.querySelectorAll("[data-format]").forEach(item => {
+          item.classList.toggle(
+            "on",
+            item.dataset.format === selectedFormat
+          );
+        });
+
+        render();
+      });
+    });
+
+    document.getElementById("reset").addEventListener("click", () => {
+      subject.value = "";
+      price.value = 300;
+      sort.value = "match";
+      selectedFormat = "";
+
+      document.getElementById("range-value").textContent =
+        "עד ₪300";
+
+      document.querySelectorAll(".chip").forEach(button => {
+        button.classList.remove("on");
+      });
+
+      render();
+    });
+
+    async function loadTeachers() {
+      try {
+        const snapshot = await getDocs(collection(db, "teachers"));
+
+        const realTeachers = snapshot.docs.map(documentItem => ({
+          id: documentItem.id,
+          ...documentItem.data(),
+          isDemo: false
+        }));
+
+        teachers = [...realTeachers, ...DEMO_TEACHERS];
+      } catch (error) {
+        console.error(error);
+        teachers = [...DEMO_TEACHERS];
+      }
+
+      render();
+    }
+
+    onAuthStateChanged(auth, async user => {
+      if (user) {
+        try {
+          const snapshot = await getDoc(
+            doc(db, "users", user.uid)
+          );
+
+          if (snapshot.exists()) {
+            student = snapshot.data();
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      loadTeachers();
+    });
   </script>
-</body></html>
+</body>
+</html>

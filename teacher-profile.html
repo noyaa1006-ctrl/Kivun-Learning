@@ -3,515 +3,475 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <title>פרופיל מורה — כיוון</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap");
 
     :root {
-      --navy: #121a37;
-      --ink: #1c2746;
-      --teal: #0b9d78;
-      --coral: #ff6e61;
-      --yellow: #ffd25d;
-      --cloud: #f6f8fe;
-      --line: #e5eaf4;
-      --muted: #69738d;
-      --white: #fff;
-      --shadow: 0 16px 42px rgba(23, 37, 78, .1);
+      --navy:#121a37;
+      --ink:#1d2746;
+      --teal:#0b9d78;
+      --coral:#ff6e61;
+      --cloud:#f6f8fe;
+      --line:#e4e9f4;
+      --muted:#69738d;
+      --shadow:0 18px 45px rgba(23,37,78,.11);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing:border-box; }
 
     body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--cloud);
-      font-family: Heebo, Arial, sans-serif;
+      margin:0;
+      min-height:100vh;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 92% 8%,#ddfff1 0,transparent 26%),
+        radial-gradient(circle at 4% 94%,#fff1d4 0,transparent 28%),
+        var(--cloud);
+      font-family:Heebo,Arial,sans-serif;
     }
+
+    .hidden { display:none !important; }
 
     .container {
-      width: min(1100px, calc(100% - 40px));
-      margin: auto;
+      width:min(1080px,calc(100% - 32px));
+      margin:auto;
     }
 
-    .nav {
-      height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    nav {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      min-height:78px;
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--navy);
-      font-size: 27px;
-      font-weight: 900;
-      text-decoration: none;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:var(--navy);
+      font-size:28px;
+      font-weight:900;
+      text-decoration:none;
     }
 
     .mark {
-      display: grid;
-      place-items: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 10px 10px 10px 2px;
-      color: #fff;
-      background: var(--coral);
-      transform: rotate(-5deg);
+      display:grid;
+      place-items:center;
+      width:29px;
+      height:29px;
+      border-radius:10px 10px 10px 2px;
+      color:#fff;
+      background:var(--coral);
+      transform:rotate(-5deg);
     }
 
-    .back {
-      color: var(--muted);
-      font-weight: 700;
-      text-decoration: none;
+    .nav-links {
+      display:flex;
+      gap:15px;
     }
 
-    .cover {
-      position: relative;
-      height: 165px;
-      overflow: hidden;
-      border-radius: 27px 27px 0 0;
-      background:
-        linear-gradient(115deg, #1e315c, #1e766d 58%, #f3c65b);
+    .nav-links a {
+      color:var(--muted);
+      font-weight:800;
+      text-decoration:none;
     }
 
-    .cover::after {
-      position: absolute;
-      top: -110px;
-      left: -60px;
-      width: 270px;
-      height: 270px;
-      border: 45px solid rgba(255, 255, 255, .16);
-      border-radius: 50%;
-      content: "";
+    .hero {
+      position:relative;
+      overflow:hidden;
+      padding:35px;
+      border-radius:28px;
+      color:#fff;
+      background:var(--navy);
+      box-shadow:var(--shadow);
     }
 
-    .profile {
-      position: relative;
-      padding: 0 35px 27px;
-      border-radius: 0 0 27px 27px;
-      background: #fff;
-      box-shadow: var(--shadow);
-    }
-
-    .top {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .identity {
-      min-width: 0;
+    .profile-head {
+      display:flex;
+      align-items:center;
+      gap:22px;
     }
 
     .avatar {
-      position: relative;
-      display: grid;
-      place-items: center;
-      width: 112px;
-      height: 112px;
-      margin-top: -55px;
-      overflow: hidden;
-      border: 6px solid #fff;
-      border-radius: 27px;
-      color: #fff;
-      background: linear-gradient(135deg, #fa9d6e, #c64f62);
-      box-shadow: 0 8px 18px #283a6040;
-      font-size: 38px;
-      font-weight: 900;
+      display:grid;
+      place-items:center;
+      width:125px;
+      height:125px;
+      flex:0 0 125px;
+      overflow:hidden;
+      border:4px solid rgba(255,255,255,.2);
+      border-radius:29px;
+      color:#fff;
+      background:linear-gradient(135deg,#ff9d6e,#c64f62);
+      font-size:42px;
+      font-weight:900;
     }
 
     .avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .name {
-      margin: 12px 0 3px;
-      font-size: 34px;
-      line-height: 1.15;
+      width:100%;
+      height:100%;
+      object-fit:cover;
     }
 
     .status {
-      display: inline-block;
-      margin-right: 7px;
-      padding: 4px 8px;
-      border-radius: 7px;
-      color: #8a6308;
-      background: #fff5d9;
-      font-size: 12px;
-      font-weight: 900;
-      vertical-align: middle;
+      display:inline-block;
+      padding:5px 9px;
+      border-radius:8px;
+      color:#fff0b7;
+      background:rgba(255,210,93,.15);
+      font-size:12px;
+      font-weight:900;
     }
 
-    .status.verified {
-      color: var(--teal);
-      background: #e5faf0;
+    .status.real {
+      color:#bff6df;
+      background:rgba(11,157,120,.2);
+    }
+
+    .profile-head h1 {
+      margin:8px 0 2px;
+      font-size:40px;
     }
 
     .headline {
-      color: var(--muted);
-      font-size: 16px;
-    }
-
-    .actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 12px 17px;
-      border: 0;
-      border-radius: 12px;
-      font: inherit;
-      font-size: 14px;
-      font-weight: 900;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .primary {
-      color: #fff;
-      background: var(--navy);
-    }
-
-    .light {
-      color: #52607d;
-      background: #eff3fb;
-    }
-
-    .details-line {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 22px;
-      margin-top: 21px;
-      padding-top: 17px;
-      border-top: 1px solid var(--line);
-    }
-
-    .detail b {
-      display: block;
-      color: var(--navy);
-      font-size: 17px;
-    }
-
-    .detail span {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
+      color:#cbd5ee;
+      font-size:16px;
     }
 
     .layout {
-      display: grid;
-      grid-template-columns: 1fr 335px;
-      gap: 25px;
-      margin: 26px 0 75px;
+      display:grid;
+      grid-template-columns:1fr 330px;
+      gap:24px;
+      padding:25px 0 70px;
     }
 
     .card {
-      padding: 23px;
-      border-radius: 20px;
-      background: #fff;
-      box-shadow: 0 8px 26px rgba(23, 37, 78, .05);
+      padding:24px;
+      border-radius:21px;
+      background:#fff;
+      box-shadow:0 8px 28px rgba(23,37,78,.06);
     }
 
-    .card + .card {
-      margin-top: 17px;
-    }
+    .card + .card { margin-top:17px; }
 
     .card h2 {
-      margin: 0 0 12px;
-      font-size: 21px;
+      margin:0 0 12px;
+      color:var(--navy);
     }
 
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.7;
-      white-space: pre-line;
+    .bio {
+      margin:0;
+      color:#59657f;
+      line-height:1.8;
+      white-space:pre-line;
     }
 
     .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
     }
 
     .tag {
-      padding: 7px 10px;
-      border-radius: 9px;
-      color: #087c5f;
-      background: #e8faf1;
-      font-size: 13px;
-      font-weight: 800;
+      padding:7px 10px;
+      border-radius:9px;
+      color:#08785c;
+      background:#e5faf0;
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .details {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .detail {
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:13px;
+      background:#fbfcff;
+    }
+
+    .detail small {
+      display:block;
+      color:var(--muted);
+      font-weight:700;
     }
 
     .contact {
-      position: sticky;
-      top: 18px;
-      height: max-content;
+      position:sticky;
+      top:18px;
+      height:max-content;
     }
 
     .price {
-      margin-bottom: 3px;
-      color: var(--navy);
-      font-size: 29px;
-      font-weight: 900;
+      margin:4px 0 18px;
+      color:var(--navy);
+      font-size:34px;
+      font-weight:900;
     }
 
     .price small {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 600;
+      color:var(--muted);
+      font-size:13px;
     }
 
-    .mini {
-      margin: 3px 0 17px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
+    .button {
+      display:block;
+      width:100%;
+      padding:14px;
+      border:0;
+      border-radius:12px;
+      color:#fff;
+      background:var(--navy);
+      font:inherit;
+      font-weight:900;
+      text-align:center;
+      text-decoration:none;
+      cursor:pointer;
+    }
+
+    .button.secondary {
+      margin-top:9px;
+      color:#08785c;
+      background:#e5faf0;
+    }
+
+    .button:disabled {
+      opacity:.6;
+      cursor:wait;
     }
 
     .availability {
-      margin: 15px 0;
-      padding: 12px;
-      border-radius: 11px;
-      color: #52607d;
-      background: #f3f6fb;
-      font-size: 14px;
-      font-weight: 700;
+      margin-top:18px;
+      padding:14px;
+      border-radius:13px;
+      color:#51607b;
+      background:#f4f7fd;
+      line-height:1.6;
     }
 
-    .contact .primary {
-      width: 100%;
-      text-align: center;
+    .availability b { display:block; }
+
+    .request-form {
+      display:grid;
+      gap:11px;
+      margin-top:15px;
+      padding-top:15px;
+      border-top:1px solid var(--line);
     }
 
-    .notice {
-      margin: 12px 0 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-      text-align: center;
+    label {
+      display:block;
+      margin-bottom:5px;
+      color:#4e5b76;
+      font-size:13px;
+      font-weight:800;
     }
 
-    .state {
-      margin-bottom: 70px;
-      padding: 50px 25px;
-      border-radius: 25px;
-      color: var(--muted);
-      background: #fff;
-      box-shadow: var(--shadow);
-      text-align: center;
+    input, select, textarea {
+      width:100%;
+      padding:11px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      outline:none;
+      font:inherit;
     }
 
-    .state h1 {
-      margin: 8px 0;
-      color: var(--navy);
+    input:focus, select:focus, textarea:focus {
+      border-color:var(--teal);
+      box-shadow:0 0 0 3px #dff7ed;
     }
 
-    .state-icon {
-      color: var(--teal);
-      font-size: 40px;
-      font-weight: 900;
+    textarea {
+      min-height:85px;
+      resize:vertical;
     }
 
-    .hidden {
-      display: none !important;
+    .message {
+      display:none;
+      padding:11px;
+      border-radius:10px;
+      font-size:13px;
+      font-weight:800;
     }
 
-    @media (max-width: 750px) {
-      .top {
-        align-items: flex-start;
-        flex-direction: column;
-      }
+    .message.show { display:block; }
+    .message.success { color:#08785c; background:#e5faf0; }
+    .message.error { color:#9e2f2a; background:#fff0ef; }
 
-      .profile {
-        padding: 0 19px 21px;
-      }
+    .loading,.not-found {
+      margin:55px auto;
+      padding:45px;
+      border-radius:22px;
+      background:#fff;
+      box-shadow:var(--shadow);
+      text-align:center;
+    }
 
-      .actions {
-        width: 100%;
-      }
+    .not-found a {
+      display:inline-block;
+      padding:11px 16px;
+      border-radius:10px;
+      color:#fff;
+      background:var(--navy);
+      font-weight:800;
+      text-decoration:none;
+    }
 
-      .actions .button {
-        flex: 1;
-        text-align: center;
-      }
-
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .contact {
-        position: static;
-        order: -1;
-      }
-
-      .name {
-        font-size: 30px;
-      }
-
-      .details-line {
-        gap: 18px;
-      }
-
-      .cover {
-        height: 130px;
-      }
+    @media(max-width:760px) {
+      .layout { grid-template-columns:1fr; }
+      .contact { position:static; }
 
       .avatar {
-        width: 96px;
-        height: 96px;
-        font-size: 32px;
+        width:90px;
+        height:90px;
+        flex-basis:90px;
+        border-radius:22px;
+        font-size:30px;
       }
 
-      .container {
-        width: min(100% - 28px, 1100px);
-      }
+      .profile-head h1 { font-size:30px; }
+      .details { grid-template-columns:1fr; }
+      .hero { padding:23px; }
+    }
+
+    @media(max-width:430px) {
+      .profile-head { flex-direction:column; }
+      .nav-links { gap:8px; }
+      .nav-links a { font-size:12px; }
     }
   </style>
 </head>
 
 <body>
-  <nav class="container nav">
+  <nav class="container">
     <a class="brand" href="index.html">
       <span class="mark">↗</span>
       כיוון
     </a>
 
-    <a class="back" href="matches.html">
-      חזרה לרשימת המורים
-    </a>
+    <div class="nav-links">
+      <a href="matches.html">חזרה למורים</a>
+      <a href="dashboard.html">האזור שלי</a>
+    </div>
   </nav>
 
   <main class="container">
-    <div id="loading" class="state">
-      <div class="state-icon">◎</div>
-      <h1>טוענים את הפרופיל</h1>
-      <p>רק רגע...</p>
+    <div class="loading" id="loading">
+      טוענים את פרופיל המורה...
     </div>
 
-    <div id="not-found" class="state hidden">
-      <div class="state-icon">!</div>
-      <h1>הפרופיל לא נמצא</h1>
-
-      <p>
-        ייתכן שהקישור אינו תקין או שהפרופיל עדיין לא פורסם.
-      </p>
-
-      <a class="button primary" href="matches.html">
-        חזרה לרשימת המורים
-      </a>
+    <div class="not-found hidden" id="not-found">
+      <h1>לא מצאנו את הפרופיל</h1>
+      <p>ייתכן שהפרופיל נמחק או שהקישור אינו תקין.</p>
+      <a href="matches.html">חזרה לרשימת המורים</a>
     </div>
 
-    <div id="profile-content" class="hidden">
-      <section class="profile">
-        <div class="cover"></div>
+    <div class="hidden" id="profile-content">
+      <section class="hero">
+        <div class="profile-head">
+          <div class="avatar" id="avatar">כ</div>
 
-        <div class="top">
-          <div class="identity">
-            <div class="avatar" id="avatar">כ</div>
-
-            <h1 class="name">
-              <span id="name"></span>
-              <span class="status" id="status"></span>
-            </h1>
-
+          <div>
+            <span class="status" id="status"></span>
+            <h1 id="name"></h1>
             <div class="headline" id="headline"></div>
-          </div>
-
-          <div class="actions">
-            <a class="button light" href="matches.html">
-              למורים נוספים
-            </a>
-
-            <a
-              class="button primary hidden"
-              id="edit-profile"
-              href="dashboard.html"
-            >
-              עריכת הפרופיל
-            </a>
-          </div>
-        </div>
-
-        <div class="details-line">
-          <div class="detail">
-            <b id="city">טרם צוין</b>
-            <span>עיר או אזור</span>
-          </div>
-
-          <div class="detail">
-            <b id="experience">טרם צוין</b>
-            <span>ניסיון בהוראה</span>
-          </div>
-
-          <div class="detail">
-            <b id="format">טרם צוין</b>
-            <span>אופן השיעור</span>
           </div>
         </div>
       </section>
 
-      <section class="layout">
-        <div>
+      <div class="layout">
+        <section>
           <article class="card">
             <h2>קצת עליי</h2>
-            <p id="bio"></p>
+            <p class="bio" id="bio"></p>
           </article>
 
           <article class="card">
-            <h2>מה נלמד יחד?</h2>
+            <h2>מקצועות לימוד</h2>
             <div class="tags" id="tags"></div>
           </article>
 
           <article class="card">
-            <h2>חשוב לדעת</h2>
+            <h2>פרטים נוספים</h2>
 
-            <p>
-              הפרטים בעמוד נכתבו על ידי המורה.
-              סימון אימות מופיע רק לאחר בדיקה אמיתית.
-              האתר אינו מציג דירוגים או ביקורות שלא נכתבו
-              לאחר שיעורים אמיתיים.
-            </p>
+            <div class="details">
+              <div class="detail">
+                <small>עיר או אזור</small>
+                <b id="city"></b>
+              </div>
+
+              <div class="detail">
+                <small>ניסיון בהוראה</small>
+                <b id="experience"></b>
+              </div>
+
+              <div class="detail">
+                <small>אופן השיעור</small>
+                <b id="format"></b>
+              </div>
+
+              <div class="detail">
+                <small>זמינות</small>
+                <b id="availability-detail"></b>
+              </div>
+            </div>
           </article>
-        </div>
+        </section>
 
         <aside class="card contact">
-          <h2>פרטי השיעור</h2>
+          <h2>רוצים ללמוד יחד?</h2>
 
           <div class="price" id="price"></div>
 
-          <p class="mini">
-            ניתן לקרוא על המורה ולבדוק אם סגנון הלמידה מתאים לך.
-          </p>
+          <button class="button" id="open-request" type="button">
+            שליחת בקשה למורה
+          </button>
 
-          <div class="availability">
-            <b>זמינות:</b><br>
-            <span id="availability"></span>
-          </div>
-
-          <a class="button primary" href="login.html">
-            כניסה לחשבון כדי ליצור קשר
+          <a class="button secondary hidden"
+             id="edit-profile"
+             href="dashboard.html">
+            עריכת הפרופיל שלי
           </a>
 
-          <p class="notice">
-            אפשרות לשליחת הודעות ולקביעת שיעורים תתווסף
-            בהמשך דרך מערכת מאובטחת.
-          </p>
+          <form class="request-form hidden" id="request-form">
+            <div>
+              <label for="request-subject">באיזה מקצוע?</label>
+              <select id="request-subject" required></select>
+            </div>
+
+            <div>
+              <label for="preferred-time">יום ושעה מועדפים</label>
+              <input id="preferred-time"
+                     required
+                     placeholder="למשל: יום שני בשעה 17:00">
+            </div>
+
+            <div>
+              <label for="request-text">הודעה למורה</label>
+              <textarea id="request-text"
+                        required
+                        placeholder="ספרו בקצרה במה תרצו עזרה"></textarea>
+            </div>
+
+            <button class="button" id="send-request" type="submit">
+              שליחת הבקשה
+            </button>
+
+            <div class="message" id="request-message"></div>
+          </form>
+
+          <div class="availability">
+            <b>זמינות המורה</b>
+            <span id="availability"></span>
+          </div>
         </aside>
-      </section>
+      </div>
     </div>
   </main>
 
@@ -521,154 +481,249 @@
       db,
       onAuthStateChanged,
       doc,
-      getDoc
+      getDoc,
+      collection,
+      addDoc,
+      serverTimestamp
     } from "./firebase.js";
 
-    const parameters =
-      new URLSearchParams(window.location.search);
+    import {
+      DEMO_TEACHERS,
+      normalizeList
+    } from "./catalog.js";
 
-    const teacherId = parameters.get("id");
+    const params = new URLSearchParams(window.location.search);
+    const teacherId = params.get("id");
 
     const loading = document.getElementById("loading");
     const notFound = document.getElementById("not-found");
-    const profileContent =
-      document.getElementById("profile-content");
+    const content = document.getElementById("profile-content");
+    const openRequest = document.getElementById("open-request");
+    const requestForm = document.getElementById("request-form");
+    const requestMessage = document.getElementById("request-message");
+    const sendRequest = document.getElementById("send-request");
 
-    let loadedTeacher = null;
+    let teacher = null;
+    let currentUser = null;
+    let studentProfile = null;
+
+    function setText(id,text,fallback="טרם צוין") {
+      document.getElementById(id).textContent=text||fallback;
+    }
+
+    function showMessage(text,type) {
+      requestMessage.textContent=text;
+      requestMessage.className="message show "+type;
+    }
 
     function showNotFound() {
       loading.classList.add("hidden");
-      profileContent.classList.add("hidden");
+      content.classList.add("hidden");
       notFound.classList.remove("hidden");
     }
 
-    function setText(id, text, fallback = "טרם צוין") {
-      document.getElementById(id).textContent =
-        text || fallback;
-    }
+    function showPhoto(photo,name) {
+      const avatar=document.getElementById("avatar");
+      avatar.innerHTML="";
 
-    function showPhoto(photo, name) {
-      const avatar = document.getElementById("avatar");
-
-      avatar.innerHTML = "";
-
-      if (photo && photo.startsWith("data:image/")) {
-        const image = document.createElement("img");
-        image.src = photo;
-        image.alt = "תמונת הפרופיל של " + name;
+      if(photo&&photo.startsWith("data:image/")) {
+        const image=document.createElement("img");
+        image.src=photo;
+        image.alt="תמונת הפרופיל של "+name;
         avatar.appendChild(image);
       } else {
-        avatar.textContent = name.charAt(0) || "כ";
+        avatar.textContent=(name||"כ").charAt(0);
       }
     }
 
     function showSubjects(subjects) {
-      const tags = document.getElementById("tags");
-      tags.innerHTML = "";
+      const tags=document.getElementById("tags");
+      const select=document.getElementById("request-subject");
+      const list=normalizeList(subjects);
 
-      const subjectList = String(subjects || "")
-        .split(",")
-        .map((subject) => subject.trim())
-        .filter(Boolean);
+      tags.innerHTML="";
+      select.innerHTML="";
 
-      if (!subjectList.length) {
-        subjectList.push("המקצועים טרם צוינו");
-      }
-
-      subjectList.forEach((subject) => {
-        const tag = document.createElement("span");
-        tag.className = "tag";
-        tag.textContent = subject;
+      (list.length?list:["המקצוע טרם צוין"]).forEach(subject=>{
+        const tag=document.createElement("span");
+        tag.className="tag";
+        tag.textContent=subject;
         tags.appendChild(tag);
+
+        const option=new Option(subject,subject);
+        select.add(option);
       });
     }
 
-    function renderTeacher(teacher) {
-      loadedTeacher = teacher;
+    function renderTeacher(data) {
+      teacher=data;
 
-      const name = teacher.name || "מורה בכיוון";
-      const subjects =
-        teacher.subjects || "המקצועים טרם צוינו";
-      const format =
-        teacher.format || "אופן השיעור טרם צוין";
+      const name=data.name||"מורה בכיוון";
+      const subjects=normalizeList(data.subjects);
+      const subjectText=subjects.length
+        ? subjects.join(", ")
+        : "המקצועים טרם צוינו";
 
-      setText("name", name);
-      setText("city", teacher.city);
-      setText("experience", teacher.experience);
-      setText("format", teacher.format);
-      setText(
-        "bio",
-        teacher.bio,
-        "המורה עדיין לא הוסיף/ה תיאור אישי."
-      );
-      setText(
-        "availability",
-        teacher.availability,
-        "הזמינות טרם צוינה"
-      );
+      setText("name",name);
+      setText("city",data.city);
+      setText("experience",data.experience);
+      setText("format",data.format);
+      setText("availability",data.availability,"הזמינות טרם צוינה");
+      setText("availability-detail",data.availability,"הזמינות טרם צוינה");
+      setText("bio",data.bio,"המורה עדיין לא הוסיף/ה תיאור אישי.");
 
-      document.getElementById("headline").textContent =
-        subjects + " · " + format;
+      document.getElementById("headline").textContent=
+        subjectText+" · "+(data.format||"אופן השיעור טרם צוין");
 
-      const status = document.getElementById("status");
+      const status=document.getElementById("status");
 
-      status.textContent = teacher.verified
-        ? "✓ מורה מאומת/ת"
-        : "ממתין/ה לאימות";
+      status.textContent=data.isDemo
+        ? "פרופיל הדגמה"
+        : data.verified
+          ? "✓ מורה מאומת/ת"
+          : "מורה רשום/ה";
 
-      status.classList.toggle(
-        "verified",
-        teacher.verified === true
-      );
+      status.classList.toggle("real",!data.isDemo);
 
-      document.getElementById("price").innerHTML =
-        teacher.price
-          ? "₪" +
-            Number(teacher.price).toLocaleString("he-IL") +
-            ' <small>לשעה</small>'
-          : '<small>המחיר טרם צוין</small>';
+      document.getElementById("price").innerHTML=
+        Number(data.price)
+          ? "₪"+Number(data.price).toLocaleString("he-IL")+
+            " <small>לשעה</small>"
+          : "<small>המחיר טרם צוין</small>";
 
-      showPhoto(teacher.photo || "", name);
-      showSubjects(subjects);
+      showPhoto(data.photo||"",name);
+      showSubjects(data.subjects);
 
-      document.title = name + " — כיוון";
+      if(data.isDemo) {
+        openRequest.textContent="זהו פרופיל הדגמה";
+        openRequest.disabled=true;
+      }
 
+      if(currentUser&&currentUser.uid===teacherId) {
+        openRequest.classList.add("hidden");
+        document.getElementById("edit-profile").classList.remove("hidden");
+      }
+
+      document.title=name+" — כיוון";
       loading.classList.add("hidden");
-      notFound.classList.add("hidden");
-      profileContent.classList.remove("hidden");
+      content.classList.remove("hidden");
     }
 
     async function loadTeacher() {
-      if (!teacherId) {
+      if(!teacherId) {
         showNotFound();
         return;
       }
 
-      try {
-        const teacherSnapshot = await getDoc(
-          doc(db, "teachers", teacherId)
-        );
+      const demo=DEMO_TEACHERS.find(item=>item.id===teacherId);
 
-        if (!teacherSnapshot.exists()) {
+      if(demo) {
+        renderTeacher(demo);
+        return;
+      }
+
+      try {
+        const snapshot=await getDoc(doc(db,"teachers",teacherId));
+
+        if(!snapshot.exists()) {
           showNotFound();
           return;
         }
 
         renderTeacher({
-          id: teacherSnapshot.id,
-          ...teacherSnapshot.data()
+          id:snapshot.id,
+          ...snapshot.data(),
+          isDemo:false
         });
-      } catch (error) {
+      } catch(error) {
         console.error(error);
         showNotFound();
       }
     }
 
-    onAuthStateChanged(auth, (user) => {
-      if (user && user.uid === teacherId) {
-        document
-          .getElementById("edit-profile")
-          .classList.remove("hidden");
+    openRequest.addEventListener("click",()=>{
+      if(!currentUser) {
+        window.location.href="login.html";
+        return;
+      }
+
+      if(!studentProfile) {
+        showMessage("לא הצלחנו לטעון את הפרופיל שלך.","error");
+        requestForm.classList.remove("hidden");
+        return;
+      }
+
+      if(studentProfile.role==="teacher") {
+        requestForm.classList.remove("hidden");
+        showMessage("רק תלמידים יכולים לשלוח בקשה למורה.","error");
+        return;
+      }
+
+      requestForm.classList.toggle("hidden");
+    });
+
+    requestForm.addEventListener("submit",async event=>{
+      event.preventDefault();
+
+      if(!currentUser||!teacher||teacher.isDemo) return;
+
+      sendRequest.disabled=true;
+      sendRequest.textContent="שולחים...";
+
+      try {
+        await addDoc(collection(db,"requests"),{
+          studentId:currentUser.uid,
+          studentName:
+            studentProfile?.name||
+            currentUser.displayName||
+            "תלמיד/ה",
+          teacherId,
+          teacherName:teacher.name||"מורה",
+          subject:document.getElementById("request-subject").value,
+          preferredTime:
+            document.getElementById("preferred-time").value.trim(),
+          message:
+            document.getElementById("request-text").value.trim(),
+          status:"pending",
+          createdAt:serverTimestamp(),
+          updatedAt:serverTimestamp()
+        });
+
+        showMessage(
+          "הבקשה נשלחה בהצלחה! המורה יראה אותה באזור האישי.",
+          "success"
+        );
+
+        document.getElementById("preferred-time").value="";
+        document.getElementById("request-text").value="";
+      } catch(error) {
+        console.error(error);
+
+        showMessage(
+          "לא הצלחנו לשלוח את הבקשה. נסו שוב.",
+          "error"
+        );
+      } finally {
+        sendRequest.disabled=false;
+        sendRequest.textContent="שליחת הבקשה";
+      }
+    });
+
+    onAuthStateChanged(auth,async user=>{
+      currentUser=user;
+
+      if(user) {
+        try {
+          const snapshot=await getDoc(doc(db,"users",user.uid));
+          studentProfile=snapshot.exists()?snapshot.data():null;
+        } catch(error) {
+          console.error(error);
+        }
+      }
+
+      if(teacher&&user&&user.uid===teacherId) {
+        openRequest.classList.add("hidden");
+        document.getElementById("edit-profile").classList.remove("hidden");
       }
     });
 

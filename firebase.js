@@ -1,4 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 import {
   getAuth,
@@ -15,10 +17,15 @@ import {
   doc,
   getDoc,
   setDoc,
+  addDoc,
   updateDoc,
   deleteDoc,
   collection,
   getDocs,
+  query,
+  where,
+  orderBy,
+  onSnapshot,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
@@ -39,18 +46,25 @@ const db = getFirestore(app);
 export {
   auth,
   db,
+
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
   onAuthStateChanged,
   updateProfile,
+
   doc,
   getDoc,
   setDoc,
+  addDoc,
   updateDoc,
   deleteDoc,
   collection,
   getDocs,
+  query,
+  where,
+  orderBy,
+  onSnapshot,
   serverTimestamp
 };
