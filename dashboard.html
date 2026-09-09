@@ -175,6 +175,10 @@
       margin:0 0 14px;
       color:var(--navy);
     }
+    .use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .use-choice{padding:14px;border:2px solid var(--line);border-radius:14px;background:#fff;cursor:pointer}
+    .use-choice:has(input:checked){border-color:var(--teal);background:#effdf7}
+    .use-choice input{width:auto;margin-left:7px}.use-choice b{color:var(--navy)}.use-choice small{display:block;margin-top:4px;color:var(--muted)}
 
     .two {
       display:grid;
@@ -366,6 +370,7 @@
       }
 
       .two { grid-template-columns:1fr; }
+      .use-grid { grid-template-columns:1fr; }
 
       .photo-row {
         align-items:flex-start;
@@ -426,22 +431,13 @@
           </p>
 
           <form class="form" id="edit-form">
-            <div class="two">
+            <div>
               <div>
                 <label for="name">שם מלא</label>
                 <input id="name" required>
               </div>
-
-              <div>
-                <label for="role">סוג חשבון</label>
-
-                <select id="role">
-                  <option value="student">תלמיד/ה או הורה</option>
-                  <option value="teacher">מורה/מדריך/ה</option>
-                  <option value="both">גם תלמיד/ה וגם מורה</option>
-                </select>
-              </div>
             </div>
+            <section class="profile-section"><h3>איך החשבון משמש אותך?</h3><p class="sub">אפשר לבחור כמה אפשרויות ולשנות אותן תמיד. הפרטים נשמרים גם אם מכבים אפשרות.</p><div class="use-grid"><label class="use-choice"><span><input id="use-self" type="checkbox"> <b>אני רוצה ללמוד</b></span><small>חיפוש מורה בשבילי</small></label><label class="use-choice"><span><input id="use-parent" type="checkbox"> <b>אני הורה</b></span><small>חיפוש מורה עבור ילד/ה</small></label><label class="use-choice"><span><input id="use-teacher" type="checkbox"> <b>אני רוצה ללמד</b></span><small>פרופיל מורה וקבלת בקשות</small></label></div></section>
 
             <div class="two">
               <div>
@@ -514,6 +510,7 @@
                 </div>
               </div>
             </section>
+            <section class="profile-section hidden" id="child-section"><h3>פרופיל הלמידה של הילד/ה</h3><p class="sub">אין צורך לכתוב את שם הילד/ה. המידע הזה נשאר פרטי.</p><div class="form"><div><label for="child-subjects">מקצועות שרוצים ללמוד</label><input id="child-subjects"></div><div class="two"><div><label for="child-level">רמה או כיתה</label><input id="child-level"></div><div><label for="child-learning-style">איך נוח לילד/ה ללמוד?</label><select id="child-learning-style"><option value="">בחירה</option><option>הסברים ותרגול</option><option>למידה חזותית</option><option>למידה בקצב מהיר</option><option>למידה רגועה ומסודרת</option></select></div></div><div><label for="child-goal">מטרת הלמידה</label><textarea id="child-goal"></textarea></div><div><label for="child-availability">ימים ושעות נוחים</label><input id="child-availability"></div></div></section>
 
             <section class="profile-section hidden" id="teacher-section">
               <h3>פרופיל ההוראה שלי</h3>
@@ -621,7 +618,6 @@
       getDoc,
       setDoc,
       updateDoc,
-      deleteDoc,
       collection,
       getDocs,
       query,
@@ -633,8 +629,8 @@
     const profilePane = document.getElementById("profile-pane");
     const requestsPane = document.getElementById("requests-pane");
     const editForm = document.getElementById("edit-form");
-    const roleField = document.getElementById("role");
     const studentSection = document.getElementById("student-section");
+    const childSection = document.getElementById("child-section");
     const teacherSection = document.getElementById("teacher-section");
     const saveButton = document.getElementById("save-button");
     const profileMessage = document.getElementById("profile-message");
@@ -645,6 +641,7 @@
     let currentProfile = {};
     let photoData = "";
     let requestMode = "outgoing";
+    const useFields={selfLearner:document.getElementById("use-self"),parent:document.getElementById("use-parent"),teacher:document.getElementById("use-teacher")};
 
     function value(id) {
       return document.getElementById(id).value.trim();
@@ -654,18 +651,8 @@
       document.getElementById(id).value = newValue || "";
     }
 
-    function hasStudentRole(role = roleField.value) {
-      return role === "student" || role === "both";
-    }
-
-    function hasTeacherRole(role = roleField.value) {
-      return role === "teacher" || role === "both";
-    }
-
-    function rolesFor(role) {
-      if(role === "both") return ["student","teacher"];
-      return [role];
-    }
+    function selectedUses(){return Object.fromEntries(Object.entries(useFields).map(([key,field])=>[key,field.checked]))}
+    function compatibilityRole(uses){return uses.teacher&&(uses.selfLearner||uses.parent)?"both":uses.teacher?"teacher":"student"}
 
     function safe(value) {
       return String(value ?? "").replace(
@@ -702,10 +689,10 @@
     }
 
     function updateRoleSections() {
-      const student = hasStudentRole();
-      const teacher = hasTeacherRole();
+      const uses=selectedUses();const student=uses.selfLearner;const parent=uses.parent;const teacher=uses.teacher;
 
       studentSection.classList.toggle("hidden",!student);
+      childSection.classList.toggle("hidden",!parent);
       teacherSection.classList.toggle("hidden",!teacher);
       incomingTab.classList.toggle("hidden",!teacher);
 
@@ -714,15 +701,11 @@
       }
 
       document.getElementById("banner-text").textContent =
-        roleField.value === "both"
-          ? "כאן מנהלים גם את הלמידה וגם את ההוראה."
-          : teacher
-            ? "כאן מנהלים את פרופיל המורה והבקשות."
-            : "כאן מנהלים את פרופיל הלמידה והבקשות.";
+        teacher&&(student||parent)?"כאן מנהלים את הלמידה, ההוראה והבקשות במקום אחד.":teacher?"כאן מנהלים את פרופיל המורה והבקשות.":parent?"כאן מנהלים את החיפוש עבור הילד/ה והבקשות.":"כאן מנהלים את פרופיל הלמידה והבקשות.";
     }
 
     function refreshSubjectPickers() {
-      ["student-subjects","teacher-subjects"].forEach(id => {
+      ["student-subjects","child-subjects","teacher-subjects"].forEach(id => {
         document.getElementById(id).dispatchEvent(
           new Event("subject-picker-refresh")
         );
@@ -738,9 +721,8 @@
       setValue("phone",profile.phone);
       setValue("city",profile.city);
 
-      roleField.value = profile.role || "student";
-
-      const studentProfile = profile.studentProfile || profile;
+      const legacyStudent=profile.studentProfile||profile;const uses=profile.accountUses||{selfLearner:profile.role!=="teacher",parent:false,teacher:profile.role==="teacher"||profile.role==="both"};Object.entries(useFields).forEach(([key,field])=>field.checked=Boolean(uses[key]));
+      const studentProfile=profile.selfLearningProfile||legacyStudent;const childProfile=profile.childLearningProfile||{};
       const teacherProfile = profile.teacherProfile || profile;
 
       setValue("student-subjects",studentProfile.subjects);
@@ -748,6 +730,7 @@
       setValue("learning-style",studentProfile.learningStyle);
       setValue("student-goal",studentProfile.goal);
       setValue("student-availability",studentProfile.availability);
+      setValue("child-subjects",childProfile.subjects);setValue("child-level",childProfile.level);setValue("child-learning-style",childProfile.learningStyle);setValue("child-goal",childProfile.goal);setValue("child-availability",childProfile.availability);
 
       setValue("teacher-subjects",teacherProfile.subjects);
       setValue("price",teacherProfile.price);
@@ -802,7 +785,7 @@
       });
     });
 
-    roleField.addEventListener("change",updateRoleSections);
+    Object.values(useFields).forEach(field=>field.addEventListener("change",updateRoleSections));
 
     document.getElementById("logout-button")
       .addEventListener("click",async () => {
@@ -864,9 +847,8 @@
     editForm.addEventListener("submit",async event => {
       event.preventDefault();
 
-      const role = roleField.value;
-      const student = hasStudentRole(role);
-      const teacher = hasTeacherRole(role);
+      const accountUses=selectedUses();const student=accountUses.selfLearner;const parent=accountUses.parent;const teacher=accountUses.teacher;
+      if(!student&&!parent&&!teacher){showMessage("צריך לבחור לפחות שימוש אחד לחשבון.","error");return}
 
       if(student && !value("student-subjects")) {
         showMessage(
@@ -883,12 +865,13 @@
         );
         return;
       }
+      if(parent&&!value("child-subjects")){showMessage("צריך לבחור לפחות מקצוע אחד עבור הילד/ה.","error");return}
 
       saveButton.disabled = true;
       saveButton.textContent = "שומרים...";
 
       try {
-        const studentProfile = student
+        const selfLearningProfile = student
           ? {
               subjects:value("student-subjects"),
               level:value("student-level"),
@@ -897,7 +880,8 @@
               goal:value("student-goal"),
               availability:value("student-availability")
             }
-          : null;
+          : (currentProfile.selfLearningProfile||currentProfile.studentProfile||null);
+        const childLearningProfile=parent?{subjects:value("child-subjects"),level:value("child-level"),learningStyle:document.getElementById("child-learning-style").value,goal:value("child-goal"),availability:value("child-availability")}:(currentProfile.childLearningProfile||null);
 
         const teacherProfile = teacher
           ? {
@@ -908,7 +892,8 @@
               bio:value("bio"),
               availability:value("teacher-availability")
             }
-          : null;
+          : (currentProfile.teacherProfile||null);
+        const role=compatibilityRole(accountUses);
 
         const profile = {
           uid:currentUser.uid,
@@ -918,8 +903,7 @@
           city:value("city"),
           photo:photoData,
           role,
-          roles:rolesFor(role),
-          studentProfile,
+          roles:[...(student||parent?["student"]:[]),...(teacher?["teacher"]:[])],accountUses,selfLearningProfile,childLearningProfile,studentProfile:selfLearningProfile,
           teacherProfile,
           updatedAt:serverTimestamp()
         };
@@ -949,13 +933,14 @@
               bio:teacherProfile.bio,
               availability:teacherProfile.availability,
               acceptingStudents:true,
+              active:true,
               verified:false,
               updatedAt:serverTimestamp()
             },
             {merge:true}
           );
-        } else {
-          await deleteDoc(doc(db,"teachers",currentUser.uid));
+        } else if(currentProfile.teacherProfile) {
+          await setDoc(doc(db,"teachers",currentUser.uid),{active:false,acceptingStudents:false,updatedAt:serverTimestamp()},{merge:true});
         }
 
         currentProfile = profile;
@@ -1007,7 +992,16 @@
               </button>
             </div>
           `
-          : "";
+          : request.status === "accepted"
+            ? `
+              <div class="request-actions">
+                <a class="button"
+                   href="chat.html?id=${encodeURIComponent(request.id)}">
+                  פתיחת הצ׳אט
+                </a>
+              </div>
+            `
+            : "";
 
       return `
         <article class="request">

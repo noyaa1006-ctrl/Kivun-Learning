@@ -108,54 +108,92 @@ style.textContent = `
 
 document.head.appendChild(style);
 
-function enhanceSubjectInput(inputId) {
-  const originalInput = document.getElementById(inputId);
+function enhanceSubjectInput(
+  inputId,
+  placeholder = "חיפוש מקצוע..."
+) {
+  const originalInput =
+    document.getElementById(inputId);
 
-  if (!originalInput || originalInput.dataset.pickerReady === "true") {
+  if (
+    !originalInput ||
+    originalInput.dataset.pickerReady === "true"
+  ) {
     return null;
   }
 
   originalInput.dataset.pickerReady = "true";
   originalInput.type = "hidden";
 
-  const pickerRoot = document.createElement("div");
+  const pickerRoot =
+    document.createElement("div");
+
   pickerRoot.className = "subject-picker";
-  originalInput.insertAdjacentElement("afterend", pickerRoot);
+
+  originalInput.insertAdjacentElement(
+    "afterend",
+    pickerRoot
+  );
 
   const picker = createTagPicker({
     root: pickerRoot,
     options: SUBJECTS,
     selected: normalizeList(originalInput.value),
-    placeholder: "חיפוש מקצוע...",
+    placeholder,
     maximum: 12,
 
     onChange(selectedSubjects) {
-      originalInput.value = selectedSubjects.join(", ");
+      originalInput.value =
+        selectedSubjects.join(", ");
 
       originalInput.dispatchEvent(
-        new Event("input", { bubbles: true })
+        new Event("input", {
+          bubbles: true
+        })
       );
 
       originalInput.dispatchEvent(
-        new Event("change", { bubbles: true })
+        new Event("change", {
+          bubbles: true
+        })
       );
     }
   });
 
-  originalInput.addEventListener("subject-picker-refresh", () => {
-    picker.setSelected(normalizeList(originalInput.value));
-  });
+  originalInput.addEventListener(
+    "subject-picker-refresh",
+    () => {
+      picker.setSelected(
+        normalizeList(originalInput.value)
+      );
+    }
+  );
 
   return picker;
 }
 
 function startSubjectPickers() {
-  enhanceSubjectInput("student-subjects");
-  enhanceSubjectInput("teacher-subjects");
+  enhanceSubjectInput(
+    "student-subjects",
+    "חיפוש מקצוע ללמידה..."
+  );
+
+  enhanceSubjectInput(
+    "child-subjects",
+    "חיפוש מקצוע עבור הילד/ה..."
+  );
+
+  enhanceSubjectInput(
+    "teacher-subjects",
+    "חיפוש מקצוע להוראה..."
+  );
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", startSubjectPickers);
+  document.addEventListener(
+    "DOMContentLoaded",
+    startSubjectPickers
+  );
 } else {
   startSubjectPickers();
 }
