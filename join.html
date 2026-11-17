@@ -2,384 +2,503 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>יצירת פרופיל — כיוון</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121a37">
+  <title>יצירת חשבון — כיוון</title>
 
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap");
 
     :root {
-      --navy:#121a37;
-      --ink:#1d2746;
-      --teal:#0b9d78;
-      --coral:#ff6e61;
-      --cloud:#f6f8fe;
-      --line:#e4e9f4;
-      --muted:#69738d;
-      --shadow:0 22px 52px rgba(20,34,75,.12);
+      --navy: #121a37;
+      --ink: #1d2746;
+      --teal: #08785c;
+      --coral: #ff6e61;
+      --cloud: #f6f8fe;
+      --line: #e4e9f4;
+      --muted: #69738d;
+      --shadow: 0 22px 52px rgba(20, 34, 75, .12);
     }
 
-    * { box-sizing:border-box; }
-    .hidden { display:none !important; }
+    * {
+      box-sizing: border-box;
+    }
+
+    .hidden {
+      display: none !important;
+    }
 
     body {
-      margin:0;
-      min-height:100vh;
-      color:var(--ink);
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
       background:
-        radial-gradient(circle at 91% 9%,#ddfff1 0,transparent 28%),
-        radial-gradient(circle at 5% 92%,#fff1d4 0,transparent 30%),
+        radial-gradient(circle at 91% 9%, #ddfff1, transparent 28%),
+        radial-gradient(circle at 5% 92%, #fff1d4, transparent 30%),
         var(--cloud);
-      font-family:Heebo,Arial,sans-serif;
+      font-family: Heebo, Arial, sans-serif;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
     }
 
     .container {
-      width:min(1120px,calc(100% - 34px));
-      margin:auto;
+      width: min(1120px, calc(100% - 34px));
+      margin-inline: auto;
     }
 
-    nav {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      min-height:80px;
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 80px;
     }
 
     .brand {
-      display:flex;
-      align-items:center;
-      gap:8px;
-      color:var(--navy);
-      font-size:29px;
-      font-weight:900;
-      text-decoration:none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy);
+      font-size: 29px;
+      font-weight: 900;
+      text-decoration: none;
     }
 
     .mark {
-      display:grid;
-      place-items:center;
-      width:29px;
-      height:29px;
-      border-radius:10px 10px 10px 2px;
-      color:#fff;
-      background:var(--coral);
-      transform:rotate(-5deg);
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 10px 10px 10px 2px;
+      color: #fff;
+      background: var(--coral);
+      transform: rotate(-5deg);
     }
 
     .login {
-      color:var(--muted);
-      font-size:14px;
-      font-weight:700;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
     }
 
     .login a {
-      color:var(--teal);
-      font-weight:900;
-      text-decoration:none;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: var(--teal);
+      font-weight: 900;
+      text-decoration: none;
     }
 
     .page {
-      display:grid;
-      grid-template-columns:.8fr 1.2fr;
-      gap:48px;
-      align-items:start;
-      padding:32px 0 70px;
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+      gap: 48px;
+      align-items: start;
+      padding: 32px 0 70px;
     }
 
     .intro {
-      padding-top:65px;
+      padding-top: 55px;
+    }
+
+    .intro-label {
+      color: var(--teal);
+      font-weight: 800;
     }
 
     .intro h1 {
-      margin:10px 0 13px;
-      color:var(--navy);
-      font-size:52px;
-      line-height:1.04;
+      margin: 12px 0 16px;
+      color: var(--navy);
+      font-size: 52px;
+      line-height: 1.12;
+      letter-spacing: -1.5px;
     }
 
     .intro h1 em {
-      color:var(--coral);
-      font-style:normal;
+      color: #d94c42;
+      font-style: normal;
     }
 
     .intro p {
-      max-width:430px;
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.7;
+      max-width: 430px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
     }
 
     .benefits {
-      padding:0;
-      list-style:none;
+      padding: 0;
+      list-style: none;
     }
 
     .benefits li {
-      margin:11px 0;
-      color:#54607a;
-      font-weight:700;
+      margin: 12px 0;
+      color: #54607a;
+      font-size: 14px;
+      line-height: 1.7;
     }
 
     .benefits li::before {
-      content:"✓";
-      display:inline-grid;
-      place-items:center;
-      width:24px;
-      height:24px;
-      margin-left:8px;
-      border-radius:50%;
-      color:#078361;
-      background:#dcf8ed;
+      content: "✓";
+      display: inline-grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      margin-left: 8px;
+      border-radius: 50%;
+      color: var(--teal);
+      background: #dcf8ed;
     }
 
     .card {
-      padding:27px;
-      border-radius:27px;
-      background:#fff;
-      box-shadow:var(--shadow);
+      min-width: 0;
+      padding: 27px;
+      border-radius: 27px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    #step-label {
+      margin: 0 0 12px;
     }
 
     .progress {
-      display:flex;
-      gap:7px;
-      margin-bottom:24px;
+      display: flex;
+      gap: 7px;
+      margin-bottom: 25px;
     }
 
     .progress i {
-      height:5px;
-      flex:1;
-      border-radius:99px;
-      background:#e5eaf4;
+      height: 5px;
+      flex: 1;
+      border-radius: 99px;
+      background: #e5eaf4;
     }
 
-    .progress i.active { background:var(--teal); }
+    .progress i.active {
+      background: var(--teal);
+    }
 
     h2 {
-      margin:0 0 4px;
-      color:var(--navy);
-      font-size:26px;
+      margin: 0 0 7px;
+      color: var(--navy);
+      font-size: 26px;
     }
 
     .sub {
-      margin:0 0 18px;
-      color:var(--muted);
-      font-size:14px;
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
     }
 
     .uses {
-      display:grid;
-      gap:10px;
+      display: grid;
+      gap: 11px;
     }
 
     .use {
-      display:flex;
-      align-items:center;
-      gap:13px;
-      padding:15px;
-      border:2px solid var(--line);
-      border-radius:15px;
-      color:var(--ink);
-      background:#fff;
-      font:inherit;
-      text-align:right;
-      cursor:pointer;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      width: 100%;
+      padding: 15px;
+      border: 2px solid var(--line);
+      border-radius: 15px;
+      color: var(--ink);
+      background: #fff;
+      text-align: right;
+      cursor: pointer;
     }
 
-    .use:hover,.use.selected {
-      border-color:var(--teal);
-      background:#effdf7;
+    .use:hover,
+    .use.selected {
+      border-color: var(--teal);
+      background: #effdf7;
     }
 
     .use-icon {
-      display:grid;
-      place-items:center;
-      width:42px;
-      height:42px;
-      flex:0 0 42px;
-      border-radius:12px;
-      color:#08785c;
-      background:#dff7ed;
-      font-size:20px;
-      font-weight:900;
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      border-radius: 12px;
+      color: var(--teal);
+      background: #dff7ed;
+      font-size: 20px;
     }
 
     .use strong {
-      display:block;
-      font-size:16px;
+      display: block;
+      font-size: 16px;
     }
 
     .use small {
-      display:block;
-      margin-top:2px;
-      color:var(--muted);
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      line-height: 1.6;
     }
 
     .selected-mark {
-      margin-right:auto;
-      color:var(--teal);
-      font-size:20px;
-      font-weight:900;
+      margin-inline-start: auto;
+      color: var(--teal);
+      font-size: 20px;
+      font-weight: 900;
     }
 
     .fields {
-      display:grid;
-      gap:13px;
+      display: grid;
+      gap: 15px;
     }
 
     .two {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:11px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
     }
 
     label {
-      display:block;
-      margin-bottom:6px;
-      color:#4e5b76;
-      font-size:13px;
-      font-weight:800;
+      display: block;
+      margin-bottom: 7px;
+      color: #4e5b76;
+      font-size: 14px;
+      font-weight: 800;
     }
 
-    input,select,textarea {
-      width:100%;
-      padding:12px;
-      border:1px solid var(--line);
-      border-radius:11px;
-      outline:0;
-      color:var(--ink);
-      background:#fff;
-      font:inherit;
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      color: var(--ink);
+      background: #fff;
+      font-size: 16px;
     }
 
-    input:focus,select:focus,textarea:focus {
-      border-color:var(--teal);
-      box-shadow:0 0 0 3px #dff7ed;
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--teal);
+      outline: none;
+      box-shadow: 0 0 0 3px #dff7ed;
+    }
+
+    #email,
+    #phone {
+      direction: ltr;
+      text-align: left;
     }
 
     textarea {
-      min-height:86px;
-      resize:vertical;
+      min-height: 90px;
+      resize: vertical;
     }
 
     .profile-section {
-      padding:17px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:#fbfcff;
+      min-width: 0;
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fbfcff;
     }
 
     .profile-section h3 {
-      margin:0 0 4px;
-      color:var(--navy);
-      font-size:18px;
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 19px;
     }
 
     .section-note {
-      margin:0 0 14px;
-      color:var(--muted);
-      font-size:12px;
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
     }
 
     .photo-row {
-      display:flex;
-      align-items:center;
-      gap:14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .photo-row input {
+      min-width: 0;
     }
 
     .photo-preview {
-      display:grid;
-      place-items:center;
-      width:72px;
-      height:72px;
-      flex:0 0 72px;
-      overflow:hidden;
-      border-radius:18px;
-      color:#fff;
-      background:linear-gradient(135deg,#ff9d6e,#c64f62);
-      font-size:26px;
-      font-weight:900;
+      display: grid;
+      place-items: center;
+      width: 72px;
+      height: 72px;
+      flex: 0 0 72px;
+      overflow: hidden;
+      border-radius: 18px;
+      color: #fff;
+      background: linear-gradient(135deg, #ff9d6e, #c64f62);
+      font-size: 26px;
+      font-weight: 900;
     }
 
     .photo-preview img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .notice {
-      margin:6px 0 0;
-      color:var(--muted);
-      font-size:12px;
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
     }
 
     .buttons {
-      display:flex;
-      gap:10px;
-      margin-top:21px;
+      display: flex;
+      gap: 10px;
+      margin-top: 22px;
     }
 
     .button {
-      padding:13px 17px;
-      border:0;
-      border-radius:12px;
-      font:inherit;
-      font-weight:900;
-      cursor:pointer;
+      min-height: 48px;
+      padding: 13px 17px;
+      border: 0;
+      border-radius: 12px;
+      font-weight: 900;
+      cursor: pointer;
     }
 
     .primary {
-      flex:1;
-      color:#fff;
-      background:var(--navy);
+      flex: 1;
+      color: #fff;
+      background: var(--navy);
     }
 
     .secondary {
-      color:#5e6a84;
-      background:#f1f4fa;
+      color: #53607a;
+      background: #f1f4fa;
     }
 
-    .button:disabled {
-      opacity:.6;
-      cursor:wait;
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
     }
 
     .message {
-      display:none;
-      margin-top:14px;
-      padding:12px;
-      border-radius:11px;
-      font-size:13px;
-      font-weight:800;
+      display: none;
+      margin-top: 14px;
+      padding: 13px;
+      border-radius: 11px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.7;
     }
 
-    .message.show { display:block; }
-    .message.error { color:#9e2f2a; background:#fff0ef; }
-    .message.success { color:#08785c; background:#e4faef; }
-
-    @media(max-width:800px) {
-      .page { grid-template-columns:1fr; }
-      .intro { padding-top:10px; text-align:center; }
-      .intro h1 { font-size:42px; }
-      .intro p { margin-inline:auto; }
+    .message.show {
+      display: block;
     }
 
-    @media(max-width:560px) {
-      .two { grid-template-columns:1fr; }
-      .card { padding:20px; }
-      .intro h1 { font-size:37px; }
+    .message.error {
+      color: #9e2f2a;
+      background: #fff0ef;
+    }
+
+    .message.success {
+      color: var(--teal);
+      background: #e4faef;
+    }
+
+    .message.info {
+      color: #405177;
+      background: #eef3ff;
+    }
+
+    @media (max-width: 800px) {
+      .page {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding-top: 15px;
+      }
+
+      .intro {
+        padding-top: 0;
+        text-align: center;
+      }
+
+      .intro h1 {
+        font-size: 42px;
+      }
+
+      .intro p {
+        margin-inline: auto;
+        font-size: 16px;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 650px;
+        margin-inline: auto;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav {
+        min-height: 70px;
+      }
+
+      .brand {
+        font-size: 25px;
+      }
+
+      .login {
+        font-size: 12px;
+      }
+
+      .two {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .intro h1 {
+        font-size: 37px;
+      }
 
       .photo-row {
-        align-items:flex-start;
-        flex-direction:column;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .use {
+        gap: 10px;
+        padding: 12px;
+      }
+
+      .use strong {
+        font-size: 14px;
       }
     }
   </style>
+
+  <link rel="stylesheet" href="navigation.css">
+  <script defer src="navigation.js"></script>
 </head>
 
 <body>
-  <nav class="container">
-    <a class="brand" href="index.html">
-      <span class="mark">↗</span>
+  <nav class="container nav" aria-label="ניווט ראשי">
+    <a class="brand" href="index.html" aria-label="כיוון — עמוד הבית">
+      <span class="mark" aria-hidden="true">↗</span>
       כיוון
     </a>
 
@@ -391,7 +510,7 @@
 
   <main class="container page">
     <section class="intro">
-      <b style="color:var(--teal)">הפרופיל שלך מתחיל כאן</b>
+      <div class="intro-label">הפרופיל שלך מתחיל כאן</div>
 
       <h1>
         בואו נבנה את<br>
@@ -399,128 +518,154 @@
       </h1>
 
       <p>
-        חשבון אחד יכול לשמש ללמידה עצמית, לחיפוש מורה
-        עבור ילד או ילדה, להוראה — או לכל אלה יחד.
+        חשבון אחד ללמידה עצמית, לחיפוש מורה עבור ילד או ילדה,
+        להוראה — או לכל אלה יחד.
       </p>
 
       <ul class="benefits">
-        <li>אפשר לשנות את הבחירה בכל זמן</li>
-        <li>אותו אימייל לכל השימושים</li>
-        <li>הפרטים של הילד או הילדה נשארים פרטיים</li>
+        <li>בוחרים את סוג השימוש שמתאים לכם</li>
+        <li>ממלאים פרטים בשלושה שלבים ברורים</li>
+        <li>אפשר לעדכן את הפרופילים בהמשך</li>
       </ul>
     </section>
 
-    <section class="card">
-      <div class="progress">
+    <section class="card" aria-label="יצירת חשבון">
+      <p id="step-label" role="status" aria-live="polite">
+        שלב 1 מתוך 3 — בחירת שימוש
+      </p>
+
+      <div class="progress" aria-hidden="true">
         <i class="active"></i>
         <i></i>
         <i></i>
       </div>
 
-      <div id="uses-step">
-        <h2>איך תרצו להשתמש בכיוון?</h2>
+      <div
+        class="message"
+        id="service-message"
+        role="status"
+        aria-live="polite"
+      ></div>
 
-        <p class="sub">
-          אפשר לבחור יותר מאפשרות אחת.
-        </p>
+      <div id="uses-step">
+        <h2 tabindex="-1">איך תרצו להשתמש בכיוון?</h2>
+        <p class="sub">אפשר לבחור יותר מאפשרות אחת.</p>
 
         <div class="uses">
-          <button class="use selected"
-                  data-use="selfLearner"
-                  type="button">
-            <span class="use-icon">◎</span>
-
+          <button
+            class="use selected"
+            data-use="selfLearner"
+            type="button"
+            aria-pressed="true"
+          >
+            <span class="use-icon" aria-hidden="true">◎</span>
             <span>
               <strong>אני מחפש/ת מורה עבור עצמי</strong>
               <small>לימודים, מבחנים, בגרויות או העשרה</small>
             </span>
-
-            <span class="selected-mark">✓</span>
+            <span class="selected-mark" aria-hidden="true">✓</span>
           </button>
 
-          <button class="use"
-                  data-use="parent"
-                  type="button">
-            <span class="use-icon">♡</span>
-
+          <button
+            class="use"
+            data-use="parent"
+            type="button"
+            aria-pressed="false"
+          >
+            <span class="use-icon" aria-hidden="true">♡</span>
             <span>
               <strong>אני הורה ומחפש/ת מורה לילד/ה</strong>
-              <small>פרופיל למידה נפרד ופרטי לילד או לילדה</small>
+              <small>פרופיל למידה נפרד עבור הילד או הילדה</small>
             </span>
-
-            <span class="selected-mark"></span>
+            <span class="selected-mark" aria-hidden="true"></span>
           </button>
 
-          <button class="use"
-                  data-use="teacher"
-                  type="button">
-            <span class="use-icon">↗</span>
-
+          <button
+            class="use"
+            data-use="teacher"
+            type="button"
+            aria-pressed="false"
+          >
+            <span class="use-icon" aria-hidden="true">↗</span>
             <span>
               <strong>אני מלמד/ת ורוצה לקבל תלמידים</strong>
-              <small>פרופיל ציבורי שיופיע ברשימת המורים</small>
+              <small>פרופיל מורה שיופיע ברשימת המורים</small>
             </span>
-
-            <span class="selected-mark"></span>
+            <span class="selected-mark" aria-hidden="true"></span>
           </button>
         </div>
 
-        <div class="message" id="uses-message"></div>
+        <div
+          class="message"
+          id="uses-message"
+          role="status"
+          aria-live="polite"
+        ></div>
 
         <div class="buttons">
-          <button class="button primary"
-                  id="continue"
-                  type="button">
-            ממשיכים לפרטים ←
+          <button
+            class="button primary"
+            id="continue"
+            type="button"
+            disabled
+          >
+            טוענים את ההרשמה…
           </button>
         </div>
       </div>
 
       <form id="account-step" class="hidden">
-        <h2>פותחים חשבון</h2>
-
+        <h2 tabindex="-1">פותחים חשבון</h2>
         <p class="sub">
-          האימייל, הטלפון והמידע המשפחתי נשמרים באופן פרטי.
+          שם, אימייל וסיסמה הם שדות חובה. את שאר הפרטים אפשר להוסיף בהמשך.
         </p>
 
         <div class="fields">
           <div>
-            <label for="name">שם מלא</label>
-            <input id="name" required autocomplete="name">
+            <label for="name">שם מלא *</label>
+            <input id="name" required maxlength="100" autocomplete="name">
           </div>
 
           <div>
-            <label for="email">אימייל</label>
-            <input id="email"
-                   type="email"
-                   required
-                   autocomplete="email">
+            <label for="email">אימייל *</label>
+            <input
+              id="email"
+              type="email"
+              required
+              autocomplete="email"
+              inputmode="email"
+              autocapitalize="none"
+              spellcheck="false"
+              placeholder="name@example.com"
+            >
           </div>
 
           <div>
-            <label for="password">סיסמה</label>
-            <input id="password"
-                   type="password"
-                   required
-                   minlength="6"
-                   autocomplete="new-password"
-                   placeholder="לפחות 6 תווים">
+            <label for="password">סיסמה *</label>
+            <input
+              id="password"
+              type="password"
+              required
+              minlength="6"
+              autocomplete="new-password"
+              placeholder="לפחות 6 תווים"
+            >
           </div>
 
           <div class="two">
             <div>
-              <label for="phone">טלפון</label>
+              <label for="phone">טלפון — לא חובה</label>
               <input id="phone" type="tel" autocomplete="tel">
             </div>
 
             <div>
-              <label for="city">עיר או אזור</label>
-              <input id="city">
+              <label for="city">עיר או אזור — לא חובה</label>
+              <input id="city" autocomplete="address-level2" maxlength="100">
             </div>
           </div>
 
           <div>
-            <label for="photo">תמונת פרופיל</label>
+            <label for="photo">תמונת פרופיל — לא חובה</label>
 
             <div class="photo-row">
               <div class="photo-preview" id="photo-preview">כ</div>
@@ -528,60 +673,58 @@
             </div>
 
             <p class="notice">
-              בטלפון אפשר לבחור תמונה מהגלריה או לצלם חדשה.
+              אפשר לבחור תמונה עד 8MB. למורים, התמונה תוצג בפרופיל המורה.
             </p>
+
+            <div
+              class="message"
+              id="photo-message"
+              role="status"
+              aria-live="polite"
+            ></div>
           </div>
         </div>
 
         <div class="buttons">
-          <button class="button secondary"
-                  id="back-uses"
-                  type="button">
+          <button class="button secondary" id="back-uses" type="button">
             חזרה
           </button>
 
-          <button class="button primary" type="submit">
-            המשך לפרופילים ←
+          <button class="button primary" id="to-profiles" type="submit">
+            ממשיכים לפרופילים ←
           </button>
         </div>
       </form>
 
       <form id="profiles-step" class="hidden">
-        <h2>בונים את הפרופילים</h2>
+        <h2 tabindex="-1">בונים את הפרופילים</h2>
 
         <p class="sub">
-          יוצגו רק החלקים המתאימים לבחירות שלכם.
+          ממלאים את החלקים שמתאימים לבחירות שלכם.
+          בכל פרופיל פעיל צריך לבחור לפחות מקצוע אחד.
         </p>
 
         <div class="fields">
-          <section class="profile-section"
-                   id="self-section">
+          <section class="profile-section" id="self-section">
             <h3>הלמידה שלי</h3>
-
             <p class="section-note">
-              הפרטים משמשים להתאמת מורים עבורך.
+              הפרטים עוזרים להתאים את החיפוש לצרכים שלך.
             </p>
 
             <div class="fields">
               <div>
-                <label for="student-subjects">
-                  אילו מקצועות רוצים ללמוד?
-                </label>
+                <label for="student-subjects">אילו מקצועות רוצים ללמוד? *</label>
                 <input id="student-subjects">
               </div>
 
               <div class="two">
                 <div>
                   <label for="student-level">רמה או כיתה</label>
-                  <input id="student-level"
-                         placeholder="למשל: כיתה י׳, 5 יח״ל">
+                  <input id="student-level" placeholder="למשל: כיתה י׳, 5 יח״ל">
                 </div>
 
                 <div>
-                  <label for="learning-style">
-                    איך נוח לך ללמוד?
-                  </label>
-
+                  <label for="learning-style">איך נוח לך ללמוד?</label>
                   <select id="learning-style">
                     <option value="">בחירה</option>
                     <option>הסברים ותרגול</option>
@@ -594,46 +737,34 @@
 
               <div>
                 <label for="student-goal">מה המטרה שלך?</label>
-                <textarea id="student-goal"></textarea>
+                <textarea id="student-goal" maxlength="1000"></textarea>
               </div>
 
               <div>
-                <label for="student-availability">
-                  ימים ושעות נוחים
-                </label>
-                <input id="student-availability">
+                <label for="student-availability">ימים ושעות נוחים</label>
+                <input id="student-availability" maxlength="200">
               </div>
             </div>
           </section>
 
-          <section class="profile-section hidden"
-                   id="child-section">
+          <section class="profile-section hidden" id="child-section">
             <h3>חיפוש מורה עבור ילד/ה</h3>
-
-            <p class="section-note">
-              אין צורך לכתוב את שם הילד או הילדה.
-            </p>
+            <p class="section-note">אין צורך לכתוב את שם הילד או הילדה.</p>
 
             <div class="fields">
               <div>
-                <label for="child-subjects">
-                  אילו מקצועות הילד/ה רוצה ללמוד?
-                </label>
+                <label for="child-subjects">אילו מקצועות רוצים ללמוד? *</label>
                 <input id="child-subjects">
               </div>
 
               <div class="two">
                 <div>
                   <label for="child-level">כיתה או רמה</label>
-                  <input id="child-level"
-                         placeholder="למשל: כיתה ז׳">
+                  <input id="child-level" placeholder="למשל: כיתה ז׳">
                 </div>
 
                 <div>
-                  <label for="child-learning-style">
-                    איך נוח לילד/ה ללמוד?
-                  </label>
-
+                  <label for="child-learning-style">איך נוח לילד/ה ללמוד?</label>
                   <select id="child-learning-style">
                     <option value="">בחירה</option>
                     <option>הסברים ותרגול</option>
@@ -645,53 +776,44 @@
               </div>
 
               <div>
-                <label for="child-goal">
-                  מה מטרת הלמידה?
-                </label>
-                <textarea id="child-goal"></textarea>
+                <label for="child-goal">מה מטרת הלמידה?</label>
+                <textarea id="child-goal" maxlength="1000"></textarea>
               </div>
 
               <div>
-                <label for="child-availability">
-                  ימים ושעות נוחים
-                </label>
-                <input id="child-availability">
+                <label for="child-availability">ימים ושעות נוחים</label>
+                <input id="child-availability" maxlength="200">
               </div>
             </div>
           </section>
 
-          <section class="profile-section hidden"
-                   id="teacher-section">
+          <section class="profile-section hidden" id="teacher-section">
             <h3>פרופיל ההוראה שלי</h3>
 
             <p class="section-note">
-              הפרטים האלה יופיעו בפרופיל המורה הציבורי.
+              הפרטים בחלק הזה יופיעו בפרופיל המורה.
             </p>
 
             <div class="fields">
               <div>
-                <label for="teacher-subjects">
-                  אילו מקצועות מלמדים?
-                </label>
+                <label for="teacher-subjects">אילו מקצועות מלמדים? *</label>
                 <input id="teacher-subjects">
               </div>
 
               <div class="two">
                 <div>
-                  <label for="teacher-price">מחיר לשעה</label>
-                  <input id="teacher-price" type="number" min="0">
+                  <label for="teacher-price">מחיר לשעה בשקלים</label>
+                  <input id="teacher-price" type="number" min="0" step="1">
                 </div>
 
                 <div>
                   <label for="experience">ניסיון בהוראה</label>
-                  <input id="experience"
-                         placeholder="למשל: 4 שנות ניסיון">
+                  <input id="experience" placeholder="למשל: 4 שנות ניסיון">
                 </div>
               </div>
 
               <div>
                 <label for="format">אופן השיעור</label>
-
                 <select id="format">
                   <option value="אונליין">אונליין</option>
                   <option value="פרונטלי">פרונטלי</option>
@@ -702,75 +824,86 @@
               </div>
 
               <div>
-                <label for="teacher-bio">
-                  ניסיון ושיטת הוראה
-                </label>
-                <textarea id="teacher-bio"></textarea>
+                <label for="teacher-bio">ניסיון ושיטת הוראה</label>
+                <textarea id="teacher-bio" maxlength="2000"></textarea>
               </div>
 
               <div>
-                <label for="teacher-availability">
-                  ימים ושעות זמינים
-                </label>
-
-                <input id="teacher-availability"
-                       placeholder="למשל: ראשון 16:00–20:00">
+                <label for="teacher-availability">ימים ושעות זמינים</label>
+                <input
+                  id="teacher-availability"
+                  maxlength="200"
+                  placeholder="למשל: ראשון 16:00–20:00"
+                >
               </div>
             </div>
           </section>
         </div>
 
-        <div class="message" id="message"></div>
+        <div
+          class="message"
+          id="message"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        ></div>
 
         <div class="buttons">
-          <button class="button secondary"
-                  id="back-account"
-                  type="button">
+          <button class="button secondary" id="back-account" type="button">
             חזרה
           </button>
 
-          <button class="button primary"
-                  id="create-button"
-                  type="submit">
+          <button class="button primary" id="create-button" type="submit">
             יצירת החשבון והפרופילים ←
           </button>
         </div>
       </form>
+
+      <noscript>
+        <p class="message show error">
+          כדי להירשם צריך לאפשר JavaScript בדפדפן.
+        </p>
+      </noscript>
     </section>
   </main>
 
   <script type="module">
-    import {
-      auth,
-      db,
-      createUserWithEmailAndPassword,
-      updateProfile,
-      doc,
-      setDoc,
-      serverTimestamp
-    } from "./firebase.js";
+    const byId = id => document.getElementById(id);
+    const value = id => byId(id).value.trim();
 
     const accountUses = {
-      selfLearner:true,
-      parent:false,
-      teacher:false
+      selfLearner: true,
+      parent: false,
+      teacher: false
     };
 
+    const usesStep = byId("uses-step");
+    const accountStep = byId("account-step");
+    const profilesStep = byId("profiles-step");
+
+    const sections = {
+      selfLearner: byId("self-section"),
+      parent: byId("child-section"),
+      teacher: byId("teacher-section")
+    };
+
+    const createButton = byId("create-button");
+    const continueButton = byId("continue");
+    const message = byId("message");
+    const usesMessage = byId("uses-message");
+    const serviceMessage = byId("service-message");
+
+    let firebase = null;
     let photoData = "";
+    let photoBusy = false;
+    let photoVersion = 0;
+    let createdUser = null;
+    let busy = false;
+    let completed = false;
 
-    const usesStep = document.getElementById("uses-step");
-    const accountStep = document.getElementById("account-step");
-    const profilesStep = document.getElementById("profiles-step");
-    const selfSection = document.getElementById("self-section");
-    const childSection = document.getElementById("child-section");
-    const teacherSection = document.getElementById("teacher-section");
-    const message = document.getElementById("message");
-    const usesMessage = document.getElementById("uses-message");
-    const createButton = document.getElementById("create-button");
-    const progress = document.querySelectorAll(".progress i");
-
-    function value(id) {
-      return document.getElementById(id).value.trim();
+    function showMessage(element, text, type = "info") {
+      element.textContent = text;
+      element.className = "message show " + type;
     }
 
     function selectedUseCount() {
@@ -778,334 +911,465 @@
     }
 
     function showStep(step) {
-      usesStep.classList.toggle("hidden",step !== 1);
-      accountStep.classList.toggle("hidden",step !== 2);
-      profilesStep.classList.toggle("hidden",step !== 3);
+      const steps = [usesStep, accountStep, profilesStep];
+      const labels = ["בחירת שימוש", "פרטי חשבון", "פרופילים"];
 
-      progress.forEach((item,index) => {
-        item.classList.toggle("active",index < step);
+      steps.forEach((element, index) => {
+        element.classList.toggle("hidden", index !== step - 1);
       });
+
+      byId("step-label").textContent =
+        `שלב ${step} מתוך 3 — ${labels[step - 1]}`;
+
+      document.querySelectorAll(".progress i").forEach((item, index) => {
+        item.classList.toggle("active", index < step);
+      });
+
+      steps[step - 1].querySelector("h2").focus();
     }
 
     function updateSections() {
-      selfSection.classList.toggle(
-        "hidden",
-        !accountUses.selfLearner
-      );
+      Object.entries(sections).forEach(([key, section]) => {
+        const active = accountUses[key];
 
-      childSection.classList.toggle(
-        "hidden",
-        !accountUses.parent
-      );
+        section.classList.toggle("hidden", !active);
 
-      teacherSection.classList.toggle(
-        "hidden",
-        !accountUses.teacher
-      );
+        section.querySelectorAll("input, select, textarea, button")
+          .forEach(field => {
+            field.disabled = !active;
+          });
+      });
     }
 
-    function showMessage(element,text,type) {
-      element.textContent = text;
-      element.className = "message show " + type;
+    function setBusy(value) {
+      busy = value;
+      profilesStep.setAttribute("aria-busy", String(value));
+      profilesStep.inert = value;
+
+      createButton.disabled = value;
+      byId("back-account").disabled = value || Boolean(createdUser);
+
+      createButton.textContent = value
+        ? "שומרים את החשבון והפרופילים…"
+        : createdUser
+          ? "ניסיון נוסף לשמירת הפרופיל ←"
+          : "יצירת החשבון והפרופילים ←";
     }
 
     document.querySelectorAll(".use").forEach(button => {
-      button.addEventListener("click",() => {
-        const use = button.dataset.use;
+      button.addEventListener("click", () => {
+        if (busy || createdUser) return;
 
-        accountUses[use] = !accountUses[use];
+        const key = button.dataset.use;
+        accountUses[key] = !accountUses[key];
 
-        button.classList.toggle(
-          "selected",
-          accountUses[use]
-        );
+        button.classList.toggle("selected", accountUses[key]);
+        button.setAttribute("aria-pressed", String(accountUses[key]));
 
         button.querySelector(".selected-mark").textContent =
-          accountUses[use] ? "✓" : "";
+          accountUses[key] ? "✓" : "";
 
         usesMessage.className = "message";
         updateSections();
       });
     });
 
-    document.getElementById("continue").onclick = () => {
-      if(!selectedUseCount()) {
+    continueButton.addEventListener("click", () => {
+      if (!firebase) return;
+
+      if (!selectedUseCount()) {
         showMessage(
           usesMessage,
-          "צריך לבחור לפחות אפשרות אחת.",
+          "בחרו לפחות אפשרות אחת כדי להמשיך.",
           "error"
         );
         return;
       }
 
       showStep(2);
-    };
+    });
 
-    document.getElementById("back-uses").onclick = () => showStep(1);
-    document.getElementById("back-account").onclick = () => showStep(2);
+    byId("back-uses").addEventListener("click", () => {
+      if (!busy && !createdUser) showStep(1);
+    });
 
-    accountStep.addEventListener("submit",event => {
+    byId("back-account").addEventListener("click", () => {
+      if (!busy && !createdUser) showStep(2);
+    });
+
+    accountStep.addEventListener("submit", event => {
       event.preventDefault();
+
+      if (photoBusy) {
+        showMessage(
+          byId("photo-message"),
+          "התמונה עדיין נטענת. המתינו רגע לפני ההמשך.",
+          "info"
+        );
+        return;
+      }
+
+      byId("name").value = value("name");
+      byId("email").value = value("email");
+
+      if (!accountStep.reportValidity()) return;
+
       updateSections();
       showStep(3);
     });
 
-    document.getElementById("name").addEventListener("input",event => {
-      if(!photoData) {
-        document.getElementById("photo-preview").textContent =
-          event.target.value.charAt(0) || "כ";
+    byId("name").addEventListener("input", event => {
+      if (!photoData) {
+        byId("photo-preview").textContent =
+          event.target.value.trim().charAt(0) || "כ";
       }
     });
 
-    document.getElementById("photo").addEventListener("change",event => {
-      const file = event.target.files[0];
-      if(!file) return;
+    function readFile(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error("file-read-failed"));
+        reader.readAsDataURL(file);
+      });
+    }
 
-      if(!file.type.startsWith("image/")) {
-        alert("יש לבחור קובץ תמונה.");
-        return;
-      }
-
-      if(file.size > 8 * 1024 * 1024) {
-        alert("התמונה גדולה מדי.");
-        return;
-      }
-
-      const reader = new FileReader();
-
-      reader.onload = () => {
+    function loadImage(source) {
+      return new Promise((resolve, reject) => {
         const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = () => reject(new Error("image-load-failed"));
+        image.src = source;
+      });
+    }
 
-        image.onload = () => {
-          const size = 360;
-          const crop = Math.min(image.width,image.height);
-          const canvas = document.createElement("canvas");
-          const context = canvas.getContext("2d");
+    byId("photo").addEventListener("change", async event => {
+      const file = event.target.files[0];
+      if (!file) return;
 
-          canvas.width = size;
-          canvas.height = size;
+      const version = ++photoVersion;
+      const photoMessage = byId("photo-message");
 
-          context.drawImage(
-            image,
-            (image.width-crop)/2,
-            (image.height-crop)/2,
-            crop,
-            crop,
-            0,
-            0,
-            size,
-            size
-          );
+      photoBusy = false;
+      byId("to-profiles").disabled = false;
 
-          photoData = canvas.toDataURL("image/jpeg",.72);
-
-          document.getElementById("photo-preview").innerHTML =
-            `<img src="${photoData}" alt="תמונת פרופיל">`;
-        };
-
-        image.src = reader.result;
-      };
-
-      reader.readAsDataURL(file);
-    });
-
-    profilesStep.addEventListener("submit",async event => {
-      event.preventDefault();
-
-      if(
-        accountUses.selfLearner &&
-        !value("student-subjects")
-      ) {
-        showMessage(
-          message,
-          "בחרו לפחות מקצוע אחד עבור הלמידה שלך.",
-          "error"
-        );
+      if (!file.type.startsWith("image/")) {
+        showMessage(photoMessage, "בחרו קובץ תמונה.", "error");
+        event.target.value = "";
         return;
       }
 
-      if(
-        accountUses.parent &&
-        !value("child-subjects")
-      ) {
-        showMessage(
-          message,
-          "בחרו לפחות מקצוע אחד עבור הילד או הילדה.",
-          "error"
-        );
+      if (file.size > 8 * 1024 * 1024) {
+        showMessage(photoMessage, "בחרו תמונה קטנה מ־8MB.", "error");
+        event.target.value = "";
         return;
       }
 
-      if(
-        accountUses.teacher &&
-        !value("teacher-subjects")
-      ) {
-        showMessage(
-          message,
-          "בחרו לפחות מקצוע אחד שאתם מלמדים.",
-          "error"
-        );
-        return;
-      }
-
-      createButton.disabled = true;
-      createButton.textContent = "יוצרים את החשבון...";
+      photoBusy = true;
+      byId("to-profiles").disabled = true;
+      showMessage(photoMessage, "מכינים את התמונה…");
 
       try {
-        const credential =
-          await createUserWithEmailAndPassword(
-            auth,
+        const source = await readFile(file);
+        const image = await loadImage(source);
+
+        if (version !== photoVersion) return;
+
+        const size = 360;
+        const crop = Math.min(image.width, image.height);
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        if (!context || !crop) throw new Error("invalid-image");
+
+        canvas.width = size;
+        canvas.height = size;
+
+        context.drawImage(
+          image,
+          (image.width - crop) / 2,
+          (image.height - crop) / 2,
+          crop,
+          crop,
+          0,
+          0,
+          size,
+          size
+        );
+
+        photoData = canvas.toDataURL("image/jpeg", .72);
+
+        const preview = document.createElement("img");
+        preview.src = photoData;
+        preview.alt = "תצוגה מקדימה של תמונת הפרופיל";
+
+        byId("photo-preview").replaceChildren(preview);
+        showMessage(photoMessage, "התמונה מוכנה.", "success");
+      } catch {
+        if (version !== photoVersion) return;
+
+        showMessage(
+          photoMessage,
+          "לא הצלחנו לפתוח את התמונה. נסו תמונת JPG או PNG אחרת.",
+          "error"
+        );
+      } finally {
+        if (version === photoVersion) {
+          photoBusy = false;
+          byId("to-profiles").disabled = false;
+        }
+      }
+    });
+
+    function getLearningProfile(prefix, styleId) {
+      return {
+        subjects: value(prefix + "-subjects"),
+        level: value(prefix + "-level"),
+        learningStyle: value(styleId),
+        goal: value(prefix + "-goal"),
+        availability: value(prefix + "-availability")
+      };
+    }
+
+    profilesStep.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      if (busy || completed || !firebase) return;
+
+      if (!selectedUseCount()) {
+        showStep(1);
+        showMessage(usesMessage, "בחרו לפחות שימוש אחד.", "error");
+        return;
+      }
+
+      if (!accountStep.checkValidity()) {
+        showStep(2);
+        accountStep.reportValidity();
+        return;
+      }
+
+      const requiredSubjects = [
+        ["selfLearner", "student-subjects", "בחרו לפחות מקצוע אחד ללמידה שלכם."],
+        ["parent", "child-subjects", "בחרו לפחות מקצוע אחד עבור הילד או הילדה."],
+        ["teacher", "teacher-subjects", "בחרו לפחות מקצוע אחד שאתם מלמדים."]
+      ];
+
+      for (const [use, id, errorText] of requiredSubjects) {
+        if (accountUses[use] && !value(id)) {
+          showMessage(message, errorText, "error");
+
+          const field = byId(id);
+          const search = field.parentElement.querySelector(".tag-picker-search");
+          (search || field).focus();
+
+          return;
+        }
+      }
+
+      if (!profilesStep.reportValidity()) return;
+
+      const name = value("name");
+
+      const selfLearningProfile = accountUses.selfLearner
+        ? getLearningProfile("student", "learning-style")
+        : null;
+
+      const childLearningProfile = accountUses.parent
+        ? getLearningProfile("child", "child-learning-style")
+        : null;
+
+      const teacherProfile = accountUses.teacher
+        ? {
+            subjects: value("teacher-subjects"),
+            price: Number(value("teacher-price")) || 0,
+            experience: value("experience"),
+            format: value("format"),
+            bio: value("teacher-bio"),
+            availability: value("teacher-availability"),
+            active: true
+          }
+        : null;
+
+      const matchingProfile = selfLearningProfile || childLearningProfile;
+
+      const role = accountUses.teacher
+        ? accountUses.selfLearner || accountUses.parent
+          ? "both"
+          : "teacher"
+        : "student";
+
+      setBusy(true);
+      showMessage(message, "שומרים את הפרטים…");
+
+      try {
+        if (!createdUser) {
+          const credential = await firebase.createUserWithEmailAndPassword(
+            firebase.auth,
             value("email"),
-            document.getElementById("password").value
+            byId("password").value
           );
 
-        const user = credential.user;
-        const name = value("name");
+          createdUser = credential.user;
+        }
 
-        await updateProfile(user,{displayName:name});
+        const user = createdUser;
 
-        const selfLearningProfile =
-          accountUses.selfLearner
-            ? {
-                subjects:value("student-subjects"),
-                level:value("student-level"),
-                learningStyle:
-                  document.getElementById("learning-style").value,
-                goal:value("student-goal"),
-                availability:value("student-availability")
-              }
-            : null;
+        if (firebase.auth.currentUser?.uid !== user.uid) {
+          throw new Error("session-changed");
+        }
 
-        const childLearningProfile =
-          accountUses.parent
-            ? {
-                subjects:value("child-subjects"),
-                level:value("child-level"),
-                learningStyle:
-                  document.getElementById(
-                    "child-learning-style"
-                  ).value,
-                goal:value("child-goal"),
-                availability:value("child-availability")
-              }
-            : null;
-
-        const teacherProfile =
-          accountUses.teacher
-            ? {
-                subjects:value("teacher-subjects"),
-                price:Number(value("teacher-price")) || 0,
-                experience:value("experience"),
-                format:document.getElementById("format").value,
-                bio:value("teacher-bio"),
-                availability:value("teacher-availability"),
-                active:true
-              }
-            : null;
-
-        const matchingProfile =
-          selfLearningProfile || childLearningProfile;
-
-        const role =
-          accountUses.teacher &&
-          (accountUses.selfLearner || accountUses.parent)
-            ? "both"
-            : accountUses.teacher
-              ? "teacher"
-              : "student";
+        await firebase.updateProfile(user, {
+          displayName: name
+        });
 
         const profile = {
-          uid:user.uid,
+          uid: user.uid,
           name,
-          email:value("email"),
-          phone:value("phone"),
-          city:value("city"),
-          photo:photoData,
+          email: user.email,
+          phone: value("phone"),
+          city: value("city"),
+          photo: photoData,
           role,
-          accountUses:{...accountUses},
+          accountUses: { ...accountUses },
           selfLearningProfile,
           childLearningProfile,
           teacherProfile,
-
-          subjects:matchingProfile?.subjects || "",
-          level:matchingProfile?.level || "",
-          learningStyle:
-            matchingProfile?.learningStyle || "",
-          goal:matchingProfile?.goal || "",
-          availability:
-            matchingProfile?.availability || "",
-
-          createdAt:serverTimestamp(),
-          updatedAt:serverTimestamp()
+          subjects: matchingProfile?.subjects || "",
+          level: matchingProfile?.level || "",
+          learningStyle: matchingProfile?.learningStyle || "",
+          goal: matchingProfile?.goal || "",
+          availability: matchingProfile?.availability || "",
+          createdAt: firebase.serverTimestamp(),
+          updatedAt: firebase.serverTimestamp()
         };
 
-        await setDoc(
-          doc(db,"users",user.uid),
+        await firebase.setDoc(
+          firebase.doc(firebase.db, "users", user.uid),
           profile
         );
 
-        if(accountUses.teacher) {
-          await setDoc(
-            doc(db,"teachers",user.uid),
+        if (accountUses.teacher) {
+          await firebase.setDoc(
+            firebase.doc(firebase.db, "teachers", user.uid),
             {
-              uid:user.uid,
+              uid: user.uid,
               name,
-              city:value("city"),
-              photo:photoData,
-              subjects:teacherProfile.subjects,
-              price:teacherProfile.price,
-              experience:teacherProfile.experience,
-              format:teacherProfile.format,
-              bio:teacherProfile.bio,
-              availability:teacherProfile.availability,
-              active:true,
-              acceptingStudents:true,
-              verified:false,
-              createdAt:serverTimestamp(),
-              updatedAt:serverTimestamp()
+              city: profile.city,
+              photo: photoData,
+              subjects: teacherProfile.subjects,
+              price: teacherProfile.price,
+              experience: teacherProfile.experience,
+              format: teacherProfile.format,
+              bio: teacherProfile.bio,
+              availability: teacherProfile.availability,
+              active: true,
+              acceptingStudents: true,
+              verified: false,
+              createdAt: firebase.serverTimestamp(),
+              updatedAt: firebase.serverTimestamp()
             }
           );
         }
 
+        completed = true;
+        byId("password").value = "";
+
         showMessage(
           message,
-          "החשבון והפרופילים נוצרו בהצלחה!",
+          "החשבון והפרופילים נוצרו בהצלחה. עוברים לאזור האישי…",
           "success"
         );
 
-        setTimeout(() => {
-          window.location.href = "dashboard.html";
-        },700);
-      } catch(error) {
-        console.error(error);
+        window.location.replace("dashboard.html");
+      } catch (error) {
+        console.error("Registration failed:", error.code || error.message);
+        setBusy(false);
+
+        if (createdUser) {
+          showMessage(
+            message,
+            "החשבון נוצר, אך שמירת הפרופיל לא הושלמה. לחצו על ניסיון נוסף כדי להשלים את השמירה. אין צורך ליצור חשבון חדש.",
+            "error"
+          );
+          return;
+        }
 
         const errors = {
           "auth/email-already-in-use":
-            "כבר קיים חשבון עם האימייל הזה. היכנסו לחשבון הקיים ושנו את הבחירות באזור האישי.",
+            "כבר קיים חשבון עם האימייל הזה. לחצו על כניסה בראש העמוד.",
           "auth/invalid-email":
-            "כתובת האימייל אינה תקינה.",
+            "כתובת האימייל אינה תקינה. חזרו לשלב הקודם ותקנו אותה.",
           "auth/weak-password":
-            "הסיסמה צריכה להכיל לפחות 6 תווים.",
+            "הסיסמה אינה עומדת בדרישות. חזרו לשלב הקודם ובחרו סיסמה חזקה יותר.",
+          "auth/password-does-not-meet-requirements":
+            "הסיסמה אינה עומדת בדרישות החשבון. חזרו לשלב הקודם ובחרו סיסמה חזקה יותר.",
           "auth/network-request-failed":
-            "לא הצלחנו להתחבר לאינטרנט."
+            "לא הצלחנו להתחבר לאינטרנט. בדקו את החיבור ונסו שוב.",
+          "auth/too-many-requests":
+            "בוצעו יותר מדי ניסיונות. נסו שוב מאוחר יותר."
         };
 
         showMessage(
           message,
-          errors[error.code] ||
-          "לא הצלחנו ליצור את החשבון. נסו שוב.",
+          errors[error.code] || "לא הצלחנו ליצור את החשבון. נסו שוב.",
           "error"
         );
-
-        createButton.disabled = false;
-        createButton.textContent =
-          "יצירת החשבון והפרופילים ←";
       }
     });
 
     updateSections();
-  </script>
 
-  <script type="module" src="./subject-picker.js"></script>
+    const loadingTimer = setTimeout(() => {
+      if (!firebase) {
+        showMessage(
+          serviceMessage,
+          "טעינת ההרשמה מתעכבת. בדקו את החיבור לאינטרנט.",
+          "info"
+        );
+      }
+    }, 12000);
+
+    try {
+      const [firebaseModule] = await Promise.all([
+        import("./firebase.js"),
+        import("./subject-picker.js")
+      ]);
+
+      firebase = firebaseModule;
+      clearTimeout(loadingTimer);
+
+      // מחברים את התוויות לשדות החיפוש שיצר בוחר המקצועות.
+      ["student-subjects", "child-subjects", "teacher-subjects"]
+        .forEach(id => {
+          const original = byId(id);
+          const search = original.nextElementSibling?.querySelector(
+            ".tag-picker-search"
+          );
+          const label = document.querySelector(`label[for="${id}"]`);
+
+          if (search && label) {
+            search.id = id + "-search";
+            label.htmlFor = search.id;
+          }
+        });
+
+      updateSections();
+      serviceMessage.className = "message";
+      continueButton.disabled = false;
+      continueButton.textContent = "ממשיכים לפרטים ←";
+    } catch (error) {
+      clearTimeout(loadingTimer);
+      console.error("Registration initialization failed:", error);
+
+      continueButton.disabled = true;
+      continueButton.textContent = "ההרשמה אינה זמינה כרגע";
+
+      showMessage(
+        serviceMessage,
+        "לא הצלחנו לטעון את ההרשמה. בדקו את החיבור ורעננו את העמוד.",
+        "error"
+      );
+    }
+  </script>
 </body>
 </html>

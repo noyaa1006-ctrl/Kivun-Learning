@@ -1,392 +1,563 @@
 <!doctype html>
-<html lang="he" dir="rtl">
+<html lang="he" dir="rtl" class="access-pending">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121a37">
   <title>פרופיל מורה — כיוון</title>
 
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap");
 
     :root {
-      --navy:#121a37;
-      --ink:#1d2746;
-      --teal:#0b9d78;
-      --coral:#ff6e61;
-      --cloud:#f6f8fe;
-      --line:#e4e9f4;
-      --muted:#69738d;
-      --shadow:0 18px 45px rgba(23,37,78,.11);
+      --navy: #121a37;
+      --ink: #1d2746;
+      --teal: #08785c;
+      --coral: #ff6e61;
+      --cloud: #f6f8fe;
+      --line: #e4e9f4;
+      --muted: #69738d;
+      --shadow: 0 18px 45px rgba(23, 37, 78, .09);
     }
 
-    * { box-sizing:border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
+    .hidden {
+      display: none !important;
+    }
 
     body {
-      margin:0;
-      min-height:100vh;
-      color:var(--ink);
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
       background:
-        radial-gradient(circle at 92% 8%,#ddfff1 0,transparent 26%),
-        radial-gradient(circle at 4% 94%,#fff1d4 0,transparent 28%),
+        radial-gradient(circle at 92% 8%, #ddfff1, transparent 26%),
         var(--cloud);
-      font-family:Heebo,Arial,sans-serif;
+      font-family: Heebo, Arial, sans-serif;
     }
 
-    .hidden { display:none !important; }
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
 
     .container {
-      width:min(1080px,calc(100% - 32px));
-      margin:auto;
+      width: min(1080px, calc(100% - 32px));
+      margin-inline: auto;
     }
 
-    nav {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      min-height:78px;
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 80px;
+      padding-block: 12px;
     }
 
     .brand {
-      display:flex;
-      align-items:center;
-      gap:8px;
-      color:var(--navy);
-      font-size:28px;
-      font-weight:900;
-      text-decoration:none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy);
+      font-size: 28px;
+      font-weight: 900;
+      text-decoration: none;
     }
 
     .mark {
-      display:grid;
-      place-items:center;
-      width:29px;
-      height:29px;
-      border-radius:10px 10px 10px 2px;
-      color:#fff;
-      background:var(--coral);
-      transform:rotate(-5deg);
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 10px 10px 10px 2px;
+      color: #fff;
+      background: var(--coral);
     }
 
     .nav-links {
-      display:flex;
-      gap:15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     .nav-links a {
-      color:var(--muted);
-      font-weight:800;
-      text-decoration:none;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
     }
 
-    .hero {
-      position:relative;
-      overflow:hidden;
-      padding:35px;
-      border-radius:28px;
-      color:#fff;
-      background:var(--navy);
-      box-shadow:var(--shadow);
+    .profile-hero {
+      padding: 32px;
+      border-radius: 26px;
+      color: #fff;
+      background: var(--navy);
+      box-shadow: var(--shadow);
     }
 
     .profile-head {
-      display:flex;
-      align-items:center;
-      gap:22px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
     }
 
     .avatar {
-      display:grid;
-      place-items:center;
-      width:125px;
-      height:125px;
-      flex:0 0 125px;
-      overflow:hidden;
-      border:4px solid rgba(255,255,255,.2);
-      border-radius:29px;
-      color:#fff;
-      background:linear-gradient(135deg,#ff9d6e,#c64f62);
-      font-size:42px;
-      font-weight:900;
+      display: grid;
+      place-items: center;
+      width: 120px;
+      height: 120px;
+      flex: 0 0 120px;
+      overflow: hidden;
+      border: 4px solid rgba(255, 255, 255, .2);
+      border-radius: 27px;
+      color: #fff;
+      background: linear-gradient(135deg, #ff9d6e, #b84458);
+      font-size: 42px;
+      font-weight: 900;
     }
 
     .avatar img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .status {
-      display:inline-block;
-      padding:5px 9px;
-      border-radius:8px;
-      color:#fff0b7;
-      background:rgba(255,210,93,.15);
-      font-size:12px;
-      font-weight:900;
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 8px;
+      color: #fff0b7;
+      background: rgba(255, 210, 93, .15);
+      font-size: 12px;
+      font-weight: 800;
     }
 
     .status.real {
-      color:#bff6df;
-      background:rgba(11,157,120,.2);
+      color: #c6ffe7;
+      background: rgba(11, 157, 120, .2);
     }
 
     .profile-head h1 {
-      margin:8px 0 2px;
-      font-size:40px;
+      margin: 10px 0 8px;
+      font-size: 39px;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
     }
 
     .headline {
-      color:#cbd5ee;
-      font-size:16px;
+      color: #cbd5ee;
+      font-size: 16px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
     }
 
     .layout {
-      display:grid;
-      grid-template-columns:1fr 330px;
-      gap:24px;
-      padding:25px 0 70px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      align-items: start;
+      gap: 24px;
+      padding: 25px 0 70px;
     }
 
     .card {
-      padding:24px;
-      border-radius:21px;
-      background:#fff;
-      box-shadow:0 8px 28px rgba(23,37,78,.06);
+      min-width: 0;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 21px;
+      background: #fff;
+      box-shadow: 0 8px 28px rgba(23, 37, 78, .04);
     }
 
-    .card + .card { margin-top:17px; }
+    .information {
+      display: grid;
+      gap: 18px;
+    }
 
     .card h2 {
-      margin:0 0 12px;
-      color:var(--navy);
+      margin: 0 0 14px;
+      color: var(--navy);
+      font-size: 22px;
     }
 
     .bio {
-      margin:0;
-      color:#59657f;
-      line-height:1.8;
-      white-space:pre-line;
+      margin: 0;
+      color: #59657f;
+      line-height: 1.9;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
     }
 
     .tags {
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .tag {
-      padding:7px 10px;
-      border-radius:9px;
-      color:#08785c;
-      background:#e5faf0;
-      font-size:13px;
-      font-weight:800;
+      padding: 7px 10px;
+      border-radius: 9px;
+      color: var(--teal);
+      background: #e5faf0;
+      font-size: 13px;
+      font-weight: 800;
     }
 
     .details {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      margin: 0;
     }
 
     .detail {
-      padding:14px;
-      border:1px solid var(--line);
-      border-radius:13px;
-      background:#fbfcff;
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fbfcff;
+      overflow-wrap: anywhere;
     }
 
-    .detail small {
-      display:block;
-      color:var(--muted);
-      font-weight:700;
+    .detail dt {
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .detail dd {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.7;
+      white-space: pre-line;
     }
 
     .contact {
-      position:sticky;
-      top:18px;
-      height:max-content;
+      height: max-content;
     }
 
     .price {
-      margin:4px 0 18px;
-      color:var(--navy);
-      font-size:34px;
-      font-weight:900;
+      margin: 4px 0 16px;
+      color: var(--navy);
+      font-size: 33px;
+      font-weight: 900;
     }
 
     .price small {
-      color:var(--muted);
-      font-size:13px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .contact-note {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
     }
 
     .button {
-      display:block;
-      width:100%;
-      padding:14px;
-      border:0;
-      border-radius:12px;
-      color:#fff;
-      background:var(--navy);
-      font:inherit;
-      font-weight:900;
-      text-align:center;
-      text-decoration:none;
-      cursor:pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 48px;
+      padding: 13px 15px;
+      border: 0;
+      border-radius: 12px;
+      color: #fff;
+      background: var(--navy);
+      font-weight: 800;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
     }
 
     .button.secondary {
-      margin-top:9px;
-      color:#08785c;
-      background:#e5faf0;
+      color: var(--teal);
+      background: #e5faf0;
     }
 
-    .button:disabled {
-      opacity:.6;
-      cursor:wait;
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
     }
 
     .availability {
-      margin-top:18px;
-      padding:14px;
-      border-radius:13px;
-      color:#51607b;
-      background:#f4f7fd;
-      line-height:1.6;
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 13px;
+      color: #51607b;
+      background: #f4f7fd;
+      font-size: 14px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
     }
 
-    .availability b { display:block; }
+    .availability b {
+      display: block;
+      margin-bottom: 5px;
+    }
 
     .request-form {
-      display:grid;
-      gap:11px;
-      margin-top:15px;
-      padding-top:15px;
-      border-top:1px solid var(--line);
+      display: grid;
+      gap: 15px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .request-form h3 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 19px;
     }
 
     label {
-      display:block;
-      margin-bottom:5px;
-      color:#4e5b76;
-      font-size:13px;
-      font-weight:800;
+      display: block;
+      margin-bottom: 7px;
+      color: #4e5b76;
+      font-size: 14px;
+      font-weight: 800;
     }
 
-    input, select, textarea {
-      width:100%;
-      padding:11px;
-      border:1px solid var(--line);
-      border-radius:10px;
-      outline:none;
-      font:inherit;
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      color: var(--ink);
+      background: #fff;
+      font-size: 16px;
     }
 
-    input:focus, select:focus, textarea:focus {
-      border-color:var(--teal);
-      box-shadow:0 0 0 3px #dff7ed;
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--teal);
+      outline: none;
+      box-shadow: 0 0 0 3px #dff7ed;
     }
 
     textarea {
-      min-height:85px;
-      resize:vertical;
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .field-note {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .form-actions {
+      display: grid;
+      gap: 9px;
     }
 
     .message {
-      display:none;
-      padding:11px;
-      border-radius:10px;
-      font-size:13px;
-      font-weight:800;
+      display: none;
+      margin-top: 16px;
+      padding: 13px;
+      border-radius: 11px;
+      font-size: 14px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
     }
 
-    .message.show { display:block; }
-    .message.success { color:#08785c; background:#e5faf0; }
-    .message.error { color:#9e2f2a; background:#fff0ef; }
-
-    .loading,.not-found {
-      margin:55px auto;
-      padding:45px;
-      border-radius:22px;
-      background:#fff;
-      box-shadow:var(--shadow);
-      text-align:center;
+    .message.show {
+      display: block;
     }
 
-    .not-found a {
-      display:inline-block;
-      padding:11px 16px;
-      border-radius:10px;
-      color:#fff;
-      background:var(--navy);
-      font-weight:800;
-      text-decoration:none;
+    .message.info {
+      color: #405177;
+      background: #eef3ff;
     }
 
-    @media(max-width:760px) {
-      .layout { grid-template-columns:1fr; }
-      .contact { position:static; }
+    .message.success {
+      color: var(--teal);
+      background: #e5faf0;
+    }
 
-      .avatar {
-        width:90px;
-        height:90px;
-        flex-basis:90px;
-        border-radius:22px;
-        font-size:30px;
+    .message.error {
+      color: #9e2f2a;
+      background: #fff0ef;
+    }
+
+    .message a {
+      color: inherit;
+      font-weight: 800;
+    }
+
+    .loading,
+    .state-card {
+      max-width: 650px;
+      margin: 45px auto;
+      padding: 35px 25px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .state-card h1 {
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-size: 28px;
+    }
+
+    .state-card p {
+      color: var(--muted);
+    }
+
+    .state-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .state-actions .button {
+      width: auto;
+    }
+
+    @media (max-width: 800px) {
+      .layout {
+        grid-template-columns: 1fr;
       }
 
-      .profile-head h1 { font-size:30px; }
-      .details { grid-template-columns:1fr; }
-      .hero { padding:23px; }
+      .profile-head h1 {
+        font-size: 32px;
+      }
+
+      .avatar {
+        width: 95px;
+        height: 95px;
+        flex-basis: 95px;
+        border-radius: 22px;
+        font-size: 34px;
+      }
     }
 
-    @media(max-width:430px) {
-      .profile-head { flex-direction:column; }
-      .nav-links { gap:8px; }
-      .nav-links a { font-size:12px; }
+    @media (max-width: 500px) {
+      .container {
+        width: calc(100% - 28px);
+      }
+
+      .brand {
+        font-size: 25px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 12px;
+      }
+
+      .profile-hero {
+        padding: 24px 20px;
+      }
+
+      .profile-head {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .profile-head h1 {
+        font-size: 30px;
+      }
+
+      .headline {
+        font-size: 14px;
+      }
+
+      .details {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 20px;
+      }
     }
   </style>
+
+  <link rel="stylesheet" href="navigation.css">
+  <script defer src="navigation.js"></script>
 </head>
 
 <body>
-  <nav class="container">
+  <div id="access-status" role="status" aria-live="polite">
+    <strong>רגע, בודקים את הכניסה שלך…</strong>
+    <p>מיד ממשיכים לכיוון שלך.</p>
+    <a href="login.html">חזרה לכניסה</a>
+  </div>
+
+  <nav class="container nav" aria-label="ניווט ראשי">
     <a class="brand" href="index.html">
-      <span class="mark">↗</span>
+      <span class="mark" aria-hidden="true">↗</span>
       כיוון
     </a>
 
     <div class="nav-links">
       <a href="matches.html">חזרה למורים</a>
-      <a href="dashboard.html">האזור שלי</a>
+      <a href="dashboard.html">האזור האישי שלי</a>
     </div>
   </nav>
 
   <main class="container">
-    <div class="loading" id="loading">
-      טוענים את פרופיל המורה...
+    <div class="loading" id="loading" role="status">
+      טוענים את פרופיל המורה…
     </div>
 
-    <div class="not-found hidden" id="not-found">
-      <h1>לא מצאנו את הפרופיל</h1>
-      <p>ייתכן שהפרופיל נמחק או שהקישור אינו תקין.</p>
-      <a href="matches.html">חזרה לרשימת המורים</a>
-    </div>
+    <section class="state-card hidden" id="state-card">
+      <h1 id="state-title" tabindex="-1">לא מצאנו את הפרופיל</h1>
+      <p id="state-description"></p>
+
+      <div class="state-actions">
+        <a class="button" href="matches.html">חזרה לרשימת המורים</a>
+
+        <button
+          class="button secondary hidden"
+          id="retry-load"
+          type="button"
+        >
+          ניסיון נוסף
+        </button>
+      </div>
+    </section>
 
     <div class="hidden" id="profile-content">
-      <section class="hero">
+      <section class="profile-hero">
         <div class="profile-head">
           <div class="avatar" id="avatar">כ</div>
 
           <div>
             <span class="status" id="status"></span>
-            <h1 id="name"></h1>
+            <h1 id="teacher-name"></h1>
             <div class="headline" id="headline"></div>
           </div>
         </div>
       </section>
 
       <div class="layout">
-        <section>
+        <div class="information">
           <article class="card">
             <h2>קצת עליי</h2>
             <p class="bio" id="bio"></p>
@@ -400,71 +571,136 @@
           <article class="card">
             <h2>פרטים נוספים</h2>
 
-            <div class="details">
+            <dl class="details">
               <div class="detail">
-                <small>עיר או אזור</small>
-                <b id="city"></b>
+                <dt>עיר או אזור</dt>
+                <dd id="city"></dd>
               </div>
 
               <div class="detail">
-                <small>ניסיון בהוראה</small>
-                <b id="experience"></b>
+                <dt>ניסיון בהוראה</dt>
+                <dd id="experience"></dd>
               </div>
 
               <div class="detail">
-                <small>אופן השיעור</small>
-                <b id="format"></b>
+                <dt>אופן השיעור</dt>
+                <dd id="format"></dd>
               </div>
 
               <div class="detail">
-                <small>זמינות</small>
-                <b id="availability-detail"></b>
+                <dt>זמינות</dt>
+                <dd id="availability-detail"></dd>
               </div>
-            </div>
+            </dl>
           </article>
-        </section>
+        </div>
 
-        <aside class="card contact">
-          <h2>רוצים ללמוד יחד?</h2>
+        <aside class="card contact" aria-labelledby="contact-title">
+          <h2 id="contact-title">רוצים ללמוד יחד?</h2>
 
           <div class="price" id="price"></div>
 
-          <button class="button" id="open-request" type="button">
+          <p class="contact-note">
+            שולחים בקשה עם המקצוע והזמן המועדף.
+            אחרי שהמורה מאשר/ת, אפשר להמשיך לשיחה בצ׳אט.
+          </p>
+
+          <button
+            class="button hidden"
+            id="open-request"
+            type="button"
+            aria-expanded="false"
+            aria-controls="request-form"
+          >
             שליחת בקשה למורה
           </button>
 
-          <a class="button secondary hidden"
-             id="edit-profile"
-             href="dashboard.html">
+          <a
+            class="button secondary hidden"
+            id="edit-profile"
+            href="dashboard.html"
+          >
             עריכת הפרופיל שלי
           </a>
 
+          <div
+            class="message"
+            id="contact-message"
+            role="status"
+            aria-live="polite"
+          ></div>
+
           <form class="request-form hidden" id="request-form">
+            <h3 id="request-title" tabindex="-1">פרטי הבקשה</h3>
+
             <div>
-              <label for="request-subject">באיזה מקצוע?</label>
+              <label for="request-subject">באיזה מקצוע? *</label>
               <select id="request-subject" required></select>
             </div>
 
             <div>
-              <label for="preferred-time">יום ושעה מועדפים</label>
-              <input id="preferred-time"
-                     required
-                     placeholder="למשל: יום שני בשעה 17:00">
+              <label for="preferred-time">יום ושעה מועדפים *</label>
+
+              <input
+                id="preferred-time"
+                required
+                maxlength="200"
+                placeholder="למשל: יום שני בשעה 17:00"
+                aria-describedby="time-note"
+              >
+
+              <p class="field-note" id="time-note">
+                זו בקשה לתיאום. הזמן ייקבע מול המורה.
+              </p>
             </div>
 
             <div>
-              <label for="request-text">הודעה למורה</label>
-              <textarea id="request-text"
-                        required
-                        placeholder="ספרו בקצרה במה תרצו עזרה"></textarea>
+              <label for="request-text">הודעה למורה *</label>
+
+              <textarea
+                id="request-text"
+                required
+                maxlength="1000"
+                placeholder="ספרו בקצרה במה תרצו עזרה"
+                aria-describedby="message-note"
+              ></textarea>
+
+              <p class="field-note" id="message-note">
+                כתבו על מטרת הלמידה, בלי סיסמאות או פרטי תשלום.
+              </p>
             </div>
 
-            <button class="button" id="send-request" type="submit">
-              שליחת הבקשה
-            </button>
+            <div class="form-actions">
+              <button class="button" id="send-request" type="submit">
+                שליחת הבקשה
+              </button>
 
-            <div class="message" id="request-message"></div>
+              <button
+                class="button secondary"
+                id="cancel-request"
+                type="button"
+              >
+                חזרה לפרופיל
+              </button>
+            </div>
           </form>
+
+          <div
+            class="message"
+            id="request-message"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          ></div>
+
+          <a
+            class="button secondary hidden"
+            id="requests-link"
+            href="dashboard.html"
+            style="margin-top: 12px"
+          >
+            לבקשות באזור האישי ←
+          </a>
 
           <div class="availability">
             <b>זמינות המורה</b>
@@ -476,258 +712,616 @@
   </main>
 
   <script type="module">
-    import {
-      auth,
-      db,
-      onAuthStateChanged,
-      doc,
-      getDoc,
-      collection,
-      addDoc,
-      serverTimestamp
-    } from "./firebase.js";
+    const byId = id => document.getElementById(id);
 
-    import {
-      DEMO_TEACHERS,
-      normalizeList
-    } from "./catalog.js";
+    const teacherId =
+      new URLSearchParams(window.location.search).get("id");
 
-    const params = new URLSearchParams(window.location.search);
-    const teacherId = params.get("id");
+    const loading = byId("loading");
+    const content = byId("profile-content");
+    const stateCard = byId("state-card");
+    const openRequest = byId("open-request");
+    const requestForm = byId("request-form");
+    const sendRequest = byId("send-request");
 
-    const loading = document.getElementById("loading");
-    const notFound = document.getElementById("not-found");
-    const content = document.getElementById("profile-content");
-    const openRequest = document.getElementById("open-request");
-    const requestForm = document.getElementById("request-form");
-    const requestMessage = document.getElementById("request-message");
-    const sendRequest = document.getElementById("send-request");
-
-    let teacher = null;
+    let firebase = null;
+    let catalog = null;
     let currentUser = null;
     let studentProfile = null;
+    let profileLoadFailed = false;
+    let teacher = null;
+    let sending = false;
+    let sent = false;
 
-    function setText(id,text,fallback="טרם צוין") {
-      document.getElementById(id).textContent=text||fallback;
+    function setText(id, value, fallback = "טרם צוין") {
+      const text = String(value ?? "").trim();
+      byId(id).textContent = text || fallback;
     }
 
-    function showMessage(text,type) {
-      requestMessage.textContent=text;
-      requestMessage.className="message show "+type;
+    function showMessage(id, text, type = "info") {
+      const box = byId(id);
+      box.textContent = text;
+      box.className = "message show " + type;
     }
 
-    function showNotFound() {
+    function showState(title, description, retry = false) {
       loading.classList.add("hidden");
       content.classList.add("hidden");
-      notFound.classList.remove("hidden");
+      stateCard.classList.remove("hidden");
+
+      setText("state-title", title);
+      setText("state-description", description);
+
+      byId("retry-load").classList.toggle("hidden", !retry);
+      byId("state-title").focus();
     }
 
-    function showPhoto(photo,name) {
-      const avatar=document.getElementById("avatar");
-      avatar.innerHTML="";
+    function isOwnProfile() {
+      return Boolean(
+        currentUser &&
+        teacher &&
+        !teacher.isDemo &&
+        currentUser.uid === teacherId
+      );
+    }
 
-      if(photo&&photo.startsWith("data:image/")) {
-        const image=document.createElement("img");
-        image.src=photo;
-        image.alt="תמונת הפרופיל של "+name;
+    function canLearn() {
+      if (!studentProfile) return false;
+
+      const uses = studentProfile.accountUses;
+
+      if (uses) {
+        return Boolean(uses.selfLearner || uses.parent);
+      }
+
+      return studentProfile.role !== "teacher";
+    }
+
+    function teacherAcceptsRequests() {
+      return Boolean(
+        teacher &&
+        !teacher.isDemo &&
+        teacher.active !== false &&
+        teacher.acceptingStudents !== false &&
+        catalog.normalizeList(teacher.subjects).length
+      );
+    }
+
+    function canRequest() {
+      return Boolean(
+        currentUser &&
+        canLearn() &&
+        teacherAcceptsRequests() &&
+        !isOwnProfile()
+      );
+    }
+
+    function addDashboardLink(id, text) {
+      const box = byId(id);
+
+      box.appendChild(document.createTextNode(" "));
+
+      const link = document.createElement("a");
+      link.href = "dashboard.html";
+      link.textContent = text;
+
+      box.appendChild(link);
+    }
+
+    function configureContact() {
+      openRequest.classList.add("hidden");
+      byId("edit-profile").classList.add("hidden");
+      byId("contact-message").className = "message";
+
+      if (isOwnProfile()) {
+        byId("edit-profile").classList.remove("hidden");
+
+        showMessage(
+          "contact-message",
+          "זהו פרופיל המורה שלך. אפשר לערוך את הפרטים באזור האישי."
+        );
+        return;
+      }
+
+      if (teacher.isDemo) {
+        showMessage(
+          "contact-message",
+          "זהו פרופיל הדגמה להמחשה בלבד. לא ניתן לשלוח אליו בקשה."
+        );
+        return;
+      }
+
+      if (
+        teacher.active === false ||
+        teacher.acceptingStudents === false
+      ) {
+        showMessage(
+          "contact-message",
+          "המורה אינו/ה מקבל/ת בקשות חדשות כרגע."
+        );
+        return;
+      }
+
+      if (!catalog.normalizeList(teacher.subjects).length) {
+        showMessage(
+          "contact-message",
+          "המורה עדיין לא הגדיר/ה מקצועות לימוד. לא ניתן לשלוח בקשה כרגע."
+        );
+        return;
+      }
+
+      if (profileLoadFailed) {
+        showMessage(
+          "contact-message",
+          "לא הצלחנו לטעון את הפרופיל שלך. רעננו את העמוד לפני שליחת בקשה.",
+          "error"
+        );
+        return;
+      }
+
+      if (!canLearn()) {
+        showMessage(
+          "contact-message",
+          "כדי לשלוח בקשה, צריך להגדיר בחשבון שימוש ללמידה או לחיפוש מורה עבור ילד או ילדה."
+        );
+
+        addDashboardLink(
+          "contact-message",
+          "לעדכון הפרופיל באזור האישי"
+        );
+        return;
+      }
+
+      openRequest.classList.remove("hidden");
+    }
+
+    function showPhoto(photo, name) {
+      const avatar = byId("avatar");
+      avatar.replaceChildren();
+
+      if (
+        typeof photo === "string" &&
+        photo.startsWith("data:image/")
+      ) {
+        const image = document.createElement("img");
+        image.src = photo;
+        image.alt = "תמונת הפרופיל של " + name;
+
+        image.addEventListener("error", () => {
+          avatar.textContent = name.charAt(0) || "כ";
+        });
+
         avatar.appendChild(image);
       } else {
-        avatar.textContent=(name||"כ").charAt(0);
+        avatar.textContent = name.charAt(0) || "כ";
       }
     }
 
     function showSubjects(subjects) {
-      const tags=document.getElementById("tags");
-      const select=document.getElementById("request-subject");
-      const list=normalizeList(subjects);
+      const tags = byId("tags");
+      const select = byId("request-subject");
 
-      tags.innerHTML="";
-      select.innerHTML="";
+      const list = [
+        ...new Set(catalog.normalizeList(subjects))
+      ];
 
-      (list.length?list:["המקצוע טרם צוין"]).forEach(subject=>{
-        const tag=document.createElement("span");
-        tag.className="tag";
-        tag.textContent=subject;
+      tags.replaceChildren();
+      select.replaceChildren();
+
+      select.add(new Option("בחירת מקצוע", ""));
+
+      if (!list.length) {
+        tags.textContent = "המקצועות טרם צוינו";
+        return;
+      }
+
+      list.forEach(subject => {
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = subject;
         tags.appendChild(tag);
 
-        const option=new Option(subject,subject);
-        select.add(option);
+        select.add(new Option(subject, subject));
       });
+
+      if (list.length === 1) {
+        select.value = list[0];
+      }
+    }
+
+    function showPrice(data) {
+      const box = byId("price");
+      box.replaceChildren();
+
+      const hasPrice =
+        data.price !== "" &&
+        data.price !== null &&
+        data.price !== undefined;
+
+      const amount = Number(data.price);
+
+      if (!hasPrice || !Number.isFinite(amount) || amount < 0) {
+        const note = document.createElement("small");
+        note.textContent = "מחיר בתיאום עם המורה";
+        box.appendChild(note);
+        return;
+      }
+
+      box.appendChild(
+        document.createTextNode(
+          "₪" + amount.toLocaleString("he-IL", {
+            maximumFractionDigits: 2
+          }) + " "
+        )
+      );
+
+      const unit = document.createElement("small");
+      unit.textContent = data.isDemo ? "לשעה לדוגמה" : "לשעה";
+      box.appendChild(unit);
     }
 
     function renderTeacher(data) {
-      teacher=data;
+      teacher = data;
 
-      const name=data.name||"מורה בכיוון";
-      const subjects=normalizeList(data.subjects);
-      const subjectText=subjects.length
-        ? subjects.join(", ")
-        : "המקצועים טרם צוינו";
+      const name = String(data.name || "מורה בכיוון");
+      const subjects = catalog.normalizeList(data.subjects);
 
-      setText("name",name);
-      setText("city",data.city);
-      setText("experience",data.experience);
-      setText("format",data.format);
-      setText("availability",data.availability,"הזמינות טרם צוינה");
-      setText("availability-detail",data.availability,"הזמינות טרם צוינה");
-      setText("bio",data.bio,"המורה עדיין לא הוסיף/ה תיאור אישי.");
+      setText("teacher-name", name);
+      setText("city", data.city);
+      setText("experience", data.experience);
+      setText("format", data.format);
 
-      document.getElementById("headline").textContent=
-        subjectText+" · "+(data.format||"אופן השיעור טרם צוין");
+      setText(
+        "bio",
+        data.bio,
+        "המורה עדיין לא הוסיף/ה תיאור אישי."
+      );
 
-      const status=document.getElementById("status");
+      setText(
+        "availability",
+        data.availability,
+        "יש לתאם את הזמינות עם המורה"
+      );
 
-      status.textContent=data.isDemo
+      setText(
+        "availability-detail",
+        data.availability,
+        "יש לתאם עם המורה"
+      );
+
+      byId("headline").textContent = [
+        subjects.length
+          ? subjects.join(" · ")
+          : "המקצועות טרם צוינו",
+        data.format || "אופן השיעור בתיאום"
+      ].join(" — ");
+
+      const status = byId("status");
+
+      status.textContent = data.isDemo
         ? "פרופיל הדגמה"
-        : data.verified
-          ? "✓ מורה מאומת/ת"
-          : "מורה רשום/ה";
+        : data.active === false
+          ? "פרופיל לא פעיל"
+          : data.verified
+            ? "מורה מאומת/ת"
+            : "מורה רשום/ה";
 
-      status.classList.toggle("real",!data.isDemo);
+      status.classList.toggle(
+        "real",
+        !data.isDemo && data.active !== false
+      );
 
-      document.getElementById("price").innerHTML=
-        Number(data.price)
-          ? "₪"+Number(data.price).toLocaleString("he-IL")+
-            " <small>לשעה</small>"
-          : "<small>המחיר טרם צוין</small>";
-
-      showPhoto(data.photo||"",name);
+      showPhoto(data.photo, name);
       showSubjects(data.subjects);
+      showPrice(data);
+      configureContact();
 
-      if(data.isDemo) {
-        openRequest.textContent="זהו פרופיל הדגמה";
-        openRequest.disabled=true;
-      }
+      document.title = name + " — כיוון";
 
-      if(currentUser&&currentUser.uid===teacherId) {
-        openRequest.classList.add("hidden");
-        document.getElementById("edit-profile").classList.remove("hidden");
-      }
-
-      document.title=name+" — כיוון";
       loading.classList.add("hidden");
+      stateCard.classList.add("hidden");
       content.classList.remove("hidden");
     }
 
     async function loadTeacher() {
-      if(!teacherId) {
-        showNotFound();
+      if (!teacherId || teacherId.includes("/")) {
+        showState(
+          "הקישור לפרופיל אינו תקין",
+          "חזרו לרשימת המורים ובחרו את המורה שתרצו להכיר."
+        );
         return;
       }
 
-      const demo=DEMO_TEACHERS.find(item=>item.id===teacherId);
+      const demo = catalog.DEMO_TEACHERS.find(
+        item => item.id === teacherId
+      );
 
-      if(demo) {
-        renderTeacher(demo);
+      if (demo) {
+        renderTeacher({ ...demo, isDemo: true });
         return;
       }
 
       try {
-        const snapshot=await getDoc(doc(db,"teachers",teacherId));
+        const snapshot = await firebase.getDoc(
+          firebase.doc(firebase.db, "teachers", teacherId)
+        );
 
-        if(!snapshot.exists()) {
-          showNotFound();
+        if (!snapshot.exists()) {
+          showState(
+            "לא מצאנו את הפרופיל",
+            "ייתכן שהפרופיל הוסר או שהקישור אינו מעודכן."
+          );
+          return;
+        }
+
+        const data = snapshot.data();
+
+        if (
+          data.active === false &&
+          currentUser.uid !== teacherId
+        ) {
+          showState(
+            "הפרופיל אינו זמין כרגע",
+            "אפשר לחזור לרשימה ולמצוא מורים אחרים."
+          );
           return;
         }
 
         renderTeacher({
-          id:snapshot.id,
-          ...snapshot.data(),
-          isDemo:false
+          ...data,
+          id: snapshot.id,
+          isDemo: false
         });
-      } catch(error) {
-        console.error(error);
-        showNotFound();
+      } catch (error) {
+        console.error("Teacher profile loading failed:", error);
+
+        showState(
+          "לא הצלחנו לטעון את הפרופיל",
+          "בדקו את החיבור לאינטרנט ונסו שוב.",
+          true
+        );
       }
     }
 
-    openRequest.addEventListener("click",()=>{
-      if(!currentUser) {
-        window.location.href="login.html";
-        return;
-      }
+    function closeRequestForm() {
+      if (sending) return;
 
-      if(!studentProfile) {
-        showMessage("לא הצלחנו לטעון את הפרופיל שלך.","error");
-        requestForm.classList.remove("hidden");
-        return;
-      }
+      requestForm.classList.add("hidden");
+      openRequest.setAttribute("aria-expanded", "false");
+      openRequest.focus();
+    }
 
-      if(studentProfile.role==="teacher") {
-        requestForm.classList.remove("hidden");
-        showMessage("רק תלמידים יכולים לשלוח בקשה למורה.","error");
-        return;
-      }
+    openRequest.addEventListener("click", () => {
+      if (!canRequest() || sent || sending) return;
 
-      requestForm.classList.toggle("hidden");
+      const opening = requestForm.classList.contains("hidden");
+
+      requestForm.classList.toggle("hidden", !opening);
+      openRequest.setAttribute("aria-expanded", String(opening));
+
+      if (opening) {
+        byId("request-title").focus();
+      }
     });
 
-    requestForm.addEventListener("submit",async event=>{
+    byId("cancel-request").addEventListener(
+      "click",
+      closeRequestForm
+    );
+
+    requestForm.addEventListener("submit", async event => {
       event.preventDefault();
 
-      if(!currentUser||!teacher||teacher.isDemo) return;
+      if (sending || sent) return;
 
-      sendRequest.disabled=true;
-      sendRequest.textContent="שולחים...";
+      if (
+        !canRequest() ||
+        firebase.auth.currentUser?.uid !== currentUser?.uid
+      ) {
+        showMessage(
+          "request-message",
+          "לא ניתן לשלוח את הבקשה כרגע. רעננו את העמוד ובדקו את פרטי החשבון.",
+          "error"
+        );
+        return;
+      }
+
+      const subject = byId("request-subject").value;
+      const preferredTime = byId("preferred-time").value.trim();
+      const text = byId("request-text").value.trim();
+
+      byId("preferred-time").value = preferredTime;
+      byId("request-text").value = text;
+
+      if (!requestForm.reportValidity()) return;
+
+      if (!catalog.normalizeList(teacher.subjects).includes(subject)) {
+        showMessage(
+          "request-message",
+          "בחרו מקצוע מתוך רשימת המקצועות של המורה.",
+          "error"
+        );
+        return;
+      }
+
+      sending = true;
+      requestForm.inert = true;
+      requestForm.setAttribute("aria-busy", "true");
+      openRequest.disabled = true;
+      sendRequest.disabled = true;
+      sendRequest.textContent = "שולחים את הבקשה…";
+
+      showMessage(
+        "request-message",
+        "שולחים את הבקשה למורה…",
+        "info"
+      );
 
       try {
-        await addDoc(collection(db,"requests"),{
-          studentId:currentUser.uid,
-          studentName:
-            studentProfile?.name||
-            currentUser.displayName||
-            "תלמיד/ה",
-          teacherId,
-          teacherName:teacher.name||"מורה",
-          subject:document.getElementById("request-subject").value,
-          preferredTime:
-            document.getElementById("preferred-time").value.trim(),
-          message:
-            document.getElementById("request-text").value.trim(),
-          status:"pending",
-          createdAt:serverTimestamp(),
-          updatedAt:serverTimestamp()
-        });
+        // מוודאים שהמורה עדיין מקבל/ת בקשות לפני השליחה.
+        const latestTeacher = await firebase.getDoc(
+          firebase.doc(firebase.db, "teachers", teacherId)
+        );
+
+        if (!latestTeacher.exists()) {
+          throw new Error("teacher-unavailable");
+        }
+
+        const latest = latestTeacher.data();
+
+        if (
+          latest.active === false ||
+          latest.acceptingStudents === false ||
+          !catalog.normalizeList(latest.subjects).includes(subject)
+        ) {
+          throw new Error("teacher-unavailable");
+        }
+
+        if (firebase.auth.currentUser?.uid !== currentUser.uid) {
+          throw new Error("session-changed");
+        }
+
+        await firebase.addDoc(
+          firebase.collection(firebase.db, "requests"),
+          {
+            studentId: currentUser.uid,
+            studentName:
+              studentProfile.name ||
+              currentUser.displayName ||
+              "תלמיד/ה",
+
+            teacherId,
+            teacherName: latest.name || teacher.name || "מורה",
+            subject,
+            preferredTime,
+            message: text,
+            status: "pending",
+
+            unreadForStudent: 0,
+            unreadForTeacher: 0,
+
+            createdAt: firebase.serverTimestamp(),
+            updatedAt: firebase.serverTimestamp()
+          }
+        );
+
+        sent = true;
+        requestForm.reset();
+        requestForm.classList.add("hidden");
+
+        openRequest.setAttribute("aria-expanded", "false");
+        openRequest.textContent = "הבקשה נשלחה";
+        openRequest.disabled = true;
 
         showMessage(
-          "הבקשה נשלחה בהצלחה! המורה יראה אותה באזור האישי.",
+          "request-message",
+          "הבקשה נשלחה בהצלחה וממתינה לאישור המורה. תוכלו לעקוב אחריה באזור האישי, בלשונית הבקשות והשיחות.",
           "success"
         );
 
-        document.getElementById("preferred-time").value="";
-        document.getElementById("request-text").value="";
-      } catch(error) {
-        console.error(error);
+        byId("requests-link").classList.remove("hidden");
+        byId("requests-link").focus();
+      } catch (error) {
+        console.error("Request submission failed:", error);
 
-        showMessage(
-          "לא הצלחנו לשלוח את הבקשה. נסו שוב.",
-          "error"
-        );
+        if (error.message === "teacher-unavailable") {
+          showMessage(
+            "request-message",
+            "פרטי המורה השתנו או שהמורה אינו/ה מקבל/ת בקשות כרגע. רעננו את העמוד לפני ניסיון נוסף.",
+            "error"
+          );
+        } else {
+          showMessage(
+            "request-message",
+            "לא הצלחנו לשלוח את הבקשה. הפרטים נשארו בטופס — בדקו את החיבור ונסו שוב.",
+            "error"
+          );
+        }
       } finally {
-        sendRequest.disabled=false;
-        sendRequest.textContent="שליחת הבקשה";
-      }
-    });
+        sending = false;
+        requestForm.inert = false;
+        requestForm.setAttribute("aria-busy", "false");
 
-    onAuthStateChanged(auth,async user=>{
-      currentUser=user;
-
-      if(user) {
-        try {
-          const snapshot=await getDoc(doc(db,"users",user.uid));
-          studentProfile=snapshot.exists()?snapshot.data():null;
-        } catch(error) {
-          console.error(error);
+        if (!sent) {
+          openRequest.disabled = false;
+          sendRequest.disabled = false;
+          sendRequest.textContent = "שליחת הבקשה";
         }
       }
-
-      if(teacher&&user&&user.uid===teacherId) {
-        openRequest.classList.add("hidden");
-        document.getElementById("edit-profile").classList.remove("hidden");
-      }
     });
 
-    loadTeacher();
+    byId("retry-load").addEventListener("click", () => {
+      window.location.reload();
+    });
+
+    try {
+      const access = await import("./access.js");
+      await access.requireAccess();
+
+      const [firebaseModule, catalogModule] = await Promise.all([
+        import("./firebase.js"),
+        import("./catalog.js")
+      ]);
+
+      firebase = firebaseModule;
+      catalog = catalogModule;
+      currentUser = firebase.auth.currentUser;
+
+      if (!currentUser) {
+        const next = "teacher-profile.html" + window.location.search;
+
+        window.location.replace(
+          "login.html?next=" + encodeURIComponent(next)
+        );
+
+        await new Promise(() => {});
+      }
+
+      const initialUid = currentUser.uid;
+
+      firebase.onAuthStateChanged(firebase.auth, user => {
+        if (!user || user.uid !== initialUid) {
+          document.documentElement.classList.add("access-pending");
+          window.location.replace("login.html");
+        }
+      });
+
+      try {
+        const snapshot = await firebase.getDoc(
+          firebase.doc(firebase.db, "users", currentUser.uid)
+        );
+
+        studentProfile = snapshot.exists()
+          ? snapshot.data()
+          : null;
+      } catch (error) {
+        profileLoadFailed = true;
+        console.error("User profile loading failed:", error);
+      }
+
+      await loadTeacher();
+    } catch (error) {
+      console.error("Teacher page initialization failed:", error);
+
+      const accessBox = byId("access-status");
+
+      if (
+        document.documentElement.classList.contains("access-pending") &&
+        accessBox
+      ) {
+        accessBox.querySelector("strong").textContent =
+          "לא הצלחנו לבדוק את הכניסה";
+
+        accessBox.querySelector("p").textContent =
+          "בדקו את החיבור לאינטרנט ונסו לרענן.";
+      } else {
+        showState(
+          "טעינת העמוד לא הושלמה",
+          "בדקו את החיבור לאינטרנט ונסו שוב.",
+          true
+        );
+      }
+    }
   </script>
 </body>
 </html>

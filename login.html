@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta name="theme-color" content="#121a37">
   <title>כניסה לחשבון — כיוון</title>
 
   <style>
@@ -12,13 +12,11 @@
     :root {
       --navy: #121a37;
       --ink: #1d2746;
-      --teal: #0b9d78;
+      --teal: #08785c;
       --coral: #ff6e61;
-      --yellow: #ffd25d;
       --cloud: #f6f8fe;
       --line: #e4e9f4;
-      --muted: #6c7691;
-      --white: #fff;
+      --muted: #69738d;
       --shadow: 0 22px 52px rgba(20, 34, 75, .12);
     }
 
@@ -31,22 +29,28 @@
       min-height: 100vh;
       color: var(--ink);
       background:
-        radial-gradient(circle at 91% 9%, #ddfff1 0, transparent 28%),
-        radial-gradient(circle at 5% 92%, #fff1d4 0, transparent 30%),
+        radial-gradient(circle at 91% 9%, #ddfff1, transparent 28%),
+        radial-gradient(circle at 5% 92%, #fff1d4, transparent 30%),
         var(--cloud);
       font-family: Heebo, Arial, sans-serif;
     }
 
+    button,
+    input {
+      font: inherit;
+    }
+
     .container {
       width: min(1120px, calc(100% - 40px));
-      margin: auto;
+      margin-inline: auto;
     }
 
     .nav {
-      height: 80px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 16px;
+      min-height: 80px;
     }
 
     .brand {
@@ -56,7 +60,7 @@
       color: var(--navy);
       font-size: 29px;
       font-weight: 900;
-      letter-spacing: -1.3px;
+      letter-spacing: -1px;
       text-decoration: none;
     }
 
@@ -72,6 +76,9 @@
     }
 
     .nav-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
       color: var(--teal);
       font-size: 14px;
       font-weight: 800;
@@ -79,12 +86,12 @@
     }
 
     .page {
-      min-height: calc(100vh - 150px);
       display: grid;
-      grid-template-columns: 1fr 460px;
-      gap: 70px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
       align-items: center;
-      padding: 25px 0 70px;
+      gap: 65px;
+      min-height: calc(100vh - 150px);
+      padding: 30px 0 70px;
     }
 
     .intro-label {
@@ -94,15 +101,15 @@
     }
 
     .intro h1 {
-      margin: 10px 0 14px;
+      margin: 12px 0 18px;
       color: var(--navy);
       font-size: 58px;
-      line-height: 1.04;
-      letter-spacing: -2.5px;
+      line-height: 1.12;
+      letter-spacing: -2px;
     }
 
     .intro h1 em {
-      color: var(--coral);
+      color: #d94c42;
       font-style: normal;
     }
 
@@ -110,7 +117,29 @@
       max-width: 470px;
       color: var(--muted);
       font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .intro-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 25px;
+      color: #54607a;
+      font-size: 14px;
       line-height: 1.7;
+    }
+
+    .note-icon {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      flex: 0 0 29px;
+      border-radius: 50%;
+      color: var(--teal);
+      background: #dcf8ed;
+      font-weight: 800;
     }
 
     .login-card {
@@ -122,73 +151,91 @@
     }
 
     .login-card h2 {
-      margin: 0 0 5px;
+      margin: 0 0 7px;
       color: var(--navy);
       font-size: 28px;
       font-weight: 900;
-      letter-spacing: -1px;
     }
 
     .sub {
-      margin: 0 0 22px;
+      margin: 0 0 24px;
       color: var(--muted);
       font-size: 14px;
+      line-height: 1.7;
     }
 
     .field {
-      margin-bottom: 14px;
+      margin-bottom: 17px;
     }
 
     .field label {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 7px;
       color: #4e5b76;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
     }
 
     .field input {
       width: 100%;
+      min-height: 49px;
       padding: 13px;
       border: 1px solid var(--line);
       border-radius: 11px;
-      outline: none;
       color: var(--ink);
       background: #fff;
-      font: inherit;
+      font-size: 16px;
     }
 
     .field input:focus {
       border-color: var(--teal);
+      outline: none;
       box-shadow: 0 0 0 3px #dff7ed;
+    }
+
+    #email {
+      direction: ltr;
+      text-align: left;
     }
 
     .password-row {
       position: relative;
     }
 
+    .password-row input {
+      padding-left: 78px;
+    }
+
     .show-password {
       position: absolute;
       top: 50%;
-      left: 11px;
+      left: 5px;
+      min-width: 64px;
+      min-height: 44px;
+      padding: 6px 10px;
       border: 0;
+      border-radius: 8px;
       color: var(--teal);
       background: transparent;
-      font-family: inherit;
+      font-size: 13px;
       font-weight: 800;
       cursor: pointer;
       transform: translateY(-50%);
     }
 
+    .show-password:hover {
+      background: #effaf5;
+    }
+
     .button {
       width: 100%;
+      min-height: 49px;
       margin-top: 8px;
       padding: 13px 17px;
       border: 0;
       border-radius: 12px;
       color: #fff;
       background: var(--navy);
-      font-family: inherit;
       font-size: 15px;
       font-weight: 900;
       cursor: pointer;
@@ -198,30 +245,33 @@
       background: #202d57;
     }
 
-    .button:disabled {
+    button:disabled {
       opacity: .65;
       cursor: wait;
     }
 
     .forgot {
-      display: inline-block;
-      margin-top: 14px;
+      display: block;
+      min-height: 44px;
+      margin-top: 10px;
+      padding: 8px 0;
       border: 0;
       color: var(--teal);
       background: transparent;
-      font-family: inherit;
+      font-size: 14px;
       font-weight: 800;
       cursor: pointer;
     }
 
     .message {
       display: none;
-      margin-top: 16px;
-      padding: 12px;
+      margin-top: 15px;
+      padding: 13px;
       border-radius: 11px;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
-      line-height: 1.5;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
     }
 
     .message.show {
@@ -234,51 +284,45 @@
     }
 
     .message.success {
-      color: #08785c;
+      color: var(--teal);
       background: #e4faef;
+    }
+
+    .message.info {
+      color: #405177;
+      background: #eef3ff;
     }
 
     .join {
       margin: 22px 0 0;
-      padding-top: 18px;
+      padding-top: 20px;
       border-top: 1px solid var(--line);
       color: var(--muted);
       text-align: center;
       font-size: 14px;
+      line-height: 1.9;
     }
 
     .join a {
+      display: inline-block;
       color: var(--teal);
       font-weight: 900;
       text-decoration: none;
     }
 
-    .security-note {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 24px;
-      color: #54607a;
-      font-size: 13px;
-      font-weight: 700;
+    .footer {
+      padding: 0 20px 25px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
     }
 
-    .security-icon {
-      display: grid;
-      place-items: center;
-      width: 29px;
-      height: 29px;
-      flex: 0 0 29px;
-      border-radius: 50%;
-      color: #08785c;
-      background: #dcf8ed;
-    }
-
-    @media (max-width: 780px) {
+    @media (max-width: 800px) {
       .page {
         grid-template-columns: 1fr;
-        gap: 30px;
-        padding-top: 15px;
+        gap: 28px;
+        min-height: auto;
+        padding: 20px 0 45px;
       }
 
       .intro {
@@ -291,83 +335,100 @@
 
       .intro p {
         margin-inline: auto;
+        font-size: 16px;
+      }
+
+      .intro-note {
+        justify-content: center;
+        margin-top: 15px;
       }
 
       .login-card {
         width: 100%;
         max-width: 460px;
-        margin: auto;
+        margin-inline: auto;
       }
 
       .nav {
-        height: 68px;
+        min-height: 70px;
       }
     }
 
     @media (max-width: 410px) {
       .container {
-        width: min(100% - 28px, 1120px);
+        width: calc(100% - 28px);
+      }
+
+      .brand {
+        font-size: 25px;
       }
 
       .intro h1 {
-        font-size: 38px;
+        font-size: 37px;
       }
 
       .login-card {
-        padding: 21px;
+        padding: 22px;
       }
     }
   </style>
+
+  <link rel="stylesheet" href="navigation.css">
+  <script defer src="navigation.js"></script>
 </head>
 
 <body>
-  <nav class="container nav">
-    <a class="brand" href="index.html">
-      <span class="mark">↗</span>
+  <nav class="container nav" aria-label="ניווט ראשי">
+    <a class="brand" href="index.html" aria-label="כיוון — עמוד הבית">
+      <span class="mark" aria-hidden="true">↗</span>
       כיוון
     </a>
 
     <a class="nav-link" href="index.html">
-      עמוד הבית
+      חזרה לעמוד הבית
     </a>
   </nav>
 
   <main class="container page">
-    <section class="intro">
+    <section class="intro" aria-labelledby="page-title">
       <div class="intro-label">טוב לראות אותך שוב</div>
 
-      <h1>
+      <h1 id="page-title">
         ממשיכים בדיוק<br>
         מה<em>כיוון</em> שלך.
       </h1>
 
       <p>
-        הזינו אימייל וסיסמה כדי להיכנס לכל חשבון קיים.
-        אפשר לעבור בין חשבונות גם אם התחברתם קודם לחשבון אחר.
+        הפרופילים, ההתאמות והשיחות שלכם במקום אחד.
+        היכנסו עם הפרטים שאיתם נרשמתם.
       </p>
 
-      <div class="security-note">
-        <span class="security-icon">✓</span>
-        החשבון והסיסמה נשמרים בצורה מאובטחת באמצעות Firebase
+      <div class="intro-note">
+        <span class="note-icon" aria-hidden="true">✓</span>
+        <span>חשבון אחד ללמידה, להורות ולהוראה.</span>
       </div>
     </section>
 
-    <section class="login-card">
-      <h2>כניסה לחשבון</h2>
+    <section class="login-card" aria-labelledby="login-title">
+      <h2 id="login-title">כניסה לחשבון</h2>
 
-      <p class="sub">
-        הזינו את האימייל והסיסמה שאיתם נרשמתם.
+      <p class="sub" id="login-description">
+        הזינו את האימייל והסיסמה שלכם כדי להמשיך.
       </p>
 
-      <form id="login-form">
+      <form id="login-form" aria-describedby="login-description">
         <div class="field">
           <label for="email">אימייל</label>
 
           <input
             id="email"
+            name="email"
             type="email"
-            autocomplete="email"
-            placeholder="name@email.com"
+            autocomplete="username"
+            inputmode="email"
+            autocapitalize="none"
+            spellcheck="false"
+            placeholder="name@example.com"
             required
           >
         </div>
@@ -378,10 +439,10 @@
           <div class="password-row">
             <input
               id="password"
+              name="password"
               type="password"
               autocomplete="current-password"
               placeholder="הסיסמה שלך"
-              minlength="6"
               required
             >
 
@@ -389,57 +450,112 @@
               class="show-password"
               id="show-password"
               type="button"
+              aria-label="הצגת הסיסמה"
+              aria-controls="password"
+              aria-pressed="false"
             >
               הצגה
             </button>
           </div>
         </div>
 
-        <button class="button" id="login-button" type="submit">
-          כניסה לאזור שלי ←
+        <button
+          class="button"
+          id="login-button"
+          type="submit"
+          disabled
+        >
+          מכינים את הכניסה…
         </button>
 
-        <button class="forgot" id="forgot-password" type="button">
+        <button
+          class="forgot"
+          id="forgot-password"
+          type="button"
+          disabled
+        >
           שכחתי את הסיסמה
         </button>
 
-        <div class="message" id="message"></div>
+        <div
+          class="message"
+          id="message"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        ></div>
       </form>
 
       <p class="join">
-        עדיין אין לך חשבון?
-        <a href="join.html">להרשמה ופתיחת פרופיל</a>
+        עדיין אין לך חשבון?<br>
+        <a href="join.html">להרשמה ופתיחת פרופיל ←</a>
       </p>
+
+      <noscript>
+        <p class="message show error">
+          כדי להיכנס לחשבון צריך לאפשר JavaScript בדפדפן.
+        </p>
+      </noscript>
     </section>
   </main>
 
-  <script type="module">
-    import {
-      auth,
-      signInWithEmailAndPassword,
-      sendPasswordResetEmail
-    } from "./firebase.js";
+  <footer class="footer">
+    © 2026 כיוון · ללמוד בדרך שמתאימה לך
+  </footer>
 
+  <script type="module">
     const form = document.getElementById("login-form");
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
     const loginButton = document.getElementById("login-button");
     const forgotButton = document.getElementById("forgot-password");
-    const showPasswordButton =
-      document.getElementById("show-password");
+    const showPasswordButton = document.getElementById("show-password");
     const message = document.getElementById("message");
 
-    function showMessage(text, type) {
+    let firebase = null;
+    let nextPage = "dashboard.html";
+    let busy = false;
+
+    function showMessage(text, type = "info") {
       message.textContent = text;
       message.className = "message show " + type;
     }
 
-    function errorMessage(code) {
+    function setBusy(value, action = "login") {
+      busy = value;
+
+      form.setAttribute("aria-busy", String(value));
+
+      emailInput.disabled = value;
+      passwordInput.disabled = value;
+      showPasswordButton.disabled = value;
+
+      loginButton.disabled = value || !firebase;
+      forgotButton.disabled = value || !firebase;
+
+      loginButton.textContent =
+        value && action === "login"
+          ? "נכנסים לחשבון…"
+          : "כניסה לחשבון ←";
+
+      forgotButton.textContent =
+        value && action === "reset"
+          ? "שולחים קישור…"
+          : "שכחתי את הסיסמה";
+    }
+
+    function loginError(code) {
       const messages = {
         "auth/invalid-email":
           "כתובת האימייל אינה תקינה.",
 
         "auth/invalid-credential":
+          "האימייל או הסיסמה אינם נכונים.",
+
+        "auth/wrong-password":
+          "האימייל או הסיסמה אינם נכונים.",
+
+        "auth/user-not-found":
           "האימייל או הסיסמה אינם נכונים.",
 
         "auth/user-disabled":
@@ -449,59 +565,82 @@
           "בוצעו יותר מדי ניסיונות. נסו שוב מאוחר יותר.",
 
         "auth/network-request-failed":
-          "לא הצלחנו להתחבר לאינטרנט."
+          "לא הצלחנו להתחבר. בדקו את החיבור לאינטרנט ונסו שוב."
       };
 
       return messages[code] ||
-        "לא הצלחנו להיכנס לחשבון. בדקו את הפרטים ונסו שוב.";
+        "לא הצלחנו להיכנס לחשבון. נסו שוב בעוד רגע.";
     }
 
     showPasswordButton.addEventListener("click", () => {
-      const hidden = passwordInput.type === "password";
+      const show = passwordInput.type === "password";
 
-      passwordInput.type = hidden ? "text" : "password";
+      passwordInput.type = show ? "text" : "password";
+
       showPasswordButton.textContent =
-        hidden ? "הסתרה" : "הצגה";
+        show ? "הסתרה" : "הצגה";
+
+      showPasswordButton.setAttribute(
+        "aria-label",
+        show ? "הסתרת הסיסמה" : "הצגת הסיסמה"
+      );
+
+      showPasswordButton.setAttribute(
+        "aria-pressed",
+        String(show)
+      );
     });
 
     form.addEventListener("submit", async event => {
       event.preventDefault();
 
-      loginButton.disabled = true;
-      loginButton.textContent = "נכנסים לחשבון...";
+      if (busy || !firebase) {
+        return;
+      }
+
+      emailInput.value = emailInput.value.trim();
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      setBusy(true, "login");
+      showMessage("בודקים את פרטי הכניסה…");
 
       try {
-        await signInWithEmailAndPassword(
-          auth,
-          emailInput.value.trim(),
-          passwordInput.value
+        await firebase.signInWithEmailAndPassword(
+          firebase.auth,
+          email,
+          password
         );
 
         showMessage(
-          "הכניסה הצליחה. מעבירים אותך לאזור האישי...",
+          "הכניסה הצליחה. מיד ממשיכים…",
           "success"
         );
 
-        window.location.href = "dashboard.html";
+        window.location.replace(nextPage);
       } catch (error) {
-        console.error(error);
+        console.error("Login failed:", error.code);
 
-        showMessage(
-          errorMessage(error.code),
-          "error"
-        );
-
-        loginButton.disabled = false;
-        loginButton.textContent = "כניסה לאזור שלי ←";
+        setBusy(false);
+        showMessage(loginError(error.code), "error");
       }
     });
 
     forgotButton.addEventListener("click", async () => {
-      const email = emailInput.value.trim();
+      if (busy || !firebase) {
+        return;
+      }
 
-      if (!email) {
+      emailInput.value = emailInput.value.trim();
+
+      if (!emailInput.value) {
         showMessage(
-          "כתבו קודם את כתובת האימייל שלכם.",
+          "כתבו בשדה האימייל את הכתובת שאיתה נרשמתם.",
           "error"
         );
 
@@ -509,26 +648,97 @@
         return;
       }
 
-      forgotButton.disabled = true;
+      if (!emailInput.reportValidity()) {
+        return;
+      }
+
+      const email = emailInput.value;
+
+      setBusy(true, "reset");
+      showMessage("מבקשים קישור לבחירת סיסמה חדשה…");
 
       try {
-        await sendPasswordResetEmail(auth, email);
+        await firebase.sendPasswordResetEmail(
+          firebase.auth,
+          email
+        );
 
         showMessage(
-          "שלחנו לאימייל קישור לבחירת סיסמה חדשה.",
+          "אם קיים חשבון מתאים לכתובת הזו, יישלח אליו קישור לבחירת סיסמה חדשה. בדקו גם בתיקיית הספאם.",
           "success"
         );
       } catch (error) {
-        console.error(error);
+        console.error("Password reset failed:", error.code);
 
-        showMessage(
-          errorMessage(error.code),
-          "error"
-        );
+        if (error.code === "auth/user-not-found") {
+          showMessage(
+            "אם קיים חשבון מתאים לכתובת הזו, יישלח אליו קישור לבחירת סיסמה חדשה. בדקו גם בתיקיית הספאם.",
+            "success"
+          );
+        } else if (error.code === "auth/invalid-email") {
+          showMessage("כתובת האימייל אינה תקינה.", "error");
+        } else if (error.code === "auth/too-many-requests") {
+          showMessage(
+            "בוצעו יותר מדי בקשות. נסו שוב מאוחר יותר.",
+            "error"
+          );
+        } else {
+          showMessage(
+            "לא הצלחנו לשלוח את הבקשה. בדקו את החיבור ונסו שוב.",
+            "error"
+          );
+        }
       } finally {
-        forgotButton.disabled = false;
+        setBusy(false);
       }
     });
+
+    const loadingTimer = setTimeout(() => {
+      if (!firebase) {
+        showMessage(
+          "טעינת מסך הכניסה מתעכבת. בדקו את החיבור לאינטרנט.",
+          "info"
+        );
+      }
+    }, 12000);
+
+    try {
+      const [firebaseModule, routesModule] = await Promise.all([
+        import("./firebase.js"),
+        import("./routes.js")
+      ]);
+
+      const requestedPage =
+        new URLSearchParams(window.location.search).get("next");
+
+      nextPage = routesModule.safeNext(requestedPage);
+      firebase = firebaseModule;
+
+      clearTimeout(loadingTimer);
+      setBusy(false);
+
+      if (requestedPage) {
+        showMessage(
+          "כדי להמשיך לעמוד שביקשתם, יש להיכנס לחשבון.",
+          "info"
+        );
+      } else {
+        message.textContent = "";
+        message.className = "message";
+      }
+    } catch (error) {
+      clearTimeout(loadingTimer);
+      console.error("Login page initialization failed:", error);
+
+      loginButton.disabled = true;
+      forgotButton.disabled = true;
+      loginButton.textContent = "הכניסה אינה זמינה כרגע";
+
+      showMessage(
+        "לא הצלחנו לטעון את שירות הכניסה. בדקו את החיבור ורעננו את העמוד.",
+        "error"
+      );
+    }
   </script>
 </body>
 </html>

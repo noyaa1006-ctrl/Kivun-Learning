@@ -3,73 +3,1335 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#111a38">
+  <meta name="theme-color" content="#121a37">
   <title>כיוון — למצוא מורה שמבין אותך</title>
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap');
-    :root{--navy:#121a37;--ink:#1c2746;--mint:#e9fff4;--teal:#10a37f;--teal-dark:#08785c;--coral:#ff6e61;--yellow:#ffd25d;--cloud:#f6f8fe;--line:#e6eaf4;--white:#fff;--muted:#6c7691;--shadow:0 18px 50px rgba(26,39,76,.12)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cloud);color:var(--ink);font-family:Heebo,Arial,sans-serif}.shell{overflow:hidden}.container{width:min(1180px,calc(100% - 40px));margin-inline:auto}.nav{height:82px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:4}.brand{font-size:29px;font-weight:900;letter-spacing:-1.4px;display:flex;gap:8px;align-items:center;color:var(--navy)}.brand-mark{width:29px;height:29px;border-radius:10px 10px 10px 2px;background:var(--coral);display:grid;place-items:center;color:#fff;font-size:18px;transform:rotate(-5deg)}.nav-links{display:flex;gap:28px;align-items:center}.nav-links a{color:var(--muted);font-weight:600;text-decoration:none}.button{border:0;font-family:inherit;font-weight:800;font-size:15px;cursor:pointer;border-radius:14px;padding:13px 19px;transition:.2s transform,.2s box-shadow}.button:hover{transform:translateY(-2px)}.button-primary{background:var(--navy);color:#fff;box-shadow:0 8px 18px rgba(18,26,55,.2)}.button-coral{background:var(--coral);color:#fff}.button-light{background:#fff;color:var(--navy);box-shadow:0 9px 24px rgba(18,26,55,.1)}
-    .hero{position:relative;min-height:620px;padding:70px 0 90px;background:radial-gradient(circle at 15% 13%,#fff6db 0,transparent 26%),radial-gradient(circle at 91% 26%,#d7fbef 0,transparent 28%),#f6f8fe}.hero-grid{display:grid;grid-template-columns:1fr 1.03fr;gap:45px;align-items:center;position:relative;z-index:1}.eyebrow{display:inline-flex;align-items:center;gap:8px;background:#e4f8ef;color:#098064;padding:8px 12px;border-radius:99px;font-size:14px;font-weight:800}.eyebrow i{width:8px;height:8px;background:var(--teal);border-radius:50%;box-shadow:0 0 0 4px #c9efde}.hero h1{font-size:clamp(49px,5.8vw,78px);letter-spacing:-3.6px;line-height:.98;margin:19px 0;color:var(--navy);font-weight:900}.hero h1 em{font-style:normal;color:var(--coral);position:relative}.hero h1 em:after{content:"";position:absolute;right:0;left:0;bottom:-8px;height:7px;background:var(--yellow);border-radius:30px;z-index:-1;transform:rotate(-2deg)}.hero-text{font-size:19px;line-height:1.65;color:var(--muted);max-width:520px;margin:0}.hero-actions{display:flex;gap:12px;align-items:center;margin-top:27px}.hero-trust{display:flex;align-items:center;gap:10px;margin-top:30px;color:var(--muted);font-size:14px;font-weight:600}.faces{display:flex;direction:ltr}.face{margin-left:-8px;width:28px;height:28px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;font-size:12px;color:#fff}.f1{background:#e17e5d}.f2{background:#5a82d1}.f3{background:#5baf8e}.f4{background:#a069bf}
-    .search-card{background:#fff;border:1px solid #fff;border-radius:28px;padding:19px;box-shadow:var(--shadow);position:relative}.search-card:before{content:"";position:absolute;left:-19px;top:42px;width:39px;height:39px;background:var(--yellow);border-radius:13px;transform:rotate(13deg);z-index:-1}.search-head{display:flex;justify-content:space-between;align-items:center;margin:1px 5px 16px}.search-head b{font-size:19px}.progress{font-size:13px;color:var(--teal);font-weight:800}.search-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{border:1px solid var(--line);border-radius:15px;padding:12px;min-height:69px;background:#fff}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}.field strong{font-size:16px}.full{grid-column:1/-1}.choice-row{display:flex;gap:8px;flex-wrap:wrap}.choice{font-size:13px;background:#f1f5ff;color:#53607a;padding:7px 10px;border-radius:9px;font-weight:700}.choice.active{background:#dff8ee;color:#08785c}.match-button{width:100%;margin-top:13px;padding:15px}.magic-card{background:var(--navy);border-radius:18px;margin-top:13px;padding:14px 16px;color:#fff;display:flex;align-items:center;gap:11px}.magic-star{flex:none;width:34px;height:34px;border-radius:12px;background:var(--yellow);color:var(--navy);display:grid;place-items:center;font-size:19px}.magic-card p{font-size:13px;margin:2px 0 0;color:#bec8e3}.floating{position:absolute;background:#fff;border-radius:15px;padding:10px 13px;box-shadow:0 14px 30px rgba(23,38,78,.16);font-size:13px;font-weight:800;display:flex;gap:8px;align-items:center}.float-a{left:-30px;bottom:84px;animation:float 4s ease-in-out infinite}.float-b{right:-21px;top:80px;animation:float 5s 1s ease-in-out infinite}.float-icon{background:#e4f8ef;color:var(--teal);width:28px;height:28px;border-radius:9px;display:grid;place-items:center}@keyframes float{50%{transform:translateY(-10px)}}
-    .ticker{background:var(--navy);color:#fff;padding:14px 0;overflow:hidden}.ticker-inner{display:flex;justify-content:space-around;gap:35px;white-space:nowrap;color:#cdd5eb;font-size:14px;font-weight:700}.ticker b{color:#fff}.stats{padding:75px 0 28px;display:grid;grid-template-columns:1.1fr .9fr;gap:80px;align-items:start}.section-kicker{color:var(--teal);font-weight:900;font-size:15px}.section-title{font-size:42px;line-height:1.1;letter-spacing:-1.7px;margin:9px 0 12px;color:var(--navy)}.section-copy{color:var(--muted);font-size:17px;line-height:1.7;max-width:560px}.number-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.number{background:#fff;border-radius:18px;padding:22px 18px;box-shadow:0 8px 30px rgba(18,26,55,.05)}.number b{font-family:"Space Grotesk",sans-serif;font-size:31px;letter-spacing:-1px;color:var(--coral)}.number span{display:block;color:var(--muted);font-size:13px;font-weight:600;margin-top:3px}
-    .how{padding:84px 0}.section-top{text-align:center;max-width:655px;margin:auto}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}.step{padding:25px;border-radius:22px;background:#fff;min-height:248px;position:relative;overflow:hidden}.step:nth-child(2){background:var(--mint)}.step:nth-child(3){background:#fff4e5}.step-num{font-family:"Space Grotesk";font-size:15px;font-weight:700;color:var(--coral)}.step-icon{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;margin:17px 0;background:#e8efff;font-size:25px}.step:nth-child(2) .step-icon{background:#cdf5e5}.step:nth-child(3) .step-icon{background:#ffe0a0}.step h3{font-size:21px;margin:0 0 7px}.step p{font-size:15px;line-height:1.55;color:var(--muted);margin:0}.spark{position:absolute;left:17px;bottom:13px;color:var(--yellow);font-size:40px;opacity:.8}
-    .discover{padding:85px 0;background:#fff;position:relative}.discover-grid{display:grid;grid-template-columns:.83fr 1.17fr;gap:58px;align-items:center}.filter-card{background:var(--navy);border-radius:26px;padding:24px;color:#fff;box-shadow:var(--shadow)}.filter-card h3{margin:0;font-size:22px}.filter-card p{margin:5px 0 18px;color:#bbc5e0;font-size:14px}.filter-label{font-size:12px;color:#b5c1dd;margin:14px 0 7px}.filter-pill{border:1px solid #445173;border-radius:11px;padding:10px 11px;display:flex;justify-content:space-between;font-size:14px;font-weight:700}.filter-pills{display:flex;flex-wrap:wrap;gap:7px}.filter-pills span{font-size:13px;padding:7px 9px;border-radius:8px;background:#283454;color:#d8e1f5}.filter-pills span.active{background:var(--coral);color:white}.filter-card button{width:100%;margin-top:22px}.teacher-card{display:grid;grid-template-columns:112px 1fr;gap:18px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:17px;box-shadow:0 8px 28px rgba(18,26,55,.05);transition:.2s}.teacher-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.teacher-card+.teacher-card{margin-top:12px}.portrait{height:110px;border-radius:15px;display:flex;align-items:end;padding:9px;color:#fff;font-size:22px;font-weight:900;overflow:hidden;position:relative}.portrait:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent,rgba(18,26,55,.35))}.portrait span{position:relative;z-index:1}.p-noam{background:linear-gradient(135deg,#fa9d6e,#c64f62)}.p-maya{background:linear-gradient(135deg,#a2d7ea,#5474c1)}.p-omer{background:linear-gradient(135deg,#abd99a,#258e83)}.teacher-info{position:relative}.verified{color:var(--teal);font-size:14px}.teacher-name{font-size:20px;font-weight:900;margin-left:7px}.teacher-info p{margin:4px 0;color:var(--muted);font-size:14px}.teacher-footer{display:flex;justify-content:space-between;align-items:end;margin-top:8px}.rating{color:#d58a00;font-size:13px;font-weight:800}.price{font-size:17px;font-weight:900}.price small{font-size:12px;color:var(--muted);font-weight:600}.fit{position:absolute;left:0;top:0;background:#e4f8ef;color:#08785c;border-radius:8px;padding:5px 8px;font-size:12px;font-weight:900}
-    .passport{padding:90px 0;background:var(--navy);color:#fff}.passport-grid{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center}.passport .section-title{color:#fff}.passport .section-copy{color:#b8c4df}.passport-list{list-style:none;padding:0;margin:24px 0}.passport-list li{margin:13px 0;display:flex;align-items:center;gap:10px;color:#dbe4f6}.check{width:23px;height:23px;border-radius:50%;background:#1f805f;color:#fff;display:grid;place-items:center;font-size:13px;font-weight:900}.passport-card{background:#fff;color:var(--navy);border-radius:24px;padding:20px;transform:rotate(2deg);box-shadow:16px 18px 0 #ff6e61}.passport-card-head{display:flex;justify-content:space-between;align-items:center}.passport-card h3{margin:0;font-size:20px}.lesson-state{background:#e5faf0;color:#08785c;font-size:12px;font-weight:900;padding:6px 9px;border-radius:8px}.goal{background:#f4f6fb;border-radius:15px;padding:13px;margin-top:17px}.goal span{font-size:12px;color:var(--muted);font-weight:700}.goal b{display:block;font-size:16px;margin-top:2px}.timeline{border-right:2px solid #dce4f1;margin:18px 7px 3px;padding-right:19px}.timeline div{position:relative;padding-bottom:16px;font-size:14px}.timeline div:before{content:"";position:absolute;right:-25px;top:4px;width:10px;height:10px;background:var(--teal);border-radius:50%;border:2px solid #fff}.timeline small{display:block;color:var(--muted);margin-top:2px}.next{background:#fff6dd;color:#765500;border-radius:12px;padding:11px;font-size:14px;font-weight:700}
-    .cta{padding:90px 0;background:linear-gradient(120deg,#ffd361,#ff9d7a)}.cta-box{text-align:center;max-width:680px;margin:auto}.cta h2{font-size:50px;letter-spacing:-2px;line-height:1.05;margin:8px 0 14px;color:var(--navy)}.cta p{font-size:18px;color:#603d39;margin:0 auto 25px}.footer{background:var(--navy);color:#c6d0e7;padding:30px 0}.footer .container{display:flex;justify-content:space-between;align-items:center}.footer .brand{color:#fff;font-size:24px}.footer p{font-size:13px;margin:0}
-    @media(max-width:800px){.nav-links{display:none}.hero{padding-top:35px;min-height:auto}.hero-grid,.stats,.discover-grid,.passport-grid{grid-template-columns:1fr}.hero h1{font-size:56px}.hero-visual{max-width:520px;margin:0 auto;width:100%}.floating{display:none}.stats{gap:28px}.number-grid{max-width:500px}.steps{grid-template-columns:1fr}.discover{padding:60px 0}.filter-card{max-width:470px}.passport-card{max-width:430px;margin:20px auto 0}.footer .container{display:block}.footer p{margin-top:14px}.cta h2{font-size:43px}}
-    @media(max-width:470px){.container{width:min(100% - 28px,1180px)}.nav{height:67px}.brand{font-size:25px}.nav .button{padding:10px 12px;font-size:13px}.hero h1{font-size:47px;letter-spacing:-2.5px}.hero-text{font-size:17px}.hero-actions{align-items:stretch;flex-direction:column}.hero-actions .button{width:100%}.search-card{padding:13px}.search-fields{grid-template-columns:1fr}.field{min-height:60px}.full{grid-column:auto}.number-grid{grid-template-columns:1fr 1fr}.number:last-child{grid-column:1/-1}.teacher-card{grid-template-columns:83px 1fr;gap:12px;padding:12px}.portrait{height:90px;font-size:18px}.teacher-name{font-size:18px}.cta{padding:68px 0}.cta h2{font-size:38px}.passport{padding:65px 0}}
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');
+
+    :root {
+      --navy: #121a37;
+      --ink: #1c2746;
+      --mint: #e9fff4;
+      --teal: #10a37f;
+      --teal-dark: #08785c;
+      --coral: #ff6e61;
+      --yellow: #ffd25d;
+      --cloud: #f6f8fe;
+      --line: #e6eaf4;
+      --muted: #6c7691;
+      --shadow: 0 18px 50px rgba(26, 39, 76, .12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cloud);
+      color: var(--ink);
+      font-family: Heebo, Arial, sans-serif;
+    }
+
+    .shell {
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .nav {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 82px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy);
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: -1.4px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 10px 10px 10px 2px;
+      background: var(--coral);
+      color: #fff;
+      font-size: 18px;
+      transform: rotate(-5deg);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 19px;
+      border: 0;
+      border-radius: 14px;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 800;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--navy);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(18, 26, 55, .2);
+    }
+
+    .button-coral {
+      background: var(--coral);
+      color: var(--navy);
+    }
+
+    .button-light {
+      background: #fff;
+      color: var(--navy);
+      box-shadow: 0 9px 24px rgba(18, 26, 55, .1);
+    }
+
+    .hero {
+      position: relative;
+      padding: 12px 0 85px;
+      background:
+        radial-gradient(circle at 15% 13%, #fff6db, transparent 26%),
+        radial-gradient(circle at 91% 26%, #d7fbef, transparent 28%),
+        var(--cloud);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 48px;
+      padding-top: 35px;
+    }
+
+    .hero-grid > * {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 99px;
+      background: #e4f8ef;
+      color: var(--teal-dark);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .eyebrow i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px #c9efde;
+    }
+
+    .hero h1 {
+      margin: 22px 0;
+      color: var(--navy);
+      font-size: clamp(46px, 5.8vw, 76px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -3px;
+    }
+
+    .hero h1 em {
+      color: #d94c42;
+      font-style: normal;
+    }
+
+    .hero-text {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 27px;
+    }
+
+    .hero-trust {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .hero-trust a {
+      color: var(--teal-dark);
+      font-weight: 800;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .search-card {
+      position: relative;
+      padding: 22px;
+      border: 1px solid #fff;
+      border-radius: 28px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .search-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .search-head b {
+      font-size: 19px;
+    }
+
+    .demo-label {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 8px;
+      background: #fff6dd;
+      color: #765500;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .search-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .field {
+      min-height: 72px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+    }
+
+    .field-label {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .field strong {
+      font-size: 16px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .choice-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .choice {
+      padding: 7px 10px;
+      border-radius: 9px;
+      background: #f1f5ff;
+      color: #53607a;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .choice.active {
+      background: #dff8ee;
+      color: var(--teal-dark);
+    }
+
+    .match-button {
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .magic-card {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-top: 14px;
+      padding: 15px;
+      border-radius: 18px;
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .magic-star {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      border-radius: 12px;
+      background: var(--yellow);
+      color: var(--navy);
+      font-size: 19px;
+    }
+
+    .magic-card p {
+      margin: 4px 0 0;
+      color: #bec8e3;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .ticker {
+      padding: 16px 0;
+      background: var(--navy);
+      color: #dbe4f6;
+    }
+
+    .ticker-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px 38px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .ticker b {
+      margin-left: 5px;
+      color: var(--yellow);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 55px;
+      padding-top: 75px;
+      padding-bottom: 25px;
+    }
+
+    .section-kicker {
+      color: var(--teal-dark);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .section-title {
+      margin: 10px 0 14px;
+      color: var(--navy);
+      font-size: 42px;
+      line-height: 1.2;
+      letter-spacing: -1.5px;
+    }
+
+    .section-copy {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .number {
+      padding: 22px 14px;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 8px 30px rgba(18, 26, 55, .05);
+    }
+
+    .number b {
+      color: #d94c42;
+      font-size: 27px;
+    }
+
+    .number span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .how {
+      padding: 75px 0;
+    }
+
+    .section-top {
+      max-width: 655px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .section-top .section-copy {
+      margin-inline: auto;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 35px;
+    }
+
+    .step {
+      padding: 25px;
+      border-radius: 22px;
+      background: #fff;
+    }
+
+    .step:nth-child(2) {
+      background: var(--mint);
+    }
+
+    .step:nth-child(3) {
+      background: #fff4e5;
+    }
+
+    .step-num {
+      color: #b8433a;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .step-icon {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      margin: 17px 0;
+      border-radius: 16px;
+      background: #e8efff;
+      font-size: 25px;
+    }
+
+    .step:nth-child(2) .step-icon {
+      background: #cdf5e5;
+    }
+
+    .step:nth-child(3) .step-icon {
+      background: #ffe0a0;
+    }
+
+    .step h3 {
+      margin: 0 0 8px;
+      font-size: 21px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .teachers {
+      padding-top: 35px;
+      padding-bottom: 80px;
+    }
+
+    .section-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .section-heading .section-title {
+      margin-bottom: 0;
+    }
+
+    .teacher-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .teacher-card {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+    }
+
+    .portrait {
+      display: flex;
+      align-items: flex-end;
+      height: 110px;
+      padding: 12px;
+      border-radius: 16px;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .p-noam {
+      background: linear-gradient(135deg, #e78b61, #a8384d);
+    }
+
+    .p-maya {
+      background: linear-gradient(135deg, #88bdce, #3b5296);
+    }
+
+    .teacher-name {
+      margin: 0;
+      color: var(--navy);
+      font-size: 21px;
+    }
+
+    .teacher-info p {
+      margin: 8px 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .teacher-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .price {
+      color: var(--navy);
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .price small {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .demo-note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .passport {
+      padding: 80px 0;
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .passport-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .passport .section-title {
+      color: #fff;
+    }
+
+    .passport .section-kicker {
+      color: var(--yellow);
+    }
+
+    .passport .section-copy {
+      color: #c4cfe6;
+    }
+
+    .passport-list {
+      padding: 0;
+      margin: 24px 0;
+      list-style: none;
+    }
+
+    .passport-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 14px 0;
+      color: #dbe4f6;
+    }
+
+    .check {
+      display: grid;
+      place-items: center;
+      width: 23px;
+      height: 23px;
+      flex: 0 0 23px;
+      border-radius: 50%;
+      background: #1f805f;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .passport-card {
+      padding: 23px;
+      border-radius: 24px;
+      background: #fff;
+      color: var(--navy);
+      box-shadow: 12px 14px 0 var(--coral);
+    }
+
+    .passport-card-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .passport-card h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .goal {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 15px;
+      background: #f4f6fb;
+    }
+
+    .goal span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .goal b {
+      display: block;
+      margin-top: 4px;
+      font-size: 16px;
+    }
+
+    .timeline {
+      margin: 22px 7px 5px;
+      padding-right: 19px;
+      border-right: 2px solid #dce4f1;
+    }
+
+    .timeline div {
+      position: relative;
+      padding-bottom: 18px;
+      font-size: 14px;
+    }
+
+    .timeline div::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      right: -26px;
+      width: 10px;
+      height: 10px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .timeline small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+    }
+
+    .next {
+      padding: 12px;
+      border-radius: 12px;
+      background: #fff6dd;
+      color: #765500;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .cta {
+      padding: 80px 0;
+      background: linear-gradient(120deg, #ffd361, #ff9d7a);
+    }
+
+    .cta-box {
+      max-width: 680px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .cta h2 {
+      margin: 10px 0 16px;
+      color: var(--navy);
+      font-size: 48px;
+      line-height: 1.15;
+      letter-spacing: -2px;
+    }
+
+    .cta p {
+      margin: 0 auto 24px;
+      color: #603d39;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .footer {
+      padding: 30px 0;
+      background: var(--navy);
+      color: #c6d0e7;
+    }
+
+    .footer .container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer .brand {
+      color: #fff;
+      font-size: 24px;
+    }
+
+    .footer p {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a {
+      color: #dbe4f6;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        gap: 14px;
+      }
+
+      .nav-links a {
+        font-size: 13px;
+      }
+
+      .hero-grid {
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 0;
+        padding-bottom: 55px;
+      }
+
+      .hero-grid,
+      .stats,
+      .passport-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        gap: 35px;
+        padding-top: 15px;
+      }
+
+      .hero h1 {
+        font-size: 56px;
+      }
+
+      .hero-visual {
+        width: 100%;
+        max-width: 550px;
+        margin-inline: auto;
+      }
+
+      .stats {
+        gap: 25px;
+        padding-top: 50px;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .how {
+        padding: 55px 0;
+      }
+
+      .passport-grid {
+        gap: 35px;
+      }
+
+      .passport-card {
+        width: 100%;
+        max-width: 500px;
+        margin-inline: auto;
+      }
+
+      .cta h2 {
+        font-size: 42px;
+      }
+    }
+
+    @media (max-width: 470px) {
+      .container {
+        width: calc(100% - 28px);
+      }
+
+      .nav {
+        min-height: 70px;
+      }
+
+      .brand {
+        font-size: 25px;
+      }
+
+      .hero h1 {
+        font-size: 47px;
+        letter-spacing: -2px;
+      }
+
+      .hero-text {
+        font-size: 17px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      .search-card {
+        padding: 16px;
+      }
+
+      .search-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .full {
+        grid-column: auto;
+      }
+
+      .number-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .number {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+      }
+
+      .number span {
+        margin: 0;
+      }
+
+      .teacher-card {
+        grid-template-columns: 74px 1fr;
+        gap: 13px;
+        padding: 14px;
+      }
+
+      .portrait {
+        height: 90px;
+        padding: 8px;
+        font-size: 18px;
+      }
+
+      .teacher-name {
+        font-size: 19px;
+      }
+
+      .passport {
+        padding: 55px 0;
+      }
+
+      .cta {
+        padding: 55px 0;
+      }
+
+      .cta h2 {
+        font-size: 37px;
+      }
+
+      .cta-actions {
+        flex-direction: column;
+      }
+    }
   </style>
+
+  <link rel="stylesheet" href="navigation.css">
+  <script defer src="navigation.js"></script>
 </head>
+
 <body>
   <div class="shell">
     <header class="hero">
       <div class="container nav">
-        <div class="brand"><span class="brand-mark">↗</span>כיוון</div>
-        <nav class="nav-links"><a href="#how">איך זה עובד</a><a href="matches.html">לגלות מורים</a><a href="#passport">דרכון התקדמות</a><a href="dashboard.html">האזור שלי</a></nav>
-        <a class="button button-primary" href="join.html" style="text-decoration:none">הצטרפו לכיוון</a>
+        <a
+          class="brand"
+          href="index.html"
+          aria-label="כיוון — עמוד הבית"
+        >
+          <span class="brand-mark" aria-hidden="true">↗</span>
+          כיוון
+        </a>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="public-menu"
+        >
+          תפריט ☰
+        </button>
+
+        <nav
+          class="nav-links"
+          id="public-menu"
+          aria-label="ניווט ראשי"
+        >
+          <a href="#how">איך זה עובד</a>
+          <a href="#teachers">המורים בכיוון</a>
+          <a href="#passport">דרכון התקדמות</a>
+          <a href="login.html">כניסה לחשבון</a>
+        </nav>
+
+        <a class="button button-primary" href="join.html">
+          הצטרפו לכיוון
+        </a>
       </div>
+
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow"><i></i>התאמה שמבינה מה צריך עכשיו</div>
-          <h1>לא עוד מורה.<br><em>החיבור</em> הנכון.</h1>
-          <p class="hero-text">כיוון מוצאת מורה שמתאים למטרה, לאופי ולקצב של התלמיד. קובעים שיעור, משלמים בבטחה, ורואים התקדמות לאורך הדרך.</p>
-          <div class="hero-actions"><a class="button button-coral" href="join.html" style="text-decoration:none">בואו נמצא התאמה</a><a class="button button-light" href="#how" style="text-decoration:none">איך זה עובד ↓</a></div>
-          <div class="hero-trust"><div class="faces"><span class="face f1">מ</span><span class="face f2">נ</span><span class="face f3">ע</span><span class="face f4">י</span></div>מאות תלמידים כבר מצאו את הכיוון שלהם</div>
+          <div class="eyebrow">
+            <i aria-hidden="true"></i>
+            התאמה שמבינה מה צריך עכשיו
+          </div>
+
+          <h1>
+            לא עוד מורה.<br>
+            <em>החיבור</em> הנכון.
+          </h1>
+
+          <p class="hero-text">
+            לכל תלמיד יש מטרה, אופי וקצב משלו.
+            כיוון עוזרת למצוא מורה שמתאים לצורך שלכם —
+            ולהתחיל את הדרך בצורה מסודרת.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-coral" href="join.html">
+              מתחילים בהרשמה ←
+            </a>
+
+            <a class="button button-light" href="#how">
+              איך זה עובד ↓
+            </a>
+          </div>
+
+          <p class="hero-trust">
+            כבר יש לכם חשבון?
+            <a href="login.html">נכנסים וממשיכים מכאן</a>
+          </p>
         </div>
+
         <div class="hero-visual">
           <div class="search-card">
-            <div class="search-head"><b>בואו נכיר אותך</b><span class="progress">שלב 1 מתוך 3</span></div>
-            <div class="search-fields">
-              <div class="field"><label>מה רוצים ללמוד?</label><strong>מתמטיקה</strong></div>
-              <div class="field"><label>באיזו רמה?</label><strong>4–5 יח״ל</strong></div>
-              <div class="field full"><label>מה היעד?</label><strong>להרגיש בטוח לקראת הבגרות</strong></div>
-              <div class="field full"><label>איך הכי נוח ללמוד?</label><div class="choice-row"><span class="choice active">בגובה העיניים</span><span class="choice">מסודר ומדויק</span><span class="choice">בקצב מהיר</span></div></div>
+            <div class="search-head">
+              <b>כך נראית התאמה אישית</b>
+              <span class="demo-label">דוגמה להמחשה</span>
             </div>
-            <a class="button button-primary match-button" href="join.html" style="display:block;text-align:center;text-decoration:none">מצאו לי התאמה אישית ←</a>
-            <div class="magic-card"><div class="magic-star">✦</div><div><b>לא דירוג, התאמה.</b><p>נראה לך למה כל מורה הוצע דווקא לך.</p></div></div>
+
+            <div class="search-fields">
+              <div class="field">
+                <span class="field-label">מה רוצים ללמוד?</span>
+                <strong>מתמטיקה</strong>
+              </div>
+
+              <div class="field">
+                <span class="field-label">באיזו רמה?</span>
+                <strong>4–5 יח״ל</strong>
+              </div>
+
+              <div class="field full">
+                <span class="field-label">מה היעד?</span>
+                <strong>להרגיש בטוח לקראת הבגרות</strong>
+              </div>
+
+              <div class="field full">
+                <span class="field-label">איך נוח ללמוד?</span>
+
+                <div class="choice-row">
+                  <span class="choice active">בגובה העיניים</span>
+                  <span class="choice">מסודר ומדויק</span>
+                  <span class="choice">בקצב אישי</span>
+                </div>
+              </div>
+            </div>
+
+            <a
+              class="button button-primary match-button"
+              href="join.html"
+            >
+              בונים את הפרופיל שלי ←
+            </a>
+
+            <div class="magic-card">
+              <div class="magic-star" aria-hidden="true">✦</div>
+
+              <div>
+                <b>מתחילים במה שחשוב לכם.</b>
+                <p>
+                  אחרי ההרשמה תוכלו להגדיר את הצרכים
+                  ולחפש מורים שמתאימים לכם.
+                </p>
+              </div>
+            </div>
           </div>
-          <div class="floating float-a"><span class="float-icon">✓</span>ביקורות משיעורים אמיתיים</div>
-          <div class="floating float-b"><span class="float-icon">◷</span>זמינות בזמן אמת</div>
         </div>
       </div>
     </header>
 
-    <div class="ticker"><div class="container ticker-inner"><span><b>✦</b> התאמה לפי מטרה</span><span><b>✦</b> תשלום מוגן</span><span><b>✦</b> שיעור אונליין או פרונטלי</span><span><b>✦</b> דירוגים מאומתים בלבד</span></div></div>
+    <div class="ticker">
+      <div class="container ticker-inner">
+        <span><b aria-hidden="true">✦</b> התאמה לפי מטרה</span>
+        <span><b aria-hidden="true">✦</b> פרופיל למידה אישי</span>
+        <span><b aria-hidden="true">✦</b> אונליין או פרונטלי</span>
+        <span><b aria-hidden="true">✦</b> בקשות ושיחות במקום אחד</span>
+      </div>
+    </div>
 
-    <section class="container stats">
-      <div><div class="section-kicker">הבעיה שאנחנו פותרים</div><h2 class="section-title">מורה מעולה הוא לא בהכרח המורה המתאים.</h2><p class="section-copy">במקום לגלול בין עשרות פרופילים, התלמיד או ההורה מספרים מה באמת נדרש. כיוון מחברת אותם למורים שמתאימים לרגע המסוים הזה.</p></div>
-      <div class="number-grid"><div class="number"><b>2 דק׳</b><span>עד התאמה ראשונה</span></div><div class="number"><b>100%</b><span>ביקורות מאומתות</span></div><div class="number"><b>0 כאב</b><span>בתיאום ותשלום</span></div></div>
+    <section class="container stats" aria-labelledby="why-title">
+      <div>
+        <div class="section-kicker">הבעיה שאנחנו פותרים</div>
+
+        <h2 class="section-title" id="why-title">
+          מורה מעולה הוא לא בהכרח המורה המתאים.
+        </h2>
+
+        <p class="section-copy">
+          במקום להתחיל מרשימה ארוכה של שמות,
+          מתחילים במה שבאמת צריך: המקצוע, הרמה והמטרה.
+          כך אפשר לבחור מורה מתוך הבנה של הדרך שמתאימה לכם.
+        </p>
+      </div>
+
+      <div class="number-grid">
+        <div class="number">
+          <b>01</b>
+          <span>נרשמים ומספרים על עצמכם</span>
+        </div>
+
+        <div class="number">
+          <b>02</b>
+          <span>מכירים מורים ומתאימים ציפיות</span>
+        </div>
+
+        <div class="number">
+          <b>03</b>
+          <span>שולחים בקשה ומתחילים לדבר</span>
+        </div>
+      </div>
     </section>
 
-    <section class="how" id="how"><div class="container"><div class="section-top"><div class="section-kicker">פשוט יותר ממה שחשבת</div><h2 class="section-title">שלושה צעדים קדימה.</h2><p class="section-copy">בלי קבוצות ווטסאפ, בלי טלפונים וללא חוסר ודאות.</p></div><div class="steps"><article class="step"><div class="step-num">01 / מכוונים</div><div class="step-icon">◎</div><h3>מספרים מה צריך</h3><p>מקצוע, רמה, מטרה, תקציב, זמינות ואיך נוח לך ללמוד.</p><span class="spark">✦</span></article><article class="step"><div class="step-num">02 / בוחרים</div><div class="step-icon">↗</div><h3>מכירים התאמות</h3><p>רואים מי הכי מדויק, למה, ומה תלמידים אמיתיים מספרים.</p><span class="spark">✦</span></article><article class="step"><div class="step-num">03 / מתקדמים</div><div class="step-icon">✓</div><h3>קובעים ומתפתחים</h3><p>הזמנה, תשלום, תזכורת וקישור לשיעור — והכול במקום אחד.</p><span class="spark">✦</span></article></div></div></section>
+    <section class="how" id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-top">
+          <div class="section-kicker">ברור בכל שלב</div>
 
-    <section class="container" id="teachers" style="padding:65px 0 85px"><div style="display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap"><div><div class="section-kicker">השלב הבא</div><h2 class="section-title" style="margin-bottom:0">פוגשים את המורים שמתאימים לך.</h2></div><a class="button button-light" href="matches.html" style="text-decoration:none">לכל ההתאמות ←</a></div><div style="margin-top:27px"><article class="teacher-card"><div class="portrait p-noam"><span>נועם</span></div><div class="teacher-info"><div><span class="teacher-name">נועם לוי</span><span class="verified">● מאומת</span></div><p>מתמטיקה 4–5 יח״ל · 6 שנות ניסיון</p><div class="fit">94% התאמה</div><div class="teacher-footer"><span class="rating">★★★★★ 4.9 <small style="color:var(--muted)">(48)</small></span><span class="price">₪120 <small>/ שעה</small></span></div></div></article><article class="teacher-card"><div class="portrait p-maya"><span>מאיה</span></div><div class="teacher-info"><div><span class="teacher-name">מאיה כהן</span><span class="verified">● מאומת</span></div><p>מתמטיקה ופיזיקה · הכנה לבגרות</p><div class="fit">91% התאמה</div><div class="teacher-footer"><span class="rating">★★★★★ 5.0 <small style="color:var(--muted)">(31)</small></span><span class="price">₪135 <small>/ שעה</small></span></div></div></article></div></section>
+          <h2 class="section-title" id="how-title">
+            שלושה צעדים קדימה.
+          </h2>
 
-    <section class="passport" id="passport"><div class="container passport-grid"><div><div class="section-kicker" style="color:var(--yellow)">הדבר שאף לוח מורים לא נותן</div><h2 class="section-title">לא מסיימים שיעור.<br>מתקדמים ממנו.</h2><p class="section-copy">דרכון ההתקדמות של כיוון שומר את המטרה, ההצלחות והצעד הבא — כדי שלכל שיעור תהיה סיבה.</p><ul class="passport-list"><li><span class="check">✓</span>סיכום קצר אחרי כל שיעור</li><li><span class="check">✓</span>יעדים שנשארים מול העיניים</li><li><span class="check">✓</span>עדכון להורה, בלי לפגוע בפרטיות</li></ul><a class="button button-coral" href="join.html" style="text-decoration:none">אני רוצה להתחיל</a></div><div class="passport-card"><div class="passport-card-head"><h3>הדרכון של דנה</h3><span class="lesson-state">שיעור 3 הושלם</span></div><div class="goal"><span>המטרה שלנו</span><b>להגיע מוכנה לבגרות במתמטיקה</b></div><div class="timeline"><div><b>פירוק שאלות מילוליות</b><small>✓ הושג בשיעור 3</small></div><div><b>תרגול פונקציות</b><small>הצעד הבא · שיעור 4</small></div></div><div class="next">✦ נועם הכין לדנה 4 תרגילים קצרים לפעם הבאה</div></div></div></section>
+          <p class="section-copy">
+            מההיכרות הראשונה ועד לשיחה עם המורה —
+            כל שלב מוביל לבא אחריו.
+          </p>
+        </div>
 
-    <section class="cta"><div class="container cta-box"><div class="eyebrow" style="background:#fff4d2;color:#805500">מורה טוב משנה הכול</div><h2>בואו נמצא את<br>הכיוון שלכם.</h2><p>ההתאמה הראשונה בחינם. קובעים רק כשזה מרגיש נכון.</p><a class="button button-primary" href="join.html" style="text-decoration:none">התחילו עכשיו ←</a></div></section>
+        <div class="steps">
+          <article class="step">
+            <div class="step-num">01 / נרשמים</div>
+            <div class="step-icon" aria-hidden="true">◎</div>
+            <h3>בונים פרופיל</h3>
+            <p>
+              בוחרים אם מחפשים מורה לעצמכם, לילד או לילדה,
+              או רוצים ללמד. ממלאים את הפרטים המתאימים.
+            </p>
+          </article>
 
-    <footer class="footer"><div class="container"><div class="brand"><span class="brand-mark">↗</span>כיוון</div><p>© 2026 כיוון · ללמוד בדרך שמתאימה לך</p></div></footer>
+          <article class="step">
+            <div class="step-num">02 / מכירים</div>
+            <div class="step-icon" aria-hidden="true">↗</div>
+            <h3>מוצאים את הכיוון</h3>
+            <p>
+              לאחר הכניסה לחשבון, מסננים מורים לפי מקצוע,
+              מחיר ואופן הלימוד וקוראים על הניסיון שלהם.
+            </p>
+          </article>
+
+          <article class="step">
+            <div class="step-num">03 / יוצרים קשר</div>
+            <div class="step-icon" aria-hidden="true">✓</div>
+            <h3>שולחים בקשה</h3>
+            <p>
+              שולחים למורה בקשה עם המטרה והזמן המועדף.
+              אחרי אישור הבקשה אפשר להמשיך לשיחה בצ׳אט.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="container teachers"
+      id="teachers"
+      aria-labelledby="teachers-title"
+    >
+      <div class="section-heading">
+        <div>
+          <div class="section-kicker">מכירים לפני שבוחרים</div>
+
+          <h2 class="section-title" id="teachers-title">
+            המקום להכיר את המורה הבא שלכם.
+          </h2>
+        </div>
+
+        <a class="button button-light" href="join.html">
+          להרשמה ולהתאמה אישית ←
+        </a>
+      </div>
+
+      <div class="teacher-list">
+        <article class="teacher-card">
+          <div class="portrait p-noam" aria-hidden="true">
+            נועם
+          </div>
+
+          <div class="teacher-info">
+            <h3 class="teacher-name">נועם לוי</h3>
+            <p>מתמטיקה 4–5 יח״ל · 6 שנות ניסיון</p>
+
+            <div class="teacher-footer">
+              <span class="demo-label">פרופיל לדוגמה</span>
+              <span class="price">
+                ₪120 <small>/ שעה לדוגמה</small>
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <article class="teacher-card">
+          <div class="portrait p-maya" aria-hidden="true">
+            מאיה
+          </div>
+
+          <div class="teacher-info">
+            <h3 class="teacher-name">מאיה כהן</h3>
+            <p>מתמטיקה ופיזיקה · הכנה לבגרות</p>
+
+            <div class="teacher-footer">
+              <span class="demo-label">פרופיל לדוגמה</span>
+              <span class="price">
+                ₪135 <small>/ שעה לדוגמה</small>
+              </span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <p class="demo-note">
+        הכרטיסים כאן נועדו להמחיש את מבנה הפרופילים.
+        את רשימת המורים באתר תוכלו לראות לאחר הרשמה וכניסה.
+      </p>
+    </section>
+
+    <section
+      class="passport"
+      id="passport"
+      aria-labelledby="passport-title"
+    >
+      <div class="container passport-grid">
+        <div>
+          <div class="section-kicker">מבט להמשך הדרך</div>
+
+          <h2 class="section-title" id="passport-title">
+            לכל שיעור<br>
+            יש צעד הבא.
+          </h2>
+
+          <p class="section-copy">
+            דרכון ההתקדמות הוא חלק מהחזון של כיוון:
+            מקום אחד למטרות, להצלחות ולמה שרוצים לתרגל בהמשך.
+            כך נראית דוגמה לחוויית ההתקדמות המתוכננת.
+          </p>
+
+          <ul class="passport-list">
+            <li>
+              <span class="check" aria-hidden="true">✓</span>
+              מטרה ברורה מול העיניים
+            </li>
+            <li>
+              <span class="check" aria-hidden="true">✓</span>
+              תיעוד של מה שכבר הצליח
+            </li>
+            <li>
+              <span class="check" aria-hidden="true">✓</span>
+              צעד קטן לקראת השיעור הבא
+            </li>
+          </ul>
+
+          <a class="button button-coral" href="join.html">
+            מתחילים בבניית פרופיל
+          </a>
+        </div>
+
+        <div class="passport-card">
+          <div class="passport-card-head">
+            <h3>הדרכון של דנה</h3>
+            <span class="demo-label">המחשה בלבד</span>
+          </div>
+
+          <div class="goal">
+            <span>המטרה שלנו</span>
+            <b>להגיע מוכנה לבגרות במתמטיקה</b>
+          </div>
+
+          <div class="timeline">
+            <div>
+              <b>פירוק שאלות מילוליות</b>
+              <small>הצלחה לדוגמה · שיעור 3</small>
+            </div>
+
+            <div>
+              <b>תרגול פונקציות</b>
+              <small>הצעד הבא לדוגמה · שיעור 4</small>
+            </div>
+          </div>
+
+          <div class="next">
+            ✦ לקראת הפעם הבאה: ארבעה תרגילים קצרים לחיזוק.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="start-title">
+      <div class="container cta-box">
+        <h2 id="start-title">
+          בואו נמצא את<br>
+          הכיוון שלכם.
+        </h2>
+
+        <p>
+          פותחים חשבון, מספרים מה צריך
+          ומתחילים להכיר את האפשרויות.
+        </p>
+
+        <div class="cta-actions">
+          <a class="button button-primary" href="join.html">
+            יצירת חשבון ←
+          </a>
+
+          <a class="button button-light" href="login.html">
+            כבר נרשמתי — כניסה
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">↗</span>
+          כיוון
+        </a>
+
+        <nav class="footer-links" aria-label="קישורים בתחתית העמוד">
+          <a href="#how">איך זה עובד</a>
+          <a href="join.html">הרשמה</a>
+          <a href="login.html">כניסה לחשבון</a>
+        </nav>
+
+        <p>© 2026 כיוון · ללמוד בדרך שמתאימה לך</p>
+      </div>
+    </footer>
   </div>
 </body>
 </html>

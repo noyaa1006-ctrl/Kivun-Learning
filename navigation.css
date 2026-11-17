@@ -1,0 +1,223 @@
+:root {
+  --focus-ring: #08785c;
+}
+
+html {
+  scroll-padding-top: 96px;
+}
+
+a {
+  text-underline-offset: 4px;
+}
+
+a.brand {
+  text-decoration: none;
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+
+:where(button, a.button) {
+  min-height: 44px;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+/* קישור דילוג לתוכן למשתמשי מקלדת */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  right: 16px;
+  z-index: 999;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #121a37;
+  color: white;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* כפתור תפריט בנייד */
+.menu-toggle {
+  display: none;
+  padding: 8px 12px;
+  border: 1px solid #e6eaf4;
+  border-radius: 12px;
+  background: white;
+  color: #121a37;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* מצב המתנה לבדיקת התחברות */
+#access-status {
+  max-width: 480px;
+  margin: 15vh auto;
+  padding: 32px;
+  border: 1px solid #e6eaf4;
+  border-radius: 24px;
+  background: white;
+  color: #121a37;
+  font: 18px/1.7 Heebo, Arial, sans-serif;
+  text-align: center;
+}
+
+#access-status a {
+  color: #08785c;
+}
+
+.access-pending body > :not(#access-status):not(script) {
+  display: none !important;
+}
+
+/* ניווט ותצוגת דף הבית */
+.nav-links {
+  flex-wrap: wrap;
+}
+
+.hero {
+  scroll-margin-top: 20px;
+}
+
+.hero .nav {
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.hero-visual {
+  position: relative;
+}
+
+.hero .nav-links {
+  gap: 20px;
+}
+
+.hero .nav-links a:hover {
+  color: #08785c;
+}
+
+/* מרווח לכפתור הצגת הסיסמה */
+.password-row input {
+  padding-left: 76px;
+}
+
+/* תיאור השלב בהרשמה */
+#step-label {
+  color: #08785c;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* טאבלטים וטלפונים */
+@media (max-width: 800px) {
+  .menu-toggle {
+    display: block;
+    margin-inline-start: auto;
+  }
+
+  .hero #public-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% - 4px);
+    right: 0;
+    left: 0;
+    z-index: 10;
+    padding: 12px;
+    border: 1px solid #e6eaf4;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 0 18px 50px rgba(26, 39, 76, 0.13);
+  }
+
+  .hero #public-menu.is-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  #public-menu a {
+    padding: 12px 14px;
+    border-radius: 10px;
+  }
+
+  #public-menu a:hover {
+    background: #e9fff4;
+  }
+
+  body > nav .nav-links {
+    display: flex;
+    gap: 12px;
+  }
+
+  .teacher-info .fit {
+    position: static;
+    display: inline-block;
+    margin-top: 6px;
+  }
+
+  .ticker-inner {
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    white-space: normal;
+  }
+}
+
+/* מסכים קטנים */
+@media (max-width: 470px) {
+  .hero .nav {
+    gap: 8px;
+  }
+
+  .menu-toggle {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .hero .nav > .button {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .passport-card {
+    transform: none;
+    box-shadow: 7px 8px 0 #ff6e61;
+  }
+
+  .section-title {
+    font-size: 32px;
+  }
+
+  input,
+  select,
+  textarea {
+    max-width: 100%;
+  }
+
+  #access-status {
+    margin: 12vh 14px;
+    padding: 24px;
+  }
+}
+
+/* התאמה להעדפה להפחתת תנועה */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

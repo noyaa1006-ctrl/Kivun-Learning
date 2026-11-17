@@ -1,396 +1,599 @@
-
 <!doctype html>
-<html lang="he" dir="rtl">
+<html lang="he" dir="rtl" class="access-pending">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121a37">
   <title>האזור שלי — כיוון</title>
 
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap");
 
     :root {
-      --navy:#121a37;
-      --ink:#1d2746;
-      --teal:#0b9d78;
-      --coral:#ff6e61;
-      --cloud:#f6f8fe;
-      --line:#e4e9f4;
-      --muted:#69738d;
-      --shadow:0 15px 40px rgba(23,37,78,.09);
+      --navy: #121a37;
+      --ink: #1d2746;
+      --teal: #08785c;
+      --coral: #ff6e61;
+      --cloud: #f6f8fe;
+      --line: #e4e9f4;
+      --muted: #69738d;
+      --shadow: 0 15px 40px rgba(23, 37, 78, .09);
     }
 
-    * { box-sizing:border-box; }
-    .hidden { display:none !important; }
+    * {
+      box-sizing: border-box;
+    }
+
+    .hidden {
+      display: none !important;
+    }
 
     body {
-      margin:0;
-      color:var(--ink);
-      background:var(--cloud);
-      font-family:Heebo,Arial,sans-serif;
+      margin: 0;
+      color: var(--ink);
+      background: var(--cloud);
+      font-family: Heebo, Arial, sans-serif;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
     }
 
     .container {
-      width:min(1120px,calc(100% - 30px));
-      margin:auto;
+      width: min(1120px, calc(100% - 30px));
+      margin-inline: auto;
     }
 
-    nav {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      min-height:76px;
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      min-height: 80px;
+      padding-block: 12px;
     }
 
     .brand {
-      color:var(--navy);
-      font-size:28px;
-      font-weight:900;
-      text-decoration:none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy);
+      font-size: 28px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .mark {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 10px 10px 10px 2px;
+      color: #fff;
+      background: var(--coral);
     }
 
     .nav-links {
-      display:flex;
-      align-items:center;
-      gap:16px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
-    .nav-links a,.logout {
-      border:0;
-      color:var(--muted);
-      background:transparent;
-      font:inherit;
-      font-weight:800;
-      text-decoration:none;
-      cursor:pointer;
+    .nav-links a,
+    .logout {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 6px 0;
+      border: 0;
+      color: var(--muted);
+      background: transparent;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
     }
 
-    .logout { color:var(--coral); }
+    .logout {
+      color: #a5342e;
+    }
 
     .banner {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      padding:28px;
-      border-radius:25px;
-      color:#fff;
-      background:var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px;
+      border-radius: 25px;
+      color: #fff;
+      background: var(--navy);
     }
 
-    .banner h1 { margin:0; }
-    .banner p { margin:4px 0 0; color:#cbd5ee; }
+    .banner h1 {
+      margin: 0;
+      font-size: 29px;
+      overflow-wrap: anywhere;
+    }
 
-    .avatar,.photo-preview {
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      color:#fff;
-      background:linear-gradient(135deg,#ff9d6e,#c64f62);
-      font-weight:900;
+    .banner p {
+      margin: 8px 0 0;
+      color: #cbd5ee;
+      line-height: 1.7;
+    }
+
+    .avatar,
+    .photo-preview {
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      color: #fff;
+      background: linear-gradient(135deg, #ff9d6e, #c64f62);
+      font-weight: 900;
     }
 
     .avatar {
-      width:60px;
-      height:60px;
-      flex:0 0 60px;
-      border-radius:18px;
-      font-size:24px;
+      width: 60px;
+      height: 60px;
+      flex: 0 0 60px;
+      border-radius: 18px;
+      font-size: 24px;
     }
 
     .photo-preview {
-      width:85px;
-      height:85px;
-      flex:0 0 85px;
-      border-radius:20px;
-      font-size:28px;
+      width: 85px;
+      height: 85px;
+      flex: 0 0 85px;
+      border-radius: 20px;
+      font-size: 28px;
     }
 
-    .avatar img,.photo-preview img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
+    .avatar img,
+    .photo-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .layout {
-      display:grid;
-      grid-template-columns:225px 1fr;
-      gap:24px;
-      margin:25px 0 70px;
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr);
+      gap: 24px;
+      margin: 25px 0 70px;
     }
 
     .menu {
-      height:max-content;
-      padding:10px;
-      border-radius:19px;
-      background:#fff;
-      box-shadow:var(--shadow);
+      display: grid;
+      gap: 6px;
+      height: max-content;
+      padding: 10px;
+      border-radius: 19px;
+      background: #fff;
+      box-shadow: var(--shadow);
     }
 
     .menu button {
-      width:100%;
-      padding:12px;
-      border:0;
-      border-radius:11px;
-      color:var(--muted);
-      background:transparent;
-      font:inherit;
-      font-weight:800;
-      text-align:right;
-      cursor:pointer;
+      width: 100%;
+      min-height: 46px;
+      padding: 12px;
+      border: 0;
+      border-radius: 11px;
+      color: var(--muted);
+      background: transparent;
+      font-weight: 800;
+      text-align: right;
+      cursor: pointer;
     }
 
-    .menu button.active,.menu button:hover {
-      color:#08785c;
-      background:#e5faf0;
+    .menu button.active,
+    .menu button:hover {
+      color: var(--teal);
+      background: #e5faf0;
     }
 
     .card {
-      padding:24px;
-      border-radius:21px;
-      background:#fff;
-      box-shadow:var(--shadow);
+      min-width: 0;
+      padding: 24px;
+      border-radius: 21px;
+      background: #fff;
+      box-shadow: var(--shadow);
     }
 
-    .card h2 { margin:0 0 5px; }
+    .card h2 {
+      margin: 0 0 8px;
+      color: var(--navy);
+    }
 
     .sub {
-      margin:0 0 20px;
-      color:var(--muted);
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
     }
 
     .form {
-      display:grid;
-      gap:14px;
+      display: grid;
+      gap: 17px;
     }
 
     .profile-section {
-      padding:17px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:#fbfcff;
+      min-width: 0;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fbfcff;
     }
 
     .profile-section h3 {
-      margin:0 0 14px;
-      color:var(--navy);
+      margin: 0 0 14px;
+      color: var(--navy);
     }
-    .use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .use-choice{padding:14px;border:2px solid var(--line);border-radius:14px;background:#fff;cursor:pointer}
-    .use-choice:has(input:checked){border-color:var(--teal);background:#effdf7}
-    .use-choice input{width:auto;margin-left:7px}.use-choice b{color:var(--navy)}.use-choice small{display:block;margin-top:4px;color:var(--muted)}
+
+    .use-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .use-choice {
+      margin: 0;
+      padding: 14px;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .use-choice:has(input:checked) {
+      border-color: var(--teal);
+      background: #effdf7;
+    }
+
+    .use-choice input {
+      width: auto;
+      margin-left: 7px;
+      accent-color: var(--teal);
+    }
+
+    .use-choice small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.6;
+    }
 
     .two {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
     }
 
     label {
-      display:block;
-      margin-bottom:5px;
-      color:#4e5b76;
-      font-size:13px;
-      font-weight:800;
+      display: block;
+      margin-bottom: 7px;
+      color: #4e5b76;
+      font-size: 14px;
+      font-weight: 800;
     }
 
-    input,select,textarea {
-      width:100%;
-      padding:12px;
-      border:1px solid var(--line);
-      border-radius:11px;
-      outline:none;
-      font:inherit;
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      color: var(--ink);
+      background: #fff;
+      font-size: 16px;
     }
 
-    input:focus,select:focus,textarea:focus {
-      border-color:var(--teal);
-      box-shadow:0 0 0 3px #dff7ed;
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--teal);
+      outline: none;
+      box-shadow: 0 0 0 3px #dff7ed;
     }
 
-    input:read-only {
-      color:var(--muted);
-      background:#f4f6fa;
+    input[readonly] {
+      color: var(--muted);
+      background: #f4f6fa;
+    }
+
+    #email,
+    #phone {
+      direction: ltr;
+      text-align: left;
     }
 
     textarea {
-      min-height:95px;
-      resize:vertical;
+      min-height: 95px;
+      resize: vertical;
     }
 
     .photo-row {
-      display:flex;
-      align-items:center;
-      gap:14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .photo-row input {
+      min-width: 0;
+    }
+
+    .notice {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
     }
 
     .button {
-      padding:13px 16px;
-      border:0;
-      border-radius:11px;
-      color:#fff;
-      background:var(--navy);
-      font:inherit;
-      font-weight:900;
-      cursor:pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 11px;
+      color: #fff;
+      background: var(--navy);
+      font-weight: 800;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
     }
 
     .button.danger {
-      color:#9e2f2a;
-      background:#fff0ef;
+      color: #9e2f2a;
+      background: #fff0ef;
     }
 
-    .button:disabled {
-      opacity:.6;
-      cursor:wait;
+    .button.secondary {
+      color: var(--teal);
+      background: #e5faf0;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
     }
 
     .message {
-      display:none;
-      padding:11px;
-      border-radius:10px;
-      font-weight:800;
+      display: none;
+      margin-top: 12px;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.7;
     }
 
-    .message.show { display:block; }
-    .message.success { color:#08785c; background:#e5faf0; }
-    .message.error { color:#9e2f2a; background:#fff0ef; }
+    .message.show {
+      display: block;
+    }
 
-    .loading,.empty {
-      padding:38px;
-      color:var(--muted);
-      text-align:center;
+    .message.success {
+      color: var(--teal);
+      background: #e5faf0;
+    }
+
+    .message.error {
+      color: #9e2f2a;
+      background: #fff0ef;
+    }
+
+    .message.info {
+      color: #405177;
+      background: #eef3ff;
+    }
+
+    .loading,
+    .empty {
+      padding: 32px 20px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.8;
     }
 
     .request-tabs {
-      display:flex;
-      gap:8px;
-      margin-bottom:18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
     }
 
     .request-tab {
-      padding:9px 13px;
-      border:1px solid var(--line);
-      border-radius:10px;
-      color:var(--muted);
-      background:#fff;
-      font:inherit;
-      font-weight:800;
-      cursor:pointer;
+      min-height: 44px;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--muted);
+      background: #fff;
+      font-weight: 800;
+      cursor: pointer;
     }
 
     .request-tab.active {
-      color:#08785c;
-      border-color:#bcebd9;
-      background:#e5faf0;
+      color: var(--teal);
+      border-color: #bcebd9;
+      background: #e5faf0;
     }
 
     .requests {
-      display:grid;
-      gap:13px;
+      display: grid;
+      gap: 14px;
     }
 
     .request {
-      padding:18px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:#fff;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      overflow-wrap: anywhere;
     }
 
     .request-top {
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
     }
 
     .request h3 {
-      margin:0 0 4px;
-      color:var(--navy);
+      margin: 0 0 7px;
+      color: var(--navy);
     }
 
     .request p {
-      margin:10px 0;
-      color:#5d6881;
-      line-height:1.6;
+      margin: 12px 0;
+      color: #5d6881;
+      line-height: 1.8;
+      white-space: pre-wrap;
     }
 
     .request-info {
-      display:flex;
-      flex-wrap:wrap;
-      gap:9px;
-      color:var(--muted);
-      font-size:13px;
-      font-weight:700;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 13px;
     }
 
     .status {
-      padding:5px 9px;
-      border-radius:8px;
-      color:#765b09;
-      background:#fff7d9;
-      font-size:12px;
-      font-weight:900;
+      flex-shrink: 0;
+      padding: 5px 9px;
+      border-radius: 8px;
+      color: #765b09;
+      background: #fff7d9;
+      font-size: 12px;
+      font-weight: 900;
     }
 
     .status.accepted {
-      color:#08785c;
-      background:#e5faf0;
+      color: var(--teal);
+      background: #e5faf0;
     }
 
     .status.declined {
-      color:#9e2f2a;
-      background:#fff0ef;
+      color: #9e2f2a;
+      background: #fff0ef;
     }
 
     .request-actions {
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:13px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .unread {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 800;
     }
 
     .public-link {
-      color:var(--teal);
-      font-weight:800;
-      text-decoration:none;
+      display: inline-block;
+      color: var(--teal);
+      font-weight: 800;
+      text-decoration: none;
     }
 
-    @media(max-width:720px) {
-      .layout { grid-template-columns:1fr; }
+    @media (max-width: 800px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
 
       .menu {
-        display:flex;
-        overflow:auto;
+        display: flex;
+        flex-wrap: wrap;
       }
 
       .menu button {
-        width:auto;
-        white-space:nowrap;
+        flex: 1;
+        width: auto;
+        text-align: center;
       }
 
-      .two { grid-template-columns:1fr; }
-      .use-grid { grid-template-columns:1fr; }
+      .use-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .two {
+        grid-template-columns: 1fr;
+      }
 
       .photo-row {
-        align-items:flex-start;
-        flex-direction:column;
+        align-items: flex-start;
+        flex-direction: column;
       }
 
-      .nav-links { gap:8px; }
-      .nav-links a,.logout { font-size:12px; }
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a,
+      .logout {
+        font-size: 12px;
+      }
+
+      .brand {
+        font-size: 24px;
+      }
+
+      .banner {
+        padding: 21px;
+      }
+
+      .banner h1 {
+        font-size: 23px;
+      }
+
+      .banner p {
+        font-size: 14px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .profile-section {
+        padding: 14px;
+      }
     }
   </style>
+
+  <link rel="stylesheet" href="navigation.css">
+  <script defer src="navigation.js"></script>
 </head>
 
 <body>
-  <nav class="container">
-    <a class="brand" href="index.html">כיוון ↗</a>
+  <div id="access-status" role="status" aria-live="polite">
+    <strong>רגע, בודקים את הכניסה שלך…</strong>
+    <p>מיד ממשיכים לכיוון שלך.</p>
+    <a href="login.html">חזרה לכניסה</a>
+  </div>
+
+  <nav class="container nav" aria-label="ניווט ראשי">
+    <a class="brand" href="index.html">
+      <span class="mark" aria-hidden="true">↗</span>
+      כיוון
+    </a>
 
     <div class="nav-links">
-      <a href="index.html">בית</a>
-      <a href="matches.html">מורים</a>
-
+      <a href="index.html">עמוד הבית</a>
+      <a href="matches.html">חיפוש מורים</a>
       <button class="logout" id="logout-button" type="button">
         התנתקות
       </button>
@@ -400,60 +603,112 @@
   <main class="container">
     <section class="banner">
       <div>
-        <h1 id="welcome">טוענים את האזור שלך...</h1>
+        <h1 id="welcome">האזור האישי שלך</h1>
         <p id="banner-text">כאן מנהלים את הפרופילים והבקשות.</p>
       </div>
 
-      <div class="avatar" id="avatar">כ</div>
+      <div class="avatar" id="avatar" aria-hidden="true">כ</div>
     </section>
 
+    <div
+      class="message"
+      id="page-message"
+      role="status"
+      aria-live="polite"
+    ></div>
+
     <div class="layout">
-      <aside class="menu">
-        <button class="active" data-pane="profile" type="button">
-          עריכת פרופיל
+      <aside class="menu" aria-label="תפריט האזור האישי">
+        <button
+          class="active"
+          data-pane="profile"
+          type="button"
+          aria-pressed="true"
+          aria-controls="profile-pane"
+          disabled
+        >
+          הפרופילים שלי
         </button>
 
-        <button data-pane="requests" type="button">
-          בקשות ושיעורים
+        <button
+          data-pane="requests"
+          type="button"
+          aria-pressed="false"
+          aria-controls="requests-pane"
+          disabled
+        >
+          הבקשות והשיחות שלי
         </button>
       </aside>
 
       <section>
-        <div class="card loading" id="loading">
-          טוענים את הפרופיל שלך...
+        <div class="card loading" id="loading" role="status">
+          טוענים את הפרופיל שלך…
         </div>
 
-        <div class="card hidden" id="profile-pane">
-          <h2>עריכת הפרופיל</h2>
-
+        <section class="card hidden" id="profile-pane">
+          <h2 tabindex="-1">הפרופילים שלי</h2>
           <p class="sub">
-            חשבון אחד יכול לשמש ללמידה, להוראה או לשניהם.
+            עדכנו את הפרטים ואת סוגי השימוש בחשבון.
+            בסיום לחצו על שמירת השינויים.
           </p>
 
           <form class="form" id="edit-form">
             <div>
-              <div>
-                <label for="name">שם מלא</label>
-                <input id="name" required>
-              </div>
+              <label for="name">שם מלא *</label>
+              <input id="name" required maxlength="100" autocomplete="name">
             </div>
-            <section class="profile-section"><h3>איך החשבון משמש אותך?</h3><p class="sub">אפשר לבחור כמה אפשרויות ולשנות אותן תמיד. הפרטים נשמרים גם אם מכבים אפשרות.</p><div class="use-grid"><label class="use-choice"><span><input id="use-self" type="checkbox"> <b>אני רוצה ללמוד</b></span><small>חיפוש מורה בשבילי</small></label><label class="use-choice"><span><input id="use-parent" type="checkbox"> <b>אני הורה</b></span><small>חיפוש מורה עבור ילד/ה</small></label><label class="use-choice"><span><input id="use-teacher" type="checkbox"> <b>אני רוצה ללמד</b></span><small>פרופיל מורה וקבלת בקשות</small></label></div></section>
+
+            <section class="profile-section">
+              <h3>איך החשבון משמש אותך?</h3>
+
+              <p class="sub">
+                אפשר לבחור כמה אפשרויות.
+                פרופילים שנשמרו נשארים בחשבון גם אם מכבים את השימוש בהם.
+              </p>
+
+              <div class="use-grid">
+                <label class="use-choice">
+                  <span>
+                    <input id="use-self" type="checkbox">
+                    <b>אני רוצה ללמוד</b>
+                  </span>
+                  <small>חיפוש מורה עבורי</small>
+                </label>
+
+                <label class="use-choice">
+                  <span>
+                    <input id="use-parent" type="checkbox">
+                    <b>אני הורה</b>
+                  </span>
+                  <small>חיפוש מורה עבור ילד או ילדה</small>
+                </label>
+
+                <label class="use-choice">
+                  <span>
+                    <input id="use-teacher" type="checkbox">
+                    <b>אני רוצה ללמד</b>
+                  </span>
+                  <small>פרופיל מורה וקבלת בקשות</small>
+                </label>
+              </div>
+            </section>
 
             <div class="two">
               <div>
-                <label for="email">אימייל</label>
+                <label for="email">אימייל החשבון</label>
                 <input id="email" type="email" readonly>
               </div>
 
               <div>
-                <label for="phone">טלפון פרטי</label>
-                <input id="phone" type="tel">
+                <label for="phone">טלפון</label>
+                <input id="phone" type="tel" autocomplete="tel">
               </div>
             </div>
 
             <div>
               <label for="city">עיר או אזור</label>
-              <input id="city">
+              <input id="city" maxlength="100" autocomplete="address-level2">
             </div>
 
             <div>
@@ -463,6 +718,18 @@
                 <div class="photo-preview" id="photo-preview">כ</div>
                 <input id="photo" type="file" accept="image/*">
               </div>
+
+              <p class="notice">
+                אפשר לבחור תמונה עד 8MB.
+                התמונה תישמר לאחר לחיצה על שמירת השינויים.
+              </p>
+
+              <div
+                class="message"
+                id="photo-message"
+                role="status"
+                aria-live="polite"
+              ></div>
             </div>
 
             <section class="profile-section" id="student-section">
@@ -470,9 +737,7 @@
 
               <div class="form">
                 <div>
-                  <label for="student-subjects">
-                    מקצועות שרוצים ללמוד
-                  </label>
+                  <label for="student-subjects">מקצועות שרוצים ללמוד *</label>
                   <input id="student-subjects">
                 </div>
 
@@ -483,10 +748,7 @@
                   </div>
 
                   <div>
-                    <label for="learning-style">
-                      איך נוח לך ללמוד?
-                    </label>
-
+                    <label for="learning-style">איך נוח לך ללמוד?</label>
                     <select id="learning-style">
                       <option value="">בחירה</option>
                       <option>הסברים ותרגול</option>
@@ -499,45 +761,83 @@
 
                 <div>
                   <label for="student-goal">המטרה שלך</label>
-                  <textarea id="student-goal"></textarea>
+                  <textarea id="student-goal" maxlength="1000"></textarea>
                 </div>
 
                 <div>
-                  <label for="student-availability">
-                    ימים ושעות נוחים
-                  </label>
-                  <input id="student-availability">
+                  <label for="student-availability">ימים ושעות נוחים</label>
+                  <input id="student-availability" maxlength="200">
                 </div>
               </div>
             </section>
-            <section class="profile-section hidden" id="child-section"><h3>פרופיל הלמידה של הילד/ה</h3><p class="sub">אין צורך לכתוב את שם הילד/ה. המידע הזה נשאר פרטי.</p><div class="form"><div><label for="child-subjects">מקצועות שרוצים ללמוד</label><input id="child-subjects"></div><div class="two"><div><label for="child-level">רמה או כיתה</label><input id="child-level"></div><div><label for="child-learning-style">איך נוח לילד/ה ללמוד?</label><select id="child-learning-style"><option value="">בחירה</option><option>הסברים ותרגול</option><option>למידה חזותית</option><option>למידה בקצב מהיר</option><option>למידה רגועה ומסודרת</option></select></div></div><div><label for="child-goal">מטרת הלמידה</label><textarea id="child-goal"></textarea></div><div><label for="child-availability">ימים ושעות נוחים</label><input id="child-availability"></div></div></section>
+
+            <section class="profile-section hidden" id="child-section">
+              <h3>פרופיל הלמידה של הילד/ה</h3>
+              <p class="sub">אין צורך לכתוב את שם הילד או הילדה.</p>
+
+              <div class="form">
+                <div>
+                  <label for="child-subjects">מקצועות שרוצים ללמוד *</label>
+                  <input id="child-subjects">
+                </div>
+
+                <div class="two">
+                  <div>
+                    <label for="child-level">רמה או כיתה</label>
+                    <input id="child-level">
+                  </div>
+
+                  <div>
+                    <label for="child-learning-style">איך נוח לילד/ה ללמוד?</label>
+                    <select id="child-learning-style">
+                      <option value="">בחירה</option>
+                      <option>הסברים ותרגול</option>
+                      <option>למידה חזותית</option>
+                      <option>למידה בקצב מהיר</option>
+                      <option>למידה רגועה ומסודרת</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="child-goal">מטרת הלמידה</label>
+                  <textarea id="child-goal" maxlength="1000"></textarea>
+                </div>
+
+                <div>
+                  <label for="child-availability">ימים ושעות נוחים</label>
+                  <input id="child-availability" maxlength="200">
+                </div>
+              </div>
+            </section>
 
             <section class="profile-section hidden" id="teacher-section">
               <h3>פרופיל ההוראה שלי</h3>
 
+              <p class="sub">
+                הפרטים בחלק הזה מוצגים בפרופיל המורה.
+              </p>
+
               <div class="form">
                 <div>
-                  <label for="teacher-subjects">
-                    מקצועות שמלמדים
-                  </label>
+                  <label for="teacher-subjects">מקצועות שמלמדים *</label>
                   <input id="teacher-subjects">
                 </div>
 
                 <div class="two">
                   <div>
-                    <label for="price">מחיר לשעה</label>
-                    <input id="price" type="number" min="0">
+                    <label for="price">מחיר לשעה בשקלים</label>
+                    <input id="price" type="number" min="0" step="1">
                   </div>
 
                   <div>
                     <label for="experience">ניסיון בהוראה</label>
-                    <input id="experience">
+                    <input id="experience" maxlength="200">
                   </div>
                 </div>
 
                 <div>
                   <label for="format">אופן השיעור</label>
-
                   <select id="format">
                     <option value="אונליין">אונליין</option>
                     <option value="פרונטלי">פרונטלי</option>
@@ -549,135 +849,201 @@
 
                 <div>
                   <label for="bio">ניסיון ושיטת הוראה</label>
-                  <textarea id="bio"></textarea>
+                  <textarea id="bio" maxlength="2000"></textarea>
                 </div>
 
                 <div>
-                  <label for="teacher-availability">
-                    ימים ושעות זמינים
-                  </label>
-
-                  <input id="teacher-availability"
-                         placeholder="למשל: ראשון 16:00–20:00">
+                  <label for="teacher-availability">ימים ושעות זמינים</label>
+                  <input
+                    id="teacher-availability"
+                    maxlength="200"
+                    placeholder="למשל: ראשון 16:00–20:00"
+                  >
                 </div>
 
-                <a class="public-link"
-                   id="public-profile-link"
-                   href="teacher-profile.html">
-                  צפייה בפרופיל הציבורי שלי
+                <a
+                  class="public-link hidden"
+                  id="public-profile-link"
+                  href="teacher-profile.html"
+                >
+                  צפייה בפרופיל המורה השמור שלי ←
                 </a>
               </div>
             </section>
 
-            <div class="message" id="profile-message"></div>
+            <div
+              class="message"
+              id="profile-message"
+              role="status"
+              aria-live="polite"
+            ></div>
 
             <button class="button" id="save-button" type="submit">
               שמירת השינויים
             </button>
           </form>
-        </div>
+        </section>
 
-        <div class="card hidden" id="requests-pane">
-          <h2>בקשות ושיעורים</h2>
+        <section class="card hidden" id="requests-pane">
+          <h2 tabindex="-1">הבקשות והשיחות שלי</h2>
 
           <p class="sub">
-            בקשות ששלחת ובקשות שקיבלת מופיעות כאן.
+            כאן רואים בקשות שנשלחו והתקבלו.
+            הצ׳אט נפתח לאחר אישור הבקשה.
           </p>
 
-          <div class="request-tabs">
-            <button class="request-tab active"
-                    data-request-mode="outgoing"
-                    type="button">
+          <div class="request-tabs" aria-label="סוג הבקשות">
+            <button
+              class="request-tab active"
+              data-request-mode="outgoing"
+              type="button"
+              aria-pressed="true"
+            >
               בקשות ששלחתי
             </button>
 
-            <button class="request-tab"
-                    id="incoming-tab"
-                    data-request-mode="incoming"
-                    type="button">
+            <button
+              class="request-tab"
+              data-request-mode="incoming"
+              type="button"
+              aria-pressed="false"
+            >
               בקשות שקיבלתי
+            </button>
+
+            <button
+              class="request-tab"
+              id="refresh-requests"
+              type="button"
+            >
+              רענון
             </button>
           </div>
 
-          <div class="requests" id="requests-list">
-            <div class="loading">טוענים בקשות...</div>
-          </div>
-        </div>
+          <div
+            class="message"
+            id="requests-message"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+          <div
+            class="requests"
+            id="requests-list"
+            aria-busy="false"
+          ></div>
+        </section>
       </section>
     </div>
   </main>
 
   <script type="module">
-    import {
-      auth,
-      db,
-      onAuthStateChanged,
-      signOut,
-      updateProfile,
-      doc,
-      getDoc,
-      setDoc,
-      updateDoc,
-      collection,
-      getDocs,
-      query,
-      where,
-      serverTimestamp
-    } from "./firebase.js";
+    const byId = id => document.getElementById(id);
+    const value = id => byId(id).value.trim();
 
-    const loading = document.getElementById("loading");
-    const profilePane = document.getElementById("profile-pane");
-    const requestsPane = document.getElementById("requests-pane");
-    const editForm = document.getElementById("edit-form");
-    const studentSection = document.getElementById("student-section");
-    const childSection = document.getElementById("child-section");
-    const teacherSection = document.getElementById("teacher-section");
-    const saveButton = document.getElementById("save-button");
-    const profileMessage = document.getElementById("profile-message");
-    const requestsList = document.getElementById("requests-list");
-    const incomingTab = document.getElementById("incoming-tab");
+    const loading = byId("loading");
+    const editForm = byId("edit-form");
+    const saveButton = byId("save-button");
+    const requestsList = byId("requests-list");
 
+    const useFields = {
+      selfLearner: byId("use-self"),
+      parent: byId("use-parent"),
+      teacher: byId("use-teacher")
+    };
+
+    const sections = {
+      selfLearner: byId("student-section"),
+      parent: byId("child-section"),
+      teacher: byId("teacher-section")
+    };
+
+    let firebase = null;
     let currentUser = null;
     let currentProfile = {};
+    let ready = false;
+    let saving = false;
+    let dirty = false;
     let photoData = "";
+    let photoBusy = false;
+    let photoVersion = 0;
     let requestMode = "outgoing";
-    const useFields={selfLearner:document.getElementById("use-self"),parent:document.getElementById("use-parent"),teacher:document.getElementById("use-teacher")};
-
-    function value(id) {
-      return document.getElementById(id).value.trim();
-    }
-
-    function setValue(id,newValue) {
-      document.getElementById(id).value = newValue || "";
-    }
-
-    function selectedUses(){return Object.fromEntries(Object.entries(useFields).map(([key,field])=>[key,field.checked]))}
-    function compatibilityRole(uses){return uses.teacher&&(uses.selfLearner||uses.parent)?"both":uses.teacher?"teacher":"student"}
+    let requestVersion = 0;
+    let unsubscribeAuth = null;
 
     function safe(value) {
       return String(value ?? "").replace(
         /[&<>'"]/g,
         character => ({
-          "&":"&amp;",
-          "<":"&lt;",
-          ">":"&gt;",
-          "'":"&#39;",
-          '"':"&quot;"
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          "'": "&#39;",
+          '"': "&quot;"
         })[character]
       );
     }
 
-    function showMessage(text,type) {
-      profileMessage.textContent = text;
-      profileMessage.className = "message show " + type;
+    function showMessage(id, text, type = "info") {
+      const box = byId(id);
+      box.textContent = text;
+      box.className = "message show " + type;
     }
 
-    function showPhoto(photo,name) {
-      ["avatar","photo-preview"].forEach(id => {
-        const box = document.getElementById(id);
-        box.innerHTML = "";
+    function setValue(id, newValue) {
+      const field = byId(id);
 
-        if(photo && photo.startsWith("data:image/")) {
+      const text = Array.isArray(newValue)
+        ? newValue.join(", ")
+        : String(newValue ?? "");
+
+      if (
+        field.tagName === "SELECT" &&
+        text &&
+        !Array.from(field.options).some(option => option.value === text)
+      ) {
+        field.add(new Option(text, text));
+      }
+
+      field.value = text;
+    }
+
+    function selectedUses() {
+      return Object.fromEntries(
+        Object.entries(useFields).map(([key, field]) => [
+          key,
+          field.checked
+        ])
+      );
+    }
+
+    function profileUses(profile) {
+      return profile.accountUses || {
+        selfLearner: profile.role !== "teacher",
+        parent: false,
+        teacher: profile.role === "teacher" || profile.role === "both"
+      };
+    }
+
+    function learningProfile(profile) {
+      if (profile.selfLearningProfile) return profile.selfLearningProfile;
+      if (profile.studentProfile) return profile.studentProfile;
+      if (!profile.accountUses) return profile;
+      return {};
+    }
+
+    function teacherProfile(profile) {
+      if (profile.teacherProfile) return profile.teacherProfile;
+      if (!profile.accountUses && profile.role !== "student") return profile;
+      return {};
+    }
+
+    function showPhoto(photo, name) {
+      ["avatar", "photo-preview"].forEach(id => {
+        const box = byId(id);
+        box.replaceChildren();
+
+        if (typeof photo === "string" && photo.startsWith("data:image/")) {
           const image = document.createElement("img");
           image.src = photo;
           image.alt = "תמונת פרופיל";
@@ -688,452 +1054,758 @@
       });
     }
 
-    function updateRoleSections() {
-      const uses=selectedUses();const student=uses.selfLearner;const parent=uses.parent;const teacher=uses.teacher;
+    function updateSections() {
+      const uses = selectedUses();
 
-      studentSection.classList.toggle("hidden",!student);
-      childSection.classList.toggle("hidden",!parent);
-      teacherSection.classList.toggle("hidden",!teacher);
-      incomingTab.classList.toggle("hidden",!teacher);
+      Object.entries(sections).forEach(([key, section]) => {
+        section.classList.toggle("hidden", !uses[key]);
 
-      if(!teacher && requestMode === "incoming") {
-        requestMode = "outgoing";
-      }
-
-      document.getElementById("banner-text").textContent =
-        teacher&&(student||parent)?"כאן מנהלים את הלמידה, ההוראה והבקשות במקום אחד.":teacher?"כאן מנהלים את פרופיל המורה והבקשות.":parent?"כאן מנהלים את החיפוש עבור הילד/ה והבקשות.":"כאן מנהלים את פרופיל הלמידה והבקשות.";
+        section.querySelectorAll("input, select, textarea, button")
+          .forEach(field => {
+            field.disabled = !uses[key];
+          });
+      });
     }
 
-    function refreshSubjectPickers() {
-      ["student-subjects","child-subjects","teacher-subjects"].forEach(id => {
-        document.getElementById(id).dispatchEvent(
-          new Event("subject-picker-refresh")
-        );
-      });
+    function refreshSummary() {
+      const uses = profileUses(currentProfile);
+      const name = currentProfile.name || currentUser.displayName || "חבר/ה";
+
+      byId("welcome").textContent = `היי ${name}, זה האזור שלך.`;
+
+      byId("banner-text").textContent =
+        uses.teacher && (uses.selfLearner || uses.parent)
+          ? "הלמידה, ההוראה והבקשות שלך במקום אחד."
+          : uses.teacher
+            ? "כאן מנהלים את פרופיל המורה ואת הבקשות."
+            : uses.parent
+              ? "כאן מנהלים את פרופילי הלמידה ואת החיפוש עבור הילד או הילדה."
+              : "כאן מנהלים את פרופיל הלמידה ואת הבקשות.";
+
+      const publicLink = byId("public-profile-link");
+      publicLink.href =
+        "teacher-profile.html?id=" + encodeURIComponent(currentUser.uid);
+      publicLink.classList.toggle("hidden", !uses.teacher);
     }
 
     function fillProfile(profile) {
       currentProfile = profile;
       photoData = profile.photo || "";
 
-      setValue("name",profile.name);
-      setValue("email",profile.email || currentUser.email);
-      setValue("phone",profile.phone);
-      setValue("city",profile.city);
+      setValue("name", profile.name || currentUser.displayName);
+      setValue("email", currentUser.email);
+      setValue("phone", profile.phone);
+      setValue("city", profile.city);
 
-      const legacyStudent=profile.studentProfile||profile;const uses=profile.accountUses||{selfLearner:profile.role!=="teacher",parent:false,teacher:profile.role==="teacher"||profile.role==="both"};Object.entries(useFields).forEach(([key,field])=>field.checked=Boolean(uses[key]));
-      const studentProfile=profile.selfLearningProfile||legacyStudent;const childProfile=profile.childLearningProfile||{};
-      const teacherProfile = profile.teacherProfile || profile;
+      const uses = profileUses(profile);
 
-      setValue("student-subjects",studentProfile.subjects);
-      setValue("student-level",studentProfile.level);
-      setValue("learning-style",studentProfile.learningStyle);
-      setValue("student-goal",studentProfile.goal);
-      setValue("student-availability",studentProfile.availability);
-      setValue("child-subjects",childProfile.subjects);setValue("child-level",childProfile.level);setValue("child-learning-style",childProfile.learningStyle);setValue("child-goal",childProfile.goal);setValue("child-availability",childProfile.availability);
+      Object.entries(useFields).forEach(([key, field]) => {
+        field.checked = Boolean(uses[key]);
+      });
 
-      setValue("teacher-subjects",teacherProfile.subjects);
-      setValue("price",teacherProfile.price);
-      setValue("experience",teacherProfile.experience);
-      setValue("format",teacherProfile.format || "אונליין");
-      setValue("bio",teacherProfile.bio);
-      setValue("teacher-availability",teacherProfile.availability);
+      const student = learningProfile(profile);
+      const child = profile.childLearningProfile || {};
+      const teacher = teacherProfile(profile);
 
-      const name = profile.name || currentUser.displayName || "חבר/ה";
+      setValue("student-subjects", student.subjects);
+      setValue("student-level", student.level);
+      setValue("learning-style", student.learningStyle);
+      setValue("student-goal", student.goal);
+      setValue("student-availability", student.availability);
 
-      document.getElementById("welcome").textContent =
-        `היי ${name}, זה האזור שלך.`;
+      setValue("child-subjects", child.subjects);
+      setValue("child-level", child.level);
+      setValue("child-learning-style", child.learningStyle);
+      setValue("child-goal", child.goal);
+      setValue("child-availability", child.availability);
 
-      document.getElementById("public-profile-link").href =
-        `teacher-profile.html?id=${encodeURIComponent(currentUser.uid)}`;
+      setValue("teacher-subjects", teacher.subjects);
+      setValue("price", teacher.price);
+      setValue("experience", teacher.experience);
+      setValue("format", teacher.format || "אונליין");
+      setValue("bio", teacher.bio);
+      setValue("teacher-availability", teacher.availability);
 
-      showPhoto(photoData,name);
-      updateRoleSections();
-
-      loading.classList.add("hidden");
-      profilePane.classList.remove("hidden");
-
-      setTimeout(refreshSubjectPickers,0);
+      showPhoto(photoData, value("name"));
+      updateSections();
+      refreshSummary();
+      dirty = false;
     }
 
-    document.querySelectorAll(".menu button").forEach(button => {
-      button.addEventListener("click",() => {
-        document.querySelectorAll(".menu button").forEach(item => {
-          item.classList.remove("active");
-        });
+    function openPane(name) {
+      if (!ready || saving) return;
 
-        button.classList.add("active");
+      const showRequests = name === "requests";
 
-        const requests = button.dataset.pane === "requests";
+      byId("profile-pane").classList.toggle("hidden", showRequests);
+      byId("requests-pane").classList.toggle("hidden", !showRequests);
 
-        profilePane.classList.toggle("hidden",requests);
-        requestsPane.classList.toggle("hidden",!requests);
+      document.querySelectorAll("[data-pane]").forEach(button => {
+        const active = button.dataset.pane === name;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
 
-        if(requests) loadRequests();
+      byId(showRequests ? "requests-pane" : "profile-pane")
+        .querySelector("h2").focus();
+
+      if (showRequests) loadRequests();
+    }
+
+    document.querySelectorAll("[data-pane]").forEach(button => {
+      button.addEventListener("click", () => {
+        openPane(button.dataset.pane);
       });
     });
 
-    document.querySelectorAll(".request-tab").forEach(button => {
-      button.addEventListener("click",() => {
-        requestMode = button.dataset.requestMode;
-
-        document.querySelectorAll(".request-tab").forEach(item => {
-          item.classList.toggle("active",item === button);
-        });
-
-        loadRequests();
-      });
+    Object.values(useFields).forEach(field => {
+      field.addEventListener("change", updateSections);
     });
 
-    Object.values(useFields).forEach(field=>field.addEventListener("change",updateRoleSections));
+    editForm.addEventListener("input", () => {
+      if (ready) dirty = true;
+    });
 
-    document.getElementById("logout-button")
-      .addEventListener("click",async () => {
-        await signOut(auth);
-        window.location.href = "login.html";
-      });
+    editForm.addEventListener("change", () => {
+      if (ready) dirty = true;
+    });
 
-    document.getElementById("photo")
-      .addEventListener("change",event => {
-        const file = event.target.files[0];
-        if(!file) return;
+    window.addEventListener("beforeunload", event => {
+      if (dirty || saving) {
+        event.preventDefault();
+        event.returnValue = "";
+      }
+    });
 
-        if(!file.type.startsWith("image/")) {
-          showMessage("יש לבחור קובץ תמונה.","error");
-          return;
-        }
+    byId("logout-button").addEventListener("click", async () => {
+      if (!firebase || saving) return;
 
-        const reader = new FileReader();
-
-        reader.onload = () => {
-          const image = new Image();
-
-          image.onload = () => {
-            const size = 360;
-            const crop = Math.min(image.width,image.height);
-            const canvas = document.createElement("canvas");
-            const context = canvas.getContext("2d");
-
-            canvas.width = size;
-            canvas.height = size;
-
-            context.drawImage(
-              image,
-              (image.width-crop)/2,
-              (image.height-crop)/2,
-              crop,
-              crop,
-              0,
-              0,
-              size,
-              size
-            );
-
-            photoData = canvas.toDataURL("image/jpeg",.72);
-            showPhoto(photoData,value("name"));
-
-            showMessage(
-              "התמונה מוכנה. לחצי על שמירת השינויים.",
-              "success"
-            );
-          };
-
-          image.src = reader.result;
-        };
-
-        reader.readAsDataURL(file);
-      });
-
-    editForm.addEventListener("submit",async event => {
-      event.preventDefault();
-
-      const accountUses=selectedUses();const student=accountUses.selfLearner;const parent=accountUses.parent;const teacher=accountUses.teacher;
-      if(!student&&!parent&&!teacher){showMessage("צריך לבחור לפחות שימוש אחד לחשבון.","error");return}
-
-      if(student && !value("student-subjects")) {
-        showMessage(
-          "צריך לבחור לפחות מקצוע אחד ללמידה.",
-          "error"
-        );
+      if (dirty && !confirm("יש שינויים שלא נשמרו. להתנתק בלי לשמור?")) {
         return;
       }
 
-      if(teacher && !value("teacher-subjects")) {
-        showMessage(
-          "צריך לבחור לפחות מקצוע אחד להוראה.",
-          "error"
-        );
-        return;
-      }
-      if(parent&&!value("child-subjects")){showMessage("צריך לבחור לפחות מקצוע אחד עבור הילד/ה.","error");return}
+      const button = byId("logout-button");
+      button.disabled = true;
 
-      saveButton.disabled = true;
-      saveButton.textContent = "שומרים...";
+      const hadChanges = dirty;
+      dirty = false;
 
       try {
-        const selfLearningProfile = student
-          ? {
-              subjects:value("student-subjects"),
-              level:value("student-level"),
-              learningStyle:
-                document.getElementById("learning-style").value,
-              goal:value("student-goal"),
-              availability:value("student-availability")
-            }
-          : (currentProfile.selfLearningProfile||currentProfile.studentProfile||null);
-        const childLearningProfile=parent?{subjects:value("child-subjects"),level:value("child-level"),learningStyle:document.getElementById("child-learning-style").value,goal:value("child-goal"),availability:value("child-availability")}:(currentProfile.childLearningProfile||null);
+        await firebase.signOut(firebase.auth);
+        window.location.replace("login.html");
+      } catch (error) {
+        dirty = hadChanges;
+        button.disabled = false;
 
-        const teacherProfile = teacher
-          ? {
-              subjects:value("teacher-subjects"),
-              price:Number(value("price")) || 0,
-              experience:value("experience"),
-              format:document.getElementById("format").value,
-              bio:value("bio"),
-              availability:value("teacher-availability")
-            }
-          : (currentProfile.teacherProfile||null);
-        const role=compatibilityRole(accountUses);
-
-        const profile = {
-          uid:currentUser.uid,
-          name:value("name"),
-          email:currentUser.email,
-          phone:value("phone"),
-          city:value("city"),
-          photo:photoData,
-          role,
-          roles:[...(student||parent?["student"]:[]),...(teacher?["teacher"]:[])],accountUses,selfLearningProfile,childLearningProfile,studentProfile:selfLearningProfile,
-          teacherProfile,
-          updatedAt:serverTimestamp()
-        };
-
-        await updateProfile(currentUser,{
-          displayName:profile.name
-        });
-
-        await setDoc(
-          doc(db,"users",currentUser.uid),
-          profile,
-          {merge:true}
+        showMessage(
+          "page-message",
+          "לא הצלחנו להתנתק. נסו שוב.",
+          "error"
         );
-
-        if(teacher) {
-          await setDoc(
-            doc(db,"teachers",currentUser.uid),
-            {
-              uid:currentUser.uid,
-              name:profile.name,
-              city:profile.city,
-              photo:profile.photo,
-              subjects:teacherProfile.subjects,
-              price:teacherProfile.price,
-              experience:teacherProfile.experience,
-              format:teacherProfile.format,
-              bio:teacherProfile.bio,
-              availability:teacherProfile.availability,
-              acceptingStudents:true,
-              active:true,
-              verified:false,
-              updatedAt:serverTimestamp()
-            },
-            {merge:true}
-          );
-        } else if(currentProfile.teacherProfile) {
-          await setDoc(doc(db,"teachers",currentUser.uid),{active:false,acceptingStudents:false,updatedAt:serverTimestamp()},{merge:true});
-        }
-
-        currentProfile = profile;
-
-        document.getElementById("welcome").textContent =
-          `היי ${profile.name}, זה האזור שלך.`;
-
-        showPhoto(photoData,profile.name);
-        updateRoleSections();
-        showMessage("הפרטים נשמרו בהצלחה.","success");
-      } catch(error) {
-        console.error(error);
-        showMessage("לא הצלחנו לשמור. נסי שוב.","error");
-      } finally {
-        saveButton.disabled = false;
-        saveButton.textContent = "שמירת השינויים";
       }
     });
 
-    function statusText(status) {
-      if(status === "accepted") return "אושרה";
-      if(status === "declined") return "נדחתה";
-      return "ממתינה";
+    function readFile(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error("file-read-failed"));
+        reader.readAsDataURL(file);
+      });
     }
 
-    function requestCard(request) {
-      const incoming = requestMode === "incoming";
+    function loadImage(source) {
+      return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = () => reject(new Error("image-load-failed"));
+        image.src = source;
+      });
+    }
+
+    byId("photo").addEventListener("change", async event => {
+      const file = event.target.files[0];
+      if (!file || saving) return;
+
+      const version = ++photoVersion;
+      photoBusy = false;
+
+      if (!file.type.startsWith("image/")) {
+        showMessage("photo-message", "בחרו קובץ תמונה.", "error");
+        event.target.value = "";
+        return;
+      }
+
+      if (file.size > 8 * 1024 * 1024) {
+        showMessage("photo-message", "בחרו תמונה קטנה מ־8MB.", "error");
+        event.target.value = "";
+        return;
+      }
+
+      photoBusy = true;
+      showMessage("photo-message", "מכינים את התמונה…");
+
+      try {
+        const source = await readFile(file);
+        const image = await loadImage(source);
+
+        if (version !== photoVersion) return;
+
+        const size = 360;
+        const crop = Math.min(image.width, image.height);
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        if (!context || !crop) throw new Error("invalid-image");
+
+        canvas.width = size;
+        canvas.height = size;
+
+        context.drawImage(
+          image,
+          (image.width - crop) / 2,
+          (image.height - crop) / 2,
+          crop,
+          crop,
+          0,
+          0,
+          size,
+          size
+        );
+
+        photoData = canvas.toDataURL("image/jpeg", .72);
+        showPhoto(photoData, value("name"));
+        dirty = true;
+
+        showMessage(
+          "photo-message",
+          "התמונה מוכנה. לחצו על שמירת השינויים.",
+          "success"
+        );
+      } catch {
+        if (version !== photoVersion) return;
+
+        showMessage(
+          "photo-message",
+          "לא הצלחנו לפתוח את התמונה. נסו תמונת JPG או PNG אחרת.",
+          "error"
+        );
+      } finally {
+        if (version === photoVersion) photoBusy = false;
+      }
+    });
+
+    function collectLearning(prefix, styleId, previous) {
+      return {
+        ...previous,
+        subjects: value(prefix + "-subjects"),
+        level: value(prefix + "-level"),
+        learningStyle: value(styleId),
+        goal: value(prefix + "-goal"),
+        availability: value(prefix + "-availability")
+      };
+    }
+
+    editForm.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      if (!ready || !currentUser || saving) return;
+
+      if (photoBusy) {
+        showMessage(
+          "profile-message",
+          "התמונה עדיין נטענת. המתינו רגע לפני השמירה.",
+          "info"
+        );
+        return;
+      }
+
+      byId("name").value = value("name");
+
+      if (!editForm.reportValidity()) return;
+
+      const uses = selectedUses();
+
+      if (!Object.values(uses).some(Boolean)) {
+        showMessage(
+          "profile-message",
+          "בחרו לפחות שימוש אחד לחשבון.",
+          "error"
+        );
+        return;
+      }
+
+      const requiredSubjects = [
+        ["selfLearner", "student-subjects", "בחרו לפחות מקצוע אחד ללמידה."],
+        ["parent", "child-subjects", "בחרו לפחות מקצוע אחד עבור הילד או הילדה."],
+        ["teacher", "teacher-subjects", "בחרו לפחות מקצוע אחד להוראה."]
+      ];
+
+      for (const [use, id, text] of requiredSubjects) {
+        if (uses[use] && !value(id)) {
+          showMessage("profile-message", text, "error");
+          byId(id).parentElement.querySelector(".tag-picker-search")?.focus();
+          return;
+        }
+      }
+
+      const previousStudent = learningProfile(currentProfile);
+      const previousTeacher = teacherProfile(currentProfile);
+
+      const selfLearningProfile = uses.selfLearner
+        ? collectLearning("student", "learning-style", previousStudent)
+        : currentProfile.selfLearningProfile ||
+          currentProfile.studentProfile ||
+          (Object.keys(previousStudent).length ? {
+            subjects: previousStudent.subjects || "",
+            level: previousStudent.level || "",
+            learningStyle: previousStudent.learningStyle || "",
+            goal: previousStudent.goal || "",
+            availability: previousStudent.availability || ""
+          } : null);
+
+      const childLearningProfile = uses.parent
+        ? collectLearning(
+            "child",
+            "child-learning-style",
+            currentProfile.childLearningProfile || {}
+          )
+        : currentProfile.childLearningProfile || null;
+
+      const teaching = uses.teacher
+        ? {
+            ...previousTeacher,
+            subjects: value("teacher-subjects"),
+            price: Number(value("price")) || 0,
+            experience: value("experience"),
+            format: value("format"),
+            bio: value("bio"),
+            availability: value("teacher-availability")
+          }
+        : currentProfile.teacherProfile || null;
+
+      const role = uses.teacher
+        ? uses.selfLearner || uses.parent ? "both" : "teacher"
+        : "student";
+
+      const matching = uses.selfLearner
+        ? selfLearningProfile
+        : uses.parent ? childLearningProfile : null;
+
+      const profile = {
+        uid: currentUser.uid,
+        name: value("name"),
+        email: currentUser.email,
+        phone: value("phone"),
+        city: value("city"),
+        photo: photoData,
+        role,
+        roles: [
+          ...(uses.selfLearner || uses.parent ? ["student"] : []),
+          ...(uses.teacher ? ["teacher"] : [])
+        ],
+        accountUses: uses,
+        selfLearningProfile,
+        childLearningProfile,
+        studentProfile: selfLearningProfile,
+        teacherProfile: teaching,
+        subjects: matching?.subjects || "",
+        level: matching?.level || "",
+        learningStyle: matching?.learningStyle || "",
+        goal: matching?.goal || "",
+        availability: matching?.availability || "",
+        updatedAt: firebase.serverTimestamp()
+      };
+
+      const oldUses = profileUses(currentProfile);
+
+      saving = true;
+      editForm.inert = true;
+      editForm.setAttribute("aria-busy", "true");
+      saveButton.disabled = true;
+      saveButton.textContent = "שומרים…";
+
+      document.querySelectorAll("[data-pane]").forEach(button => {
+        button.disabled = true;
+      });
+
+      byId("logout-button").disabled = true;
+      showMessage("profile-message", "שומרים את הפרטים…");
+
+      try {
+        await firebase.updateProfile(currentUser, {
+          displayName: profile.name
+        });
+
+        await firebase.setDoc(
+          firebase.doc(firebase.db, "users", currentUser.uid),
+          profile,
+          { merge: true }
+        );
+
+        if (uses.teacher) {
+          await firebase.setDoc(
+            firebase.doc(firebase.db, "teachers", currentUser.uid),
+            {
+              uid: currentUser.uid,
+              name: profile.name,
+              city: profile.city,
+              photo: profile.photo,
+              subjects: teaching.subjects,
+              price: teaching.price,
+              experience: teaching.experience,
+              format: teaching.format,
+              bio: teaching.bio,
+              availability: teaching.availability,
+              active: true,
+              acceptingStudents: true,
+              updatedAt: firebase.serverTimestamp()
+            },
+            { merge: true }
+          );
+        } else if (oldUses.teacher) {
+          await firebase.setDoc(
+            firebase.doc(firebase.db, "teachers", currentUser.uid),
+            {
+              active: false,
+              acceptingStudents: false,
+              updatedAt: firebase.serverTimestamp()
+            },
+            { merge: true }
+          );
+        }
+
+        currentProfile = { ...currentProfile, ...profile };
+        dirty = false;
+        refreshSummary();
+
+        showMessage(
+          "profile-message",
+          "כל השינויים נשמרו בהצלחה.",
+          "success"
+        );
+      } catch (error) {
+        console.error("Profile save failed:", error);
+
+        showMessage(
+          "profile-message",
+          "לא כל השינויים נשמרו. הפרטים נשארו בטופס — נסו לשמור שוב.",
+          "error"
+        );
+      } finally {
+        saving = false;
+        editForm.inert = false;
+        editForm.setAttribute("aria-busy", "false");
+        saveButton.disabled = false;
+        saveButton.textContent = "שמירת השינויים";
+        byId("logout-button").disabled = false;
+
+        document.querySelectorAll("[data-pane]").forEach(button => {
+          button.disabled = false;
+        });
+      }
+    });
+
+    function requestCard(request, mode) {
+      const incoming = mode === "incoming";
 
       const name = incoming
         ? request.studentName
         : request.teacherName;
 
-      const actions =
-        incoming && request.status === "pending"
-          ? `
-            <div class="request-actions">
-              <button class="button request-action"
-                      data-id="${safe(request.id)}"
-                      data-status="accepted"
-                      type="button">
-                אישור
-              </button>
+      const status = ["pending", "accepted", "declined"].includes(request.status)
+        ? request.status
+        : "pending";
 
-              <button class="button danger request-action"
-                      data-id="${safe(request.id)}"
-                      data-status="declined"
-                      type="button">
-                דחייה
-              </button>
-            </div>
-          `
-          : request.status === "accepted"
-            ? `
-              <div class="request-actions">
-                <a class="button"
-                   href="chat.html?id=${encodeURIComponent(request.id)}">
-                  פתיחת הצ׳אט
-                </a>
-              </div>
-            `
-            : "";
+      const labels = {
+        pending: "ממתינה לאישור",
+        accepted: "אושרה",
+        declined: "נדחתה"
+      };
+
+      const unread = Math.max(
+        0,
+        Number(
+          incoming
+            ? request.unreadForTeacher
+            : request.unreadForStudent
+        ) || 0
+      );
+
+      let actions = "";
+
+      if (incoming && status === "pending") {
+        actions = `
+          <button
+            class="button request-action"
+            data-id="${safe(request.id)}"
+            data-status="accepted"
+            type="button"
+          >אישור הבקשה</button>
+
+          <button
+            class="button danger request-action"
+            data-id="${safe(request.id)}"
+            data-status="declined"
+            type="button"
+          >דחייה</button>
+        `;
+      } else if (status === "accepted") {
+        actions = `
+          <a class="button"
+             href="chat.html?id=${encodeURIComponent(request.id)}">
+            פתיחת הצ׳אט ←
+          </a>
+        `;
+      }
 
       return `
         <article class="request">
           <div class="request-top">
             <div>
               <h3>${safe(name || "משתמש/ת בכיוון")}</h3>
-
               <div class="request-info">
-                <span>מקצוע: ${safe(request.subject)}</span>
-                <span>זמן: ${safe(request.preferredTime)}</span>
+                <span>מקצוע: ${safe(request.subject || "לא צוין")}</span>
+                <span>זמן: ${safe(request.preferredTime || "לתיאום")}</span>
               </div>
             </div>
-
-            <span class="status ${safe(request.status)}">
-              ${statusText(request.status)}
-            </span>
+            <span class="status ${status}">${labels[status]}</span>
           </div>
 
-          <p>${safe(request.message)}</p>
-          ${actions}
+          <p>${safe(request.message || "")}</p>
+
+          ${unread > 0
+            ? `<span class="unread">${unread} הודעות שלא נקראו</span>`
+            : ""}
+
+          ${actions ? `<div class="request-actions">${actions}</div>` : ""}
         </article>
       `;
     }
 
     async function loadRequests() {
-      if(!currentUser) return;
+      if (!currentUser || !ready) return;
 
+      const version = ++requestVersion;
+      const mode = requestMode;
+      const uid = currentUser.uid;
+
+      requestsList.setAttribute("aria-busy", "true");
       requestsList.innerHTML =
-        '<div class="loading">טוענים בקשות...</div>';
+        '<div class="loading">טוענים בקשות…</div>';
+
+      byId("requests-message").className = "message";
 
       try {
-        const field = requestMode === "incoming"
-          ? "teacherId"
-          : "studentId";
+        const field = mode === "incoming" ? "teacherId" : "studentId";
 
-        const requestsQuery = query(
-          collection(db,"requests"),
-          where(field,"==",currentUser.uid)
+        const requestsQuery = firebase.query(
+          firebase.collection(firebase.db, "requests"),
+          firebase.where(field, "==", uid)
         );
 
-        const snapshot = await getDocs(requestsQuery);
+        const snapshot = await firebase.getDocs(requestsQuery);
+
+        if (version !== requestVersion || currentUser?.uid !== uid) return;
 
         const requests = snapshot.docs.map(item => ({
-          id:item.id,
-          ...item.data()
+          ...item.data(),
+          id: item.id
         }));
 
-        requests.sort((first,second) => {
-          return (
-            (second.createdAt?.seconds || 0) -
-            (first.createdAt?.seconds || 0)
-          );
-        });
+        requests.sort((first, second) =>
+          (second.createdAt?.seconds || 0) -
+          (first.createdAt?.seconds || 0)
+        );
 
         requestsList.innerHTML = requests.length
-          ? requests.map(requestCard).join("")
+          ? requests.map(request => requestCard(request, mode)).join("")
           : `
             <div class="empty">
-              ${
-                requestMode === "incoming"
-                  ? "עדיין לא התקבלו בקשות מתלמידים."
-                  : "עדיין לא שלחת בקשות למורים."
-              }
+              <p>${mode === "incoming"
+                ? "עדיין לא התקבלו בקשות מתלמידים."
+                : "עדיין לא שלחת בקשות למורים."}</p>
+              ${mode === "outgoing"
+                ? '<a class="button secondary" href="matches.html">לחיפוש מורים ←</a>'
+                : ""}
             </div>
           `;
 
-        requestsList.querySelectorAll(".request-action")
-          .forEach(button => {
-            button.addEventListener("click",async () => {
-              button.disabled = true;
+        requestsList.querySelectorAll(".request-action").forEach(button => {
+          button.addEventListener("click", async () => {
+            if (button.disabled || currentUser?.uid !== uid) return;
 
-              try {
-                await updateDoc(
-                  doc(db,"requests",button.dataset.id),
-                  {
-                    status:button.dataset.status,
-                    updatedAt:serverTimestamp()
-                  }
-                );
+            const actionButtons =
+              button.closest(".request-actions").querySelectorAll("button");
 
-                await loadRequests();
-              } catch(error) {
-                console.error(error);
-                button.disabled = false;
-                alert("לא הצלחנו לעדכן את הבקשה.");
-              }
-            });
+            actionButtons.forEach(item => item.disabled = true);
+
+            try {
+              await firebase.updateDoc(
+                firebase.doc(firebase.db, "requests", button.dataset.id),
+                {
+                  status: button.dataset.status,
+                  updatedAt: firebase.serverTimestamp()
+                }
+              );
+
+              await loadRequests();
+            } catch (error) {
+              console.error("Request update failed:", error);
+
+              actionButtons.forEach(item => item.disabled = false);
+
+              showMessage(
+                "requests-message",
+                "לא הצלחנו לעדכן את הבקשה. נסו שוב.",
+                "error"
+              );
+            }
           });
-      } catch(error) {
-        console.error(error);
+        });
+      } catch (error) {
+        if (version !== requestVersion) return;
 
-        requestsList.innerHTML = `
-          <div class="message show error">
-            לא הצלחנו לטעון את הבקשות.
-          </div>
-        `;
+        console.error("Requests loading failed:", error);
+
+        requestsList.innerHTML =
+          '<div class="empty">לא ניתן להציג את הבקשות כרגע.</div>';
+
+        showMessage(
+          "requests-message",
+          "לא הצלחנו לטעון את הבקשות. אפשר לנסות שוב באמצעות רענון.",
+          "error"
+        );
+      } finally {
+        if (version === requestVersion) {
+          requestsList.setAttribute("aria-busy", "false");
+        }
       }
     }
 
-    onAuthStateChanged(auth,async user => {
-      if(!user) {
-        window.location.href = "login.html";
-        return;
+    document.querySelectorAll("[data-request-mode]").forEach(button => {
+      button.addEventListener("click", () => {
+        requestMode = button.dataset.requestMode;
+
+        document.querySelectorAll("[data-request-mode]").forEach(item => {
+          const active = item === button;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-pressed", String(active));
+        });
+
+        loadRequests();
+      });
+    });
+
+    byId("refresh-requests").addEventListener("click", loadRequests);
+
+    try {
+      const access = await import("./access.js");
+      await access.requireAccess();
+
+      firebase = await import("./firebase.js");
+      currentUser = firebase.auth.currentUser;
+
+      if (!currentUser) {
+        window.location.replace("login.html?next=dashboard.html");
+        await new Promise(() => {});
       }
 
-      currentUser = user;
+      const initialUid = currentUser.uid;
 
-      try {
-        const snapshot = await getDoc(
-          doc(db,"users",user.uid)
-        );
+      unsubscribeAuth = firebase.onAuthStateChanged(firebase.auth, user => {
+        if (!user || user.uid !== initialUid) {
+          dirty = false;
+          document.documentElement.classList.add("access-pending");
+          window.location.replace("login.html?next=dashboard.html");
+        }
+      });
 
-        fillProfile(
-          snapshot.exists()
-            ? snapshot.data()
-            : {
-                uid:user.uid,
-                name:user.displayName || "",
-                email:user.email || "",
-                role:"student",
-                roles:["student"]
+      const snapshot = await firebase.getDoc(
+        firebase.doc(firebase.db, "users", currentUser.uid)
+      );
+
+      fillProfile(
+        snapshot.exists()
+          ? snapshot.data()
+          : {
+              uid: currentUser.uid,
+              name: currentUser.displayName || "",
+              email: currentUser.email || "",
+              role: "student",
+              accountUses: {
+                selfLearner: true,
+                parent: false,
+                teacher: false
               }
-        );
-      } catch(error) {
-        console.error(error);
+            }
+      );
 
-        loading.textContent =
-          "לא הצלחנו לטעון את הפרופיל. נסי לרענן.";
+      await import("./subject-picker.js");
+
+      ["student-subjects", "child-subjects", "teacher-subjects"]
+        .forEach(id => {
+          const original = byId(id);
+          const search = original.nextElementSibling?.querySelector(
+            ".tag-picker-search"
+          );
+
+          const label = document.querySelector(`label[for="${id}"]`);
+
+          if (search && label) {
+            search.id = id + "-search";
+            label.htmlFor = search.id;
+          }
+        });
+
+      updateSections();
+      ready = true;
+
+      loading.classList.add("hidden");
+      byId("profile-pane").classList.remove("hidden");
+
+      document.querySelectorAll("[data-pane]").forEach(button => {
+        button.disabled = false;
+      });
+
+      if (!snapshot.exists()) {
+        showMessage(
+          "profile-message",
+          "החשבון קיים, אבל הפרופיל עדיין לא הושלם. מלאו את הפרטים ושמרו.",
+          "info"
+        );
       }
+    } catch (error) {
+      console.error("Dashboard initialization failed:", error);
+
+      const accessBox = byId("access-status");
+
+      if (
+        document.documentElement.classList.contains("access-pending") &&
+        accessBox
+      ) {
+        accessBox.querySelector("strong").textContent =
+          "לא הצלחנו לבדוק את הכניסה";
+
+        accessBox.querySelector("p").textContent =
+          "בדקו את החיבור לאינטרנט ונסו לרענן.";
+      } else {
+        loading.innerHTML = `
+          <p>לא הצלחנו לטעון את הפרופיל.</p>
+          <button class="button" id="retry-load" type="button">
+            ניסיון נוסף
+          </button>
+        `;
+
+        byId("retry-load").addEventListener("click", () => {
+          window.location.reload();
+        });
+      }
+    }
+
+    window.addEventListener("pagehide", event => {
+      if (!event.persisted) unsubscribeAuth?.();
     });
   </script>
-
-  <script type="module" src="./subject-picker.js"></script>
 </body>
 </html>
