@@ -9,7 +9,10 @@ import {
   signOut,
   sendPasswordResetEmail,
   onAuthStateChanged,
-  updateProfile
+  updateProfile,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 import {
@@ -44,6 +47,23 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+/*
+ * יש לקרוא לפונקציה לפני ביצוע הכניסה.
+ *
+ * true: שמירת ההתחברות גם לאחר סגירת הדפדפן.
+ * false: שמירת ההתחברות למשך ההפעלה הנוכחית.
+ *
+ * הפונקציה אינה שומרת את הסיסמה.
+ */
+async function configureLoginPersistence(rememberMe) {
+  await setPersistence(
+    auth,
+    rememberMe
+      ? browserLocalPersistence
+      : browserSessionPersistence
+  );
+}
+
 export {
   auth,
   db,
@@ -54,6 +74,11 @@ export {
   sendPasswordResetEmail,
   onAuthStateChanged,
   updateProfile,
+
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence,
+  configureLoginPersistence,
 
   doc,
   getDoc,

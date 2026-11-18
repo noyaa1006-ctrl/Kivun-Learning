@@ -3,537 +3,393 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#121a37">
+  <meta name="theme-color" content="#172442">
   <title>השיחה שלי — כיוון</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="./site.css">
+
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap");
-
-    :root {
-      --navy: #121a37;
-      --ink: #1c2746;
-      --teal: #08785c;
-      --coral: #ff6e61;
-      --cloud: #f6f8fe;
-      --line: #e5eaf4;
-      --muted: #69738d;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    .hidden {
+    .access-pending body > :not(#access-status):not(script) {
       display: none !important;
     }
 
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: linear-gradient(135deg, #f7f9ff, #effcf8);
-      font-family: Heebo, Arial, sans-serif;
+    #access-status {
+      width: min(460px, calc(100% - 32px));
+      margin: 90px auto;
+      text-align: center;
     }
 
-    button,
-    input,
-    textarea {
-      font: inherit;
+    .chat-main {
+      width: min(1000px, calc(100% - 40px));
+      margin: 24px auto 36px;
     }
 
-    header {
-      min-height: 76px;
-      border-bottom: 1px solid var(--line);
-      background: #fff;
+    .chat-back {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      margin-bottom: 12px;
+      color: var(--site-muted);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
     }
 
-    .nav {
+    .chat-back:hover {
+      color: var(--site-primary);
+      text-decoration: underline;
+    }
+
+    .chat-shell {
+      display: grid;
+      grid-template-rows: auto auto minmax(0, 1fr) auto;
+      height: clamp(520px, calc(100dvh - 190px), 850px);
+      overflow: hidden;
+      border: 1px solid var(--site-border);
+      border-radius: 20px;
+      background: white;
+      box-shadow: var(--site-shadow);
+    }
+
+    .chat-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      width: min(1100px, calc(100% - 30px));
-      min-height: 76px;
-      margin-inline: auto;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--site-border-soft);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--navy);
-      font-size: 28px;
-      font-weight: 900;
-      text-decoration: none;
-    }
-
-    .mark {
-      display: grid;
-      place-items: center;
-      width: 29px;
-      height: 29px;
-      border-radius: 10px 10px 10px 2px;
-      color: #fff;
-      background: var(--coral);
-    }
-
-    .back {
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
-      color: var(--teal);
-      font-size: 14px;
-      font-weight: 800;
-      text-decoration: none;
-    }
-
-    main {
-      width: min(900px, calc(100% - 24px));
-      margin: 24px auto;
-    }
-
-    .chat {
-      display: grid;
-      grid-template-rows: auto auto minmax(0, 1fr) auto;
-      height: calc(100vh - 124px);
-      height: calc(100dvh - 124px);
-      min-height: 460px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background: #fff;
-      box-shadow: 0 20px 55px rgba(18, 26, 55, .1);
-    }
-
-    .chat-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 17px 20px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .person {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .chat-header .site-person {
       min-width: 0;
     }
 
-    .avatar {
-      display: grid;
-      place-items: center;
-      width: 48px;
-      height: 48px;
-      flex: 0 0 48px;
-      overflow: hidden;
-      border-radius: 15px;
-      color: #fff;
-      background: linear-gradient(135deg, #e98a70, #be5061);
-      font-size: 21px;
-      font-weight: 900;
-    }
-
-    .avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    h1 {
+    .chat-header h1 {
       margin: 0;
       font-size: 19px;
+      line-height: 1.4;
+    }
+
+    .chat-subtitle {
+      margin: 4px 0 0;
+      color: var(--site-muted);
+      font-size: 13px;
       overflow-wrap: anywhere;
     }
 
-    .details {
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.6;
-      overflow-wrap: anywhere;
+    .chat-header-actions {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      gap: 8px;
     }
 
     .safety-button {
-      flex-shrink: 0;
       min-height: 44px;
       padding: 9px 12px;
-      border: 1px solid #ffd0cc;
+      border: 1px solid var(--site-border);
       border-radius: 10px;
-      color: #a5342e;
-      background: #fff5f4;
+      color: var(--site-muted);
+      background: white;
+      font: inherit;
       font-size: 13px;
-      font-weight: 800;
-      cursor: pointer;
+      font-weight: 600;
     }
 
-    .chat-status {
-      display: none;
-      padding: 10px 18px;
-      color: #405177;
-      background: #eef3ff;
+    .safety-button:hover {
+      color: var(--site-danger);
+      border-color: #edc7cb;
+      background: var(--site-danger-soft);
+    }
+
+    .conversation-status {
+      margin: 0;
+      padding: 10px 20px;
+      color: var(--site-muted);
+      background: #f7f9fc;
       font-size: 13px;
       line-height: 1.7;
     }
 
-    .chat-status.show {
-      display: block;
+    .conversation-status[data-tone="warning"] {
+      color: var(--site-warning);
+      background: var(--site-warning-soft);
     }
 
-    .chat-status.error {
-      color: #9e2f2a;
-      background: #fff0ef;
+    .conversation-status[data-tone="error"] {
+      color: var(--site-danger);
+      background: var(--site-danger-soft);
     }
 
     .messages {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
+      gap: 12px;
       min-height: 0;
-      padding: 22px;
+      padding: 24px;
       overflow-y: auto;
       overscroll-behavior: contain;
-      background: linear-gradient(#fbfcff, #f7f9fe);
+      background: #f6f8fb;
+      scrollbar-gutter: stable;
     }
 
-    .bubble {
+    .message {
       align-self: flex-end;
-      max-width: min(80%, 560px);
+      max-width: min(78%, 600px);
       padding: 11px 14px;
-      border: 1px solid var(--line);
-      border-radius: 16px 16px 5px 16px;
-      color: var(--ink);
-      background: #fff;
-      font-size: 15px;
-      line-height: 1.7;
-      overflow-wrap: anywhere;
-    }
-
-    .bubble.mine {
-      align-self: flex-start;
-      border-color: var(--teal);
+      border: 1px solid var(--site-border);
       border-radius: 16px 16px 16px 5px;
-      color: #fff;
-      background: var(--teal);
+      color: var(--site-text);
+      background: white;
     }
 
-    .bubble-text {
+    .message.mine {
+      align-self: flex-start;
+      border-color: var(--site-primary);
+      border-radius: 16px 16px 5px 16px;
+      color: white;
+      background: var(--site-primary);
+    }
+
+    .message-text {
       margin: 0;
       white-space: pre-wrap;
-      unicode-bidi: plaintext;
+      overflow-wrap: anywhere;
+      line-height: 1.75;
+      text-align: start;
     }
 
-    .time {
+    .message-time {
       display: block;
-      margin-top: 5px;
-      color: #68738a;
+      margin-top: 6px;
+      color: var(--site-muted);
       font-size: 11px;
     }
 
-    .mine .time {
-      color: #ddfff0;
+    .message.mine .message-time {
+      color: #e0f3eb;
     }
 
-    .empty {
+    .messages .site-empty,
+    .messages .site-loading {
       width: 100%;
       margin: auto;
-      padding: 20px;
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.8;
     }
 
-    .empty strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--ink);
-      font-size: 18px;
+    .composer-area {
+      border-top: 1px solid var(--site-border);
+      background: white;
     }
 
-    .empty a {
-      display: inline-block;
-      margin-top: 14px;
-      color: var(--teal);
-      font-weight: 800;
-    }
-
-    .notice {
+    .composer-hint {
       margin: 0;
-      padding: 10px 18px;
-      color: #6d5b24;
-      background: #fff8e5;
+      padding: 12px 18px 0;
+      color: var(--site-muted);
       font-size: 12px;
       line-height: 1.7;
-      text-align: center;
     }
 
     .composer {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
       gap: 10px;
-      padding: 14px;
-      border-top: 1px solid var(--line);
+      padding: 12px 16px 8px;
     }
 
     .composer textarea {
+      display: block;
       width: 100%;
-      min-height: 52px;
-      max-height: 130px;
-      resize: vertical;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      color: var(--ink);
-      background: #fff;
+      min-height: 50px;
+      max-height: 140px;
+      resize: none;
+      padding: 12px 14px;
+      border: 1px solid #c8d2e0;
+      border-radius: 12px;
+      color: var(--site-text);
+      background: white;
+      font: inherit;
       font-size: 16px;
+      line-height: 1.5;
     }
 
     .composer textarea:focus {
-      border-color: var(--teal);
-      outline: none;
-      box-shadow: 0 0 0 3px #dff7ed;
+      border-color: var(--site-primary);
+      outline: 2px solid var(--site-primary);
+      outline-offset: 2px;
     }
 
     .composer textarea:disabled {
-      color: var(--muted);
-      background: #f4f6fa;
+      background: var(--site-surface-soft);
     }
 
-    .send {
-      min-width: 78px;
-      min-height: 48px;
-      padding: 0 18px;
-      border: 0;
-      border-radius: 13px;
-      color: #fff;
-      background: var(--navy);
-      font-weight: 900;
-      cursor: pointer;
+    .composer .site-btn {
+      min-height: 50px;
     }
 
-    button:disabled {
-      opacity: .6;
-      cursor: not-allowed;
-    }
-
-    .compose-error {
-      margin: 0;
-      padding: 0 16px 12px;
-      color: #9e2f2a;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      overflow: hidden;
-      clip-path: inset(50%);
-      white-space: nowrap;
-    }
-
-    dialog {
-      width: min(470px, calc(100% - 28px));
-      max-height: calc(100dvh - 40px);
-      padding: 24px;
-      overflow-y: auto;
-      border: 0;
-      border-radius: 22px;
-      color: var(--ink);
-      box-shadow: 0 25px 80px rgba(0, 0, 0, .25);
-    }
-
-    dialog::backdrop {
-      background: rgba(18, 26, 55, .55);
-    }
-
-    dialog h2 {
-      margin: 0 0 10px;
-      color: var(--navy);
-    }
-
-    dialog p {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    dialog label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    dialog textarea {
-      width: 100%;
-      min-height: 100px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      font-size: 16px;
-      resize: vertical;
-    }
-
-    .actions {
+    .composer-bottom {
       display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 18px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 18px 12px;
+      color: var(--site-muted);
+      font-size: 11px;
     }
 
-    .actions button {
-      min-height: 44px;
-      padding: 10px 14px;
-      border: 0;
-      border-radius: 10px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .report {
-      color: #fff;
-      background: #a5342e;
-    }
-
-    .block {
-      color: #9e2f2a;
-      background: #fff0ef;
-    }
-
-    .cancel {
-      color: var(--ink);
-      background: #eef1f7;
-    }
-
-    .modal-message {
-      margin-top: 12px;
-      color: #9e2f2a;
+    .send-status {
+      margin: 0;
+      padding: 0 18px 12px;
+      color: var(--site-danger);
       font-size: 13px;
       line-height: 1.7;
+    }
+
+    .safety-intro {
+      margin: 0 0 20px;
+      color: var(--site-muted);
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    #safety-status {
+      margin-top: 16px;
+    }
+
+    #fatal-error {
+      margin-top: 16px;
     }
 
     @media (max-width: 600px) {
-      header,
-      .nav {
-        min-height: 64px;
-      }
-
-      .brand {
-        font-size: 24px;
-      }
-
-      .back {
-        font-size: 12px;
-      }
-
-      main {
+      .chat-main {
         width: 100%;
         margin: 0;
       }
 
-      .chat {
-        height: calc(100vh - 64px);
-        height: calc(100dvh - 64px);
-        min-height: 350px;
-        border: 0;
+      .chat-back {
+        margin: 4px 16px;
+      }
+
+      .chat-shell {
+        height: calc(100dvh - 124px);
+        min-height: 380px;
+        border-inline: 0;
+        border-bottom: 0;
         border-radius: 0;
+        box-shadow: none;
       }
 
-      .chat-head {
-        padding: 12px;
+      .chat-header {
+        align-items: flex-start;
         gap: 10px;
-      }
-
-      h1 {
-        font-size: 17px;
-      }
-
-      .avatar {
-        width: 40px;
-        height: 40px;
-        flex-basis: 40px;
-      }
-
-      .messages {
         padding: 14px;
       }
 
-      .bubble {
-        max-width: 88%;
+      .chat-header .site-person {
+        gap: 10px;
+      }
+
+      .chat-header .site-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 17px;
+      }
+
+      .chat-header h1 {
+        font-size: 17px;
       }
 
       .safety-button {
-        padding: 8px;
+        max-width: 90px;
+        padding: 7px 9px;
         font-size: 12px;
       }
 
-      .composer {
-        padding: 10px;
+      .messages {
+        padding: 16px 12px;
       }
 
-      .send {
-        min-width: 65px;
-        padding: 0 12px;
+      .message {
+        max-width: 88%;
+      }
+
+      .composer {
+        padding-inline: 12px;
+      }
+
+      .composer .site-btn {
+        padding-inline: 15px;
+      }
+
+      .keyboard-hint {
+        display: none;
+      }
+
+      #fatal-error {
+        margin: 16px;
       }
     }
   </style>
 
-  <link rel="stylesheet" href="navigation.css">
-  <script defer src="navigation.js"></script>
+  <script type="module" src="./navigation.js"></script>
 </head>
 
 <body>
-  <div id="access-status" role="status" aria-live="polite">
-    <strong>רגע, בודקים את הכניסה שלך…</strong>
-    <p>מיד ממשיכים לכיוון שלך.</p>
-    <a href="login.html">חזרה לכניסה</a>
+  <div id="access-status" class="site-card" role="status">
+    <strong>מכינים את השיחה שלך</strong>
+    <p>בודקים את ההתחברות…</p>
+    <a href="login.html">חזרה למסך הכניסה</a>
   </div>
 
-  <header>
-    <nav class="nav" aria-label="ניווט ראשי">
-      <a class="brand" href="index.html">
-        <span class="mark" aria-hidden="true">↗</span>
-        כיוון
-      </a>
+  <header data-site-header></header>
 
-      <a class="back" href="dashboard.html">
-        חזרה לאזור האישי
-      </a>
-    </nav>
-  </header>
+  <main class="chat-main" id="main-content">
+    <a class="chat-back" href="dashboard.html#messages">
+      חזרה לשיחות שלי
+    </a>
 
-  <main>
-    <section class="chat" aria-labelledby="person-name">
-      <div class="chat-head">
-        <div class="person">
-          <div class="avatar" id="avatar" aria-hidden="true">כ</div>
+    <section class="chat-shell" id="chat-shell" aria-labelledby="person-name">
+      <header class="chat-header">
+        <div class="site-person">
+          <div
+            class="site-avatar"
+            id="person-avatar"
+            aria-hidden="true"
+          >כ</div>
 
           <div>
-            <h1 id="person-name">טוענים שיחה…</h1>
-            <div class="details" id="request-details"></div>
+            <h1 id="person-name">טוענים את השיחה…</h1>
+            <p class="chat-subtitle" id="request-details"></p>
           </div>
         </div>
 
-        <button
-          class="safety-button hidden"
-          id="safety-button"
-          type="button"
-          aria-haspopup="dialog"
-        >
-          דיווח או חסימה
-        </button>
-      </div>
+        <div class="chat-header-actions">
+          <button
+            class="safety-button"
+            id="safety-button"
+            type="button"
+            hidden
+          >
+            דיווח או חסימה
+          </button>
+        </div>
+      </header>
 
-      <div
-        class="chat-status"
-        id="chat-status"
+      <p
+        class="conversation-status"
+        id="conversation-status"
         role="status"
         aria-live="polite"
-      ></div>
+      >
+        מתחברים לשיחה…
+      </p>
 
       <div
         class="messages"
@@ -541,32 +397,34 @@
         role="region"
         aria-label="הודעות בשיחה"
         tabindex="0"
-        aria-busy="true"
       >
-        <div class="empty">טוענים את השיחה…</div>
+        <div class="site-loading">
+          <span class="site-spinner" aria-hidden="true"></span>
+          טוענים הודעות…
+        </div>
       </div>
 
-      <div id="composer-area">
-        <p class="notice" id="notice">
-          שמרו על שיחה מכבדת. אל תשתפו סיסמאות או פרטי תשלום.
+      <div class="composer-area">
+        <p class="composer-hint">
+          זה המקום לתאם את השיעור. אין לשלוח סיסמאות או פרטי תשלום.
         </p>
 
         <form class="composer" id="composer">
-          <label class="sr-only" for="message-input">
-            ההודעה שלך
+          <label class="site-sr-only" for="message-input">
+            הודעה חדשה
           </label>
 
           <textarea
             id="message-input"
-            rows="2"
+            rows="1"
             maxlength="1000"
+            placeholder="כתבו הודעה…"
             required
-            placeholder="מכינים את השיחה…"
             disabled
           ></textarea>
 
           <button
-            class="send"
+            class="site-btn"
             id="send-button"
             type="submit"
             disabled
@@ -575,109 +433,163 @@
           </button>
         </form>
 
+        <div class="composer-bottom">
+          <span class="keyboard-hint">
+            Enter לשליחה · Shift + Enter לשורה חדשה
+          </span>
+          <span id="character-count">0 / 1000</span>
+        </div>
+
         <p
-          class="compose-error hidden"
-          id="compose-error"
+          class="send-status"
+          id="send-status"
           role="status"
           aria-live="polite"
+          hidden
         ></p>
       </div>
     </section>
 
+    <section class="site-card" id="fatal-error" hidden>
+      <h1 class="site-section-title" id="fatal-title" tabindex="-1">
+        לא ניתן לפתוח את השיחה
+      </h1>
+
+      <p class="site-description" id="fatal-description"></p>
+
+      <div class="site-row" style="margin-top:20px">
+        <a class="site-btn" href="dashboard.html#messages">
+          חזרה לשיחות שלי
+        </a>
+
+        <button
+          class="site-btn site-btn-secondary"
+          id="reload-button"
+          type="button"
+        >
+          ניסיון נוסף
+        </button>
+      </div>
+    </section>
+
     <div
-      class="sr-only"
-      id="message-announcement"
+      class="site-sr-only"
+      id="new-message-announcement"
       role="status"
       aria-live="polite"
+      aria-atomic="true"
     ></div>
   </main>
 
   <dialog
+    class="site-dialog"
     id="safety-dialog"
     aria-labelledby="safety-title"
     aria-describedby="safety-description"
   >
-    <h2 id="safety-title">בטיחות בשיחה</h2>
+    <div class="site-dialog-head">
+      <h2 class="site-dialog-title" id="safety-title">
+        בטיחות בשיחה
+      </h2>
 
-    <p id="safety-description">
-      אפשר לדווח על תוכן שמפריע לכם או לחסום את השיחה.
-      חסימה עוצרת את האפשרות לשלוח הודעות דרך הצ׳אט.
-      אין צורך לכתוב סיבה כדי לחסום.
-    </p>
+      <button
+        class="site-icon-btn"
+        id="close-safety"
+        type="button"
+        aria-label="סגירת החלון"
+      >
+        <span aria-hidden="true">✕</span>
+      </button>
+    </div>
 
-    <label for="report-reason">מה קרה?</label>
+    <div class="site-dialog-body">
+      <p class="safety-intro" id="safety-description">
+        אפשר לדווח על תוכן לא מתאים או לחסום את המשך השיחה.
+        דיווח אינו חוסם את השיחה באופן אוטומטי.
+      </p>
 
-    <textarea
-      id="report-reason"
-      maxlength="800"
-      placeholder="כתבו בקצרה את הסיבה לדיווח"
-    ></textarea>
+      <div class="site-field">
+        <label class="site-label" for="report-reason">
+          מה קרה?
+        </label>
 
-    <div
-      class="modal-message"
-      id="modal-message"
-      role="status"
-      aria-live="polite"
-    ></div>
+        <textarea
+          class="site-textarea"
+          id="report-reason"
+          maxlength="800"
+          placeholder="תיאור קצר של הסיבה לדיווח"
+        ></textarea>
 
-    <div class="actions">
-      <button class="report" id="report-button" type="button">
+        <p class="site-field-hint">
+          נדרש תיאור לשליחת דיווח. לחסימה אפשר להשאיר ריק.
+        </p>
+      </div>
+
+      <div
+        class="site-notice"
+        id="safety-status"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></div>
+    </div>
+
+    <div class="site-dialog-actions">
+      <button
+        class="site-btn site-btn-secondary"
+        id="report-button"
+        type="button"
+      >
         שליחת דיווח
       </button>
 
-      <button class="block" id="block-button" type="button">
+      <button
+        class="site-btn site-btn-danger"
+        id="block-button"
+        type="button"
+      >
         חסימת השיחה
-      </button>
-
-      <button class="cancel" id="cancel-button" type="button">
-        ביטול
       </button>
     </div>
   </dialog>
 
   <script type="module">
-    const byId = id => document.getElementById(id);
+    const $ = id => document.getElementById(id);
 
-    const requestId =
-      new URLSearchParams(window.location.search).get("id");
+    const requestId = new URLSearchParams(
+      window.location.search
+    ).get("id");
 
-    const messagesBox = byId("messages");
-    const composer = byId("composer");
-    const input = byId("message-input");
-    const sendButton = byId("send-button");
-    const safetyButton = byId("safety-button");
-    const dialog = byId("safety-dialog");
+    const messagesBox = $("messages");
+    const input = $("message-input");
+    const dialog = $("safety-dialog");
 
-    let firebase = null;
-    let user = null;
-    let request = null;
+    let sdk;
+    let writeBatch;
+    let user;
+    let request;
 
     let fatal = false;
     let sending = false;
-    let modalBusy = false;
-    let messagesReady = false;
-    let requestReady = false;
-    let blockError = false;
-    let locallyBlocked = false;
+    let safetyBusy = false;
     let markingRead = false;
 
-    let knownMessageIds = new Set();
-    let firstMessages = true;
+    let requestReady = false;
+    let messagesReady = false;
+    let blockError = false;
+    let localBlock = false;
 
-    const blockStates = new Map();
-    const blockReady = new Set();
+    let firstSnapshot = true;
+    let previousMessageIds = new Set();
+
     const subscriptions = [];
+    const blockStates = new Map();
+    const readyBlocks = new Set();
 
-    function showStatus(text, error = false) {
-      const box = byId("chat-status");
-      box.textContent = text;
-      box.className = "chat-status show" + (error ? " error" : "");
-    }
-
-    function showSendError(text) {
-      const box = byId("compose-error");
-      box.textContent = text;
-      box.classList.toggle("hidden", !text);
+    function stopListeners() {
+      for (const unsubscribe of subscriptions.splice(0)) {
+        unsubscribe();
+      }
     }
 
     function isParticipant(data) {
@@ -689,142 +601,177 @@
     }
 
     function isBlocked() {
-      return locallyBlocked ||
-        Array.from(blockStates.values()).some(Boolean);
+      return localBlock ||
+        [...blockStates.values()].some(Boolean);
+    }
+
+    function isCurrentUser() {
+      return Boolean(user && sdk?.auth.currentUser?.uid === user.uid);
     }
 
     function canSend() {
-      return Boolean(
-        !fatal &&
-        user &&
-        firebase.auth.currentUser?.uid === user.uid &&
+      return !fatal &&
+        isCurrentUser() &&
         requestReady &&
         messagesReady &&
-        blockReady.size === 2 &&
+        readyBlocks.size === 2 &&
         !blockError &&
         !isBlocked() &&
         isParticipant(request) &&
-        request.status === "accepted"
-      );
+        request.status === "accepted";
     }
 
-    function updateComposer() {
-      const allowed = canSend();
+    function conversationStatus(text, tone = "") {
+      $("conversation-status").textContent = text;
+      $("conversation-status").dataset.tone = tone;
+    }
 
-      input.disabled = !allowed || sending;
-      sendButton.disabled = !allowed || sending;
-      sendButton.textContent = sending ? "שולחים…" : "שליחה";
+    function sendStatus(text) {
+      $("send-status").textContent = text;
+      $("send-status").hidden = !text;
+    }
+
+    function safetyStatus(text, error = false) {
+      $("safety-status").textContent = text;
+      $("safety-status").className =
+        "site-notice " + (error ? "site-notice-error" : "");
+      $("safety-status").hidden = !text;
+    }
+
+    function refreshComposer() {
+      const enabled = canSend();
+
+      input.disabled = !enabled || sending;
+      $("send-button").disabled =
+        !enabled || sending || !input.value.trim();
+
+      $("send-button").textContent = sending ? "שולחים…" : "שליחה";
+      $("composer").setAttribute("aria-busy", String(sending));
+
+      if (fatal) return;
 
       if (isBlocked()) {
-        input.placeholder = "השיחה חסומה";
-        byId("notice").textContent =
-          "השיחה חסומה. אין אפשרות לשלוח הודעות חדשות דרך הצ׳אט.";
+        input.placeholder = "השיחה חסומה לשליחת הודעות";
+        conversationStatus(
+          "השיחה חסומה. ניתן לצפות בהודעות הקיימות.",
+          "warning"
+        );
       } else if (blockError) {
-        input.placeholder = "לא ניתן לבדוק את מצב השיחה";
-      } else if (allowed) {
-        input.placeholder = "כתבו הודעה…";
+        input.placeholder = "לא ניתן לשלוח כרגע";
+        conversationStatus(
+          "לא הצלחנו לבדוק את מצב החסימה. רעננו את העמוד לפני שליחה.",
+          "warning"
+        );
+      } else if (!enabled) {
+        input.placeholder = "מתחברים לשיחה…";
+        conversationStatus("טוענים את השיחה ובודקים אפשרות לשליחה…");
       } else {
-        input.placeholder = "ממתינים לאימות מצב השיחה…";
+        input.placeholder = "כתבו הודעה…";
+        conversationStatus(
+          "הבקשה אושרה. אפשר לתאם כאן את פרטי השיעור."
+        );
       }
 
-      byId("block-button").disabled =
-        modalBusy || isBlocked() || fatal;
-
-      byId("block-button").textContent =
-        isBlocked() ? "השיחה חסומה" : "חסימת השיחה";
+      if (!safetyBusy) {
+        $("block-button").disabled = isBlocked();
+      }
     }
 
-    function stopSubscriptions() {
-      subscriptions.splice(0).forEach(unsubscribe => {
-        try {
-          unsubscribe();
-        } catch {
-          // אין צורך בפעולה נוספת בעת סגירת מאזין.
-        }
-      });
-    }
+    function fail(message) {
+      if (fatal) return;
 
-    function fail(text) {
       fatal = true;
-      stopSubscriptions();
-      updateComposer();
-
-      byId("person-name").textContent = "השיחה אינה זמינה";
-      byId("request-details").textContent = "";
-      safetyButton.classList.add("hidden");
-      byId("composer-area").classList.add("hidden");
+      stopListeners();
+      refreshComposer();
 
       if (dialog.open) dialog.close();
 
-      messagesBox.setAttribute("aria-busy", "false");
-      messagesBox.replaceChildren();
-
-      const box = document.createElement("div");
-      box.className = "empty";
-
-      const title = document.createElement("strong");
-      title.textContent = "לא ניתן לפתוח את הצ׳אט";
-
-      const paragraph = document.createElement("p");
-      paragraph.textContent = text;
-
-      const link = document.createElement("a");
-      link.href = "dashboard.html";
-      link.textContent = "חזרה לאזור האישי";
-
-      box.append(title, paragraph, link);
-      messagesBox.appendChild(box);
+      $("chat-shell").hidden = true;
+      $("fatal-description").textContent = message;
+      $("fatal-error").hidden = false;
+      $("fatal-title").focus();
     }
 
-    function otherUserId() {
-      return user.uid === request.studentId
-        ? request.teacherId
-        : request.studentId;
+    function updateInputSize() {
+      input.style.height = "auto";
+      input.style.height = `${Math.min(input.scrollHeight, 140)}px`;
+      $("character-count").textContent = `${input.value.length} / 1000`;
     }
 
     function updateHeader() {
-      const viewingAsStudent = user.uid === request.studentId;
+      const asStudent = user.uid === request.studentId;
+      const name = (
+        asStudent ? request.teacherName : request.studentName
+      ) || "משתמש/ת בכיוון";
 
-      const name = viewingAsStudent
-        ? request.teacherName
-        : request.studentName;
-
-      byId("person-name").textContent =
-        name || "משתמש/ת בכיוון";
-
-      byId("request-details").textContent = [
+      $("person-name").textContent = name;
+      $("request-details").textContent = [
         request.subject,
         request.preferredTime
       ].filter(Boolean).join(" · ");
 
-      document.title = (name || "שיחה") + " — כיוון";
+      $("person-avatar").textContent = Array.from(name)[0] || "כ";
+      document.title = `שיחה עם ${name} — כיוון`;
     }
 
-    function timeText(value) {
-      if (typeof value?.toDate !== "function") {
-        return "נשלחת…";
-      }
+    function formatTime(timestamp) {
+      const date = timestamp?.toDate?.();
 
-      const date = value.toDate();
+      if (!date) return "נשלחת…";
 
-      if (!Number.isFinite(date.getTime())) return "";
-
-      return date.toLocaleString("he-IL", {
+      return new Intl.DateTimeFormat("he-IL", {
         day: "numeric",
         month: "numeric",
         hour: "2-digit",
         minute: "2-digit"
-      });
+      }).format(date);
+    }
+
+    function renderMessage(item) {
+      const data = item.data();
+      const mine = data.senderId === user.uid;
+
+      const bubble = document.createElement("article");
+      bubble.className = mine ? "message mine" : "message";
+
+      const sender = document.createElement("span");
+      sender.className = "site-sr-only";
+      sender.textContent = mine
+        ? "הודעה שלך: "
+        : `הודעה מאת ${$("person-name").textContent}: `;
+
+      const text = document.createElement("p");
+      text.className = "message-text";
+      text.dir = "auto";
+      text.textContent = String(data.text ?? "");
+
+      const time = document.createElement("time");
+      time.className = "message-time";
+      time.textContent = formatTime(data.createdAt);
+
+      const date = data.createdAt?.toDate?.();
+      if (date) time.dateTime = date.toISOString();
+
+      bubble.append(sender, text, time);
+      return bubble;
+    }
+
+    function blockIds() {
+      return [
+        `${requestId}_${request.studentId}`,
+        `${requestId}_${request.teacherId}`
+      ];
     }
 
     async function markAsRead() {
       if (
         fatal ||
+        markingRead ||
+        document.visibilityState !== "visible" ||
         !messagesReady ||
         !requestReady ||
-        !isParticipant(request) ||
-        document.visibilityState !== "visible" ||
-        markingRead
+        !isCurrentUser() ||
+        !isParticipant(request)
       ) {
         return;
       }
@@ -838,357 +785,262 @@
       markingRead = true;
 
       try {
-        await firebase.updateDoc(
-          firebase.doc(firebase.db, "requests", requestId),
+        await sdk.updateDoc(
+          sdk.doc(sdk.db, "requests", requestId),
           { [field]: 0 }
         );
       } catch (error) {
-        console.error("Read status update failed:", error);
+        console.error("Mark as read failed:", error?.code);
       } finally {
         markingRead = false;
       }
     }
 
     function watchRequest() {
-      const unsubscribe = firebase.onSnapshot(
-        firebase.doc(firebase.db, "requests", requestId),
+      const studentId = request.studentId;
+      const teacherId = request.teacherId;
 
-        snapshot => {
-          if (fatal) return;
-
-          if (!snapshot.exists()) {
-            fail("הבקשה אינה קיימת עוד.");
-            return;
-          }
-
-          const data = snapshot.data();
-
-          if (
-            !isParticipant(data) ||
-            data.studentId !== request.studentId ||
-            data.teacherId !== request.teacherId
-          ) {
-            fail("השיחה אינה זמינה לחשבון הזה.");
-            return;
-          }
-
-          if (data.status !== "accepted") {
-            fail("הצ׳אט זמין רק לבקשה שאושרה.");
-            return;
-          }
-
-          request = { ...data, id: snapshot.id };
-          requestReady = true;
-
-          updateHeader();
-          updateComposer();
-          markAsRead();
-        },
-
-        error => {
-          console.error("Request listener failed:", error);
-          fail("לא הצלחנו לבדוק את מצב הבקשה. נסו לרענן.");
-        }
-      );
-
-      subscriptions.push(unsubscribe);
-    }
-
-    function watchBlocks() {
-      const ids = [
-        `${requestId}_${request.studentId}`,
-        `${requestId}_${request.teacherId}`
-      ];
-
-      ids.forEach(id => {
-        const unsubscribe = firebase.onSnapshot(
-          firebase.doc(firebase.db, "blocks", id),
-
+      subscriptions.push(
+        sdk.onSnapshot(
+          sdk.doc(sdk.db, "requests", requestId),
           snapshot => {
             if (fatal) return;
 
-            blockReady.add(id);
-            blockStates.set(id, snapshot.exists());
-
-            updateComposer();
-
-            if (isBlocked()) {
-              showStatus("השיחה חסומה לשליחת הודעות חדשות.");
+            if (!snapshot.exists()) {
+              fail("הבקשה אינה קיימת עוד.");
+              return;
             }
+
+            const data = snapshot.data();
+
+            if (
+              !isParticipant(data) ||
+              data.studentId !== studentId ||
+              data.teacherId !== teacherId
+            ) {
+              fail("אין לך גישה לשיחה הזו.");
+              return;
+            }
+
+            if (data.status !== "accepted") {
+              fail("השיחה זמינה רק כל עוד הבקשה מאושרת.");
+              return;
+            }
+
+            request = data;
+            requestReady = true;
+            updateHeader();
+            refreshComposer();
+            void markAsRead();
           },
-
           error => {
-            console.error("Block status listener failed:", error);
-            blockError = true;
-            updateComposer();
-
-            showStatus(
-              "לא הצלחנו לבדוק אם השיחה חסומה. השליחה אינה זמינה עד לרענון העמוד.",
-              true
-            );
+            console.error("Request listener failed:", error?.code);
+            fail("לא הצלחנו לבדוק את מצב הבקשה. נסו שוב.");
           }
-        );
+        )
+      );
+    }
 
-        subscriptions.push(unsubscribe);
-      });
+    function watchBlocks() {
+      for (const id of blockIds()) {
+        subscriptions.push(
+          sdk.onSnapshot(
+            sdk.doc(sdk.db, "blocks", id),
+            snapshot => {
+              if (fatal) return;
+
+              readyBlocks.add(id);
+              blockStates.set(id, snapshot.exists());
+              refreshComposer();
+            },
+            error => {
+              console.error("Block listener failed:", error?.code);
+              blockError = true;
+              refreshComposer();
+            }
+          )
+        );
+      }
     }
 
     function watchMessages() {
-      const messagesQuery = firebase.query(
-        firebase.collection(firebase.db, "requests", requestId, "messages"),
-        firebase.orderBy("createdAt", "asc")
+      const messagesQuery = sdk.query(
+        sdk.collection(sdk.db, "requests", requestId, "messages"),
+        sdk.orderBy("createdAt", "asc")
       );
 
-      const unsubscribe = firebase.onSnapshot(
-        messagesQuery,
+      subscriptions.push(
+        sdk.onSnapshot(
+          messagesQuery,
+          snapshot => {
+            if (fatal) return;
 
-        snapshot => {
-          if (fatal) return;
+            const nearBottom =
+              messagesBox.scrollHeight -
+              messagesBox.scrollTop -
+              messagesBox.clientHeight < 90;
 
-          const nearBottom =
-            messagesBox.scrollHeight -
-            messagesBox.scrollTop -
-            messagesBox.clientHeight < 100;
+            const previousScroll = messagesBox.scrollTop;
+            const nextIds = new Set();
+            let newIncoming = 0;
+            let newOwn = false;
 
-          const previousTop = messagesBox.scrollTop;
-          const fragment = document.createDocumentFragment();
+            const fragment = document.createDocumentFragment();
 
-          let newIncoming = 0;
-          let ownMessageAdded = false;
-          const nextIds = new Set();
-
-          if (snapshot.empty) {
-            const empty = document.createElement("div");
-            empty.className = "empty";
-
-            const title = document.createElement("strong");
-            title.textContent = "הצ׳אט מוכן";
-
-            const paragraph = document.createElement("p");
-            paragraph.textContent =
-              "אפשר להתחיל לדבר על מטרת הלמידה ועל תיאום השיעור.";
-
-            empty.append(title, paragraph);
-            fragment.appendChild(empty);
-          } else {
-            snapshot.docs.forEach(item => {
-              const data = item.data();
-              const mine = data.senderId === user.uid;
-
+            for (const item of snapshot.docs) {
               nextIds.add(item.id);
 
-              if (!knownMessageIds.has(item.id)) {
-                if (mine) ownMessageAdded = true;
-                else newIncoming++;
+              if (!previousMessageIds.has(item.id)) {
+                if (item.data().senderId === user.uid) {
+                  newOwn = true;
+                } else {
+                  newIncoming += 1;
+                }
               }
 
-              const bubble = document.createElement("article");
-              bubble.className = "bubble" + (mine ? " mine" : "");
-              bubble.setAttribute(
-                "aria-label",
-                mine ? "הודעה שלך" : "הודעה מהצד השני"
-              );
+              fragment.append(renderMessage(item));
+            }
 
-              const text = document.createElement("p");
-              text.className = "bubble-text";
-              text.textContent = String(data.text ?? "");
+            if (snapshot.empty) {
+              const empty = document.createElement("div");
+              empty.className = "site-empty";
 
-              const time = document.createElement("span");
-              time.className = "time";
-              time.textContent = timeText(data.createdAt);
+              const title = document.createElement("h2");
+              title.textContent = "אפשר להתחיל להכיר";
 
-              bubble.append(text, time);
-              fragment.appendChild(bubble);
-            });
+              const description = document.createElement("p");
+              description.textContent =
+                "הבקשה אושרה. כתבו הודעה קצרה ותאמו את פרטי השיעור.";
+
+              empty.append(title, description);
+              fragment.append(empty);
+            }
+
+            messagesBox.replaceChildren(fragment);
+
+            if (firstSnapshot || nearBottom || newOwn) {
+              messagesBox.scrollTop = messagesBox.scrollHeight;
+            } else {
+              messagesBox.scrollTop = previousScroll;
+            }
+
+            if (!firstSnapshot && newIncoming > 0) {
+              $("new-message-announcement").textContent =
+                `התקבלו ${newIncoming} הודעות חדשות בשיחה.`;
+            }
+
+            previousMessageIds = nextIds;
+            firstSnapshot = false;
+            messagesReady = true;
+
+            refreshComposer();
+            void markAsRead();
+          },
+          error => {
+            console.error("Messages listener failed:", error?.code);
+            fail("לא הצלחנו לטעון את ההודעות. נסו לפתוח את השיחה שוב.");
           }
-
-          messagesBox.replaceChildren(fragment);
-
-          if (firstMessages || nearBottom || ownMessageAdded) {
-            messagesBox.scrollTop = messagesBox.scrollHeight;
-          } else {
-            messagesBox.scrollTop = previousTop;
-          }
-
-          if (!firstMessages && newIncoming > 0) {
-            byId("message-announcement").textContent =
-              newIncoming === 1
-                ? "התקבלה הודעה חדשה בשיחה."
-                : `התקבלו ${newIncoming} הודעות חדשות בשיחה.`;
-          }
-
-          knownMessageIds = nextIds;
-          firstMessages = false;
-          messagesReady = true;
-
-          messagesBox.setAttribute("aria-busy", "false");
-          updateComposer();
-          markAsRead();
-        },
-
-        error => {
-          console.error("Messages listener failed:", error);
-          fail("לא הצלחנו לטעון את ההודעות. נסו לרענן.");
-        }
+        )
       );
-
-      subscriptions.push(unsubscribe);
     }
 
-    async function loadAvatar() {
-      const name = byId("person-name").textContent || "כ";
-      const avatar = byId("avatar");
-      avatar.textContent = name.charAt(0);
-
-      if (user.uid !== request.studentId) return;
-
-      try {
-        const snapshot = await firebase.getDoc(
-          firebase.doc(firebase.db, "teachers", request.teacherId)
-        );
-
-        if (fatal || !snapshot.exists()) return;
-
-        const photo = snapshot.data().photo;
-
-        if (
-          typeof photo === "string" &&
-          photo.startsWith("data:image/")
-        ) {
-          const image = document.createElement("img");
-          image.src = photo;
-          image.alt = "";
-
-          image.addEventListener("error", () => {
-            avatar.textContent = name.charAt(0);
-          });
-
-          avatar.replaceChildren(image);
-        }
-      } catch (error) {
-        console.error("Avatar loading failed:", error);
-      }
-    }
-
-    composer.addEventListener("submit", async event => {
+    $("composer").addEventListener("submit", async event => {
       event.preventDefault();
-
-      if (sending || !canSend()) return;
 
       const text = input.value.trim();
 
-      if (!text) {
-        showSendError("כתבו הודעה לפני השליחה.");
-        input.focus();
-        return;
-      }
-
-      if (text.length > 1000) {
-        showSendError("אפשר לשלוח עד 1,000 תווים בהודעה.");
+      if (!text || text.length > 1000 || sending || !canSend()) {
         return;
       }
 
       sending = true;
-      updateComposer();
-      showSendError("");
-
-      let messageSaved = false;
+      sendStatus("");
+      refreshComposer();
 
       try {
-        const requestRef = firebase.doc(
-          firebase.db,
-          "requests",
-          requestId
-        );
+        const [requestSnapshot, ...blocks] = await Promise.all([
+          sdk.getDoc(sdk.doc(sdk.db, "requests", requestId)),
+          ...blockIds().map(id =>
+            sdk.getDoc(sdk.doc(sdk.db, "blocks", id))
+          )
+        ]);
 
-        const [latestRequest, studentBlock, teacherBlock] =
-          await Promise.all([
-            firebase.getDoc(requestRef),
-            firebase.getDoc(
-              firebase.doc(
-                firebase.db,
-                "blocks",
-                `${requestId}_${request.studentId}`
-              )
-            ),
-            firebase.getDoc(
-              firebase.doc(
-                firebase.db,
-                "blocks",
-                `${requestId}_${request.teacherId}`
-              )
-            )
-          ]);
+        if (fatal || !isCurrentUser()) return;
+
+        const latest = requestSnapshot.exists()
+          ? requestSnapshot.data()
+          : null;
 
         if (
-          fatal ||
-          !latestRequest.exists() ||
-          !isParticipant(latestRequest.data()) ||
-          latestRequest.data().status !== "accepted"
+          !latest ||
+          !isParticipant(latest) ||
+          latest.status !== "accepted" ||
+          latest.studentId !== request.studentId ||
+          latest.teacherId !== request.teacherId
         ) {
-          throw new Error("chat-unavailable");
+          fail("השיחה אינה זמינה לשליחת הודעות כרגע.");
+          return;
         }
 
-        if (studentBlock.exists() || teacherBlock.exists()) {
-          locallyBlocked = true;
-          updateComposer();
-          throw new Error("chat-blocked");
+        if (blocks.some(snapshot => snapshot.exists())) {
+          localBlock = true;
+          return;
         }
 
-        if (!canSend()) {
-          throw new Error("chat-unavailable");
-        }
-
-        await firebase.addDoc(
-          firebase.collection(
-            firebase.db,
-            "requests",
-            requestId,
-            "messages"
-          ),
-          {
-            senderId: user.uid,
-            text,
-            createdAt: firebase.serverTimestamp()
-          }
-        );
-
-        messageSaved = true;
-        input.value = "";
+        if (!canSend()) return;
 
         const asStudent = user.uid === request.studentId;
+        const otherUnread = asStudent
+          ? "unreadForTeacher"
+          : "unreadForStudent";
 
-        await firebase.updateDoc(requestRef, {
-          lastMessage: text,
-          lastMessageAt: firebase.serverTimestamp(),
-          lastSenderId: user.uid,
+        const messageRef = sdk.doc(
+          sdk.collection(sdk.db, "requests", requestId, "messages")
+        );
 
-          [asStudent ? "unreadForTeacher" : "unreadForStudent"]:
-            firebase.increment(1),
+        /*
+         * ההודעה ותקציר השיחה נשמרים יחד.
+         * אם אחת הפעולות נכשלת, שתיהן אינן נשמרות.
+         */
+        const batch = writeBatch(sdk.db);
 
-          updatedAt: firebase.serverTimestamp()
+        batch.set(messageRef, {
+          senderId: user.uid,
+          text,
+          createdAt: sdk.serverTimestamp()
         });
-      } catch (error) {
-        console.error("Message sending failed:", error);
 
-        if (messageSaved) {
-          showSendError(
-            "ההודעה נשלחה, אך עדכון מונה ההודעות לא הושלם. אין צורך לשלוח שוב."
-          );
-        } else if (error.message === "chat-blocked") {
-          showStatus("השיחה חסומה לשליחת הודעות חדשות.");
-          showSendError("ההודעה לא נשלחה משום שהשיחה חסומה.");
-        } else {
-          showSendError(
-            "לא הצלחנו לשלוח את ההודעה. הטקסט נשאר בשדה — בדקו את החיבור ונסו שוב."
-          );
-        }
+        batch.update(sdk.doc(sdk.db, "requests", requestId), {
+          lastMessage: text,
+          lastMessageAt: sdk.serverTimestamp(),
+          lastSenderId: user.uid,
+          [otherUnread]: sdk.increment(1),
+          updatedAt: sdk.serverTimestamp()
+        });
+
+        await batch.commit();
+
+        input.value = "";
+        updateInputSize();
+      } catch (error) {
+        console.error("Message send failed:", error?.code);
+
+        sendStatus(
+          "לא הצלחנו לשלוח את ההודעה. הטקסט נשאר כאן כדי שתוכלו לנסות שוב."
+        );
       } finally {
         sending = false;
-        updateComposer();
+        refreshComposer();
 
-        if (canSend()) input.focus();
+        if (canSend()) {
+          input.focus();
+        }
       }
+    });
+
+    input.addEventListener("input", () => {
+      updateInputSize();
+      refreshComposer();
     });
 
     input.addEventListener("keydown", event => {
@@ -1199,220 +1051,254 @@
       ) {
         event.preventDefault();
 
-        if (!sending && canSend()) {
-          composer.requestSubmit();
+        if (!sending && canSend() && input.value.trim()) {
+          $("composer").requestSubmit();
         }
       }
     });
 
-    function setModalBusy(value) {
-      modalBusy = value;
+    function setSafetyBusy(value) {
+      safetyBusy = value;
 
-      byId("report-button").disabled = value;
-      byId("cancel-button").disabled = value;
-      byId("report-reason").disabled = value;
+      for (const id of [
+        "report-button",
+        "block-button",
+        "close-safety",
+        "report-reason"
+      ]) {
+        $(id).disabled = value;
+      }
 
-      updateComposer();
+      if (!value) {
+        $("block-button").disabled = isBlocked();
+      }
+
+      dialog.setAttribute("aria-busy", String(value));
     }
 
-    safetyButton.addEventListener("click", () => {
+    $("safety-button").addEventListener("click", () => {
       if (fatal || !isParticipant(request)) return;
 
-      byId("modal-message").textContent = "";
-      updateComposer();
+      safetyStatus("");
+      setSafetyBusy(false);
       dialog.showModal();
     });
 
-    byId("cancel-button").addEventListener("click", () => {
-      if (!modalBusy) dialog.close();
+    $("close-safety").addEventListener("click", () => {
+      if (!safetyBusy) dialog.close();
     });
 
     dialog.addEventListener("cancel", event => {
-      if (modalBusy) event.preventDefault();
+      if (safetyBusy) event.preventDefault();
     });
 
-    byId("report-button").addEventListener("click", async () => {
-      if (modalBusy || fatal || !isParticipant(request)) return;
-
-      const reason = byId("report-reason").value.trim();
-
-      if (!reason) {
-        byId("modal-message").textContent =
-          "כתבו בקצרה את הסיבה לדיווח.";
-
-        byId("report-reason").focus();
-        return;
-      }
-
-      setModalBusy(true);
-      byId("modal-message").textContent = "";
-
-      try {
-        await firebase.addDoc(
-          firebase.collection(firebase.db, "reports"),
-          {
-            requestId,
-            reporterId: user.uid,
-            reportedUserId: otherUserId(),
-            reason,
-            status: "open",
-            createdAt: firebase.serverTimestamp()
-          }
-        );
-
-        byId("report-reason").value = "";
-        dialog.close();
-
-        showStatus("הדיווח נשמר בהצלחה.");
-      } catch (error) {
-        console.error("Report submission failed:", error);
-
-        byId("modal-message").textContent =
-          "לא הצלחנו לשמור את הדיווח. נסו שוב.";
-      } finally {
-        setModalBusy(false);
-      }
-    });
-
-    byId("block-button").addEventListener("click", async () => {
+    $("report-button").addEventListener("click", async () => {
       if (
-        modalBusy ||
+        safetyBusy ||
         fatal ||
-        isBlocked() ||
+        !isCurrentUser() ||
         !isParticipant(request)
       ) {
         return;
       }
 
-      if (!confirm("לחסום את השיחה לשליחת הודעות חדשות?")) {
+      const reason = $("report-reason").value.trim();
+
+      if (!reason) {
+        safetyStatus("כתבו בקצרה מה קרה כדי לשלוח דיווח.", true);
+        $("report-reason").focus();
         return;
       }
 
-      setModalBusy(true);
-      byId("modal-message").textContent = "";
+      setSafetyBusy(true);
+      safetyStatus("שומרים את הדיווח…");
 
       try {
-        await firebase.setDoc(
-          firebase.doc(
-            firebase.db,
-            "blocks",
-            `${requestId}_${user.uid}`
-          ),
+        await sdk.addDoc(sdk.collection(sdk.db, "reports"), {
+          requestId,
+          reporterId: user.uid,
+          reportedUserId: user.uid === request.studentId
+            ? request.teacherId
+            : request.studentId,
+          reason,
+          status: "open",
+          createdAt: sdk.serverTimestamp()
+        });
+
+        $("report-reason").value = "";
+        safetyStatus(
+          "הדיווח נשמר. אם תרצו להפסיק את ההתכתבות, אפשר גם לחסום את השיחה."
+        );
+      } catch (error) {
+        console.error("Report failed:", error?.code);
+        safetyStatus("לא הצלחנו לשמור את הדיווח. נסו שוב.", true);
+      } finally {
+        setSafetyBusy(false);
+      }
+    });
+
+    $("block-button").addEventListener("click", async () => {
+      if (
+        safetyBusy ||
+        fatal ||
+        isBlocked() ||
+        !isCurrentUser() ||
+        !isParticipant(request)
+      ) {
+        return;
+      }
+
+      if (!confirm("לחסום את המשך השיחה? ההודעות הקיימות יישארו מוצגות.")) {
+        return;
+      }
+
+      setSafetyBusy(true);
+      safetyStatus("חוסמים את השיחה…");
+
+      try {
+        await sdk.setDoc(
+          sdk.doc(sdk.db, "blocks", `${requestId}_${user.uid}`),
           {
             requestId,
             blockedBy: user.uid,
-            blockedUserId: otherUserId(),
-            createdAt: firebase.serverTimestamp()
+            blockedUserId: user.uid === request.studentId
+              ? request.teacherId
+              : request.studentId,
+            createdAt: sdk.serverTimestamp()
           }
         );
 
-        locallyBlocked = true;
-        updateComposer();
+        localBlock = true;
+        refreshComposer();
         dialog.close();
-
-        showStatus("השיחה נחסמה לשליחת הודעות חדשות.");
       } catch (error) {
-        console.error("Conversation block failed:", error);
-
-        byId("modal-message").textContent =
-          "לא הצלחנו לחסום את השיחה. נסו שוב.";
+        console.error("Block failed:", error?.code);
+        safetyStatus("לא הצלחנו לחסום את השיחה. נסו שוב.", true);
       } finally {
-        setModalBusy(false);
+        setSafetyBusy(false);
       }
+    });
+
+    $("reload-button").addEventListener("click", () => {
+      location.reload();
     });
 
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") {
-        markAsRead();
+        void markAsRead();
       }
     });
 
     window.addEventListener("pagehide", event => {
-      if (!event.persisted) stopSubscriptions();
+      if (!event.persisted) {
+        stopListeners();
+      }
     });
 
-    try {
-      const access = await import("./access.js");
-      await access.requireAccess();
+    window.addEventListener("beforeunload", event => {
+      if (!fatal && (input.value.trim() || sending || safetyBusy)) {
+        event.preventDefault();
+        event.returnValue = "";
+      }
+    });
 
-      firebase = await import("./firebase.js");
-      user = firebase.auth.currentUser;
-
-      if (!user) {
-        const next = "chat.html" + window.location.search;
-
-        window.location.replace(
-          "login.html?next=" + encodeURIComponent(next)
-        );
-
-        await new Promise(() => {});
+    window.addEventListener("kivun:before-signout", event => {
+      if (sending || safetyBusy) {
+        event.preventDefault();
+        sendStatus("המתינו לסיום הפעולה לפני ההתנתקות.");
+        return;
       }
 
-      const initialUid = user.uid;
+      if (input.value.trim()) {
+        if (!confirm("יש הודעה שלא נשלחה. להתנתק ולוותר עליה?")) {
+          event.preventDefault();
+          return;
+        }
 
-      subscriptions.push(
-        firebase.onAuthStateChanged(firebase.auth, current => {
-          if (!current || current.uid !== initialUid) {
-            fatal = true;
-            document.documentElement.classList.add("access-pending");
-            stopSubscriptions();
-            window.location.replace("login.html");
-          }
-        })
-      );
+        input.value = "";
+        updateInputSize();
+      }
+    });
 
-      if (!requestId || requestId.includes("/")) {
-        fail("הקישור לשיחה אינו תקין. פתחו את השיחה מתוך האזור האישי.");
-      } else {
-        const snapshot = await firebase.getDoc(
-          firebase.doc(firebase.db, "requests", requestId)
+    async function start() {
+      try {
+        const access = await import("./access.js");
+        await access.requireAccess();
+
+        const modules = await Promise.all([
+          import("./firebase.js"),
+          import("https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js")
+        ]);
+
+        sdk = modules[0];
+        writeBatch = modules[1].writeBatch;
+        user = sdk.auth.currentUser;
+
+        if (!user) {
+          location.replace("login.html");
+          return;
+        }
+
+        subscriptions.push(
+          sdk.onAuthStateChanged(sdk.auth, current => {
+            if (current?.uid !== user.uid) {
+              fatal = true;
+              stopListeners();
+              location.replace("login.html");
+            }
+          })
         );
+
+        if (
+          !requestId ||
+          !requestId.trim() ||
+          requestId.includes("/")
+        ) {
+          fail("חסר קישור תקין לשיחה. פתחו שיחה מתוך האזור האישי.");
+          return;
+        }
+
+        const snapshot = await sdk.getDoc(
+          sdk.doc(sdk.db, "requests", requestId)
+        );
+
+        if (fatal) return;
 
         if (!snapshot.exists()) {
-          fail("הבקשה לא נמצאה.");
-        } else {
-          request = { ...snapshot.data(), id: snapshot.id };
-
-          if (!isParticipant(request)) {
-            fail("השיחה זמינה רק למשתתפים בבקשה.");
-          } else if (
-            !request.studentId ||
-            !request.teacherId ||
-            request.studentId === request.teacherId
-          ) {
-            fail("פרטי המשתתפים בשיחה אינם תקינים.");
-          } else if (request.status !== "accepted") {
-            fail("הצ׳אט ייפתח לאחר אישור הבקשה על ידי המורה.");
-          } else {
-            updateHeader();
-            safetyButton.classList.remove("hidden");
-
-            watchRequest();
-            watchBlocks();
-            watchMessages();
-
-            loadAvatar();
-          }
+          fail("הבקשה שאליה שייכת השיחה לא נמצאה.");
+          return;
         }
-      }
-    } catch (error) {
-      console.error("Chat initialization failed:", error);
 
-      const accessBox = byId("access-status");
+        request = snapshot.data();
 
-      if (
-        document.documentElement.classList.contains("access-pending") &&
-        accessBox
-      ) {
-        accessBox.querySelector("strong").textContent =
-          "לא הצלחנו לבדוק את הכניסה";
+        if (
+          !isParticipant(request) ||
+          !request.studentId ||
+          !request.teacherId ||
+          request.studentId === request.teacherId
+        ) {
+          fail("השיחה זמינה רק למשתתפים בבקשה.");
+          return;
+        }
 
-        accessBox.querySelector("p").textContent =
-          "בדקו את החיבור לאינטרנט ונסו לרענן.";
-      } else {
-        fail("לא הצלחנו לטעון את השיחה. בדקו את החיבור ונסו לרענן.");
+        if (request.status !== "accepted") {
+          fail("הצ׳אט נפתח לאחר שהמורה מאשר/ת את הבקשה.");
+          return;
+        }
+
+        updateHeader();
+        $("safety-button").hidden = false;
+
+        watchRequest();
+        watchBlocks();
+        watchMessages();
+      } catch (error) {
+        console.error("Chat initialization failed:", error);
+        fail("אירעה שגיאה בפתיחת השיחה. בדקו את החיבור ונסו שוב.");
       }
     }
+
+    start();
   </script>
 </body>
 </html>

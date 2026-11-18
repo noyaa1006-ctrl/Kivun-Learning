@@ -3,1809 +3,1619 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#121a37">
+  <meta name="theme-color" content="#172442">
   <title>האזור שלי — כיוון</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="./site.css">
+
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap");
-
-    :root {
-      --navy: #121a37;
-      --ink: #1d2746;
-      --teal: #08785c;
-      --coral: #ff6e61;
-      --cloud: #f6f8fe;
-      --line: #e4e9f4;
-      --muted: #69738d;
-      --shadow: 0 15px 40px rgba(23, 37, 78, .09);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    .hidden {
+    .access-pending body > :not(#access-status):not(script) {
       display: none !important;
     }
 
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--cloud);
-      font-family: Heebo, Arial, sans-serif;
+    #access-status {
+      width: min(460px, calc(100% - 32px));
+      margin: 90px auto;
+      text-align: center;
     }
 
-    button,
-    input,
-    select,
-    textarea {
-      font: inherit;
-    }
-
-    .container {
-      width: min(1120px, calc(100% - 30px));
-      margin-inline: auto;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      min-height: 80px;
-      padding-block: 12px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--navy);
-      font-size: 28px;
-      font-weight: 900;
-      text-decoration: none;
-    }
-
-    .mark {
+    .dashboard-columns {
       display: grid;
-      place-items: center;
-      width: 29px;
-      height: 29px;
-      border-radius: 10px 10px 10px 2px;
-      color: #fff;
-      background: var(--coral);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .nav-links a,
-    .logout {
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
-      padding: 6px 0;
-      border: 0;
-      color: var(--muted);
-      background: transparent;
-      font-size: 14px;
-      font-weight: 800;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .logout {
-      color: #a5342e;
-    }
-
-    .banner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 28px;
-      border-radius: 25px;
-      color: #fff;
-      background: var(--navy);
-    }
-
-    .banner h1 {
-      margin: 0;
-      font-size: 29px;
-      overflow-wrap: anywhere;
-    }
-
-    .banner p {
-      margin: 8px 0 0;
-      color: #cbd5ee;
-      line-height: 1.7;
-    }
-
-    .avatar,
-    .photo-preview {
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      color: #fff;
-      background: linear-gradient(135deg, #ff9d6e, #c64f62);
-      font-weight: 900;
-    }
-
-    .avatar {
-      width: 60px;
-      height: 60px;
-      flex: 0 0 60px;
-      border-radius: 18px;
-      font-size: 24px;
-    }
-
-    .photo-preview {
-      width: 85px;
-      height: 85px;
-      flex: 0 0 85px;
-      border-radius: 20px;
-      font-size: 28px;
-    }
-
-    .avatar img,
-    .photo-preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 210px minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr) 310px;
+      align-items: start;
       gap: 24px;
-      margin: 25px 0 70px;
     }
 
-    .menu {
-      display: grid;
-      gap: 6px;
-      height: max-content;
-      padding: 10px;
-      border-radius: 19px;
-      background: #fff;
-      box-shadow: var(--shadow);
-    }
-
-    .menu button {
-      width: 100%;
-      min-height: 46px;
-      padding: 12px;
-      border: 0;
-      border-radius: 11px;
-      color: var(--muted);
-      background: transparent;
-      font-weight: 800;
-      text-align: right;
-      cursor: pointer;
-    }
-
-    .menu button.active,
-    .menu button:hover {
-      color: var(--teal);
-      background: #e5faf0;
-    }
-
-    .card {
+    .dashboard-columns > * {
       min-width: 0;
-      padding: 24px;
-      border-radius: 21px;
-      background: #fff;
-      box-shadow: var(--shadow);
     }
 
-    .card h2 {
-      margin: 0 0 8px;
-      color: var(--navy);
+    .welcome-card {
+      margin-bottom: 28px;
+      padding: 28px;
+      border: 1px solid #d4e7dd;
+      border-radius: 20px;
+      background: linear-gradient(115deg, #eef8f2, #fff);
     }
 
-    .sub {
-      margin: 0 0 20px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
+    .welcome-card p {
+      margin: 8px 0 18px;
+      color: var(--site-muted);
     }
 
-    .form {
+    .profile-summary {
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--site-border-soft);
+    }
+
+    .profile-summary h2 {
+      margin: 0;
+      font-size: 23px;
+    }
+
+    .profile-sections {
       display: grid;
-      gap: 17px;
+      gap: 24px;
+      margin-top: 24px;
     }
 
-    .profile-section {
-      min-width: 0;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #fbfcff;
+    .profile-section + .profile-section {
+      padding-top: 24px;
+      border-top: 1px solid var(--site-border-soft);
     }
 
     .profile-section h3 {
       margin: 0 0 14px;
-      color: var(--navy);
+      font-size: 17px;
     }
 
-    .use-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .use-choice {
-      margin: 0;
-      padding: 14px;
-      border: 2px solid var(--line);
-      border-radius: 14px;
-      background: #fff;
-      cursor: pointer;
-    }
-
-    .use-choice:has(input:checked) {
-      border-color: var(--teal);
-      background: #effdf7;
-    }
-
-    .use-choice input {
-      width: auto;
-      margin-left: 7px;
-      accent-color: var(--teal);
-    }
-
-    .use-choice small {
-      display: block;
-      margin-top: 6px;
-      color: var(--muted);
-      font-weight: 500;
-      line-height: 1.6;
-    }
-
-    .two {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 12px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 7px;
-      color: #4e5b76;
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      color: var(--ink);
-      background: #fff;
-      font-size: 16px;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: var(--teal);
-      outline: none;
-      box-shadow: 0 0 0 3px #dff7ed;
-    }
-
-    input[readonly] {
-      color: var(--muted);
-      background: #f4f6fa;
-    }
-
-    #email,
-    #phone {
-      direction: ltr;
-      text-align: left;
-    }
-
-    textarea {
-      min-height: 95px;
-      resize: vertical;
-    }
-
-    .photo-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .photo-row input {
-      min-width: 0;
-    }
-
-    .notice {
-      margin: 9px 0 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 12px 16px;
-      border: 0;
-      border-radius: 11px;
-      color: #fff;
-      background: var(--navy);
-      font-weight: 800;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .button.danger {
-      color: #9e2f2a;
-      background: #fff0ef;
-    }
-
-    .button.secondary {
-      color: var(--teal);
-      background: #e5faf0;
-    }
-
-    button:disabled {
-      opacity: .6;
-      cursor: wait;
-    }
-
-    .message {
-      display: none;
-      margin-top: 12px;
-      padding: 13px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 1.7;
-    }
-
-    .message.show {
-      display: block;
-    }
-
-    .message.success {
-      color: var(--teal);
-      background: #e5faf0;
-    }
-
-    .message.error {
-      color: #9e2f2a;
-      background: #fff0ef;
-    }
-
-    .message.info {
-      color: #405177;
-      background: #eef3ff;
-    }
-
-    .loading,
-    .empty {
-      padding: 32px 20px;
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.8;
-    }
-
-    .request-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .profile-section .site-tags {
       margin-bottom: 18px;
     }
 
-    .request-tab {
-      min-height: 44px;
-      padding: 9px 13px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      color: var(--muted);
-      background: #fff;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .request-tab.active {
-      color: var(--teal);
-      border-color: #bcebd9;
-      background: #e5faf0;
-    }
-
-    .requests {
+    .dashboard-links {
       display: grid;
-      gap: 14px;
+      gap: 10px;
     }
 
-    .request {
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-      overflow-wrap: anywhere;
-    }
-
-    .request-top {
+    .dashboard-links a {
       display: flex;
-      align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
-    }
-
-    .request h3 {
-      margin: 0 0 7px;
-      color: var(--navy);
-    }
-
-    .request p {
-      margin: 12px 0;
-      color: #5d6881;
-      line-height: 1.8;
-      white-space: pre-wrap;
-    }
-
-    .request-info {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .status {
-      flex-shrink: 0;
-      padding: 5px 9px;
-      border-radius: 8px;
-      color: #765b09;
-      background: #fff7d9;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .status.accepted {
-      color: var(--teal);
-      background: #e5faf0;
-    }
-
-    .status.declined {
-      color: #9e2f2a;
-      background: #fff0ef;
-    }
-
-    .request-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .unread {
-      display: inline-block;
-      margin-top: 10px;
-      color: var(--teal);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .public-link {
-      display: inline-block;
-      color: var(--teal);
-      font-weight: 800;
+      padding: 13px 14px;
+      border-radius: 10px;
+      color: var(--site-text);
+      background: var(--site-surface-soft);
+      font-size: 14px;
+      font-weight: 600;
       text-decoration: none;
     }
 
-    @media (max-width: 800px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
+    .dashboard-links a:hover {
+      color: var(--site-primary);
+      background: var(--site-primary-soft);
+    }
 
-      .menu {
-        display: flex;
-        flex-wrap: wrap;
-      }
+    .section-anchor {
+      scroll-margin-top: 24px;
+    }
 
-      .menu button {
-        flex: 1;
-        width: auto;
-        text-align: center;
-      }
+    .request-card {
+      padding: 18px 0;
+    }
 
-      .use-grid {
-        grid-template-columns: 1fr;
+    .request-card + .request-card {
+      border-top: 1px solid var(--site-border-soft);
+    }
+
+    .request-card h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .request-card p {
+      margin: 7px 0;
+      color: var(--site-muted);
+      font-size: 14px;
+      white-space: pre-line;
+    }
+
+    .request-meta {
+      font-size: 12px !important;
+    }
+
+    .editor-section {
+      min-width: 0;
+      margin: 0;
+      padding: 22px 0;
+      border: 0;
+      border-top: 1px solid var(--site-border-soft);
+    }
+
+    .editor-section legend {
+      padding: 0 0 8px;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .editor-section[hidden] {
+      display: none;
+    }
+
+    .use-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .use-options .site-checkbox {
+      padding: 10px 14px;
+      border: 1px solid var(--site-border);
+      border-radius: 10px;
+    }
+
+    .use-options .site-checkbox:has(input:checked) {
+      border-color: var(--site-primary);
+      background: var(--site-primary-soft);
+    }
+
+    .photo-tools {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .editor-top {
+      margin-bottom: 24px;
+    }
+
+    #page-message,
+    #editor-message {
+      margin-bottom: 20px;
+    }
+
+    /* בורר המקצועות מתוך catalog.js */
+    .subject-picker {
+      position: relative;
+    }
+
+    .tag-picker-selected {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 8px;
+    }
+
+    .tag-picker-tag {
+      min-height: 36px;
+      padding: 6px 10px;
+      border: 0;
+      border-radius: 8px;
+      color: var(--site-primary);
+      background: var(--site-primary-soft);
+      font: inherit;
+      font-size: 13px;
+    }
+
+    .tag-picker-empty,
+    .tag-picker-no-results {
+      padding: 6px;
+      color: var(--site-muted);
+      font-size: 13px;
+    }
+
+    .tag-picker-search {
+      width: 100%;
+      min-height: 48px;
+      padding: 11px 13px;
+      border: 1px solid #c8d2e0;
+      border-radius: 10px;
+      color: var(--site-text);
+      background: white;
+      font: inherit;
+    }
+
+    .tag-picker-options {
+      position: absolute;
+      z-index: 20;
+      inset-inline: 0;
+      top: calc(100% + 5px);
+      max-height: 240px;
+      overflow-y: auto;
+      padding: 7px;
+      border: 1px solid var(--site-border);
+      border-radius: 12px;
+      background: white;
+      box-shadow: var(--site-shadow-menu);
+    }
+
+    .tag-picker-options.hidden {
+      display: none !important;
+    }
+
+    .tag-picker-option {
+      display: block;
+      width: 100%;
+      min-height: 44px;
+      padding: 9px 12px;
+      border: 0;
+      border-radius: 8px;
+      color: var(--site-text);
+      background: white;
+      font: inherit;
+      text-align: start;
+    }
+
+    .tag-picker-option:hover,
+    .tag-picker-option:focus {
+      background: var(--site-primary-soft);
+    }
+
+    @media (max-width: 900px) {
+      .dashboard-columns {
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
     @media (max-width: 560px) {
-      .two {
-        grid-template-columns: 1fr;
+      .welcome-card {
+        padding: 22px;
       }
 
-      .photo-row {
-        align-items: flex-start;
+      .use-options {
         flex-direction: column;
+        gap: 8px;
       }
 
-      .nav-links {
-        gap: 12px;
-      }
-
-      .nav-links a,
-      .logout {
-        font-size: 12px;
-      }
-
-      .brand {
-        font-size: 24px;
-      }
-
-      .banner {
-        padding: 21px;
-      }
-
-      .banner h1 {
-        font-size: 23px;
-      }
-
-      .banner p {
-        font-size: 14px;
-      }
-
-      .card {
-        padding: 18px;
-      }
-
-      .profile-section {
-        padding: 14px;
+      .photo-tools {
+        align-items: flex-start;
       }
     }
   </style>
 
-  <link rel="stylesheet" href="navigation.css">
-  <script defer src="navigation.js"></script>
+  <script type="module" src="./navigation.js"></script>
 </head>
 
 <body>
-  <div id="access-status" role="status" aria-live="polite">
-    <strong>רגע, בודקים את הכניסה שלך…</strong>
-    <p>מיד ממשיכים לכיוון שלך.</p>
-    <a href="login.html">חזרה לכניסה</a>
+  <div id="access-status" class="site-card" role="status">
+    <strong>מכינים את האזור האישי שלך</strong>
+    <p>בודקים את ההתחברות…</p>
+    <a href="login.html">חזרה למסך הכניסה</a>
   </div>
 
-  <nav class="container nav" aria-label="ניווט ראשי">
-    <a class="brand" href="index.html">
-      <span class="mark" aria-hidden="true">↗</span>
-      כיוון
-    </a>
+  <header data-site-header></header>
 
-    <div class="nav-links">
-      <a href="index.html">עמוד הבית</a>
-      <a href="matches.html">חיפוש מורים</a>
-      <button class="logout" id="logout-button" type="button">
-        התנתקות
-      </button>
-    </div>
-  </nav>
-
-  <main class="container">
-    <section class="banner">
+  <main class="site-container site-main" id="main-content">
+    <div class="site-page-head">
       <div>
-        <h1 id="welcome">האזור האישי שלך</h1>
-        <p id="banner-text">כאן מנהלים את הפרופילים והבקשות.</p>
+        <p class="site-eyebrow">המקום שלך בכיוון</p>
+        <h1 class="site-title" id="welcome">האזור שלי</h1>
+        <p class="site-description">
+          הפרופיל, הבקשות והשיחות שלך — במקום אחד.
+        </p>
       </div>
-
-      <div class="avatar" id="avatar" aria-hidden="true">כ</div>
-    </section>
+    </div>
 
     <div
-      class="message"
       id="page-message"
+      class="site-notice"
       role="status"
       aria-live="polite"
+      hidden
     ></div>
 
-    <div class="layout">
-      <aside class="menu" aria-label="תפריט האזור האישי">
-        <button
-          class="active"
-          data-pane="profile"
-          type="button"
-          aria-pressed="true"
-          aria-controls="profile-pane"
-          disabled
-        >
-          הפרופילים שלי
-        </button>
+    <div id="page-loading" class="site-loading" role="status">
+      <span class="site-spinner" aria-hidden="true"></span>
+      טוענים את הפרטים שלך…
+    </div>
 
-        <button
-          data-pane="requests"
-          type="button"
-          aria-pressed="false"
-          aria-controls="requests-pane"
-          disabled
-        >
-          הבקשות והשיחות שלי
-        </button>
-      </aside>
+    <button
+      id="reload-button"
+      class="site-btn site-btn-secondary"
+      type="button"
+      hidden
+    >
+      ניסיון נוסף
+    </button>
 
-      <section>
-        <div class="card loading" id="loading" role="status">
-          טוענים את הפרופיל שלך…
-        </div>
+    <div id="dashboard" hidden>
+      <section class="welcome-card" aria-labelledby="next-title">
+        <h2 class="site-section-title" id="next-title">
+          מה הצעד הבא שלך?
+        </h2>
+        <p id="next-description"></p>
+        <div class="site-row" id="next-actions"></div>
+      </section>
 
-        <section class="card hidden" id="profile-pane">
-          <h2 tabindex="-1">הפרופילים שלי</h2>
-          <p class="sub">
-            עדכנו את הפרטים ואת סוגי השימוש בחשבון.
-            בסיום לחצו על שמירת השינויים.
-          </p>
+      <div class="dashboard-columns">
+        <div class="site-stack">
+          <section
+            class="site-card section-anchor"
+            id="profile"
+            aria-labelledby="profile-title"
+          >
+            <div class="site-section-head">
+              <h2 class="site-section-title" id="profile-title">
+                הפרופיל שלי
+              </h2>
 
-          <form class="form" id="edit-form">
-            <div>
-              <label for="name">שם מלא *</label>
-              <input id="name" required maxlength="100" autocomplete="name">
+              <button
+                class="site-btn site-btn-secondary"
+                id="edit-button"
+                type="button"
+                aria-controls="profile-editor"
+              >
+                עריכת פרופיל
+              </button>
             </div>
 
-            <section class="profile-section">
-              <h3>איך החשבון משמש אותך?</h3>
-
-              <p class="sub">
-                אפשר לבחור כמה אפשרויות.
-                פרופילים שנשמרו נשארים בחשבון גם אם מכבים את השימוש בהם.
-              </p>
-
-              <div class="use-grid">
-                <label class="use-choice">
-                  <span>
-                    <input id="use-self" type="checkbox">
-                    <b>אני רוצה ללמוד</b>
-                  </span>
-                  <small>חיפוש מורה עבורי</small>
-                </label>
-
-                <label class="use-choice">
-                  <span>
-                    <input id="use-parent" type="checkbox">
-                    <b>אני הורה</b>
-                  </span>
-                  <small>חיפוש מורה עבור ילד או ילדה</small>
-                </label>
-
-                <label class="use-choice">
-                  <span>
-                    <input id="use-teacher" type="checkbox">
-                    <b>אני רוצה ללמד</b>
-                  </span>
-                  <small>פרופיל מורה וקבלת בקשות</small>
-                </label>
-              </div>
-            </section>
-
-            <div class="two">
-              <div>
-                <label for="email">אימייל החשבון</label>
-                <input id="email" type="email" readonly>
-              </div>
+            <div class="site-person profile-summary">
+              <div class="site-avatar site-avatar-lg" id="profile-avatar"></div>
 
               <div>
-                <label for="phone">טלפון</label>
-                <input id="phone" type="tel" autocomplete="tel">
+                <h2 id="profile-name"></h2>
+                <p class="site-person-detail" id="profile-email" dir="auto"></p>
+                <p class="site-person-detail" id="profile-city"></p>
+                <div class="site-tags" id="profile-roles"></div>
               </div>
             </div>
 
-            <div>
-              <label for="city">עיר או אזור</label>
-              <input id="city" maxlength="100" autocomplete="address-level2">
+            <div class="profile-sections" id="profile-sections"></div>
+          </section>
+
+          <section
+            class="site-card section-anchor"
+            id="profile-editor"
+            aria-labelledby="editor-title"
+            hidden
+          >
+            <div class="site-section-head">
+              <div>
+                <h2
+                  class="site-section-title"
+                  id="editor-title"
+                  tabindex="-1"
+                >
+                  עריכת הפרופיל
+                </h2>
+                <p class="site-description">
+                  אפשר לעדכן את הפרטים ולבחור איך להשתמש בכיוון.
+                </p>
+              </div>
             </div>
 
-            <div>
-              <label for="photo">תמונת פרופיל</label>
+            <div
+              id="editor-message"
+              class="site-notice"
+              role="status"
+              aria-live="polite"
+              hidden
+            ></div>
 
-              <div class="photo-row">
-                <div class="photo-preview" id="photo-preview">כ</div>
-                <input id="photo" type="file" accept="image/*">
-              </div>
+            <form id="profile-form">
+              <div class="photo-tools">
+                <div
+                  class="site-avatar site-avatar-lg"
+                  id="edit-avatar"
+                  aria-label="תמונת הפרופיל"
+                ></div>
 
-              <p class="notice">
-                אפשר לבחור תמונה עד 8MB.
-                התמונה תישמר לאחר לחיצה על שמירת השינויים.
-              </p>
+                <div class="site-stack-sm">
+                  <label class="site-label" for="photo-input">
+                    תמונת פרופיל
+                  </label>
 
-              <div
-                class="message"
-                id="photo-message"
-                role="status"
-                aria-live="polite"
-              ></div>
-            </div>
-
-            <section class="profile-section" id="student-section">
-              <h3>פרופיל הלמידה שלי</h3>
-
-              <div class="form">
-                <div>
-                  <label for="student-subjects">מקצועות שרוצים ללמוד *</label>
-                  <input id="student-subjects">
-                </div>
-
-                <div class="two">
-                  <div>
-                    <label for="student-level">רמה או כיתה</label>
-                    <input id="student-level">
-                  </div>
-
-                  <div>
-                    <label for="learning-style">איך נוח לך ללמוד?</label>
-                    <select id="learning-style">
-                      <option value="">בחירה</option>
-                      <option>הסברים ותרגול</option>
-                      <option>למידה חזותית</option>
-                      <option>למידה בקצב מהיר</option>
-                      <option>למידה רגועה ומסודרת</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label for="student-goal">המטרה שלך</label>
-                  <textarea id="student-goal" maxlength="1000"></textarea>
-                </div>
-
-                <div>
-                  <label for="student-availability">ימים ושעות נוחים</label>
-                  <input id="student-availability" maxlength="200">
-                </div>
-              </div>
-            </section>
-
-            <section class="profile-section hidden" id="child-section">
-              <h3>פרופיל הלמידה של הילד/ה</h3>
-              <p class="sub">אין צורך לכתוב את שם הילד או הילדה.</p>
-
-              <div class="form">
-                <div>
-                  <label for="child-subjects">מקצועות שרוצים ללמוד *</label>
-                  <input id="child-subjects">
-                </div>
-
-                <div class="two">
-                  <div>
-                    <label for="child-level">רמה או כיתה</label>
-                    <input id="child-level">
-                  </div>
-
-                  <div>
-                    <label for="child-learning-style">איך נוח לילד/ה ללמוד?</label>
-                    <select id="child-learning-style">
-                      <option value="">בחירה</option>
-                      <option>הסברים ותרגול</option>
-                      <option>למידה חזותית</option>
-                      <option>למידה בקצב מהיר</option>
-                      <option>למידה רגועה ומסודרת</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label for="child-goal">מטרת הלמידה</label>
-                  <textarea id="child-goal" maxlength="1000"></textarea>
-                </div>
-
-                <div>
-                  <label for="child-availability">ימים ושעות נוחים</label>
-                  <input id="child-availability" maxlength="200">
-                </div>
-              </div>
-            </section>
-
-            <section class="profile-section hidden" id="teacher-section">
-              <h3>פרופיל ההוראה שלי</h3>
-
-              <p class="sub">
-                הפרטים בחלק הזה מוצגים בפרופיל המורה.
-              </p>
-
-              <div class="form">
-                <div>
-                  <label for="teacher-subjects">מקצועות שמלמדים *</label>
-                  <input id="teacher-subjects">
-                </div>
-
-                <div class="two">
-                  <div>
-                    <label for="price">מחיר לשעה בשקלים</label>
-                    <input id="price" type="number" min="0" step="1">
-                  </div>
-
-                  <div>
-                    <label for="experience">ניסיון בהוראה</label>
-                    <input id="experience" maxlength="200">
-                  </div>
-                </div>
-
-                <div>
-                  <label for="format">אופן השיעור</label>
-                  <select id="format">
-                    <option value="אונליין">אונליין</option>
-                    <option value="פרונטלי">פרונטלי</option>
-                    <option value="גם אונליין וגם פרונטלי">
-                      גם אונליין וגם פרונטלי
-                    </option>
-                  </select>
-                </div>
-
-                <div>
-                  <label for="bio">ניסיון ושיטת הוראה</label>
-                  <textarea id="bio" maxlength="2000"></textarea>
-                </div>
-
-                <div>
-                  <label for="teacher-availability">ימים ושעות זמינים</label>
                   <input
-                    id="teacher-availability"
-                    maxlength="200"
-                    placeholder="למשל: ראשון 16:00–20:00"
+                    id="photo-input"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    aria-describedby="photo-hint"
+                  >
+
+                  <p class="site-field-hint" id="photo-hint">
+                    JPG, PNG או WebP, עד 5MB.
+                    אצל מורים התמונה מוצגת גם בפרופיל הציבורי.
+                  </p>
+
+                  <button
+                    class="site-btn site-btn-quiet"
+                    id="remove-photo"
+                    type="button"
+                  >
+                    הסרת התמונה
+                  </button>
+                </div>
+              </div>
+
+              <div class="site-form-grid editor-top">
+                <div class="site-field">
+                  <label class="site-label" for="name">שם לתצוגה</label>
+                  <input
+                    class="site-input"
+                    id="name"
+                    autocomplete="name"
+                    maxlength="80"
+                    required
                   >
                 </div>
 
-                <a
-                  class="public-link hidden"
-                  id="public-profile-link"
-                  href="teacher-profile.html"
-                >
-                  צפייה בפרופיל המורה השמור שלי ←
-                </a>
+                <div class="site-field">
+                  <label class="site-label" for="city">עיר</label>
+                  <input
+                    class="site-input"
+                    id="city"
+                    autocomplete="address-level2"
+                    maxlength="100"
+                  >
+                </div>
+
+                <div class="site-field">
+                  <label class="site-label" for="phone">טלפון — לא חובה</label>
+                  <input
+                    class="site-input"
+                    id="phone"
+                    type="tel"
+                    autocomplete="tel"
+                    maxlength="30"
+                    dir="ltr"
+                  >
+                </div>
+
+                <div class="site-field">
+                  <label class="site-label" for="email">כתובת המייל</label>
+                  <input class="site-input" id="email" type="email" disabled>
+                  <p class="site-field-hint">
+                    כתובת הכניסה לחשבון. אינה ניתנת לשינוי בטופס הזה.
+                  </p>
+                </div>
               </div>
-            </section>
 
-            <div
-              class="message"
-              id="profile-message"
-              role="status"
-              aria-live="polite"
-            ></div>
+              <fieldset class="editor-section">
+                <legend>איך תרצו להשתמש בכיוון?</legend>
 
-            <button class="button" id="save-button" type="submit">
-              שמירת השינויים
-            </button>
-          </form>
-        </section>
+                <div class="use-options">
+                  <label class="site-checkbox">
+                    <input id="use-self" type="checkbox">
+                    ללמוד בעצמי
+                  </label>
 
-        <section class="card hidden" id="requests-pane">
-          <h2 tabindex="-1">הבקשות והשיחות שלי</h2>
+                  <label class="site-checkbox">
+                    <input id="use-parent" type="checkbox">
+                    למצוא מורה לילד/ה
+                  </label>
 
-          <p class="sub">
-            כאן רואים בקשות שנשלחו והתקבלו.
-            הצ׳אט נפתח לאחר אישור הבקשה.
-          </p>
+                  <label class="site-checkbox">
+                    <input id="use-teacher" type="checkbox">
+                    ללמד
+                  </label>
+                </div>
 
-          <div class="request-tabs" aria-label="סוג הבקשות">
-            <button
-              class="request-tab active"
-              data-request-mode="outgoing"
-              type="button"
-              aria-pressed="true"
-            >
-              בקשות ששלחתי
-            </button>
+                <p class="site-field-hint">
+                  אפשר לבחור יותר מאפשרות אחת.
+                </p>
+              </fieldset>
 
-            <button
-              class="request-tab"
-              data-request-mode="incoming"
-              type="button"
-              aria-pressed="false"
-            >
-              בקשות שקיבלתי
-            </button>
+              <div id="learning-editors"></div>
 
-            <button
-              class="request-tab"
-              id="refresh-requests"
-              type="button"
-            >
-              רענון
-            </button>
-          </div>
+              <fieldset class="editor-section" id="teacher-editor" hidden>
+                <legend>פרופיל ההוראה</legend>
 
-          <div
-            class="message"
-            id="requests-message"
-            role="status"
-            aria-live="polite"
-          ></div>
+                <div class="site-form-grid">
+                  <div class="site-field site-field-full">
+                    <label class="site-label" id="teacher-subject-label">
+                      מקצועות להוראה
+                    </label>
+                    <div class="subject-picker" id="teacher-subject-picker"></div>
+                  </div>
 
-          <div
-            class="requests"
-            id="requests-list"
-            aria-busy="false"
-          ></div>
-        </section>
-      </section>
+                  <div class="site-field">
+                    <label class="site-label" for="teacher-price">
+                      מחיר לשיעור בש״ח
+                    </label>
+                    <input
+                      class="site-input"
+                      id="teacher-price"
+                      type="number"
+                      min="0"
+                      step="1"
+                      required
+                    >
+                    <p class="site-field-hint">לשיעור ללא עלות, הזינו 0.</p>
+                  </div>
+
+                  <div class="site-field">
+                    <label class="site-label" for="teacher-format">
+                      אופן הלימוד
+                    </label>
+                    <select class="site-select" id="teacher-format">
+                      <option>אונליין</option>
+                      <option>פרונטלי</option>
+                      <option>גם אונליין וגם פרונטלי</option>
+                    </select>
+                  </div>
+
+                  <div class="site-field">
+                    <label class="site-label" for="teacher-experience">
+                      ניסיון בהוראה
+                    </label>
+                    <input
+                      class="site-input"
+                      id="teacher-experience"
+                      maxlength="300"
+                      placeholder="למשל: חמש שנות הוראה"
+                    >
+                  </div>
+
+                  <div class="site-field">
+                    <label class="site-label" for="teacher-availability">
+                      זמינות כללית
+                    </label>
+                    <input
+                      class="site-input"
+                      id="teacher-availability"
+                      maxlength="300"
+                      placeholder="למשל: ראשון ורביעי אחר הצהריים"
+                    >
+                  </div>
+
+                  <div class="site-field site-field-full">
+                    <label class="site-label" for="teacher-bio">
+                      כמה מילים עליי ועל דרך ההוראה שלי
+                    </label>
+                    <textarea
+                      class="site-textarea"
+                      id="teacher-bio"
+                      maxlength="2000"
+                    ></textarea>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="site-form-actions">
+                <button class="site-btn" id="save-button" type="submit">
+                  שמירת שינויים
+                </button>
+
+                <button
+                  class="site-btn site-btn-secondary"
+                  id="cancel-edit"
+                  type="button"
+                >
+                  ביטול
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section
+            class="site-card section-anchor"
+            id="requests"
+            aria-labelledby="requests-title"
+          >
+            <div class="site-section-head">
+              <h2 class="site-section-title" id="requests-title">
+                הבקשות שלי
+              </h2>
+
+              <button
+                class="site-btn site-btn-quiet"
+                id="refresh-requests"
+                type="button"
+              >
+                רענון
+              </button>
+            </div>
+
+            <div id="requests-content" aria-live="polite"></div>
+          </section>
+
+          <section
+            class="site-card section-anchor"
+            id="messages"
+            aria-labelledby="messages-title"
+          >
+            <div class="site-section-head">
+              <h2 class="site-section-title" id="messages-title">
+                השיחות שלי
+              </h2>
+            </div>
+
+            <div id="messages-content" aria-live="polite"></div>
+          </section>
+        </div>
+
+        <aside class="site-stack" aria-label="קיצורי דרך">
+          <section class="site-card">
+            <h2 class="site-section-title">לאן ממשיכים?</h2>
+
+            <div class="dashboard-links" style="margin-top:18px">
+              <a href="#profile">
+                הפרופיל שלי <span aria-hidden="true">←</span>
+              </a>
+              <a href="matches.html" id="find-teacher-link">
+                מציאת מורה <span aria-hidden="true">←</span>
+              </a>
+              <a href="#requests">
+                הבקשות שלי <span aria-hidden="true">←</span>
+              </a>
+              <a href="#messages">
+                השיחות שלי <span aria-hidden="true">←</span>
+              </a>
+              <a id="public-profile-link" hidden>
+                הפרופיל הציבורי שלי <span aria-hidden="true">←</span>
+              </a>
+            </div>
+          </section>
+
+          <section class="site-card site-card-soft">
+            <h2 class="site-section-title">פרטים קטנים, התאמה טובה יותר</h2>
+            <p class="site-description">
+              מקצועות, מטרת הלמידה וזמינות עוזרים למצוא התאמה.
+              אפשר לעדכן אותם בכל שלב דרך עריכת הפרופיל.
+            </p>
+          </section>
+        </aside>
+      </div>
     </div>
   </main>
 
+  <footer class="site-footer">
+    <div class="site-container site-footer-inner">
+      <span>כיוון — מוצאים את הדרך ללמוד</span>
+      <a href="index.html">לדף הבית</a>
+    </div>
+  </footer>
+
   <script type="module">
-    const byId = id => document.getElementById(id);
-    const value = id => byId(id).value.trim();
+    const $ = id => document.getElementById(id);
 
-    const loading = byId("loading");
-    const editForm = byId("edit-form");
-    const saveButton = byId("save-button");
-    const requestsList = byId("requests-list");
-
-    const useFields = {
-      selfLearner: byId("use-self"),
-      parent: byId("use-parent"),
-      teacher: byId("use-teacher")
-    };
-
-    const sections = {
-      selfLearner: byId("student-section"),
-      parent: byId("child-section"),
-      teacher: byId("teacher-section")
-    };
-
-    let firebase = null;
-    let currentUser = null;
-    let currentProfile = {};
-    let ready = false;
-    let saving = false;
+    let sdk;
+    let catalog;
+    let writeBatch;
+    let user;
+    let profile = {};
+    let exists = false;
     let dirty = false;
-    let photoData = "";
-    let photoBusy = false;
-    let photoVersion = 0;
-    let requestMode = "outgoing";
-    let requestVersion = 0;
-    let unsubscribeAuth = null;
+    let saving = false;
+    let processingPhoto = false;
+    let photo = "";
+    let requestsLoading = false;
 
-    function safe(value) {
-      return String(value ?? "").replace(
-        /[&<>'"]/g,
-        character => ({
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          "'": "&#39;",
-          '"': "&quot;"
-        })[character]
-      );
+    const selectedSubjects = {};
+    const pickers = {};
+    const learningKinds = ["self", "child"];
+
+    function notice(id, text, error = false) {
+      const element = $(id);
+      element.textContent = text;
+      element.className =
+        "site-notice " +
+        (error ? "site-notice-error" : "site-notice-success");
+      element.hidden = !text;
     }
 
-    function showMessage(id, text, type = "info") {
-      const box = byId(id);
-      box.textContent = text;
-      box.className = "message show " + type;
+    function make(tag, className, text) {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text !== undefined) element.textContent = text;
+      return element;
     }
 
-    function setValue(id, newValue) {
-      const field = byId(id);
+    function value(id) {
+      return $(id).value.trim();
+    }
 
-      const text = Array.isArray(newValue)
-        ? newValue.join(", ")
-        : String(newValue ?? "");
-
-      if (
-        field.tagName === "SELECT" &&
-        text &&
-        !Array.from(field.options).some(option => option.value === text)
-      ) {
-        field.add(new Option(text, text));
+    function getUses(data = profile) {
+      if (data.accountUses) {
+        return {
+          selfLearner: Boolean(data.accountUses.selfLearner),
+          parent: Boolean(data.accountUses.parent),
+          teacher: Boolean(data.accountUses.teacher)
+        };
       }
 
-      field.value = text;
-    }
-
-    function selectedUses() {
-      return Object.fromEntries(
-        Object.entries(useFields).map(([key, field]) => [
-          key,
-          field.checked
-        ])
-      );
-    }
-
-    function profileUses(profile) {
-      return profile.accountUses || {
-        selfLearner: profile.role !== "teacher",
-        parent: false,
-        teacher: profile.role === "teacher" || profile.role === "both"
+      return {
+        selfLearner: data.role !== "teacher" && data.role !== "parent",
+        parent: data.role === "parent",
+        teacher: ["teacher", "both"].includes(data.role)
       };
     }
 
-    function learningProfile(profile) {
-      if (profile.selfLearningProfile) return profile.selfLearningProfile;
-      if (profile.studentProfile) return profile.studentProfile;
-      if (!profile.accountUses) return profile;
-      return {};
+    function getLearning(kind) {
+      if (kind === "child") return profile.childLearningProfile || {};
+      return profile.selfLearningProfile || profile.studentProfile || profile;
     }
 
-    function teacherProfile(profile) {
-      if (profile.teacherProfile) return profile.teacherProfile;
-      if (!profile.accountUses && profile.role !== "student") return profile;
-      return {};
-    }
+    function setAvatar(element, name, source) {
+      const initial = Array.from(name || "כ")[0];
+      element.textContent = initial;
 
-    function showPhoto(photo, name) {
-      ["avatar", "photo-preview"].forEach(id => {
-        const box = byId(id);
-        box.replaceChildren();
+      if (typeof source !== "string" || !source) return;
 
-        if (typeof photo === "string" && photo.startsWith("data:image/")) {
-          const image = document.createElement("img");
-          image.src = photo;
-          image.alt = "תמונת פרופיל";
-          box.appendChild(image);
-        } else {
-          box.textContent = (name || "כ").charAt(0);
+      let allowed = /^data:image\/(?:png|jpeg|webp|gif);base64,/i.test(source);
+
+      if (!allowed) {
+        try {
+          allowed = new URL(source).protocol === "https:";
+        } catch {
+          allowed = false;
         }
+      }
+
+      if (!allowed) return;
+
+      const image = document.createElement("img");
+      image.alt = "";
+      image.referrerPolicy = "no-referrer";
+      image.addEventListener("error", () => {
+        element.textContent = initial;
       });
+      image.src = source;
+      element.replaceChildren(image);
     }
 
-    function updateSections() {
-      const uses = selectedUses();
+    function addDetails(section, entries) {
+      const list = make("dl", "site-data-list");
 
-      Object.entries(sections).forEach(([key, section]) => {
-        section.classList.toggle("hidden", !uses[key]);
+      for (const [label, content] of entries) {
+        const row = document.createElement("div");
+        row.append(
+          make("dt", "", label),
+          make("dd", "", String(content ?? "").trim() || "טרם הוגדר")
+        );
+        list.append(row);
+      }
 
-        section.querySelectorAll("input, select, textarea, button")
-          .forEach(field => {
-            field.disabled = !uses[key];
-          });
-      });
+      section.append(list);
     }
 
-    function refreshSummary() {
-      const uses = profileUses(currentProfile);
-      const name = currentProfile.name || currentUser.displayName || "חבר/ה";
+    function profileSection(title, data, teacher = false) {
+      const section = make("section", "profile-section");
+      section.append(make("h3", "", title));
 
-      byId("welcome").textContent = `היי ${name}, זה האזור שלך.`;
+      const tags = make("div", "site-tags");
+      const subjects = catalog.normalizeList(data.subjects);
 
-      byId("banner-text").textContent =
-        uses.teacher && (uses.selfLearner || uses.parent)
-          ? "הלמידה, ההוראה והבקשות שלך במקום אחד."
-          : uses.teacher
-            ? "כאן מנהלים את פרופיל המורה ואת הבקשות."
-            : uses.parent
-              ? "כאן מנהלים את פרופילי הלמידה ואת החיפוש עבור הילד או הילדה."
-              : "כאן מנהלים את פרופיל הלמידה ואת הבקשות.";
+      if (subjects.length) {
+        for (const subject of subjects) {
+          tags.append(make("span", "site-tag", subject));
+        }
+      } else {
+        tags.append(make("span", "site-muted site-small", "עדיין לא נבחרו מקצועות"));
+      }
 
-      const publicLink = byId("public-profile-link");
-      publicLink.href =
-        "teacher-profile.html?id=" + encodeURIComponent(currentUser.uid);
-      publicLink.classList.toggle("hidden", !uses.teacher);
+      section.append(tags);
+
+      if (teacher) {
+        const hasPrice =
+          data.price !== undefined &&
+          data.price !== null &&
+          data.price !== "" &&
+          Number.isFinite(Number(data.price));
+
+        addDetails(section, [
+          ["מחיר לשיעור", hasPrice ? `${data.price} ₪` : ""],
+          ["אופן הלימוד", data.format],
+          ["ניסיון בהוראה", data.experience],
+          ["זמינות", data.availability]
+        ]);
+
+        if (data.bio) {
+          section.append(make("p", "site-profile-bio", data.bio));
+        }
+      } else {
+        addDetails(section, [
+          ["רמה או כיתה", data.level],
+          ["סגנון למידה", data.learningStyle],
+          ["מטרת הלמידה", data.goal],
+          ["זמינות", data.availability]
+        ]);
+      }
+
+      return section;
     }
 
-    function fillProfile(profile) {
-      currentProfile = profile;
-      photoData = profile.photo || "";
+    function renderProfile() {
+      const uses = getUses();
+      const name = profile.name || user.displayName || "החשבון שלי";
 
-      setValue("name", profile.name || currentUser.displayName);
-      setValue("email", currentUser.email);
-      setValue("phone", profile.phone);
-      setValue("city", profile.city);
+      $("welcome").textContent = `שלום, ${name}`;
+      $("profile-name").textContent = name;
+      $("profile-email").textContent = user.email || "";
+      $("profile-city").textContent = profile.city || "העיר עדיין לא הוגדרה";
 
-      const uses = profileUses(profile);
+      setAvatar(
+        $("profile-avatar"),
+        name,
+        profile.photo || user.photoURL
+      );
 
-      Object.entries(useFields).forEach(([key, field]) => {
-        field.checked = Boolean(uses[key]);
+      $("profile-roles").replaceChildren();
+
+      const roles = [
+        [uses.selfLearner, "לומד/ת"],
+        [uses.parent, "הורה"],
+        [uses.teacher, "מורה"]
+      ];
+
+      for (const [enabled, label] of roles) {
+        if (enabled) {
+          $("profile-roles").append(
+            make("span", "site-badge site-badge-success", label)
+          );
+        }
+      }
+
+      const sections = $("profile-sections");
+      sections.replaceChildren();
+
+      if (uses.selfLearner) {
+        sections.append(profileSection("הלמידה שלי", getLearning("self")));
+      }
+
+      if (uses.parent) {
+        sections.append(profileSection("הלמידה של הילד/ה", getLearning("child")));
+      }
+
+      if (uses.teacher) {
+        sections.append(
+          profileSection("ההוראה שלי", profile.teacherProfile || profile, true)
+        );
+      }
+
+      const publicLink = $("public-profile-link");
+      publicLink.hidden = !uses.teacher;
+      publicLink.href = `teacher-profile.html?id=${encodeURIComponent(user.uid)}`;
+
+      $("find-teacher-link").hidden = !(uses.selfLearner || uses.parent);
+
+      const actions = $("next-actions");
+      actions.replaceChildren();
+
+      const incomplete =
+        !exists ||
+        (uses.selfLearner && !catalog.normalizeList(getLearning("self").subjects).length) ||
+        (uses.parent && !catalog.normalizeList(getLearning("child").subjects).length) ||
+        (uses.teacher && !catalog.normalizeList((profile.teacherProfile || profile).subjects).length);
+
+      if (incomplete) {
+        $("next-title").textContent = "נשלים את הפרופיל שלך";
+        $("next-description").textContent =
+          "כמה פרטים על המקצועות והמטרות יעזרו להתחיל.";
+
+        const button = make("button", "site-btn", "השלמת הפרופיל");
+        button.type = "button";
+        button.addEventListener("click", openEditor);
+        actions.append(button);
+      } else if (uses.selfLearner || uses.parent) {
+        $("next-title").textContent = "מוצאים את המורה שמתאים לך";
+        $("next-description").textContent =
+          "אפשר לחפש מורה לפי הצורך שלך, או לחזור לבקשות שכבר שלחת.";
+
+        const link = make("a", "site-btn", "מציאת מורה");
+        link.href = "matches.html";
+        actions.append(link);
+      } else {
+        $("next-title").textContent = "ממשיכים מהבקשות שלך";
+        $("next-description").textContent =
+          "כאן אפשר לבדוק בקשות מתלמידים ולאשר שיעורים שמתאימים לך.";
+
+        const link = make("a", "site-btn", "לצפייה בבקשות");
+        link.href = "#requests";
+        actions.append(link);
+      }
+
+      const messagesLink = make(
+        "a",
+        "site-btn site-btn-secondary",
+        "השיחות שלי"
+      );
+      messagesLink.href = "#messages";
+      actions.append(messagesLink);
+    }
+
+    function buildLearningEditors() {
+      for (const kind of learningKinds) {
+        const section = document.createElement("fieldset");
+        section.className = "editor-section";
+        section.id = `${kind}-editor`;
+
+        section.innerHTML = `
+          <legend>${kind === "self" ? "הלמידה שלי" : "הלמידה של הילד/ה"}</legend>
+          <div class="site-form-grid">
+            <div class="site-field site-field-full">
+              <label class="site-label" id="${kind}-subject-label">
+                מקצועות ללמידה
+              </label>
+              <div class="subject-picker" id="${kind}-subject-picker"></div>
+            </div>
+
+            <div class="site-field">
+              <label class="site-label" for="${kind}-level">רמה או כיתה</label>
+              <input class="site-input" id="${kind}-level" maxlength="100">
+            </div>
+
+            <div class="site-field">
+              <label class="site-label" for="${kind}-style">סגנון למידה</label>
+              <select class="site-select" id="${kind}-style">
+                <option value="">בחירה</option>
+                <option>הסברים ותרגול</option>
+                <option>למידה חזותית</option>
+                <option>למידה בקצב מהיר</option>
+                <option>למידה רגועה ומסודרת</option>
+              </select>
+            </div>
+
+            <div class="site-field site-field-full">
+              <label class="site-label" for="${kind}-goal">מטרת הלמידה</label>
+              <textarea class="site-textarea" id="${kind}-goal" maxlength="1000"></textarea>
+            </div>
+
+            <div class="site-field site-field-full">
+              <label class="site-label" for="${kind}-availability">
+                ימים ושעות נוחים
+              </label>
+              <input class="site-input" id="${kind}-availability" maxlength="300">
+            </div>
+          </div>
+        `;
+
+        $("learning-editors").append(section);
+      }
+
+      for (const kind of ["self", "child", "teacher"]) {
+        selectedSubjects[kind] = [];
+
+        pickers[kind] = catalog.createTagPicker({
+          root: $(`${kind}-subject-picker`),
+          options: catalog.SUBJECTS,
+          selected: [],
+          placeholder: "חיפוש ובחירת מקצועות…",
+          maximum: 12,
+          onChange(subjects) {
+            selectedSubjects[kind] = [...subjects];
+            dirty = true;
+          }
+        });
+
+        const search = $(`${kind}-subject-picker`).querySelector("input");
+
+        if (search) {
+          search.id = `${kind}-subject-search`;
+          $(`${kind}-subject-label`).htmlFor = search.id;
+        }
+      }
+    }
+
+    function setSelect(id, content) {
+      const select = $(id);
+      const next = content || "";
+
+      if (next && !Array.from(select.options).some(option => option.value === next)) {
+        select.add(new Option(next, next));
+      }
+
+      select.value = next;
+    }
+
+    function toggleEditorSections() {
+      const sections = [
+        ["self", $("use-self").checked],
+        ["child", $("use-parent").checked],
+        ["teacher", $("use-teacher").checked]
+      ];
+
+      for (const [kind, enabled] of sections) {
+        const section = $(`${kind}-editor`);
+        section.hidden = !enabled;
+        section.disabled = !enabled;
+      }
+    }
+
+    function openEditor() {
+      if (saving || processingPhoto) return;
+      if (!$("profile-editor").hidden) {
+        $("editor-title").focus();
+        return;
+      }
+
+      notice("editor-message", "");
+      const uses = getUses();
+
+      $("name").value = profile.name || user.displayName || "";
+      $("email").value = user.email || "";
+      $("city").value = profile.city || "";
+      $("phone").value = profile.phone || "";
+
+      $("use-self").checked = uses.selfLearner;
+      $("use-parent").checked = uses.parent;
+      $("use-teacher").checked = uses.teacher;
+
+      photo = profile.photo ?? user.photoURL ?? "";
+      $("photo-input").value = "";
+
+      setAvatar($("edit-avatar"), $("name").value, photo);
+
+      for (const kind of learningKinds) {
+        const data = getLearning(kind);
+
+        $(`${kind}-level`).value = data.level || "";
+        $(`${kind}-goal`).value = data.goal || "";
+        $(`${kind}-availability`).value = data.availability || "";
+        setSelect(`${kind}-style`, data.learningStyle);
+
+        selectedSubjects[kind] = catalog.normalizeList(data.subjects);
+        pickers[kind].setSelected(selectedSubjects[kind]);
+      }
+
+      const teacher = profile.teacherProfile || (
+        uses.teacher ? profile : {}
+      );
+
+      $("teacher-price").value = teacher.price ?? "";
+      $("teacher-experience").value = teacher.experience || "";
+      $("teacher-availability").value = teacher.availability || "";
+      $("teacher-bio").value = teacher.bio || "";
+      setSelect("teacher-format", teacher.format || "אונליין");
+
+      selectedSubjects.teacher = catalog.normalizeList(teacher.subjects);
+      pickers.teacher.setSelected(selectedSubjects.teacher);
+
+      document.querySelectorAll(".tag-picker-options").forEach(element => {
+        element.classList.add("hidden");
       });
 
-      const student = learningProfile(profile);
-      const child = profile.childLearningProfile || {};
-      const teacher = teacherProfile(profile);
-
-      setValue("student-subjects", student.subjects);
-      setValue("student-level", student.level);
-      setValue("learning-style", student.learningStyle);
-      setValue("student-goal", student.goal);
-      setValue("student-availability", student.availability);
-
-      setValue("child-subjects", child.subjects);
-      setValue("child-level", child.level);
-      setValue("child-learning-style", child.learningStyle);
-      setValue("child-goal", child.goal);
-      setValue("child-availability", child.availability);
-
-      setValue("teacher-subjects", teacher.subjects);
-      setValue("price", teacher.price);
-      setValue("experience", teacher.experience);
-      setValue("format", teacher.format || "אונליין");
-      setValue("bio", teacher.bio);
-      setValue("teacher-availability", teacher.availability);
-
-      showPhoto(photoData, value("name"));
-      updateSections();
-      refreshSummary();
+      toggleEditorSections();
       dirty = false;
+      $("profile").hidden = true;
+      $("profile-editor").hidden = false;
+      $("editor-title").focus();
     }
 
-    function openPane(name) {
-      if (!ready || saving) return;
-
-      const showRequests = name === "requests";
-
-      byId("profile-pane").classList.toggle("hidden", showRequests);
-      byId("requests-pane").classList.toggle("hidden", !showRequests);
-
-      document.querySelectorAll("[data-pane]").forEach(button => {
-        const active = button.dataset.pane === name;
-        button.classList.toggle("active", active);
-        button.setAttribute("aria-pressed", String(active));
-      });
-
-      byId(showRequests ? "requests-pane" : "profile-pane")
-        .querySelector("h2").focus();
-
-      if (showRequests) loadRequests();
+    function closeEditor() {
+      $("profile-editor").hidden = true;
+      $("profile").hidden = false;
+      dirty = false;
+      $("edit-button").focus();
     }
 
-    document.querySelectorAll("[data-pane]").forEach(button => {
-      button.addEventListener("click", () => {
-        openPane(button.dataset.pane);
-      });
+    function learningData(kind) {
+      return {
+        ...getLearning(kind),
+        subjects: [...selectedSubjects[kind]],
+        level: value(`${kind}-level`),
+        learningStyle: value(`${kind}-style`),
+        goal: value(`${kind}-goal`),
+        availability: value(`${kind}-availability`)
+      };
+    }
+
+    async function saveProfile(event) {
+      event.preventDefault();
+      if (saving || processingPhoto) return;
+
+      $("name").value = value("name");
+      if (!$("profile-form").reportValidity()) return;
+
+      const uses = {
+        selfLearner: $("use-self").checked,
+        parent: $("use-parent").checked,
+        teacher: $("use-teacher").checked
+      };
+
+      if (!Object.values(uses).some(Boolean)) {
+        notice("editor-message", "בחרו לפחות שימוש אחד לחשבון.", true);
+        return;
+      }
+
+      for (const [kind, active] of [
+        ["self", uses.selfLearner],
+        ["child", uses.parent],
+        ["teacher", uses.teacher]
+      ]) {
+        if (active && !selectedSubjects[kind].length) {
+          notice("editor-message", "בחרו לפחות מקצוע אחד בכל פרופיל פעיל.", true);
+          $(`${kind}-subject-search`)?.focus();
+          return;
+        }
+      }
+
+      const selfProfile = uses.selfLearner
+        ? learningData("self")
+        : (profile.selfLearningProfile || profile.studentProfile || null);
+
+      const childProfile = uses.parent
+        ? learningData("child")
+        : (profile.childLearningProfile || null);
+
+      const teacherProfile = uses.teacher
+        ? {
+            ...(profile.teacherProfile || {}),
+            subjects: [...selectedSubjects.teacher],
+            price: Number(value("teacher-price")),
+            experience: value("teacher-experience"),
+            availability: value("teacher-availability"),
+            format: value("teacher-format"),
+            bio: value("teacher-bio")
+          }
+        : (profile.teacherProfile || null);
+
+      const learner = uses.selfLearner || uses.parent;
+      const primaryLearning = uses.selfLearner ? selfProfile : childProfile;
+
+      const next = {
+        uid: user.uid,
+        name: value("name"),
+        email: user.email || "",
+        phone: value("phone"),
+        city: value("city"),
+        photo,
+        accountUses: uses,
+        role: uses.teacher ? (learner ? "both" : "teacher") : "student",
+        roles: [
+          ...(learner ? ["student"] : []),
+          ...(uses.teacher ? ["teacher"] : [])
+        ],
+        selfLearningProfile: selfProfile,
+        childLearningProfile: childProfile,
+        studentProfile: selfProfile,
+        teacherProfile,
+        subjects: primaryLearning?.subjects || [],
+        level: primaryLearning?.level || "",
+        learningStyle: primaryLearning?.learningStyle || "",
+        goal: primaryLearning?.goal || "",
+        availability: primaryLearning?.availability || "",
+        updatedAt: sdk.serverTimestamp()
+      };
+
+      if (!exists) next.createdAt = sdk.serverTimestamp();
+
+      saving = true;
+      $("profile-form").inert = true;
+      $("profile-form").setAttribute("aria-busy", "true");
+      $("save-button").textContent = "שומרים…";
+      notice("editor-message", "");
+
+      try {
+        if (sdk.auth.currentUser?.uid !== user.uid) {
+          throw new Error("Account changed");
+        }
+
+        // פרטי המשתמש ופרופיל המורה נשמרים יחד.
+        const batch = writeBatch(sdk.db);
+        batch.set(sdk.doc(sdk.db, "users", user.uid), next, { merge: true });
+
+        if (uses.teacher) {
+          batch.set(
+            sdk.doc(sdk.db, "teachers", user.uid),
+            {
+              uid: user.uid,
+              name: next.name,
+              city: next.city,
+              photo: next.photo,
+              subjects: teacherProfile.subjects,
+              price: teacherProfile.price,
+              experience: teacherProfile.experience,
+              availability: teacherProfile.availability,
+              format: teacherProfile.format,
+              bio: teacherProfile.bio,
+              active: true,
+              acceptingStudents: true,
+              updatedAt: sdk.serverTimestamp()
+            },
+            { merge: true }
+          );
+        } else if (getUses().teacher) {
+          batch.set(
+            sdk.doc(sdk.db, "teachers", user.uid),
+            {
+              active: false,
+              acceptingStudents: false,
+              updatedAt: sdk.serverTimestamp()
+            },
+            { merge: true }
+          );
+        }
+
+        await batch.commit();
+
+        profile = { ...profile, ...next };
+        exists = true;
+        dirty = false;
+
+        try {
+          await sdk.updateProfile(user, { displayName: next.name });
+        } catch (error) {
+          console.error("Auth display name update failed:", error?.code);
+        }
+
+        renderProfile();
+        closeEditor();
+
+        window.dispatchEvent(new CustomEvent("kivun:profile-updated", {
+          detail: { name: next.name, photo: next.photo }
+        }));
+
+        notice("page-message", "הפרופיל עודכן בהצלחה.");
+      } catch (error) {
+        console.error("Profile save failed:", error);
+        notice(
+          "editor-message",
+          "לא הצלחנו לשמור את השינויים. הפרטים שהזנת נשארו בטופס. בדקו את החיבור ונסו שוב.",
+          true
+        );
+      } finally {
+        saving = false;
+        $("profile-form").inert = false;
+        $("profile-form").setAttribute("aria-busy", "false");
+        $("save-button").textContent = "שמירת שינויים";
+      }
+    }
+
+    async function processPhoto() {
+      const file = $("photo-input").files[0];
+      if (!file || saving || processingPhoto) return;
+
+      if (
+        !["image/jpeg", "image/png", "image/webp"].includes(file.type) ||
+        file.size > 5 * 1024 * 1024
+      ) {
+        notice("editor-message", "בחרו תמונת JPG, PNG או WebP עד 5MB.", true);
+        $("photo-input").value = "";
+        return;
+      }
+
+      processingPhoto = true;
+      $("profile-form").inert = true;
+      notice("editor-message", "מכינים את התמונה…");
+
+      const url = URL.createObjectURL(file);
+
+      try {
+        const image = new Image();
+        image.src = url;
+        await image.decode();
+
+        const scale = Math.min(1, 600 / Math.max(image.width, image.height));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(image.width * scale));
+        canvas.height = Math.max(1, Math.round(image.height * scale));
+
+        const context = canvas.getContext("2d");
+        context.fillStyle = "#ffffff";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        photo = canvas.toDataURL("image/jpeg", .82);
+        dirty = true;
+        setAvatar($("edit-avatar"), value("name"), photo);
+        notice("editor-message", "התמונה מוכנה. לחצו על שמירת שינויים כדי לשמור אותה.");
+      } catch {
+        notice("editor-message", "לא הצלחנו לקרוא את התמונה. נסו תמונה אחרת.", true);
+      } finally {
+        URL.revokeObjectURL(url);
+        processingPhoto = false;
+        $("profile-form").inert = false;
+        $("photo-input").value = "";
+      }
+    }
+
+    function emptyState(target, title, description) {
+      const box = make("div", "site-empty");
+      box.append(make("h3", "", title), make("p", "", description));
+      target.replaceChildren(box);
+    }
+
+    function requestCard(request, conversation = false) {
+      const incoming = request.teacherId === user.uid;
+      const name = incoming ? request.studentName : request.teacherName;
+
+      const card = make("article", "request-card");
+      const top = make("div", "site-between");
+
+      top.append(make("h3", "", name || "משתמש/ת בכיוון"));
+
+      const labels = {
+        pending: ["ממתינה לאישור", "site-badge-pending"],
+        accepted: ["הבקשה אושרה", "site-badge-success"],
+        declined: ["הבקשה לא אושרה", "site-badge-danger"],
+        cancelled: ["הבקשה בוטלה", ""]
+      };
+
+      const [label, style] = labels[request.status] || ["מצב לא מוכר", ""];
+      top.append(make("span", `site-badge ${style}`, label));
+      card.append(top);
+
+      const detail = [request.subject, request.preferredTime].filter(Boolean).join(" · ");
+      if (detail) card.append(make("p", "", detail));
+
+      if (!conversation && request.message) {
+        card.append(make("p", "", request.message));
+      }
+
+      const date = request.createdAt?.toDate?.();
+
+      card.append(make(
+        "p",
+        "request-meta",
+        [
+          incoming ? "בקשה שהתקבלה" : "בקשה ששלחת",
+          date ? date.toLocaleDateString("he-IL") : ""
+        ].filter(Boolean).join(" · ")
+      ));
+
+      const actions = make("div", "site-row");
+
+      if (request.status === "accepted") {
+        const link = make("a", "site-btn site-btn-secondary", "פתיחת השיחה");
+        link.href = `chat.html?id=${encodeURIComponent(request.id)}`;
+        actions.append(link);
+
+        const unread = Number(
+          incoming ? request.unreadForTeacher : request.unreadForStudent
+        );
+
+        if (unread > 0) {
+          actions.append(make(
+            "span",
+            "site-badge site-badge-info",
+            `${unread} הודעות חדשות`
+          ));
+        }
+      }
+
+      if (incoming && request.status === "pending") {
+        for (const [status, text, className] of [
+          ["accepted", "אישור הבקשה", "site-btn"],
+          ["declined", "דחיית הבקשה", "site-btn site-btn-secondary"]
+        ]) {
+          const button = make("button", className, text);
+          button.type = "button";
+
+          button.addEventListener("click", async () => {
+            actions.querySelectorAll("button").forEach(item => {
+              item.disabled = true;
+            });
+
+            try {
+              await sdk.updateDoc(
+                sdk.doc(sdk.db, "requests", request.id),
+                { status, updatedAt: sdk.serverTimestamp() }
+              );
+
+              notice("page-message", "מצב הבקשה עודכן.");
+              await loadRequests();
+            } catch (error) {
+              console.error("Request update failed:", error?.code);
+              notice("page-message", "לא הצלחנו לעדכן את הבקשה. נסו שוב.", true);
+
+              actions.querySelectorAll("button").forEach(item => {
+                item.disabled = false;
+              });
+            }
+          });
+
+          actions.append(button);
+        }
+      }
+
+      card.append(actions);
+      return card;
+    }
+
+    async function loadRequests() {
+      if (requestsLoading) return;
+      requestsLoading = true;
+      $("refresh-requests").disabled = true;
+
+      const requestBox = $("requests-content");
+      const messageBox = $("messages-content");
+
+      requestBox.textContent = "טוענים בקשות…";
+      messageBox.textContent = "טוענים שיחות…";
+
+      try {
+        const snapshots = await Promise.all([
+          sdk.getDocs(sdk.query(
+            sdk.collection(sdk.db, "requests"),
+            sdk.where("studentId", "==", user.uid)
+          )),
+          sdk.getDocs(sdk.query(
+            sdk.collection(sdk.db, "requests"),
+            sdk.where("teacherId", "==", user.uid)
+          ))
+        ]);
+
+        const unique = new Map();
+
+        for (const snapshot of snapshots) {
+          for (const item of snapshot.docs) {
+            unique.set(item.id, { ...item.data(), id: item.id });
+          }
+        }
+
+        const requests = [...unique.values()].sort((a, b) =>
+          (b.createdAt?.toMillis?.() || 0) -
+          (a.createdAt?.toMillis?.() || 0)
+        );
+
+        requestBox.replaceChildren();
+        messageBox.replaceChildren();
+
+        if (!requests.length) {
+          emptyState(
+            requestBox,
+            "עדיין אין בקשות",
+            "בקשות שתשלחו או תקבלו יופיעו כאן עם המצב שלהן."
+          );
+        } else {
+          for (const request of requests) {
+            requestBox.append(requestCard(request));
+          }
+        }
+
+        const conversations = requests
+          .filter(request => request.status === "accepted")
+          .sort((a, b) =>
+            (b.lastMessageAt?.toMillis?.() || b.createdAt?.toMillis?.() || 0) -
+            (a.lastMessageAt?.toMillis?.() || a.createdAt?.toMillis?.() || 0)
+          );
+
+        if (!conversations.length) {
+          emptyState(
+            messageBox,
+            "השיחות יתחילו כאן",
+            "אחרי אישור בקשה, אפשר לפתוח שיחה ולתאם את פרטי השיעור."
+          );
+        } else {
+          for (const request of conversations) {
+            messageBox.append(requestCard(request, true));
+          }
+        }
+      } catch (error) {
+        console.error("Request load failed:", error?.code);
+        requestBox.textContent =
+          "לא הצלחנו לטעון את הבקשות. לחצו על רענון כדי לנסות שוב.";
+        messageBox.textContent =
+          "השיחות לא נטענו. אפשר לנסות שוב באמצעות רענון הבקשות.";
+      } finally {
+        requestsLoading = false;
+        $("refresh-requests").disabled = false;
+      }
+    }
+
+    $("edit-button").addEventListener("click", openEditor);
+    $("profile-form").addEventListener("submit", saveProfile);
+    $("photo-input").addEventListener("change", processPhoto);
+    $("refresh-requests").addEventListener("click", loadRequests);
+    $("reload-button").addEventListener("click", () => location.reload());
+
+    $("profile-form").addEventListener("input", () => {
+      dirty = true;
     });
 
-    Object.values(useFields).forEach(field => {
-      field.addEventListener("change", updateSections);
+    $("profile-form").addEventListener("change", () => {
+      dirty = true;
     });
 
-    editForm.addEventListener("input", () => {
-      if (ready) dirty = true;
+    for (const id of ["use-self", "use-parent", "use-teacher"]) {
+      $(id).addEventListener("change", toggleEditorSections);
+    }
+
+    $("cancel-edit").addEventListener("click", () => {
+      if (saving || processingPhoto) return;
+      if (dirty && !confirm("לבטל את השינויים שלא נשמרו?")) return;
+      closeEditor();
     });
 
-    editForm.addEventListener("change", () => {
-      if (ready) dirty = true;
+    $("remove-photo").addEventListener("click", () => {
+      if (saving || processingPhoto) return;
+      photo = "";
+      dirty = true;
+      setAvatar($("edit-avatar"), value("name"), "");
     });
 
     window.addEventListener("beforeunload", event => {
-      if (dirty || saving) {
+      if (dirty || saving || processingPhoto) {
         event.preventDefault();
         event.returnValue = "";
       }
     });
 
-    byId("logout-button").addEventListener("click", async () => {
-      if (!firebase || saving) return;
-
-      if (dirty && !confirm("יש שינויים שלא נשמרו. להתנתק בלי לשמור?")) {
+    window.addEventListener("kivun:before-signout", event => {
+      if (saving || processingPhoto) {
+        event.preventDefault();
+        notice("editor-message", "יש להמתין לסיום הפעולה לפני התנתקות.", true);
         return;
       }
 
-      const button = byId("logout-button");
-      button.disabled = true;
-
-      const hadChanges = dirty;
-      dirty = false;
-
-      try {
-        await firebase.signOut(firebase.auth);
-        window.location.replace("login.html");
-      } catch (error) {
-        dirty = hadChanges;
-        button.disabled = false;
-
-        showMessage(
-          "page-message",
-          "לא הצלחנו להתנתק. נסו שוב.",
-          "error"
-        );
-      }
-    });
-
-    function readFile(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = () => reject(new Error("file-read-failed"));
-        reader.readAsDataURL(file);
-      });
-    }
-
-    function loadImage(source) {
-      return new Promise((resolve, reject) => {
-        const image = new Image();
-        image.onload = () => resolve(image);
-        image.onerror = () => reject(new Error("image-load-failed"));
-        image.src = source;
-      });
-    }
-
-    byId("photo").addEventListener("change", async event => {
-      const file = event.target.files[0];
-      if (!file || saving) return;
-
-      const version = ++photoVersion;
-      photoBusy = false;
-
-      if (!file.type.startsWith("image/")) {
-        showMessage("photo-message", "בחרו קובץ תמונה.", "error");
-        event.target.value = "";
-        return;
-      }
-
-      if (file.size > 8 * 1024 * 1024) {
-        showMessage("photo-message", "בחרו תמונה קטנה מ־8MB.", "error");
-        event.target.value = "";
-        return;
-      }
-
-      photoBusy = true;
-      showMessage("photo-message", "מכינים את התמונה…");
-
-      try {
-        const source = await readFile(file);
-        const image = await loadImage(source);
-
-        if (version !== photoVersion) return;
-
-        const size = 360;
-        const crop = Math.min(image.width, image.height);
-        const canvas = document.createElement("canvas");
-        const context = canvas.getContext("2d");
-
-        if (!context || !crop) throw new Error("invalid-image");
-
-        canvas.width = size;
-        canvas.height = size;
-
-        context.drawImage(
-          image,
-          (image.width - crop) / 2,
-          (image.height - crop) / 2,
-          crop,
-          crop,
-          0,
-          0,
-          size,
-          size
-        );
-
-        photoData = canvas.toDataURL("image/jpeg", .72);
-        showPhoto(photoData, value("name"));
-        dirty = true;
-
-        showMessage(
-          "photo-message",
-          "התמונה מוכנה. לחצו על שמירת השינויים.",
-          "success"
-        );
-      } catch {
-        if (version !== photoVersion) return;
-
-        showMessage(
-          "photo-message",
-          "לא הצלחנו לפתוח את התמונה. נסו תמונת JPG או PNG אחרת.",
-          "error"
-        );
-      } finally {
-        if (version === photoVersion) photoBusy = false;
-      }
-    });
-
-    function collectLearning(prefix, styleId, previous) {
-      return {
-        ...previous,
-        subjects: value(prefix + "-subjects"),
-        level: value(prefix + "-level"),
-        learningStyle: value(styleId),
-        goal: value(prefix + "-goal"),
-        availability: value(prefix + "-availability")
-      };
-    }
-
-    editForm.addEventListener("submit", async event => {
-      event.preventDefault();
-
-      if (!ready || !currentUser || saving) return;
-
-      if (photoBusy) {
-        showMessage(
-          "profile-message",
-          "התמונה עדיין נטענת. המתינו רגע לפני השמירה.",
-          "info"
-        );
-        return;
-      }
-
-      byId("name").value = value("name");
-
-      if (!editForm.reportValidity()) return;
-
-      const uses = selectedUses();
-
-      if (!Object.values(uses).some(Boolean)) {
-        showMessage(
-          "profile-message",
-          "בחרו לפחות שימוש אחד לחשבון.",
-          "error"
-        );
-        return;
-      }
-
-      const requiredSubjects = [
-        ["selfLearner", "student-subjects", "בחרו לפחות מקצוע אחד ללמידה."],
-        ["parent", "child-subjects", "בחרו לפחות מקצוע אחד עבור הילד או הילדה."],
-        ["teacher", "teacher-subjects", "בחרו לפחות מקצוע אחד להוראה."]
-      ];
-
-      for (const [use, id, text] of requiredSubjects) {
-        if (uses[use] && !value(id)) {
-          showMessage("profile-message", text, "error");
-          byId(id).parentElement.querySelector(".tag-picker-search")?.focus();
+      if (dirty) {
+        if (!confirm("יש שינויים שלא נשמרו. להתנתק ולוותר עליהם?")) {
+          event.preventDefault();
           return;
         }
-      }
 
-      const previousStudent = learningProfile(currentProfile);
-      const previousTeacher = teacherProfile(currentProfile);
-
-      const selfLearningProfile = uses.selfLearner
-        ? collectLearning("student", "learning-style", previousStudent)
-        : currentProfile.selfLearningProfile ||
-          currentProfile.studentProfile ||
-          (Object.keys(previousStudent).length ? {
-            subjects: previousStudent.subjects || "",
-            level: previousStudent.level || "",
-            learningStyle: previousStudent.learningStyle || "",
-            goal: previousStudent.goal || "",
-            availability: previousStudent.availability || ""
-          } : null);
-
-      const childLearningProfile = uses.parent
-        ? collectLearning(
-            "child",
-            "child-learning-style",
-            currentProfile.childLearningProfile || {}
-          )
-        : currentProfile.childLearningProfile || null;
-
-      const teaching = uses.teacher
-        ? {
-            ...previousTeacher,
-            subjects: value("teacher-subjects"),
-            price: Number(value("price")) || 0,
-            experience: value("experience"),
-            format: value("format"),
-            bio: value("bio"),
-            availability: value("teacher-availability")
-          }
-        : currentProfile.teacherProfile || null;
-
-      const role = uses.teacher
-        ? uses.selfLearner || uses.parent ? "both" : "teacher"
-        : "student";
-
-      const matching = uses.selfLearner
-        ? selfLearningProfile
-        : uses.parent ? childLearningProfile : null;
-
-      const profile = {
-        uid: currentUser.uid,
-        name: value("name"),
-        email: currentUser.email,
-        phone: value("phone"),
-        city: value("city"),
-        photo: photoData,
-        role,
-        roles: [
-          ...(uses.selfLearner || uses.parent ? ["student"] : []),
-          ...(uses.teacher ? ["teacher"] : [])
-        ],
-        accountUses: uses,
-        selfLearningProfile,
-        childLearningProfile,
-        studentProfile: selfLearningProfile,
-        teacherProfile: teaching,
-        subjects: matching?.subjects || "",
-        level: matching?.level || "",
-        learningStyle: matching?.learningStyle || "",
-        goal: matching?.goal || "",
-        availability: matching?.availability || "",
-        updatedAt: firebase.serverTimestamp()
-      };
-
-      const oldUses = profileUses(currentProfile);
-
-      saving = true;
-      editForm.inert = true;
-      editForm.setAttribute("aria-busy", "true");
-      saveButton.disabled = true;
-      saveButton.textContent = "שומרים…";
-
-      document.querySelectorAll("[data-pane]").forEach(button => {
-        button.disabled = true;
-      });
-
-      byId("logout-button").disabled = true;
-      showMessage("profile-message", "שומרים את הפרטים…");
-
-      try {
-        await firebase.updateProfile(currentUser, {
-          displayName: profile.name
-        });
-
-        await firebase.setDoc(
-          firebase.doc(firebase.db, "users", currentUser.uid),
-          profile,
-          { merge: true }
-        );
-
-        if (uses.teacher) {
-          await firebase.setDoc(
-            firebase.doc(firebase.db, "teachers", currentUser.uid),
-            {
-              uid: currentUser.uid,
-              name: profile.name,
-              city: profile.city,
-              photo: profile.photo,
-              subjects: teaching.subjects,
-              price: teaching.price,
-              experience: teaching.experience,
-              format: teaching.format,
-              bio: teaching.bio,
-              availability: teaching.availability,
-              active: true,
-              acceptingStudents: true,
-              updatedAt: firebase.serverTimestamp()
-            },
-            { merge: true }
-          );
-        } else if (oldUses.teacher) {
-          await firebase.setDoc(
-            firebase.doc(firebase.db, "teachers", currentUser.uid),
-            {
-              active: false,
-              acceptingStudents: false,
-              updatedAt: firebase.serverTimestamp()
-            },
-            { merge: true }
-          );
-        }
-
-        currentProfile = { ...currentProfile, ...profile };
         dirty = false;
-        refreshSummary();
-
-        showMessage(
-          "profile-message",
-          "כל השינויים נשמרו בהצלחה.",
-          "success"
-        );
-      } catch (error) {
-        console.error("Profile save failed:", error);
-
-        showMessage(
-          "profile-message",
-          "לא כל השינויים נשמרו. הפרטים נשארו בטופס — נסו לשמור שוב.",
-          "error"
-        );
-      } finally {
-        saving = false;
-        editForm.inert = false;
-        editForm.setAttribute("aria-busy", "false");
-        saveButton.disabled = false;
-        saveButton.textContent = "שמירת השינויים";
-        byId("logout-button").disabled = false;
-
-        document.querySelectorAll("[data-pane]").forEach(button => {
-          button.disabled = false;
-        });
       }
     });
 
-    function requestCard(request, mode) {
-      const incoming = mode === "incoming";
-
-      const name = incoming
-        ? request.studentName
-        : request.teacherName;
-
-      const status = ["pending", "accepted", "declined"].includes(request.status)
-        ? request.status
-        : "pending";
-
-      const labels = {
-        pending: "ממתינה לאישור",
-        accepted: "אושרה",
-        declined: "נדחתה"
-      };
-
-      const unread = Math.max(
-        0,
-        Number(
-          incoming
-            ? request.unreadForTeacher
-            : request.unreadForStudent
-        ) || 0
-      );
-
-      let actions = "";
-
-      if (incoming && status === "pending") {
-        actions = `
-          <button
-            class="button request-action"
-            data-id="${safe(request.id)}"
-            data-status="accepted"
-            type="button"
-          >אישור הבקשה</button>
-
-          <button
-            class="button danger request-action"
-            data-id="${safe(request.id)}"
-            data-status="declined"
-            type="button"
-          >דחייה</button>
-        `;
-      } else if (status === "accepted") {
-        actions = `
-          <a class="button"
-             href="chat.html?id=${encodeURIComponent(request.id)}">
-            פתיחת הצ׳אט ←
-          </a>
-        `;
-      }
-
-      return `
-        <article class="request">
-          <div class="request-top">
-            <div>
-              <h3>${safe(name || "משתמש/ת בכיוון")}</h3>
-              <div class="request-info">
-                <span>מקצוע: ${safe(request.subject || "לא צוין")}</span>
-                <span>זמן: ${safe(request.preferredTime || "לתיאום")}</span>
-              </div>
-            </div>
-            <span class="status ${status}">${labels[status]}</span>
-          </div>
-
-          <p>${safe(request.message || "")}</p>
-
-          ${unread > 0
-            ? `<span class="unread">${unread} הודעות שלא נקראו</span>`
-            : ""}
-
-          ${actions ? `<div class="request-actions">${actions}</div>` : ""}
-        </article>
-      `;
-    }
-
-    async function loadRequests() {
-      if (!currentUser || !ready) return;
-
-      const version = ++requestVersion;
-      const mode = requestMode;
-      const uid = currentUser.uid;
-
-      requestsList.setAttribute("aria-busy", "true");
-      requestsList.innerHTML =
-        '<div class="loading">טוענים בקשות…</div>';
-
-      byId("requests-message").className = "message";
-
+    async function start() {
       try {
-        const field = mode === "incoming" ? "teacherId" : "studentId";
+        const access = await import("./access.js");
+        await access.requireAccess();
 
-        const requestsQuery = firebase.query(
-          firebase.collection(firebase.db, "requests"),
-          firebase.where(field, "==", uid)
-        );
+        const modules = await Promise.all([
+          import("./firebase.js"),
+          import("./catalog.js"),
+          import("https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js")
+        ]);
 
-        const snapshot = await firebase.getDocs(requestsQuery);
+        [sdk, catalog] = modules;
+        writeBatch = modules[2].writeBatch;
 
-        if (version !== requestVersion || currentUser?.uid !== uid) return;
+        user = sdk.auth.currentUser;
 
-        const requests = snapshot.docs.map(item => ({
-          ...item.data(),
-          id: item.id
-        }));
-
-        requests.sort((first, second) =>
-          (second.createdAt?.seconds || 0) -
-          (first.createdAt?.seconds || 0)
-        );
-
-        requestsList.innerHTML = requests.length
-          ? requests.map(request => requestCard(request, mode)).join("")
-          : `
-            <div class="empty">
-              <p>${mode === "incoming"
-                ? "עדיין לא התקבלו בקשות מתלמידים."
-                : "עדיין לא שלחת בקשות למורים."}</p>
-              ${mode === "outgoing"
-                ? '<a class="button secondary" href="matches.html">לחיפוש מורים ←</a>'
-                : ""}
-            </div>
-          `;
-
-        requestsList.querySelectorAll(".request-action").forEach(button => {
-          button.addEventListener("click", async () => {
-            if (button.disabled || currentUser?.uid !== uid) return;
-
-            const actionButtons =
-              button.closest(".request-actions").querySelectorAll("button");
-
-            actionButtons.forEach(item => item.disabled = true);
-
-            try {
-              await firebase.updateDoc(
-                firebase.doc(firebase.db, "requests", button.dataset.id),
-                {
-                  status: button.dataset.status,
-                  updatedAt: firebase.serverTimestamp()
-                }
-              );
-
-              await loadRequests();
-            } catch (error) {
-              console.error("Request update failed:", error);
-
-              actionButtons.forEach(item => item.disabled = false);
-
-              showMessage(
-                "requests-message",
-                "לא הצלחנו לעדכן את הבקשה. נסו שוב.",
-                "error"
-              );
-            }
-          });
-        });
-      } catch (error) {
-        if (version !== requestVersion) return;
-
-        console.error("Requests loading failed:", error);
-
-        requestsList.innerHTML =
-          '<div class="empty">לא ניתן להציג את הבקשות כרגע.</div>';
-
-        showMessage(
-          "requests-message",
-          "לא הצלחנו לטעון את הבקשות. אפשר לנסות שוב באמצעות רענון.",
-          "error"
-        );
-      } finally {
-        if (version === requestVersion) {
-          requestsList.setAttribute("aria-busy", "false");
+        if (!user) {
+          location.replace("login.html");
+          return;
         }
-      }
-    }
 
-    document.querySelectorAll("[data-request-mode]").forEach(button => {
-      button.addEventListener("click", () => {
-        requestMode = button.dataset.requestMode;
-
-        document.querySelectorAll("[data-request-mode]").forEach(item => {
-          const active = item === button;
-          item.classList.toggle("active", active);
-          item.setAttribute("aria-pressed", String(active));
-        });
-
-        loadRequests();
-      });
-    });
-
-    byId("refresh-requests").addEventListener("click", loadRequests);
-
-    try {
-      const access = await import("./access.js");
-      await access.requireAccess();
-
-      firebase = await import("./firebase.js");
-      currentUser = firebase.auth.currentUser;
-
-      if (!currentUser) {
-        window.location.replace("login.html?next=dashboard.html");
-        await new Promise(() => {});
-      }
-
-      const initialUid = currentUser.uid;
-
-      unsubscribeAuth = firebase.onAuthStateChanged(firebase.auth, user => {
-        if (!user || user.uid !== initialUid) {
-          dirty = false;
-          document.documentElement.classList.add("access-pending");
-          window.location.replace("login.html?next=dashboard.html");
-        }
-      });
-
-      const snapshot = await firebase.getDoc(
-        firebase.doc(firebase.db, "users", currentUser.uid)
-      );
-
-      fillProfile(
-        snapshot.exists()
-          ? snapshot.data()
-          : {
-              uid: currentUser.uid,
-              name: currentUser.displayName || "",
-              email: currentUser.email || "",
-              role: "student",
-              accountUses: {
-                selfLearner: true,
-                parent: false,
-                teacher: false
-              }
-            }
-      );
-
-      await import("./subject-picker.js");
-
-      ["student-subjects", "child-subjects", "teacher-subjects"]
-        .forEach(id => {
-          const original = byId(id);
-          const search = original.nextElementSibling?.querySelector(
-            ".tag-picker-search"
-          );
-
-          const label = document.querySelector(`label[for="${id}"]`);
-
-          if (search && label) {
-            search.id = id + "-search";
-            label.htmlFor = search.id;
+        sdk.onAuthStateChanged(sdk.auth, current => {
+          if (current?.uid !== user.uid) {
+            dirty = false;
+            location.replace("login.html");
           }
         });
 
-      updateSections();
-      ready = true;
-
-      loading.classList.add("hidden");
-      byId("profile-pane").classList.remove("hidden");
-
-      document.querySelectorAll("[data-pane]").forEach(button => {
-        button.disabled = false;
-      });
-
-      if (!snapshot.exists()) {
-        showMessage(
-          "profile-message",
-          "החשבון קיים, אבל הפרופיל עדיין לא הושלם. מלאו את הפרטים ושמרו.",
-          "info"
+        const snapshot = await sdk.getDoc(
+          sdk.doc(sdk.db, "users", user.uid)
         );
-      }
-    } catch (error) {
-      console.error("Dashboard initialization failed:", error);
 
-      const accessBox = byId("access-status");
+        exists = snapshot.exists();
+        profile = exists ? snapshot.data() : {
+          name: user.displayName || "",
+          accountUses: {
+            selfLearner: true,
+            parent: false,
+            teacher: false
+          }
+        };
 
-      if (
-        document.documentElement.classList.contains("access-pending") &&
-        accessBox
-      ) {
-        accessBox.querySelector("strong").textContent =
-          "לא הצלחנו לבדוק את הכניסה";
+        buildLearningEditors();
+        renderProfile();
 
-        accessBox.querySelector("p").textContent =
-          "בדקו את החיבור לאינטרנט ונסו לרענן.";
-      } else {
-        loading.innerHTML = `
-          <p>לא הצלחנו לטעון את הפרופיל.</p>
-          <button class="button" id="retry-load" type="button">
-            ניסיון נוסף
-          </button>
-        `;
+        $("page-loading").hidden = true;
+        $("dashboard").hidden = false;
 
-        byId("retry-load").addEventListener("click", () => {
-          window.location.reload();
-        });
+        if (!exists) {
+          notice("page-message", "החשבון מחובר. השלימו את הפרופיל כדי להתחיל.");
+        }
+
+        await loadRequests();
+      } catch (error) {
+        console.error("Dashboard initialization failed:", error);
+
+        $("page-loading").hidden = true;
+        $("reload-button").hidden = false;
+
+        notice(
+          "page-message",
+          "לא הצלחנו לטעון את האזור האישי. בדקו את החיבור לאינטרנט ונסו שוב.",
+          true
+        );
       }
     }
 
-    window.addEventListener("pagehide", event => {
-      if (!event.persisted) unsubscribeAuth?.();
-    });
+    start();
   </script>
 </body>
 </html>

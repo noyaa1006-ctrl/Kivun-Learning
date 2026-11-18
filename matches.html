@@ -3,1227 +3,1050 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#121a37">
-  <title>המורים וההתאמות שלי — כיוון</title>
+  <meta name="theme-color" content="#172442">
+  <title>מציאת מורה — כיוון</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="./site.css">
 
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap");
-
-    :root {
-      --navy: #121a37;
-      --ink: #1c2746;
-      --teal: #08785c;
-      --coral: #ff6e61;
-      --cloud: #f6f8fe;
-      --line: #e6eaf4;
-      --muted: #69738d;
-      --shadow: 0 16px 40px rgba(26, 39, 76, .09);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    .hidden {
+    .access-pending body > :not(#access-status):not(script) {
       display: none !important;
     }
 
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--cloud);
-      font-family: Heebo, Arial, sans-serif;
+    #access-status {
+      width: min(460px, calc(100% - 32px));
+      margin: 90px auto;
+      text-align: center;
     }
 
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    .container {
-      width: min(1180px, calc(100% - 40px));
-      margin-inline: auto;
-    }
-
-    .nav {
+    .search-intro {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      min-height: 80px;
-      padding-block: 12px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--navy);
-      font-size: 28px;
-      font-weight: 900;
-      text-decoration: none;
-    }
-
-    .mark {
-      display: grid;
-      place-items: center;
-      width: 29px;
-      height: 29px;
-      border-radius: 10px 10px 10px 2px;
-      color: #fff;
-      background: var(--coral);
-    }
-
-    .nav-links {
-      display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      gap: 18px;
+      gap: 20px;
+      margin-bottom: 24px;
+      padding: 22px 24px;
+      border: 1px solid #d4e7dd;
+      border-radius: 16px;
+      background: #eef8f2;
     }
 
-    .nav-links a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 800;
-      text-decoration: none;
-    }
-
-    .header {
-      padding: 38px 0;
-      border-block: 1px solid var(--line);
-      background: #fff;
-    }
-
-    .breadcrumb {
-      color: var(--teal);
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    h1 {
-      margin: 10px 0 12px;
-      color: var(--navy);
-      font-size: 42px;
-      line-height: 1.2;
-      letter-spacing: -1px;
-    }
-
-    .header p {
-      max-width: 700px;
+    .search-intro h2 {
       margin: 0;
-      color: var(--muted);
-      font-size: 17px;
-      line-height: 1.8;
+      font-size: 18px;
     }
 
-    .profile-selector {
-      max-width: 380px;
-      margin-top: 22px;
+    .search-intro p {
+      margin: 6px 0 0;
+      color: var(--site-muted);
+      font-size: 14px;
     }
 
-    .layout {
-      display: grid;
-      grid-template-columns: 270px minmax(0, 1fr);
-      gap: 26px;
-      padding: 30px 0 70px;
+    .learner-control {
+      width: min(100%, 250px);
     }
 
     .filters {
-      height: max-content;
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: 21px;
-      background: #fff;
+      margin-bottom: 24px;
+      border: 1px solid var(--site-border);
+      border-radius: 16px;
+      background: white;
     }
 
-    .filters h2 {
-      margin: 0 0 20px;
-      color: var(--navy);
-      font-size: 21px;
-    }
-
-    .filter-group {
-      margin-bottom: 22px;
-    }
-
-    label,
-    .filter-label {
-      display: block;
-      margin-bottom: 8px;
-      color: #4e5b76;
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    select {
-      width: 100%;
-      min-height: 46px;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      color: var(--ink);
-      background: #fff;
-      font-size: 16px;
-    }
-
-    .range {
-      width: 100%;
-      margin: 10px 0;
-      accent-color: var(--teal);
-    }
-
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .checkbox-label {
-      display: flex;
-      align-items: flex-start;
-      gap: 9px;
-      font-size: 13px;
-      line-height: 1.7;
-      cursor: pointer;
-    }
-
-    .checkbox-label input {
-      width: 18px;
-      height: 18px;
-      flex: 0 0 18px;
-      margin-top: 3px;
-      accent-color: var(--teal);
-    }
-
-    .reset {
-      width: 100%;
-      min-height: 44px;
-      padding: 10px;
-      border: 0;
-      border-radius: 10px;
-      color: var(--teal);
-      background: #e5faf0;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .list-head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-
-    .list-head p {
-      margin: 5px 0 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    .sort-group {
-      min-width: 190px;
-    }
-
-    .sort-group label {
-      font-size: 12px;
-    }
-
-    .teacher-list {
-      display: grid;
-      gap: 16px;
-    }
-
-    .card {
-      display: grid;
-      grid-template-columns: 94px minmax(0, 1fr);
-      align-items: start;
-      gap: 20px;
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: #fff;
-      box-shadow: 0 8px 25px rgba(26, 39, 76, .04);
-    }
-
-    .portrait {
-      display: grid;
-      place-items: center;
-      width: 94px;
-      height: 104px;
-      overflow: hidden;
-      border-radius: 17px;
-      color: #fff;
-      background: linear-gradient(135deg, #e78b61, #a8384d);
-      font-size: 32px;
-      font-weight: 900;
-    }
-
-    .portrait.p2 {
-      background: linear-gradient(135deg, #88bdce, #3b5296);
-    }
-
-    .portrait.p3 {
-      background: linear-gradient(135deg, #8bbf86, #187c72);
-    }
-
-    .portrait.p4 {
-      background: linear-gradient(135deg, #bd94d3, #82499a);
-    }
-
-    .portrait img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 8px;
-      color: var(--teal);
-      background: #e5faf0;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .badge.demo {
-      color: #765500;
-      background: #fff6dd;
-    }
-
-    .badge.neutral {
-      color: #53607a;
-      background: #f0f3f9;
-    }
-
-    .card h2 {
-      margin: 10px 0 5px;
-      color: var(--navy);
-      font-size: 23px;
-      overflow-wrap: anywhere;
-    }
-
-    .subjects {
-      margin: 0 0 9px;
-      color: var(--teal);
-      font-size: 14px;
+    .filters > summary {
+      min-height: 54px;
+      padding: 16px 22px;
+      color: var(--site-heading);
       font-weight: 700;
-      line-height: 1.7;
+      cursor: pointer;
     }
 
-    .about {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
-      overflow-wrap: anywhere;
+    .filters[open] > summary {
+      border-bottom: 1px solid var(--site-border-soft);
     }
 
-    .teacher-details {
+    .filters-body {
+      padding: 22px;
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      align-items: start;
+      gap: 16px;
+    }
+
+    .filter-bottom {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px 18px;
-      margin-top: 13px;
-      color: #59657f;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .card-footer {
-      grid-column: 1 / -1;
-      display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      padding-top: 15px;
-      border-top: 1px solid var(--line);
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
     }
 
-    .price {
-      color: var(--navy);
-      font-size: 22px;
-      font-weight: 900;
-    }
-
-    .price small {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .button {
-      display: inline-flex;
+    .results-sort {
+      display: flex;
       align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 11px 17px;
-      border: 0;
-      border-radius: 11px;
-      color: #fff;
-      background: var(--navy);
-      font-weight: 800;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
+      gap: 10px;
     }
 
-    .match-details {
-      grid-column: 1 / -1;
-      padding: 13px;
-      border-radius: 12px;
-      background: #f5f8fc;
-      color: #53607a;
-      font-size: 13px;
-      line-height: 1.8;
-    }
-
-    .match-details summary {
-      color: var(--teal);
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .match-details p {
-      margin: 10px 0 0;
-    }
-
-    .message {
-      display: none;
-      margin-bottom: 18px;
-      padding: 15px;
-      border-radius: 12px;
+    .results-sort select {
+      width: auto;
+      min-width: 175px;
+      min-height: 44px;
       font-size: 14px;
-      line-height: 1.8;
     }
 
-    .message.show {
-      display: block;
+    .teacher-card {
+      height: 100%;
     }
 
-    .message.info {
-      color: #405177;
-      background: #eef3ff;
+    .teacher-card .site-person {
+      align-items: flex-start;
     }
 
-    .message.error {
-      color: #9e2f2a;
-      background: #fff0ef;
+    .teacher-card .site-person-name {
+      font-size: 19px;
     }
 
-    .message a {
-      color: inherit;
-      font-weight: 800;
+    .teacher-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--site-muted);
+      font-size: 13px;
     }
 
-    .empty {
-      padding: 36px 22px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: #fff;
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.8;
+    .teacher-bio {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      margin: 0;
+      color: var(--site-muted);
+      font-size: 14px;
+      line-height: 1.85;
     }
 
-    .empty h2 {
-      margin: 0 0 10px;
-      color: var(--navy);
-      font-size: 22px;
+    .match-note {
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #f2f8f5;
+      color: #28614f;
+      font-size: 13px;
+      line-height: 1.7;
     }
 
-    .empty .button {
-      margin-top: 12px;
+    .match-note p {
+      margin: 0;
     }
 
-    .filters[aria-busy="true"] {
-      opacity: .7;
+    .match-note details {
+      margin-top: 5px;
     }
 
-    @media (max-width: 800px) {
-      .layout {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .match-note summary {
+      min-height: 36px;
+      padding-block: 5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .match-note details p {
+      margin-top: 6px;
+      color: var(--site-muted);
+      font-size: 12px;
+    }
+
+    .teacher-card .site-card-footer {
+      align-items: flex-end;
+    }
+
+    .results-notice {
+      margin-bottom: 20px;
+    }
+
+    .results-empty {
+      grid-column: 1 / -1;
+      border: 1px solid var(--site-border);
+      border-radius: 16px;
+      background: white;
+    }
+
+    .demo-explanation {
+      margin: 6px 0 0;
+      color: var(--site-muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 1000px) {
+      .filter-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+    }
 
-      .filters {
+    @media (max-width: 560px) {
+      .search-intro,
+      .filters-body {
         padding: 18px;
       }
 
-      .filter-fields {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
+      .filter-grid {
+        grid-template-columns: minmax(0, 1fr);
       }
 
-      .filter-group {
-        margin: 0;
-      }
-
-      .filters .reset {
-        margin-top: 18px;
-      }
-
-      h1 {
-        font-size: 35px;
-      }
-
-      .header {
-        padding: 28px 0;
-      }
-    }
-
-    @media (max-width: 500px) {
-      .container {
-        width: calc(100% - 28px);
-      }
-
-      .brand {
-        font-size: 25px;
-      }
-
-      .nav-links {
-        gap: 12px;
-      }
-
-      .nav-links a {
-        font-size: 12px;
-      }
-
-      .header p {
-        font-size: 15px;
-      }
-
-      .filter-fields {
-        grid-template-columns: 1fr;
-      }
-
-      .card {
-        grid-template-columns: 65px minmax(0, 1fr);
-        gap: 14px;
-        padding: 16px;
-      }
-
-      .portrait {
-        width: 65px;
-        height: 78px;
-        font-size: 25px;
-      }
-
-      .card h2 {
-        font-size: 21px;
-      }
-
-      .sort-group {
+      .learner-control,
+      .results-sort {
         width: 100%;
       }
 
-      .card-footer .button {
+      .results-sort select {
         flex: 1;
+        min-width: 0;
+      }
+
+      .teacher-card .site-card-footer .site-btn {
+        padding-inline: 14px;
       }
     }
   </style>
 
-  <link rel="stylesheet" href="navigation.css">
-  <script defer src="navigation.js"></script>
+  <script type="module" src="./navigation.js"></script>
 </head>
 
 <body>
-  <div id="access-status" role="status" aria-live="polite">
-    <strong>רגע, בודקים את הכניסה שלך…</strong>
-    <p>מיד ממשיכים לכיוון שלך.</p>
-    <a href="login.html">חזרה לכניסה</a>
+  <div id="access-status" class="site-card" role="status">
+    <strong>מכינים את החיפוש שלך</strong>
+    <p>בודקים את ההתחברות…</p>
+    <a href="login.html">חזרה למסך הכניסה</a>
   </div>
 
-  <nav class="container nav" aria-label="ניווט ראשי">
-    <a class="brand" href="index.html">
-      <span class="mark" aria-hidden="true">↗</span>
-      כיוון
-    </a>
+  <header data-site-header></header>
 
-    <div class="nav-links">
-      <a href="index.html">עמוד הבית</a>
-      <a href="dashboard.html">האזור האישי שלי</a>
-    </div>
-  </nav>
-
-  <header class="header">
-    <div class="container">
-      <div class="breadcrumb">מכירים לפני שבוחרים</div>
-
-      <h1>המורים בכיוון שלך.</h1>
-
-      <p>
-        בוחרים מקצוע, טווח מחיר ואופן לימוד.
-        פותחים פרופיל, מכירים את המורה ושולחים בקשה כשזה מתאים.
-      </p>
-
-      <div class="profile-selector hidden" id="profile-selector">
-        <label for="learning-profile">עבור מי מחפשים מורה?</label>
-        <select id="learning-profile"></select>
+  <main class="site-container site-main" id="main-content">
+    <div class="site-page-head">
+      <div>
+        <p class="site-eyebrow">לומדים עם האדם המתאים</p>
+        <h1 class="site-title">מציאת מורה</h1>
+        <p class="site-description">
+          בחרו מקצוע, השוו בין מורים והכירו את דרך ההוראה שלהם.
+        </p>
       </div>
-    </div>
-  </header>
 
-  <main class="container layout">
-    <aside
-      class="filters"
-      id="filters"
-      aria-labelledby="filters-title"
-      aria-busy="true"
-      inert
+      <a class="site-btn site-btn-secondary" href="dashboard.html">
+        חזרה לאזור שלי
+      </a>
+    </div>
+
+    <div
+      id="page-status"
+      class="site-notice results-notice"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <div id="page-loading" class="site-loading" role="status">
+      <span class="site-spinner" aria-hidden="true"></span>
+      טוענים את המורים…
+    </div>
+
+    <button
+      class="site-btn site-btn-secondary"
+      id="retry-button"
+      type="button"
+      hidden
     >
-      <h2 id="filters-title">לדייק את החיפוש</h2>
+      ניסיון נוסף
+    </button>
 
-      <div class="filter-fields">
-        <div class="filter-group">
-          <label for="subject">מקצוע לימוד</label>
-
-          <select id="subject">
-            <option value="">כל המקצועות</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label for="lesson-format">אופן השיעור</label>
-
-          <select id="lesson-format">
-            <option value="">כל האפשרויות</option>
-            <option value="אונליין">אונליין</option>
-            <option value="פרונטלי">פרונטלי</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label for="price-range">מחיר מרבי לשעה</label>
-
-          <input
-            class="range"
-            id="price-range"
-            type="range"
-            min="0"
-            max="300"
-            value="300"
-            step="1"
-            aria-describedby="range-value"
-          >
-
-          <div class="price-row">
-            <span>₪0</span>
-            <output id="range-value" for="price-range">עד ₪300</output>
-          </div>
-        </div>
-
-        <div class="filter-group">
-          <label class="checkbox-label" for="show-demos">
-            <input id="show-demos" type="checkbox" checked>
-            <span>להציג גם פרופילי הדגמה, המסומנים בבירור</span>
-          </label>
-        </div>
-      </div>
-
-      <button class="reset" id="reset" type="button">
-        איפוס הסינונים
-      </button>
-    </aside>
-
-    <section aria-label="תוצאות חיפוש מורים">
-      <div
-        class="message"
-        id="profile-notice"
-        role="status"
-      ></div>
-
-      <div
-        class="message"
-        id="load-message"
-        role="status"
-        aria-live="polite"
-      ></div>
-
-      <div class="list-head">
+    <div id="search-page" hidden>
+      <section class="search-intro" aria-labelledby="search-profile-title">
         <div>
-          <b id="count" role="status" aria-live="polite">
-            טוענים מורים…
-          </b>
-
-          <p>
-            ציון ההתאמה הוא אומדן לפי הפרטים שהוזנו.
-          </p>
+          <h2 id="search-profile-title">החיפוש שלך</h2>
+          <p id="search-profile-description"></p>
+          <a
+            class="site-small"
+            href="dashboard.html#profile"
+            style="display:inline-block;margin-top:8px"
+          >
+            עדכון העדפות הלמידה
+          </a>
         </div>
 
-        <div class="sort-group">
-          <label for="sort">סדר התוצאות</label>
+        <div class="site-field learner-control" id="learner-control" hidden>
+          <label class="site-label" for="learner-select">
+            למי מחפשים מורה?
+          </label>
+          <select class="site-select" id="learner-select"></select>
+        </div>
+      </section>
 
-          <select id="sort" disabled>
-            <option value="match">התאמה גבוהה תחילה</option>
-            <option value="low">מחיר נמוך לגבוה</option>
-            <option value="high">מחיר גבוה לנמוך</option>
-            <option value="name">לפי שם המורה</option>
+      <details class="filters" open>
+        <summary>חיפוש וסינון</summary>
+
+        <div class="filters-body">
+          <form id="filter-form" role="search" aria-label="חיפוש מורים">
+            <div class="filter-grid">
+              <div class="site-field">
+                <label class="site-label" for="search-text">
+                  חיפוש חופשי
+                </label>
+                <input
+                  class="site-input"
+                  id="search-text"
+                  type="search"
+                  placeholder="שם, מקצוע או עיר"
+                  maxlength="100"
+                >
+              </div>
+
+              <div class="site-field">
+                <label class="site-label" for="subject-filter">
+                  מקצוע
+                </label>
+                <select class="site-select" id="subject-filter">
+                  <option value="">כל המקצועות</option>
+                </select>
+              </div>
+
+              <div class="site-field">
+                <label class="site-label" for="format-filter">
+                  אופן הלימוד
+                </label>
+                <select class="site-select" id="format-filter">
+                  <option value="">כל האפשרויות</option>
+                  <option value="online">אונליין</option>
+                  <option value="in-person">פרונטלי</option>
+                </select>
+              </div>
+
+              <div class="site-field">
+                <label class="site-label" for="price-filter">
+                  מחיר מרבי לשיעור
+                </label>
+                <input
+                  class="site-input"
+                  id="price-filter"
+                  type="number"
+                  min="0"
+                  step="1"
+                  inputmode="numeric"
+                  placeholder="ללא הגבלה"
+                  aria-describedby="price-hint"
+                >
+                <p class="site-field-hint" id="price-hint">
+                  המחיר בש״ח. אפשר להשאיר ריק.
+                </p>
+              </div>
+            </div>
+
+            <div class="filter-bottom">
+              <div>
+                <label class="site-checkbox">
+                  <input id="show-demos" type="checkbox">
+                  הצגת פרופילי הדגמה
+                </label>
+                <p class="demo-explanation">
+                  פרופילי הדגמה נועדו להמחשה ואינם זמינים לפנייה.
+                </p>
+              </div>
+
+              <button
+                class="site-btn site-btn-quiet"
+                id="clear-filters"
+                type="button"
+              >
+                ניקוי מסננים
+              </button>
+            </div>
+          </form>
+        </div>
+      </details>
+
+      <div class="site-results-summary">
+        <p id="results-count" role="status" aria-live="polite"></p>
+
+        <div class="results-sort">
+          <label for="sort-select">מיון לפי</label>
+          <select class="site-select" id="sort-select">
+            <option value="match">התאמה לפרופיל</option>
+            <option value="price-low">מחיר: מהנמוך לגבוה</option>
+            <option value="price-high">מחיר: מהגבוה לנמוך</option>
+            <option value="name">שם המורה</option>
           </select>
         </div>
       </div>
 
-      <div class="teacher-list" id="teachers" aria-busy="true">
-        <div class="empty">טוענים את רשימת המורים…</div>
-      </div>
-    </section>
+      <div class="site-grid" id="teacher-results"></div>
+
+      <p class="site-field-hint" style="margin-top:24px">
+        ההתאמה מבוססת על הפרטים שהוזנו באתר.
+        מומלץ לקרוא את הפרופיל ולתאם עם המורה את משך השיעור,
+        התוכן והמחיר לפני קביעתו.
+      </p>
+    </div>
   </main>
 
+  <footer class="site-footer">
+    <div class="site-container site-footer-inner">
+      <span>כיוון — מוצאים את הדרך ללמוד</span>
+      <a href="dashboard.html">האזור שלי</a>
+    </div>
+  </footer>
+
   <script type="module">
-    const byId = id => document.getElementById(id);
+    const $ = id => document.getElementById(id);
 
-    const list = byId("teachers");
-    const subject = byId("subject");
-    const format = byId("lesson-format");
-    const price = byId("price-range");
-    const sort = byId("sort");
-    const demos = byId("show-demos");
-    const profileSelect = byId("learning-profile");
+    let sdk;
+    let catalog;
+    let user;
 
-    let firebase = null;
-    let catalog = null;
-    let currentUser = null;
     let teachers = [];
-    let learningProfiles = [];
-    let student = null;
-    let ready = false;
-    let loadVersion = 0;
+    let learnerProfiles = [];
+    let teachersFailed = false;
+    let profileFailed = false;
+    let renderTimer;
 
-    const money = new Intl.NumberFormat("he-IL", {
-      maximumFractionDigits: 2
-    });
+    function make(tag, className, text) {
+      const element = document.createElement(tag);
 
-    function safe(value) {
-      return String(value ?? "").replace(
-        /[&<>'"]/g,
-        character => ({
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          "'": "&#39;",
-          '"': "&quot;"
-        })[character]
-      );
+      if (className) element.className = className;
+      if (text !== undefined) element.textContent = text;
+
+      return element;
     }
 
-    function showMessage(id, text, type = "info") {
-      const box = byId(id);
-      box.textContent = text;
-      box.className = "message show " + type;
+    function showStatus(text, error = false) {
+      $("page-status").textContent = text;
+      $("page-status").className =
+        "site-notice results-notice " +
+        (error ? "site-notice-warning" : "");
+      $("page-status").hidden = !text;
     }
 
-    function teacherPrice(teacher) {
+    function normalizeText(value) {
+      return String(value ?? "")
+        .normalize("NFKC")
+        .toLocaleLowerCase("he-IL")
+        .trim();
+    }
+
+    function subjectsOf(teacher) {
+      return catalog.normalizeList(teacher.subjects);
+    }
+
+    function currentLearner() {
+      return learnerProfiles.find(
+        item => item.key === $("learner-select").value
+      )?.data || null;
+    }
+
+    function priceOf(teacher) {
       if (
-        teacher.price === null ||
         teacher.price === undefined ||
+        teacher.price === null ||
         teacher.price === ""
       ) {
         return null;
       }
 
-      const number = Number(teacher.price);
-
-      return Number.isFinite(number) && number >= 0
-        ? number
-        : null;
+      const price = Number(teacher.price);
+      return Number.isFinite(price) && price >= 0 ? price : null;
     }
 
-    function matchScore(teacher) {
-      if (!student) return 0;
+    function scoreOf(teacher) {
+      const learner = currentLearner();
 
-      const score = Number(
-        catalog.calculateMatch(teacher, student)
-      );
+      if (!learner || !catalog.normalizeList(learner.subjects).length) {
+        return 0;
+      }
 
+      const score = Number(catalog.calculateMatch(teacher, learner));
       return Number.isFinite(score) ? score : 0;
     }
 
-    function updatePriceLabel() {
-      byId("range-value").textContent =
-        "עד ₪" + money.format(Number(price.value));
+    function commonSubjects(teacher) {
+      const learner = currentLearner();
+      if (!learner) return [];
 
-      price.setAttribute(
-        "aria-valuetext",
-        "עד " + price.value + " שקלים לשעה"
-      );
+      const wanted = new Set(catalog.normalizeList(learner.subjects));
+      return subjectsOf(teacher).filter(subject => wanted.has(subject));
     }
 
-    function configureProfiles(profile) {
-      learningProfiles = [];
+    function setAvatar(element, teacher) {
+      const initial = Array.from(teacher.name || "מ")[0];
+      element.textContent = initial;
+      element.setAttribute("aria-hidden", "true");
 
-      const uses = profile.accountUses;
+      const photo = teacher.photo;
+      if (typeof photo !== "string" || !photo) return;
 
-      if (uses) {
-        if (uses.selfLearner && profile.selfLearningProfile) {
-          learningProfiles.push({
-            label: "עבור עצמי",
-            data: profile.selfLearningProfile
-          });
+      let allowed =
+        /^data:image\/(?:png|jpeg|webp|gif);base64,/i.test(photo);
+
+      if (!allowed) {
+        try {
+          allowed = new URL(photo).protocol === "https:";
+        } catch {
+          allowed = false;
         }
+      }
 
-        if (uses.parent && profile.childLearningProfile) {
-          learningProfiles.push({
-            label: "עבור הילד או הילדה",
-            data: profile.childLearningProfile
-          });
-        }
-      } else if (profile.role !== "teacher") {
-        learningProfiles.push({
-          label: "פרופיל הלמידה שלי",
-          data:
-            profile.selfLearningProfile ||
-            profile.studentProfile ||
-            profile
+      if (!allowed) return;
+
+      const image = document.createElement("img");
+      image.alt = "";
+      image.loading = "lazy";
+      image.referrerPolicy = "no-referrer";
+
+      image.addEventListener("error", () => {
+        element.textContent = initial;
+      });
+
+      image.src = photo;
+      element.replaceChildren(image);
+    }
+
+    function configureLearners(data) {
+      const uses = data.accountUses || {
+        selfLearner: !["teacher", "parent"].includes(data.role),
+        parent: data.role === "parent",
+        teacher: ["teacher", "both"].includes(data.role)
+      };
+
+      learnerProfiles = [];
+
+      if (uses.selfLearner) {
+        learnerProfiles.push({
+          key: "self",
+          label: "בשבילי",
+          data: data.selfLearningProfile || data.studentProfile || data
         });
       }
 
-      profileSelect.replaceChildren();
+      if (uses.parent) {
+        learnerProfiles.push({
+          key: "child",
+          label: "בשביל הילד/ה",
+          data: data.childLearningProfile || {}
+        });
+      }
 
-      learningProfiles.forEach((item, index) => {
-        profileSelect.add(new Option(item.label, String(index)));
-      });
+      const select = $("learner-select");
+      select.replaceChildren();
 
-      byId("profile-selector").classList.toggle(
-        "hidden",
-        learningProfiles.length < 2
-      );
+      for (const item of learnerProfiles) {
+        select.add(new Option(item.label, item.key));
+      }
 
-      student = learningProfiles[0]?.data || null;
-      updateProfileNotice();
+      $("learner-control").hidden = learnerProfiles.length < 2;
+      updateLearnerDescription();
     }
 
-    function updateProfileNotice() {
-      const box = byId("profile-notice");
+    function updateLearnerDescription() {
+      const learner = currentLearner();
+      const subjects = catalog.normalizeList(learner?.subjects);
+      const isChild = $("learner-select").value === "child";
+
+      $("search-profile-title").textContent =
+        isChild ? "מוצאים מורה לילד/ה" : "החיפוש שלך";
+
+      if (profileFailed) {
+        $("search-profile-description").textContent =
+          "העדפות הלמידה לא נטענו. אפשר לחפש ולסנן מורים גם בלי התאמה לפרופיל.";
+      } else if (subjects.length) {
+        $("search-profile-description").textContent =
+          `מקצועות בפרופיל: ${subjects.join(" · ")}`;
+      } else {
+        $("search-profile-description").textContent =
+          "אפשר לחפש בחופשיות. הוספת מקצועות לפרופיל תאפשר להציג התאמה להעדפות שלך.";
+      }
+
+      const matchOption = $("sort-select").querySelector(
+        'option[value="match"]'
+      );
+
+      matchOption.disabled = !subjects.length;
+
+      if (!subjects.length && $("sort-select").value === "match") {
+        $("sort-select").value = "name";
+      }
+    }
+
+    function populateSubjects() {
+      const all = new Set([
+        ...catalog.SUBJECTS,
+        ...teachers.flatMap(subjectsOf)
+      ]);
+
+      const sorted = [...all]
+        .filter(item => typeof item === "string" && item.trim())
+        .sort((a, b) => a.localeCompare(b, "he"));
+
+      const select = $("subject-filter");
+
+      for (const subject of sorted) {
+        select.add(new Option(subject, subject));
+      }
+    }
+
+    function createTeacherCard(teacher) {
+      const card = make(
+        "article",
+        "site-card site-teacher-card teacher-card"
+      );
+
+      const person = make("div", "site-person");
+      const avatar = make("div", "site-avatar");
+      setAvatar(avatar, teacher);
+
+      const identity = document.createElement("div");
+      identity.append(
+        make("h2", "site-person-name", teacher.name || "מורה בכיוון")
+      );
+
+      const meta = [
+        teacher.city,
+        teacher.format
+      ].filter(Boolean);
+
+      if (meta.length) {
+        identity.append(
+          make("p", "site-person-detail", meta.join(" · "))
+        );
+      }
+
+      person.append(avatar, identity);
+      card.append(person);
+
+      if (teacher.isDemo) {
+        card.append(
+          make("span", "site-badge site-badge-info", "פרופיל הדגמה")
+        );
+      }
+
+      const tags = make("div", "site-tags");
+      const subjects = subjectsOf(teacher);
+
+      for (const subject of subjects.slice(0, 4)) {
+        tags.append(make("span", "site-tag", subject));
+      }
+
+      if (subjects.length > 4) {
+        tags.append(
+          make("span", "site-tag", `ועוד ${subjects.length - 4}`)
+        );
+      }
+
+      if (!subjects.length) {
+        tags.append(
+          make("span", "site-small site-muted", "מקצועות טרם עודכנו")
+        );
+      }
+
+      card.append(tags);
+
+      card.append(make(
+        "p",
+        "teacher-bio",
+        teacher.bio || "אפשר לפתוח את הפרופיל ולהכיר את פרטי ההוראה."
+      ));
+
+      if (teacher.experience) {
+        card.append(
+          make("div", "teacher-meta", `ניסיון: ${teacher.experience}`)
+        );
+      }
+
+      const common = commonSubjects(teacher);
+
+      if (common.length) {
+        const note = make("div", "match-note");
+        note.append(
+          make("p", "", `מקצועות מהפרופיל שלך: ${common.join(", ")}`)
+        );
+
+        const details = document.createElement("details");
+        details.append(
+          make("summary", "", "על ההתאמה"),
+          make(
+            "p",
+            "",
+            "המורה מלמד/ת מקצועות שבחרת. המיון עשוי להתחשב גם ברמה, בסגנון ובאופן הלמידה, כאשר הפרטים קיימים. זו התאמה משוערת, ואינה דירוג של המורה."
+          )
+        );
+
+        note.append(details);
+        card.append(note);
+      }
+
+      const footer = make("div", "site-card-footer");
+      const priceBox = document.createElement("div");
+      const price = priceOf(teacher);
+
+      if (price === null) {
+        priceBox.append(
+          make("span", "site-small", "המחיר טרם עודכן")
+        );
+      } else {
+        priceBox.append(
+          make("span", "site-price", `${price.toLocaleString("he-IL")} ₪`),
+          make("span", "site-price-note", "לשיעור")
+        );
+      }
+
+      const link = make(
+        "a",
+        "site-btn site-btn-secondary",
+        teacher.isDemo ? "צפייה בהדגמה" : "לצפייה בפרופיל"
+      );
+
+      link.href =
+        `teacher-profile.html?id=${encodeURIComponent(teacher.id)}`;
+
+      link.setAttribute(
+        "aria-label",
+        `${teacher.isDemo ? "צפייה בהדגמה" : "צפייה בפרופיל"} של ${teacher.name || "מורה"}`
+      );
+
+      footer.append(priceBox, link);
+      card.append(footer);
+
+      return card;
+    }
+
+    function showEmpty(title, description, canClear = false) {
+      const box = make("div", "site-empty results-empty");
+
+      box.append(
+        make("h2", "", title),
+        make("p", "", description)
+      );
+
+      if (canClear) {
+        const button = make(
+          "button",
+          "site-btn site-btn-secondary",
+          "ניקוי מסננים"
+        );
+
+        button.type = "button";
+        button.addEventListener("click", clearFilters);
+        box.append(button);
+      }
+
+      $("teacher-results").replaceChildren(box);
+    }
+
+    function renderResults() {
+      const priceInput = $("price-filter");
 
       if (
-        student &&
-        catalog.normalizeList(student.subjects).length
+        priceInput.validity.badInput ||
+        !priceInput.validity.valid
       ) {
-        box.textContent = "";
-        box.className = "message";
+        priceInput.setAttribute("aria-invalid", "true");
+        $("results-count").textContent = "";
+        showEmpty(
+          "צריך לעדכן את המחיר",
+          "הזינו מחיר שלם של 0 ומעלה, או השאירו את השדה ריק."
+        );
         return;
       }
 
-      box.className = "message show info";
-      box.replaceChildren(
-        document.createTextNode(
-          "אפשר לעיין במורים. כדי לקבל ציון התאמה, השלימו פרופיל למידה ומקצועות "
-        )
-      );
+      priceInput.removeAttribute("aria-invalid");
 
-      const link = document.createElement("a");
-      link.href = "dashboard.html";
-      link.textContent = "באזור האישי";
-      box.appendChild(link);
-      box.appendChild(document.createTextNode("."));
-    }
+      const search = normalizeText($("search-text").value);
+      const subject = $("subject-filter").value;
+      const format = $("format-filter").value;
+      const showDemos = $("show-demos").checked;
+      const maximum = priceInput.value === ""
+        ? null
+        : Number(priceInput.value);
 
-    function createCard(teacher, index) {
-      const isDemo = teacher.isDemo === true;
-      const name = String(teacher.name || "מורה בכיוון");
-      const subjects = catalog.normalizeList(teacher.subjects);
-      const score = matchScore(teacher);
-      const amount = teacherPrice(teacher);
+      const filtered = teachers.filter(teacher => {
+        if (teacher.isDemo && !showDemos) return false;
 
-      const photo =
-        typeof teacher.photo === "string" &&
-        teacher.photo.startsWith("data:image/")
-          ? `<img src="${safe(teacher.photo)}"
-                  alt="${safe("תמונת הפרופיל של " + name)}">`
-          : safe(name.charAt(0));
+        const subjects = subjectsOf(teacher);
 
-      const commonSubjects = student
-        ? catalog.sharedSubjects(teacher.subjects, student.subjects)
-        : [];
+        if (subject && !subjects.includes(subject)) return false;
 
-      const matchLabel = score > 0
-        ? `${score}% התאמה משוערת`
-        : "ללא ציון התאמה";
+        const teacherFormat = String(teacher.format || "");
 
-      const explanation = !student
-        ? "השלימו פרופיל למידה כדי לקבל אומדן התאמה."
-        : commonSubjects.length
-          ? "מקצועות משותפים לפרופיל שנבחר: " +
-            commonSubjects.join(", ") +
-            ". הציון עשוי להתחשב גם ברמה, בסגנון הלמידה ובאופן השיעור, כאשר קיימים פרטים תואמים."
-          : "לא נמצאה חפיפה בין מקצועות המורה למקצועות בפרופיל שנבחר.";
+        if (format === "online" && !teacherFormat.includes("אונליין")) {
+          return false;
+        }
 
-      const priceText = amount === null
-        ? "מחיר בתיאום"
-        : "₪" + money.format(amount);
+        if (
+          format === "in-person" &&
+          !teacherFormat.includes("פרונטלי")
+        ) {
+          return false;
+        }
 
-      return `
-        <article class="card">
-          <div class="portrait p${index % 4 + 1}">
-            ${photo}
-          </div>
+        const price = priceOf(teacher);
 
-          <div>
-            <div class="badges">
-              <span class="badge ${score > 0 ? "" : "neutral"}">
-                ${safe(matchLabel)}
-              </span>
+        if (maximum !== null && (price === null || price > maximum)) {
+          return false;
+        }
 
-              <span class="badge ${isDemo ? "demo" : "neutral"}">
-                ${isDemo ? "פרופיל הדגמה" : "מורה רשום/ה"}
-              </span>
-            </div>
+        if (search) {
+          const searchable = normalizeText([
+            teacher.name,
+            teacher.city,
+            teacher.bio,
+            ...subjects
+          ].filter(Boolean).join(" "));
 
-            <h2>${safe(name)}</h2>
+          if (!searchable.includes(search)) return false;
+        }
 
-            <p class="subjects">
-              ${safe(subjects.join(" · ") || "המקצועות טרם צוינו")}
-            </p>
-
-            <p class="about">
-              ${safe(teacher.bio || "המורה עדיין לא הוסיף/ה תיאור אישי.")}
-            </p>
-
-            <div class="teacher-details">
-              <span>
-                ${safe(teacher.format || "אופן הלימוד בתיאום")}
-              </span>
-              <span>
-                ${safe(teacher.experience || "הניסיון טרם צוין")}
-              </span>
-              <span>
-                ${safe(teacher.city || "האזור טרם צוין")}
-              </span>
-            </div>
-          </div>
-
-          <details class="match-details">
-            <summary>על ההתאמה והזמינות</summary>
-            <p>${safe(explanation)}</p>
-            <p>
-              זמינות: ${safe(teacher.availability || "יש לתאם עם המורה")}
-            </p>
-            ${isDemo
-              ? "<p>זהו פרופיל להמחשה בלבד. אי אפשר לשלוח אליו בקשה.</p>"
-              : ""}
-          </details>
-
-          <div class="card-footer">
-            <div class="price">
-              ${safe(priceText)}
-              ${amount !== null
-                ? `<small>/ שעה${isDemo ? " לדוגמה" : ""}</small>`
-                : ""}
-            </div>
-
-            <a
-              class="button"
-              href="teacher-profile.html?id=${encodeURIComponent(teacher.id)}"
-              aria-label="${safe("פתיחת הפרופיל של " + name)}"
-            >
-              ${isDemo ? "לפרופיל ההדגמה" : "לפרופיל המורה"} ←
-            </a>
-          </div>
-        </article>
-      `;
-    }
-
-    function render() {
-      if (!ready) return;
-
-      const results = teachers.filter(teacher => {
-        if (!demos.checked && teacher.isDemo) return false;
-
-        const subjects = catalog.normalizeList(teacher.subjects);
-        const lessonFormat = String(teacher.format || "");
-        const amount = teacherPrice(teacher);
-
-        const matchesSubject =
-          !subject.value || subjects.includes(subject.value);
-
-        const matchesFormat =
-          !format.value || lessonFormat.includes(format.value);
-
-        // מחיר שלא צוין מוצג רק כשלא צמצמו את טווח המחיר.
-        const matchesPrice = amount === null
-          ? Number(price.value) === Number(price.max)
-          : amount <= Number(price.value);
-
-        return matchesSubject && matchesFormat && matchesPrice;
+        return true;
       });
 
-      results.sort((first, second) => {
-        const firstPrice = teacherPrice(first);
-        const secondPrice = teacherPrice(second);
+      const sort = $("sort-select").value;
 
-        if (sort.value === "low" || sort.value === "high") {
-          if (firstPrice === null && secondPrice !== null) return 1;
-          if (secondPrice === null && firstPrice !== null) return -1;
+      filtered.sort((a, b) => {
+        // פרופילי הדגמה מופיעים אחרי מורים אמיתיים.
+        if (a.isDemo !== b.isDemo) {
+          return a.isDemo ? 1 : -1;
+        }
 
-          if (firstPrice !== null && secondPrice !== null) {
-            const difference = sort.value === "low"
-              ? firstPrice - secondPrice
-              : secondPrice - firstPrice;
+        if (sort === "price-low" || sort === "price-high") {
+          const first = priceOf(a);
+          const second = priceOf(b);
 
-            if (difference) return difference;
+          if (first === null && second !== null) return 1;
+          if (second === null && first !== null) return -1;
+
+          if (first !== null && second !== null && first !== second) {
+            return sort === "price-low"
+              ? first - second
+              : second - first;
           }
         }
 
-        if (sort.value === "match") {
-          const difference = matchScore(second) - matchScore(first);
+        if (sort === "match") {
+          const difference = scoreOf(b) - scoreOf(a);
           if (difference) return difference;
         }
 
-        return String(first.name || "").localeCompare(
-          String(second.name || ""),
+        return String(a.name || "").localeCompare(
+          String(b.name || ""),
           "he"
         );
       });
 
-      const demoCount = results.filter(item => item.isDemo).length;
-      const realCount = results.length - demoCount;
+      const realCount = filtered.filter(item => !item.isDemo).length;
+      const demoCount = filtered.length - realCount;
 
-      byId("count").textContent =
-        `${realCount} מורים רשומים` +
+      $("results-count").textContent =
+        `${realCount} מורים` +
         (demoCount ? ` · ${demoCount} פרופילי הדגמה` : "");
 
-      if (!results.length) {
-        list.innerHTML = `
-          <div class="empty">
-            <h2>לא נמצאו מורים בסינון הזה</h2>
-            <p>נסו לבחור מקצוע אחר, להרחיב את המחיר או לאפס את הסינונים.</p>
-            <button class="button" id="empty-reset" type="button">
-              איפוס הסינונים
-            </button>
-          </div>
-        `;
+      if (!filtered.length) {
+        const hasFilters =
+          Boolean(search || subject || format) || maximum !== null;
 
-        byId("empty-reset").addEventListener("click", resetFilters);
+        if (teachersFailed) {
+          showEmpty(
+            "רשימת המורים לא נטענה",
+            "אפשר לנסות שוב באמצעות הכפתור בראש העמוד, או להפעיל פרופילי הדגמה כדי להכיר את התצוגה."
+          );
+        } else if (hasFilters) {
+          showEmpty(
+            "לא נמצאו מורים לפי הסינון הזה",
+            "נסו מקצוע אחר, מחיר גבוה יותר או ניקוי של המסננים.",
+            true
+          );
+        } else {
+          showEmpty(
+            "עדיין אין מורים זמינים להצגה",
+            "אפשר לחזור בהמשך. בינתיים ניתן להפעיל את פרופילי ההדגמה כדי להכיר את האתר."
+          );
+        }
+
         return;
       }
 
-      list.innerHTML = results.map(createCard).join("");
+      const fragment = document.createDocumentFragment();
+
+      for (const teacher of filtered) {
+        fragment.append(createTeacherCard(teacher));
+      }
+
+      $("teacher-results").replaceChildren(fragment);
     }
 
-    function resetFilters() {
-      subject.value = "";
-      format.value = "";
-      price.value = price.max;
-      sort.value = "match";
-      demos.checked = true;
-
-      updatePriceLabel();
-      render();
+    function clearFilters() {
+      $("filter-form").reset();
+      $("price-filter").removeAttribute("aria-invalid");
+      renderResults();
     }
 
-    function setLoading(value) {
-      byId("filters").inert = value;
-      byId("filters").setAttribute("aria-busy", String(value));
-      sort.disabled = value;
-      profileSelect.disabled = value;
-      list.setAttribute("aria-busy", String(value));
+    $("filter-form").addEventListener("submit", event => {
+      event.preventDefault();
+      clearTimeout(renderTimer);
+      renderResults();
+    });
+
+    $("search-text").addEventListener("input", () => {
+      clearTimeout(renderTimer);
+      renderTimer = setTimeout(renderResults, 180);
+    });
+
+    $("price-filter").addEventListener("input", renderResults);
+
+    for (const id of [
+      "subject-filter",
+      "format-filter",
+      "show-demos",
+      "sort-select"
+    ]) {
+      $(id).addEventListener("change", renderResults);
     }
 
-    async function loadTeachers() {
-      const version = ++loadVersion;
+    $("learner-select").addEventListener("change", () => {
+      updateLearnerDescription();
 
-      ready = false;
-      setLoading(true);
+      if (catalog.normalizeList(currentLearner()?.subjects).length) {
+        $("sort-select").value = "match";
+      }
 
-      byId("count").textContent = "טוענים מורים…";
-      byId("load-message").className = "message";
+      renderResults();
+    });
 
-      list.innerHTML =
-        '<div class="empty">טוענים את רשימת המורים…</div>';
+    $("clear-filters").addEventListener("click", clearFilters);
+    $("retry-button").addEventListener("click", () => location.reload());
 
+    async function start() {
       try {
-        const snapshot = await firebase.getDocs(
-          firebase.collection(firebase.db, "teachers")
-        );
+        const access = await import("./access.js");
+        await access.requireAccess();
 
-        if (version !== loadVersion) return;
+        [sdk, catalog] = await Promise.all([
+          import("./firebase.js"),
+          import("./catalog.js")
+        ]);
 
-        const realTeachers = snapshot.docs
-          .map(item => ({
-            ...item.data(),
-            id: item.id,
-            isDemo: false
-          }))
-          .filter(item =>
-            item.active !== false &&
-            item.acceptingStudents !== false &&
-            item.id !== currentUser.uid
-          );
+        user = sdk.auth.currentUser;
 
-        teachers = [
-          ...realTeachers,
-          ...catalog.DEMO_TEACHERS.map(item => ({
-            ...item,
-            isDemo: true
-          }))
-        ];
-      } catch (error) {
-        if (version !== loadVersion) return;
-
-        console.error("Teachers loading failed:", error);
-
-        teachers = catalog.DEMO_TEACHERS.map(item => ({
-          ...item,
-          isDemo: true
-        }));
-
-        showMessage(
-          "load-message",
-          "לא הצלחנו לטעון את המורים הרשומים. מוצגים כרגע רק פרופילי הדגמה.",
-          "error"
-        );
-
-        const retry = document.createElement("button");
-        retry.type = "button";
-        retry.className = "button";
-        retry.textContent = "ניסיון נוסף";
-        retry.style.marginTop = "10px";
-        retry.style.display = "block";
-        retry.addEventListener("click", loadTeachers);
-
-        byId("load-message").appendChild(retry);
-      }
-
-      if (version !== loadVersion) return;
-
-      const prices = teachers
-        .map(teacherPrice)
-        .filter(amount => amount !== null);
-
-      const maximum = Math.max(
-        300,
-        Math.ceil(Math.max(0, ...prices) / 50) * 50
-      );
-
-      price.max = String(maximum);
-      price.value = String(maximum);
-
-      updatePriceLabel();
-      ready = true;
-      setLoading(false);
-      render();
-    }
-
-    subject.addEventListener("change", render);
-    format.addEventListener("change", render);
-    sort.addEventListener("change", render);
-    demos.addEventListener("change", render);
-
-    price.addEventListener("input", () => {
-      updatePriceLabel();
-      render();
-    });
-
-    byId("reset").addEventListener("click", resetFilters);
-
-    profileSelect.addEventListener("change", () => {
-      const index = Number(profileSelect.value);
-      student = learningProfiles[index]?.data || null;
-      updateProfileNotice();
-      render();
-    });
-
-    try {
-      const access = await import("./access.js");
-      await access.requireAccess();
-
-      const [firebaseModule, catalogModule] = await Promise.all([
-        import("./firebase.js"),
-        import("./catalog.js")
-      ]);
-
-      firebase = firebaseModule;
-      catalog = catalogModule;
-      currentUser = firebase.auth.currentUser;
-
-      if (!currentUser) {
-        window.location.replace("login.html?next=matches.html");
-        await new Promise(() => {});
-      }
-
-      const initialUid = currentUser.uid;
-
-      firebase.onAuthStateChanged(firebase.auth, user => {
-        if (!user || user.uid !== initialUid) {
-          document.documentElement.classList.add("access-pending");
-          window.location.replace("login.html?next=matches.html");
+        if (!user) {
+          location.replace("login.html");
+          return;
         }
-      });
 
-      catalog.SUBJECTS.forEach(item => {
-        subject.add(new Option(item, item));
-      });
-
-      try {
-        const snapshot = await firebase.getDoc(
-          firebase.doc(firebase.db, "users", currentUser.uid)
-        );
-
-        configureProfiles(
-          snapshot.exists() ? snapshot.data() : {}
-        );
-      } catch (error) {
-        console.error("Learning profile loading failed:", error);
-        student = null;
-
-        showMessage(
-          "profile-notice",
-          "לא הצלחנו לטעון את פרופיל הלמידה שלך. אפשר לחפש מורים, אך ציוני ההתאמה אינם זמינים כרגע.",
-          "info"
-        );
-      }
-
-      await loadTeachers();
-    } catch (error) {
-      console.error("Matches initialization failed:", error);
-
-      const accessBox = byId("access-status");
-
-      if (
-        document.documentElement.classList.contains("access-pending") &&
-        accessBox
-      ) {
-        accessBox.querySelector("strong").textContent =
-          "לא הצלחנו לבדוק את הכניסה";
-
-        accessBox.querySelector("p").textContent =
-          "בדקו את החיבור לאינטרנט ונסו לרענן.";
-      } else {
-        byId("count").textContent = "לא ניתן לטעון את המורים כרגע";
-        list.setAttribute("aria-busy", "false");
-
-        list.innerHTML = `
-          <div class="empty">
-            <h2>טעינת העמוד לא הושלמה</h2>
-            <p>בדקו את החיבור לאינטרנט ונסו שוב.</p>
-            <button class="button" id="reload-page" type="button">
-              טעינה מחדש
-            </button>
-          </div>
-        `;
-
-        byId("reload-page").addEventListener("click", () => {
-          window.location.reload();
+        sdk.onAuthStateChanged(sdk.auth, current => {
+          if (current?.uid !== user.uid) {
+            location.replace("login.html");
+          }
         });
+
+        const [profileResult, teachersResult] =
+          await Promise.allSettled([
+            sdk.getDoc(sdk.doc(sdk.db, "users", user.uid)),
+            sdk.getDocs(sdk.collection(sdk.db, "teachers"))
+          ]);
+
+        if (profileResult.status === "fulfilled") {
+          const snapshot = profileResult.value;
+
+          configureLearners(
+            snapshot.exists()
+              ? snapshot.data()
+              : { accountUses: {} }
+          );
+        } else {
+          profileFailed = true;
+          console.error(
+            "Learning profile load failed:",
+            profileResult.reason
+          );
+          configureLearners({ accountUses: {} });
+        }
+
+        if (teachersResult.status === "fulfilled") {
+          teachers = teachersResult.value.docs
+            .map(item => ({
+              ...item.data(),
+              id: item.id,
+              isDemo: false
+            }))
+            .filter(teacher =>
+              teacher.id !== user.uid &&
+              teacher.uid !== user.uid &&
+              teacher.active !== false &&
+              teacher.acceptingStudents !== false
+            );
+        } else {
+          teachersFailed = true;
+          console.error(
+            "Teachers load failed:",
+            teachersResult.reason
+          );
+        }
+
+        const demos = Array.isArray(catalog.DEMO_TEACHERS)
+          ? catalog.DEMO_TEACHERS
+          : [];
+
+        const realIds = new Set(teachers.map(item => item.id));
+
+        for (const teacher of demos) {
+          if (!teacher.id || realIds.has(teacher.id)) continue;
+
+          teachers.push({
+            ...teacher,
+            isDemo: true
+          });
+        }
+
+        populateSubjects();
+
+        if (teachersFailed) {
+          showStatus(
+            "לא הצלחנו לטעון את המורים מהאתר. פרופילי ההדגמה זמינים בנפרד, אך אינם משקפים את רשימת המורים הרשומים.",
+            true
+          );
+        } else if (profileFailed) {
+          showStatus(
+            "המורים נטענו, אבל העדפות הלמידה שלך לא נטענו. החיפוש זמין ללא התאמה לפרופיל.",
+            true
+          );
+        }
+
+        $("retry-button").hidden = !(teachersFailed || profileFailed);
+        $("retry-button").style.marginBottom = "20px";
+
+        $("page-loading").hidden = true;
+        $("search-page").hidden = false;
+
+        renderResults();
+      } catch (error) {
+        console.error("Teacher search initialization failed:", error);
+
+        $("page-loading").hidden = true;
+        $("retry-button").hidden = false;
+
+        showStatus(
+          "לא הצלחנו לפתוח את החיפוש. בדקו את החיבור לאינטרנט ולחצו על ניסיון נוסף.",
+          true
+        );
       }
     }
+
+    start();
   </script>
 </body>
 </html>
