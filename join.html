@@ -2,252 +2,455 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#172442">
-  <title>יצירת חשבון — כיוון</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  >
-
-  <link rel="stylesheet" href="./site.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#121a37">
+  <title>יצירת פרופיל — כיוון</title>
 
   <style>
-    .join-main {
-      width: min(1000px, calc(100% - 40px));
-      margin: 48px auto 64px;
+    @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap");
+
+    :root {
+      --navy: #121a37;
+      --ink: #1d2746;
+      --teal: #0b9d78;
+      --coral: #ff6e61;
+      --cloud: #f6f8fe;
+      --line: #e4e9f4;
+      --muted: #69738d;
+      --shadow: 0 22px 52px rgba(20,34,75,.12);
     }
 
-    .join-layout {
-      display: grid;
-      grid-template-columns: 270px minmax(0, 1fr);
-      align-items: start;
-      gap: 48px;
+    * { box-sizing: border-box; }
+
+    [hidden],
+    .hidden {
+      display: none !important;
     }
 
-    .join-intro h1 {
+    body {
       margin: 0;
-      color: var(--site-heading);
-      font-size: 36px;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 91% 9%, #ddfff1 0, transparent 28%),
+        radial-gradient(circle at 5% 92%, #fff1d4 0, transparent 30%),
+        var(--cloud);
+      font-family: Heebo, Arial, sans-serif;
+    }
+
+    button, input, select, textarea { font: inherit; }
+
+    a { text-underline-offset: 4px; }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid #08785c;
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 34px));
+      margin: auto;
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 80px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy);
+      font-size: 29px;
       font-weight: 900;
-      line-height: 1.3;
-      letter-spacing: -1px;
+      text-decoration: none;
     }
 
-    .join-intro > p {
-      margin: 16px 0 0;
-      color: var(--site-muted);
-      font-size: 15px;
-      line-height: 1.9;
+    .mark {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 10px 10px 10px 2px;
+      color: #fff;
+      background: var(--coral);
+      transform: rotate(-5deg);
     }
 
-    .join-login {
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px solid var(--site-border);
-      color: var(--site-muted);
+    .login {
+      color: var(--muted);
       font-size: 14px;
-    }
-
-    .join-login a {
-      display: inline-block;
-      padding-block: 8px;
       font-weight: 700;
     }
 
-    .join-card {
-      min-width: 0;
-      padding: 30px;
-      border: 1px solid var(--site-border);
-      border-radius: 20px;
-      background: white;
-      box-shadow: var(--site-shadow);
+    .login a {
+      display: inline-block;
+      padding-block: 10px;
+      color: #08785c;
+      font-weight: 900;
+      text-decoration: none;
     }
 
-    .join-progress {
+    .page {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin: 0 0 30px;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 48px;
+      align-items: start;
+      padding: 32px 0 70px;
+    }
+
+    .page > * { min-width: 0; }
+
+    .intro { padding-top: 65px; }
+
+    .intro h1 {
+      margin: 10px 0 13px;
+      color: var(--navy);
+      font-size: 52px;
+      line-height: 1.04;
+    }
+
+    .intro h1 em {
+      color: var(--coral);
+      font-style: normal;
+    }
+
+    .intro p {
+      max-width: 430px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .benefits {
       padding: 0;
       list-style: none;
     }
 
-    .join-progress li {
-      min-width: 0;
-      padding-bottom: 12px;
-      border-bottom: 3px solid var(--site-border-soft);
-      color: var(--site-muted);
-      font-size: 12px;
+    .benefits li {
+      margin: 11px 0;
+      color: #54607a;
+      font-weight: 700;
+      line-height: 1.7;
     }
 
-    .join-progress li[aria-current="step"] {
-      border-color: var(--site-primary);
-      color: var(--site-primary);
-      font-weight: 800;
-    }
-
-    .join-progress li.is-complete {
-      border-color: #a6d6bd;
-    }
-
-    .step-number {
+    .benefits li::before {
+      content: "✓";
       display: inline-grid;
       place-items: center;
       width: 24px;
       height: 24px;
-      margin-inline-end: 5px;
+      margin-left: 8px;
       border-radius: 50%;
-      background: var(--site-surface-soft);
+      color: #078361;
+      background: #dcf8ed;
+    }
+
+    .card {
+      min-width: 0;
+      padding: 27px;
+      border-radius: 27px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .progress {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 10px;
+    }
+
+    .progress i {
+      height: 5px;
+      flex: 1;
+      border-radius: 99px;
+      background: #e5eaf4;
+    }
+
+    .progress i.active { background: var(--teal); }
+
+    .step-caption {
+      margin: 0 0 22px;
+      color: var(--muted);
       font-size: 12px;
-      font-weight: 800;
     }
 
-    [aria-current="step"] .step-number {
-      color: white;
-      background: var(--site-primary);
+    h2 {
+      margin: 0 0 4px;
+      color: var(--navy);
+      font-size: 26px;
     }
 
-    .join-step {
+    .sub {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .step {
       min-width: 0;
       margin: 0;
       padding: 0;
       border: 0;
     }
 
-    .join-step h2 {
-      margin: 0;
-      color: var(--site-heading);
-      font-size: 25px;
-      font-weight: 800;
-    }
-
-    .step-description {
-      margin: 9px 0 24px;
-      color: var(--site-muted);
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    .role-list {
+    .uses {
       display: grid;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .role-option {
+    .use {
       display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 19px;
-      border: 1px solid var(--site-border);
-      border-radius: 13px;
+      align-items: center;
+      gap: 13px;
+      width: 100%;
+      padding: 15px;
+      border: 2px solid var(--line);
+      border-radius: 15px;
+      color: var(--ink);
+      background: #fff;
+      font: inherit;
+      text-align: right;
       cursor: pointer;
     }
 
-    .role-option:has(input:checked) {
-      border-color: var(--site-primary);
-      background: var(--site-primary-soft);
+    .use:hover,
+    .use.selected {
+      border-color: var(--teal);
+      background: #effdf7;
     }
 
-    .role-option input {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      margin: 4px 0 0;
-      accent-color: var(--site-primary);
+    .use-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      border-radius: 12px;
+      color: #08785c;
+      background: #dff7ed;
+      font-size: 20px;
+      font-weight: 900;
     }
 
-    .role-option strong {
+    .use strong {
       display: block;
-      color: var(--site-heading);
       font-size: 16px;
     }
 
-    .role-option small {
+    .use small {
       display: block;
-      margin-top: 5px;
-      color: var(--site-muted);
+      margin-top: 2px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .selected-mark {
+      min-width: 18px;
+      margin-right: auto;
+      color: var(--teal);
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .fields {
+      display: grid;
+      gap: 13px;
+    }
+
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 11px;
+    }
+
+    .two > * { min-width: 0; }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #4e5b76;
       font-size: 13px;
+      font-weight: 800;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      color: var(--ink);
+      background: #fff;
+      font: inherit;
+      font-size: 16px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+      border-color: var(--teal);
+    }
+
+    input:disabled {
+      color: var(--muted);
+      background: #f1f4fa;
+    }
+
+    textarea {
+      min-height: 86px;
+      resize: vertical;
+    }
+
+    .profile-section {
+      min-width: 0;
+      margin: 0;
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fbfcff;
+    }
+
+    .profile-section h3 {
+      margin: 0 0 4px;
+      color: var(--navy);
+      font-size: 18px;
+    }
+
+    .section-note {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 12px;
       line-height: 1.8;
     }
 
-    .password-wrap {
-      position: relative;
+    .photo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
+    .photo-controls { min-width: 0; flex: 1; }
+
+    .photo-preview {
+      display: grid;
+      place-items: center;
+      width: 72px;
+      height: 72px;
+      flex: 0 0 72px;
+      overflow: hidden;
+      border-radius: 18px;
+      color: #fff;
+      background: linear-gradient(135deg, #ff9d6e, #c64f62);
+      font-size: 26px;
+      font-weight: 900;
+    }
+
+    .photo-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .notice {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 21px;
+    }
+
+    .button {
+      min-height: 46px;
+      padding: 13px 17px;
+      border: 0;
+      border-radius: 12px;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .primary {
+      flex: 1;
+      color: #fff;
+      background: var(--navy);
+    }
+
+    .secondary {
+      color: #5e6a84;
+      background: #f1f4fa;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      margin: 0 0 18px;
+      padding: 12px;
+      border-radius: 11px;
+      color: #08785c;
+      background: #e4faef;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.8;
+    }
+
+    .message.error {
+      color: #9e2f2a;
+      background: #fff0ef;
+    }
+
+    .password-wrap { position: relative; }
+
     .password-wrap input {
-      padding-inline-start: 76px;
+      padding-left: 78px;
       text-align: right;
     }
 
     .password-toggle {
       position: absolute;
-      inset-block: 4px;
       left: 4px;
+      top: 4px;
+      bottom: 4px;
       min-width: 64px;
-      padding: 8px;
+      padding: 7px;
       border: 0;
       border-radius: 8px;
-      color: var(--site-primary);
+      color: #08785c;
+      background: transparent;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .password-toggle:hover { background: #effdf7; }
+
+    .remove-photo {
+      min-height: 40px;
+      padding: 6px 0;
+      border: 0;
+      color: #08785c;
       background: transparent;
       font-size: 13px;
       font-weight: 700;
+      cursor: pointer;
     }
 
-    .password-toggle:hover {
-      background: var(--site-primary-soft);
-    }
-
-    .profile-group {
-      min-width: 0;
-      margin: 0;
-      padding: 22px 0;
-      border: 0;
-      border-top: 1px solid var(--site-border-soft);
-    }
-
-    .profile-group legend {
-      padding: 0 0 12px;
-      color: var(--site-heading);
-      font-size: 17px;
-      font-weight: 800;
-    }
-
-    .group-note {
-      margin: 0 0 18px;
-      color: var(--site-muted);
-      font-size: 13px;
-      line-height: 1.8;
-    }
-
-    .join-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 26px;
-      padding-top: 22px;
-      border-top: 1px solid var(--site-border-soft);
-    }
-
-    .join-actions .site-btn {
-      min-width: 110px;
-    }
-
-    #join-status {
-      margin-bottom: 22px;
-    }
-
-    #resume-notice {
-      margin-bottom: 20px;
-    }
-
-    .subject-picker {
-      position: relative;
-    }
+    .subject-picker { position: relative; }
 
     .tag-picker-selected {
       display: flex;
@@ -258,482 +461,445 @@
 
     .tag-picker-tag {
       min-height: 36px;
-      padding: 6px 10px;
+      padding: 6px 9px;
       border: 0;
       border-radius: 8px;
-      color: var(--site-primary);
-      background: var(--site-primary-soft);
+      color: #08785c;
+      background: #e5faf0;
       font: inherit;
-      font-size: 13px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
     }
 
     .tag-picker-empty,
     .tag-picker-no-results {
       padding: 6px;
-      color: var(--site-muted);
-      font-size: 13px;
-    }
-
-    .tag-picker-search {
-      width: 100%;
-      min-height: 48px;
-      padding: 11px 13px;
-      border: 1px solid #c8d2e0;
-      border-radius: 10px;
-      color: var(--site-text);
-      background: white;
-      font: inherit;
+      color: var(--muted);
+      font-size: 12px;
     }
 
     .tag-picker-options {
       position: absolute;
-      z-index: 20;
-      inset-inline: 0;
-      top: calc(100% + 5px);
-      max-height: 240px;
+      z-index: 100;
+      top: calc(100% + 6px);
+      right: 0;
+      left: 0;
+      max-height: 245px;
       overflow-y: auto;
       padding: 7px;
-      border: 1px solid var(--site-border);
+      border: 1px solid var(--line);
       border-radius: 12px;
-      background: white;
-      box-shadow: var(--site-shadow-menu);
-    }
-
-    .tag-picker-options.hidden {
-      display: none !important;
+      background: #fff;
+      box-shadow: 0 15px 35px rgba(20,34,75,.15);
     }
 
     .tag-picker-option {
       display: block;
       width: 100%;
       min-height: 44px;
-      padding: 9px 12px;
+      padding: 9px 10px;
       border: 0;
       border-radius: 8px;
-      color: var(--site-text);
-      background: white;
+      color: #4e5b76;
+      background: transparent;
       font: inherit;
-      text-align: start;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: right;
+      cursor: pointer;
     }
 
     .tag-picker-option:hover,
     .tag-picker-option:focus {
-      background: var(--site-primary-soft);
+      color: #08785c;
+      background: #effdf7;
     }
 
+    .skip-link {
+      position: fixed;
+      top: 10px;
+      right: 12px;
+      z-index: 200;
+      padding: 12px 18px;
+      border-radius: 10px;
+      color: white;
+      background: var(--navy);
+      transform: translateY(-160%);
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
     @media (max-width: 800px) {
-      .join-main {
-        width: min(640px, calc(100% - 32px));
-        margin-block: 30px 44px;
-      }
-
-      .join-layout {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 26px;
-      }
-
-      .join-intro h1 {
-        font-size: 32px;
-      }
-
-      .join-intro > p {
-        margin-top: 10px;
-      }
-
-      .join-login {
-        margin-top: 12px;
-        padding-top: 0;
-        border: 0;
-      }
-
-      .join-login a {
-        margin-inline-start: 6px;
-      }
+      .page { grid-template-columns: 1fr; gap: 28px; }
+      .intro { padding-top: 10px; text-align: center; }
+      .intro h1 { font-size: 42px; }
+      .intro p { margin-inline: auto; }
     }
 
     @media (max-width: 560px) {
-      .join-card {
-        padding: 23px 18px;
+      .two { grid-template-columns: 1fr; }
+      .card { padding: 20px; }
+      .intro h1 { font-size: 37px; }
+      .login { font-size: 12px; text-align: left; }
+
+      .photo-row {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
-      .join-progress {
-        gap: 8px;
-      }
-
-      .join-progress li {
-        font-size: 11px;
-      }
-
-      .step-number {
-        display: grid;
-        margin-bottom: 7px;
-      }
-
-      .role-option {
-        padding: 16px;
-      }
-
-      .join-actions .site-btn {
-        min-width: 0;
-      }
+      .photo-controls { width: 100%; }
     }
   </style>
 </head>
 
 <body>
-  <header class="site-header">
-    <nav
-      class="site-container site-header-inner"
-      aria-label="ניווט ראשי"
-    >
-      <a class="site-brand" href="index.html" aria-label="כיוון — דף הבית">
+  <a class="skip-link" href="#main-content">דילוג לתוכן</a>
+
+  <header>
+    <nav class="container top-nav" aria-label="ניווט ראשי">
+      <a class="brand" href="index.html">
+        <span class="mark" aria-hidden="true">↗</span>
         כיוון
-        <span class="site-brand-mark" aria-hidden="true">↗</span>
       </a>
 
-      <div class="site-header-actions">
-        <a class="site-btn site-btn-quiet" href="login.html">
-          כניסה לחשבון
-        </a>
-      </div>
+      <span class="login">
+        כבר יש לך חשבון?
+        <a href="login.html">כניסה</a>
+      </span>
     </nav>
   </header>
 
-  <main class="join-main" id="main-content">
-    <div class="join-layout">
-      <aside class="join-intro">
-        <p class="site-eyebrow">נעים להכיר</p>
-        <h1>מתחילים את הדרך שלך בכיוון.</h1>
+  <main class="container page" id="main-content" tabindex="-1">
+    <section class="intro" aria-labelledby="page-title">
+      <b style="color:var(--teal)">הפרופיל שלך מתחיל כאן</b>
 
-        <p>
-          מספרים לנו איך תרצו להשתמש באתר,
-          מגדירים פרטי כניסה ומשלימים את הפרופיל.
-          אפשר לעדכן את הפרטים גם בהמשך.
-        </p>
+      <h1 id="page-title">
+        בואו נבנה את<br>
+        <em>הכיוון</em> שלך.
+      </h1>
 
-        <div class="join-login">
-          כבר יש לך חשבון?
-          <a href="login.html">כניסה לחשבון</a>
-        </div>
-      </aside>
+      <p>
+        חשבון אחד יכול לשמש ללמידה עצמית, לחיפוש מורה
+        עבור ילד או ילדה, להוראה — או לכל אלה יחד.
+      </p>
 
-      <section class="join-card" aria-label="יצירת חשבון">
-        <ol class="join-progress" aria-label="שלבי ההרשמה">
-          <li aria-current="step">
-            <span class="step-number" aria-hidden="true">1</span>
-            סוג החשבון
-          </li>
-          <li>
-            <span class="step-number" aria-hidden="true">2</span>
-            פרטי כניסה
-          </li>
-          <li>
-            <span class="step-number" aria-hidden="true">3</span>
-            הפרופיל שלי
-          </li>
-        </ol>
+      <ul class="benefits">
+        <li>אפשר לשנות את הבחירה באזור האישי</li>
+        <li>אותו אימייל לכל השימושים</li>
+        <li>פרופילי למידה והוראה מסודרים בנפרד</li>
+      </ul>
+    </section>
 
-        <div
-          class="site-notice"
-          id="join-status"
-          role="status"
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          מכינים את ההרשמה…
-        </div>
+    <section class="card" aria-label="יצירת חשבון ופרופילים">
+      <div class="progress" aria-hidden="true">
+        <i class="active"></i>
+        <i></i>
+        <i></i>
+      </div>
 
-        <button
-          class="site-btn site-btn-secondary"
-          id="retry-button"
-          type="button"
-          hidden
-        >
-          טעינה מחדש
-        </button>
+      <p class="step-caption" id="step-caption" aria-live="polite">
+        שלב 1 מתוך 3 · בחירת שימושים
+      </p>
 
-        <form id="join-form" aria-busy="true" novalidate>
-          <fieldset class="join-step" id="step-0" disabled>
-            <h2 id="heading-0" tabindex="-1">מה הכיוון שלך?</h2>
+      <div class="message" id="message" role="status" aria-live="polite">
+        מכינים את ההרשמה…
+      </div>
 
-            <p class="step-description">
-              אפשר לבחור יותר מאפשרות אחת.
-            </p>
+      <button
+        class="button secondary"
+        id="retry-button"
+        type="button"
+        hidden
+      >
+        טעינה מחדש
+      </button>
 
-            <div class="role-list">
-              <label class="role-option">
-                <input id="use-self" type="checkbox">
-                <span>
-                  <strong>אני רוצה ללמוד</strong>
-                  <small>
-                    למצוא מורה לפי המקצועות ומטרות הלמידה שלי.
-                  </small>
-                </span>
-              </label>
+      <form id="join-form" novalidate aria-busy="true">
+        <fieldset class="step" id="step-0" disabled>
+          <h2 id="title-0" tabindex="-1">איך תרצו להשתמש בכיוון?</h2>
+          <p class="sub">אפשר לבחור יותר מאפשרות אחת.</p>
 
-              <label class="role-option">
-                <input id="use-parent" type="checkbox">
-                <span>
-                  <strong>אני מחפש/ת מורה לילד/ה</strong>
-                  <small>
-                    להגדיר את הצורך ולנהל בקשות דרך החשבון שלי.
-                  </small>
-                </span>
-              </label>
+          <div class="uses">
+            <button
+              class="use selected"
+              data-use="selfLearner"
+              type="button"
+              aria-pressed="true"
+            >
+              <span class="use-icon" aria-hidden="true">◎</span>
+              <span>
+                <strong>אני מחפש/ת מורה עבור עצמי</strong>
+                <small>לימודים, מבחנים, בגרויות או העשרה</small>
+              </span>
+              <span class="selected-mark" aria-hidden="true">✓</span>
+            </button>
 
-              <label class="role-option">
-                <input id="use-teacher" type="checkbox">
-                <span>
-                  <strong>אני רוצה ללמד</strong>
-                  <small>
-                    ליצור פרופיל הוראה ולקבל בקשות מתלמידים.
-                  </small>
-                </span>
-              </label>
+            <button
+              class="use"
+              data-use="parent"
+              type="button"
+              aria-pressed="false"
+            >
+              <span class="use-icon" aria-hidden="true">♡</span>
+              <span>
+                <strong>אני הורה ומחפש/ת מורה לילד/ה</strong>
+                <small>פרופיל למידה נפרד בתוך החשבון שלך</small>
+              </span>
+              <span class="selected-mark" aria-hidden="true"></span>
+            </button>
+
+            <button
+              class="use"
+              data-use="teacher"
+              type="button"
+              aria-pressed="false"
+            >
+              <span class="use-icon" aria-hidden="true">↗</span>
+              <span>
+                <strong>אני מלמד/ת ורוצה לקבל תלמידים</strong>
+                <small>פרופיל ציבורי שיופיע ברשימת המורים</small>
+              </span>
+              <span class="selected-mark" aria-hidden="true"></span>
+            </button>
+          </div>
+        </fieldset>
+
+        <fieldset class="step" id="step-1" disabled hidden>
+          <h2 id="title-1" tabindex="-1">פותחים חשבון</h2>
+          <p class="sub">
+            פרטי הכניסה שלך והשם שיוצג בבקשות ובשיחות.
+          </p>
+
+          <div class="message" id="resume-notice" hidden></div>
+
+          <div class="fields">
+            <div>
+              <label for="name">שם לתצוגה</label>
+              <input id="name" required autocomplete="name" maxlength="80">
             </div>
-          </fieldset>
 
-          <fieldset class="join-step" id="step-1" disabled hidden>
-            <h2 id="heading-1" tabindex="-1">ניצור לך חשבון</h2>
-
-            <p class="step-description">
-              אלה הפרטים שאיתם אפשר להיכנס לכיוון.
-            </p>
-
-            <div
-              class="site-notice"
-              id="resume-notice"
-              hidden
-            ></div>
-
-            <div class="site-form-grid">
-              <div class="site-field site-field-full">
-                <label class="site-label" for="name">
-                  שם לתצוגה
-                </label>
-                <input
-                  class="site-input"
-                  id="name"
-                  name="name"
-                  autocomplete="name"
-                  maxlength="80"
-                  required
-                >
-                <p class="site-field-hint">
-                  השם יוצג בבקשות ובשיחות.
-                  אצל מורים הוא יופיע גם בפרופיל ההוראה.
-                </p>
-              </div>
-
-              <div class="site-field site-field-full">
-                <label class="site-label" for="email">
-                  כתובת מייל
-                </label>
-                <input
-                  class="site-input"
-                  id="email"
-                  name="email"
-                  type="email"
-                  autocomplete="username"
-                  inputmode="email"
-                  autocapitalize="none"
-                  spellcheck="false"
-                  dir="ltr"
-                  placeholder="name@example.com"
-                  required
-                >
-              </div>
-
-              <div
-                class="site-field site-field-full"
-                id="password-field"
+            <div>
+              <label for="email">אימייל</label>
+              <input
+                id="email"
+                type="email"
+                required
+                autocomplete="username"
+                inputmode="email"
+                autocapitalize="none"
+                spellcheck="false"
+                dir="ltr"
               >
-                <label class="site-label" for="password">
-                  סיסמה
-                </label>
+            </div>
 
-                <div class="password-wrap">
-                  <input
-                    class="site-input"
-                    id="password"
-                    name="password"
-                    type="password"
-                    autocomplete="new-password"
-                    minlength="6"
-                    dir="ltr"
-                    aria-describedby="password-hint"
-                    required
-                  >
+            <div id="password-field">
+              <label for="password">סיסמה</label>
+              <div class="password-wrap">
+                <input
+                  id="password"
+                  type="password"
+                  required
+                  minlength="6"
+                  autocomplete="new-password"
+                  placeholder="לפחות 6 תווים"
+                  dir="ltr"
+                >
+                <button
+                  class="password-toggle"
+                  id="password-toggle"
+                  type="button"
+                  aria-controls="password"
+                  aria-pressed="false"
+                  aria-label="הצגת הסיסמה"
+                >
+                  הצגה
+                </button>
+              </div>
+            </div>
 
-                  <button
-                    class="password-toggle"
-                    id="password-toggle"
-                    type="button"
-                    aria-controls="password"
-                    aria-label="הצגת הסיסמה"
-                    aria-pressed="false"
-                  >
-                    הצגה
-                  </button>
-                </div>
-
-                <p class="site-field-hint" id="password-hint">
-                  לפחות 6 תווים. מומלץ לבחור סיסמה ארוכה וייחודית.
-                </p>
+            <div class="two">
+              <div>
+                <label for="phone">טלפון — לא חובה</label>
+                <input
+                  id="phone"
+                  type="tel"
+                  autocomplete="tel"
+                  maxlength="30"
+                  dir="ltr"
+                >
               </div>
 
-              <div class="site-field site-field-full">
-                <label class="site-label" for="city">
-                  עיר — לא חובה
-                </label>
+              <div>
+                <label for="city">עיר או אזור — לא חובה</label>
                 <input
-                  class="site-input"
                   id="city"
                   autocomplete="address-level2"
                   maxlength="100"
                 >
               </div>
             </div>
-          </fieldset>
 
-          <fieldset class="join-step" id="step-2" disabled hidden>
-            <h2 id="heading-2" tabindex="-1">קצת על הפרופיל שלך</h2>
+            <div>
+              <label for="photo">תמונת פרופיל — לא חובה</label>
 
-            <p class="step-description">
-              בחרו מקצועות והוסיפו פרטים שיעזרו להכיר את הצורך שלכם.
-              תמונת פרופיל אפשר להוסיף בהמשך באזור האישי.
-            </p>
+              <div class="photo-row">
+                <div
+                  class="photo-preview"
+                  id="photo-preview"
+                  aria-hidden="true"
+                >כ</div>
 
-            <div id="learning-groups"></div>
+                <div class="photo-controls">
+                  <input
+                    id="photo"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    aria-describedby="photo-note"
+                  >
+                  <button
+                    class="remove-photo"
+                    id="remove-photo"
+                    type="button"
+                    hidden
+                  >
+                    הסרת התמונה
+                  </button>
+                </div>
+              </div>
 
-            <fieldset class="profile-group" id="teacher-group" disabled hidden>
-              <legend>פרופיל ההוראה</legend>
+              <p class="notice" id="photo-note">
+                תמונת JPG, PNG או WebP עד 5MB.
+                אצל מורים התמונה תופיע גם בפרופיל הציבורי.
+              </p>
+            </div>
+          </div>
+        </fieldset>
 
-              <p class="group-note">
-                הפרטים בחלק הזה יוצגו בפרופיל המורה שלך.
+        <fieldset class="step" id="step-2" disabled hidden>
+          <h2 id="title-2" tabindex="-1">בונים את הפרופילים</h2>
+          <p class="sub">
+            יוצגו רק החלקים המתאימים לבחירות שלכם.
+          </p>
+
+          <div class="fields">
+            <div class="fields" id="learning-sections"></div>
+
+            <fieldset
+              class="profile-section"
+              id="teacher-section"
+              aria-labelledby="teacher-heading"
+              hidden
+              disabled
+            >
+              <h3 id="teacher-heading">פרופיל ההוראה שלי</h3>
+
+              <p class="section-note">
+                הפרטים האלה יופיעו בפרופיל המורה הציבורי.
               </p>
 
-              <div class="site-form-grid">
-                <div class="site-field site-field-full">
-                  <label class="site-label" id="teacher-subject-label">
-                    מקצועות להוראה
+              <div class="fields">
+                <div>
+                  <label id="teacher-subject-label">
+                    אילו מקצועות מלמדים?
                   </label>
-                  <div
-                    class="subject-picker"
-                    id="teacher-subject-picker"
-                  ></div>
+                  <div class="subject-picker" id="teacher-picker"></div>
                 </div>
 
-                <div class="site-field">
-                  <label class="site-label" for="teacher-price">
-                    מחיר לשיעור בש״ח
-                  </label>
-                  <input
-                    class="site-input"
-                    id="teacher-price"
-                    type="number"
-                    min="0"
-                    step="1"
-                    inputmode="numeric"
-                    required
-                  >
-                  <p class="site-field-hint">
-                    לשיעור ללא עלות, הזינו 0.
-                  </p>
+                <div class="two">
+                  <div>
+                    <label for="teacher-price">מחיר לשיעור בש״ח</label>
+                    <input
+                      id="teacher-price"
+                      type="number"
+                      min="0"
+                      step="1"
+                      required
+                    >
+                    <p class="notice">לשיעור ללא עלות, הזינו 0.</p>
+                  </div>
+
+                  <div>
+                    <label for="experience">ניסיון בהוראה</label>
+                    <input
+                      id="experience"
+                      maxlength="300"
+                      placeholder="למשל: 4 שנות ניסיון"
+                    >
+                  </div>
                 </div>
 
-                <div class="site-field">
-                  <label class="site-label" for="teacher-format">
-                    אופן הלימוד
-                  </label>
-                  <select class="site-select" id="teacher-format">
+                <div>
+                  <label for="format">אופן השיעור</label>
+                  <select id="format">
                     <option>אונליין</option>
                     <option>פרונטלי</option>
                     <option>גם אונליין וגם פרונטלי</option>
                   </select>
                 </div>
 
-                <div class="site-field site-field-full">
-                  <label class="site-label" for="teacher-experience">
-                    ניסיון בהוראה — לא חובה
-                  </label>
-                  <input
-                    class="site-input"
-                    id="teacher-experience"
-                    maxlength="300"
-                    placeholder="למשל: חמש שנות הוראה פרטית"
-                  >
+                <div>
+                  <label for="teacher-bio">ניסיון ושיטת הוראה</label>
+                  <textarea id="teacher-bio" maxlength="2000"></textarea>
                 </div>
 
-                <div class="site-field site-field-full">
-                  <label class="site-label" for="teacher-bio">
-                    עליי ועל דרך ההוראה שלי — לא חובה
-                  </label>
-                  <textarea
-                    class="site-textarea"
-                    id="teacher-bio"
-                    maxlength="2000"
-                    placeholder="מה חשוב לך בהוראה ואיך נראים השיעורים שלך?"
-                  ></textarea>
-                </div>
-
-                <div class="site-field site-field-full">
-                  <label class="site-label" for="teacher-availability">
-                    זמינות כללית — לא חובה
-                  </label>
+                <div>
+                  <label for="teacher-availability">ימים ושעות זמינים</label>
                   <input
-                    class="site-input"
                     id="teacher-availability"
                     maxlength="300"
-                    placeholder="למשל: שני ורביעי אחר הצהריים"
+                    placeholder="למשל: ראשון 16:00–20:00"
                   >
                 </div>
               </div>
             </fieldset>
-          </fieldset>
-
-          <div class="join-actions">
-            <button
-              class="site-btn site-btn-secondary"
-              id="back-button"
-              type="button"
-              hidden
-              disabled
-            >
-              חזרה
-            </button>
-
-            <button
-              class="site-btn"
-              id="next-button"
-              type="submit"
-              disabled
-            >
-              ממשיכים
-            </button>
           </div>
-        </form>
+        </fieldset>
 
-        <noscript>
-          <p class="site-notice">
-            כדי ליצור חשבון יש להפעיל JavaScript בדפדפן.
-          </p>
-        </noscript>
-      </section>
-    </div>
+        <div class="buttons">
+          <button
+            class="button secondary"
+            id="back-button"
+            type="button"
+            hidden
+            disabled
+          >
+            חזרה
+          </button>
+
+          <button
+            class="button primary"
+            id="next-button"
+            type="submit"
+            disabled
+          >
+            ממשיכים לפרטים ←
+          </button>
+        </div>
+      </form>
+
+      <noscript>
+        <p class="message error">
+          כדי ליצור חשבון יש להפעיל JavaScript בדפדפן.
+        </p>
+      </noscript>
+    </section>
   </main>
-
-  <footer class="site-footer">
-    <div class="site-container site-footer-inner">
-      <span>כיוון — מוצאים את הדרך ללמוד</span>
-      <a href="index.html">חזרה לדף הבית</a>
-    </div>
-  </footer>
-
-  <script type="module" src="./navigation.js"></script>
 
   <script type="module">
     const $ = id => document.getElementById(id);
+
+    const accountUses = {
+      selfLearner: true,
+      parent: false,
+      teacher: false
+    };
+
+    const subjects = {
+      self: [],
+      child: [],
+      teacher: []
+    };
 
     let sdk;
     let catalog;
@@ -742,79 +908,73 @@
     let step = 0;
     let ready = false;
     let busy = false;
+    let photoBusy = false;
     let completed = false;
     let dirty = false;
+    let blocked = false;
+
     let accountUser = null;
-    let canWriteProfile = true;
-
-    const selectedSubjects = {
-      self: [],
-      child: [],
-      teacher: []
-    };
-
-    function showStatus(message, error = false) {
-      $("join-status").textContent = message;
-      $("join-status").className =
-        "site-notice " + (error ? "site-notice-error" : "");
-      $("join-status").hidden = !message;
-    }
+    let photoData = "";
 
     function value(id) {
       return $(id).value.trim();
     }
 
-    function uses() {
-      return {
-        selfLearner: $("use-self").checked,
-        parent: $("use-parent").checked,
-        teacher: $("use-teacher").checked
-      };
+    function showMessage(text, error = false) {
+      $("message").textContent = text;
+      $("message").className = error ? "message error" : "message";
+      $("message").hidden = !text;
     }
 
-    function configureGroups() {
-      const selected = uses();
-
+    function updateSections() {
       for (const [kind, enabled] of [
-        ["self", selected.selfLearner],
-        ["child", selected.parent],
-        ["teacher", selected.teacher]
+        ["self", accountUses.selfLearner],
+        ["child", accountUses.parent],
+        ["teacher", accountUses.teacher]
       ]) {
-        const group = $(`${kind}-group`);
-        if (!group) continue;
+        const section = $(`${kind}-section`);
+        if (!section) continue;
 
-        group.hidden = !enabled;
-        group.disabled = !enabled;
+        section.hidden = !enabled;
+        section.disabled = !enabled;
       }
     }
 
     function refreshControls() {
-      $("join-form").inert = busy;
-      $("join-form").setAttribute("aria-busy", String(!ready || busy));
+      const working = busy || photoBusy;
+      const disabled = !ready || working || completed || blocked;
+
+      $("join-form").inert = working || blocked || completed;
+      $("join-form").setAttribute(
+        "aria-busy",
+        String(!ready || working)
+      );
 
       for (let index = 0; index < 3; index += 1) {
-        $(`step-${index}`).disabled =
-          !ready || busy || index !== step;
+        $(`step-${index}`).disabled = disabled || step !== index;
       }
 
       $("back-button").hidden = step === 0;
-      $("back-button").disabled = !ready || busy;
-      $("next-button").disabled =
-        !ready || busy || completed || !canWriteProfile;
+      $("back-button").disabled = disabled;
+      $("next-button").disabled = disabled;
 
-      $("next-button").textContent = busy
-        ? "מכינים את החשבון…"
-        : step === 2
-          ? accountUser
-            ? "שמירת הפרופיל והמשך"
-            : "יצירת חשבון"
-          : "ממשיכים";
+      $("next-button").textContent = photoBusy
+        ? "מכינים את התמונה…"
+        : busy
+          ? "שומרים את החשבון…"
+          : step === 0
+            ? "ממשיכים לפרטים ←"
+            : step === 1
+              ? "המשך לפרופילים ←"
+              : accountUser
+                ? "שמירת הפרופילים והמשך ←"
+                : "יצירת החשבון והפרופילים ←";
 
       $("email").disabled = Boolean(accountUser);
       $("password").disabled = Boolean(accountUser);
       $("password-field").hidden = Boolean(accountUser);
 
-      configureGroups();
+      updateSections();
     }
 
     function showStep(nextStep, focus = true) {
@@ -822,119 +982,105 @@
 
       for (let index = 0; index < 3; index += 1) {
         $(`step-${index}`).hidden = index !== step;
-
-        const item = document.querySelectorAll(".join-progress li")[index];
-        item.classList.toggle("is-complete", index < step);
-
-        if (index === step) {
-          item.setAttribute("aria-current", "step");
-        } else {
-          item.removeAttribute("aria-current");
-        }
       }
+
+      document.querySelectorAll(".progress i").forEach((item, index) => {
+        item.classList.toggle("active", index <= step);
+      });
+
+      const labels = [
+        "בחירת שימושים",
+        "פרטי החשבון",
+        "בניית הפרופילים"
+      ];
+
+      $("step-caption").textContent =
+        `שלב ${step + 1} מתוך 3 · ${labels[step]}`;
 
       refreshControls();
 
       if (focus) {
-        $(`heading-${step}`).focus();
+        $(`title-${step}`).focus();
       }
     }
 
-    function buildLearningGroups() {
+    function buildLearningSections() {
       for (const kind of ["self", "child"]) {
-        const group = document.createElement("fieldset");
-        group.className = "profile-group";
-        group.id = `${kind}-group`;
-        group.disabled = true;
-        group.hidden = true;
+        const section = document.createElement("fieldset");
+        section.id = `${kind}-section`;
+        section.className = "profile-section";
+        section.setAttribute("aria-labelledby", `${kind}-heading`);
 
-        group.innerHTML = `
-          <legend>
-            ${kind === "self" ? "פרופיל הלמידה שלי" : "פרופיל הלמידה של הילד/ה"}
-          </legend>
+        section.innerHTML = `
+          <h3 id="${kind}-heading">
+            ${kind === "self" ? "הלמידה שלי" : "חיפוש מורה עבור ילד/ה"}
+          </h3>
 
-          <p class="group-note">
+          <p class="section-note">
             ${kind === "self"
-              ? "בחרו מקצועות. את שאר הפרטים אפשר להשלים גם בהמשך."
-              : "אין צורך להזין את שם הילד/ה. מספיק לתאר את הצורך בלמידה."}
+              ? "הפרטים משמשים להתאמת מורים עבורך."
+              : "אין צורך לכתוב את שם הילד או הילדה."}
           </p>
 
-          <div class="site-form-grid">
-            <div class="site-field site-field-full">
-              <label class="site-label" id="${kind}-subject-label">
-                מקצועות ללמידה
+          <div class="fields">
+            <div>
+              <label id="${kind}-subject-label">
+                אילו מקצועות רוצים ללמוד?
               </label>
-              <div class="subject-picker" id="${kind}-subject-picker"></div>
+              <div class="subject-picker" id="${kind}-picker"></div>
             </div>
 
-            <div class="site-field">
-              <label class="site-label" for="${kind}-level">
-                רמה או כיתה — לא חובה
-              </label>
-              <input
-                class="site-input"
-                id="${kind}-level"
-                maxlength="100"
-                placeholder="למשל: כיתה ח׳"
-              >
+            <div class="two">
+              <div>
+                <label for="${kind}-level">רמה או כיתה</label>
+                <input
+                  id="${kind}-level"
+                  maxlength="100"
+                  placeholder="למשל: כיתה י׳, 5 יח״ל"
+                >
+              </div>
+
+              <div>
+                <label for="${kind}-style">איך נוח ללמוד?</label>
+                <select id="${kind}-style">
+                  <option value="">בחירה</option>
+                  <option>הסברים ותרגול</option>
+                  <option>למידה חזותית</option>
+                  <option>למידה בקצב מהיר</option>
+                  <option>למידה רגועה ומסודרת</option>
+                </select>
+              </div>
             </div>
 
-            <div class="site-field">
-              <label class="site-label" for="${kind}-style">
-                סגנון למידה — לא חובה
-              </label>
-              <select class="site-select" id="${kind}-style">
-                <option value="">בחירה</option>
-                <option>הסברים ותרגול</option>
-                <option>למידה חזותית</option>
-                <option>למידה בקצב מהיר</option>
-                <option>למידה רגועה ומסודרת</option>
-              </select>
+            <div>
+              <label for="${kind}-goal">מה מטרת הלמידה?</label>
+              <textarea id="${kind}-goal" maxlength="1000"></textarea>
             </div>
 
-            <div class="site-field site-field-full">
-              <label class="site-label" for="${kind}-goal">
-                מטרת הלמידה — לא חובה
-              </label>
-              <textarea
-                class="site-textarea"
-                id="${kind}-goal"
-                maxlength="1000"
-                placeholder="מה הייתם רוצים לחזק או להשיג?"
-              ></textarea>
-            </div>
-
-            <div class="site-field site-field-full">
-              <label class="site-label" for="${kind}-availability">
-                ימים ושעות נוחים — לא חובה
-              </label>
-              <input
-                class="site-input"
-                id="${kind}-availability"
-                maxlength="300"
-                placeholder="למשל: שלישי וחמישי אחר הצהריים"
-              >
+            <div>
+              <label for="${kind}-availability">ימים ושעות נוחים</label>
+              <input id="${kind}-availability" maxlength="300">
             </div>
           </div>
         `;
 
-        $("learning-groups").append(group);
+        $("learning-sections").append(section);
       }
 
       for (const kind of ["self", "child", "teacher"]) {
         catalog.createTagPicker({
-          root: $(`${kind}-subject-picker`),
+          root: $(`${kind}-picker`),
           options: catalog.SUBJECTS,
           selected: [],
           maximum: 12,
-          placeholder: "חיפוש ובחירת מקצועות…",
-          onChange(subjects) {
-            selectedSubjects[kind] = [...subjects];
+          placeholder: "חיפוש מקצוע…",
+          onChange(selected) {
+            subjects[kind] = [...selected];
             dirty = true;
           }
         });
 
-        const search = $(`${kind}-subject-picker`).querySelector("input");
+        const search = $(`${kind}-picker`).querySelector("input");
 
         if (search) {
           search.id = `${kind}-subject-search`;
@@ -944,24 +1090,19 @@
     }
 
     function validateStep() {
-      showStatus("");
+      showMessage("");
 
       if (step === 0) {
-        if (!Object.values(uses()).some(Boolean)) {
-          showStatus("בחרו לפחות אפשרות אחת כדי להמשיך.", true);
-          $("use-self").focus();
+        if (!Object.values(accountUses).some(Boolean)) {
+          showMessage("צריך לבחור לפחות אפשרות אחת.", true);
           return false;
         }
-
         return true;
       }
 
       if (step === 1) {
         $("name").value = value("name");
-
-        if (!accountUser) {
-          $("email").value = value("email");
-        }
+        if (!accountUser) $("email").value = value("email");
       }
 
       const fields = $(`step-${step}`).querySelectorAll(
@@ -975,15 +1116,13 @@
       }
 
       if (step === 2) {
-        const selected = uses();
-
-        for (const [kind, active, label] of [
-          ["self", selected.selfLearner, "ללמידה שלך"],
-          ["child", selected.parent, "ללמידה של הילד/ה"],
-          ["teacher", selected.teacher, "להוראה"]
+        for (const [kind, enabled, label] of [
+          ["self", accountUses.selfLearner, "הלמידה שלך"],
+          ["child", accountUses.parent, "הילד או הילדה"],
+          ["teacher", accountUses.teacher, "פרופיל ההוראה"]
         ]) {
-          if (active && !selectedSubjects[kind].length) {
-            showStatus(`בחרו לפחות מקצוע אחד ${label}.`, true);
+          if (enabled && !subjects[kind].length) {
+            showMessage(`בחרו לפחות מקצוע אחד עבור ${label}.`, true);
             $(`${kind}-subject-search`)?.focus();
             return false;
           }
@@ -993,9 +1132,84 @@
       return true;
     }
 
+    function renderPhoto() {
+      const preview = $("photo-preview");
+      preview.textContent = Array.from(value("name") || "כ")[0];
+      $("remove-photo").hidden = !photoData;
+
+      if (!photoData) return;
+
+      const image = document.createElement("img");
+      image.alt = "";
+      image.src = photoData;
+      preview.replaceChildren(image);
+    }
+
+    async function processPhoto() {
+      const file = $("photo").files[0];
+      if (!file || busy || photoBusy) return;
+
+      if (
+        !["image/jpeg", "image/png", "image/webp"].includes(file.type) ||
+        file.size > 5 * 1024 * 1024
+      ) {
+        showMessage("בחרו תמונת JPG, PNG או WebP עד 5MB.", true);
+        $("photo").value = "";
+        return;
+      }
+
+      photoBusy = true;
+      refreshControls();
+      showMessage("מכינים את תמונת הפרופיל…");
+
+      const url = URL.createObjectURL(file);
+
+      try {
+        const image = new Image();
+        image.src = url;
+        await image.decode();
+
+        const crop = Math.min(image.width, image.height);
+        const canvas = document.createElement("canvas");
+        canvas.width = 360;
+        canvas.height = 360;
+
+        const context = canvas.getContext("2d");
+        if (!context) throw new Error("Canvas is unavailable");
+
+        context.fillStyle = "#ffffff";
+        context.fillRect(0, 0, 360, 360);
+
+        context.drawImage(
+          image,
+          (image.width - crop) / 2,
+          (image.height - crop) / 2,
+          crop,
+          crop,
+          0,
+          0,
+          360,
+          360
+        );
+
+        photoData = canvas.toDataURL("image/jpeg", .8);
+        dirty = true;
+        renderPhoto();
+        showMessage("התמונה מוכנה ותישמר עם הפרופיל.");
+      } catch (error) {
+        console.error("Photo processing failed:", error);
+        showMessage("לא הצלחנו לקרוא את התמונה. נסו תמונה אחרת.", true);
+      } finally {
+        URL.revokeObjectURL(url);
+        $("photo").value = "";
+        photoBusy = false;
+        refreshControls();
+      }
+    }
+
     function readLearning(kind) {
       return {
-        subjects: [...selectedSubjects[kind]],
+        subjects: [...subjects[kind]],
         level: value(`${kind}-level`),
         learningStyle: value(`${kind}-style`),
         goal: value(`${kind}-goal`),
@@ -1003,112 +1217,108 @@
       };
     }
 
-    function registrationError(error) {
-      switch (error?.code) {
-        case "auth/email-already-in-use":
-          return "כבר קיים חשבון עם כתובת המייל הזו. אפשר להיכנס אליו דרך ״כניסה לחשבון״ או להשתמש בכתובת אחרת.";
-
-        case "auth/invalid-email":
-          return "כתובת המייל אינה תקינה. חזרו לפרטי הכניסה ובדקו אותה.";
-
-        case "auth/weak-password":
-        case "auth/password-does-not-meet-requirements":
-          return "הסיסמה אינה עומדת בדרישות. חזרו לפרטי הכניסה ובחרו סיסמה חזקה יותר.";
-
-        case "auth/network-request-failed":
-          return "לא הצלחנו להתחבר. בדקו את האינטרנט ונסו שוב.";
-
-        case "auth/too-many-requests":
-          return "בוצעו יותר מדי ניסיונות. המתינו מעט ונסו שוב.";
-
-        case "auth/operation-not-allowed":
-          return "יצירת חשבון באמצעות מייל וסיסמה אינה זמינה כרגע באתר.";
-
-        default:
-          return "לא הצלחנו להשלים את ההרשמה. הפרטים נשארו בטופס. נסו שוב בעוד רגע.";
-      }
-    }
-
     function showResumeNotice() {
-      $("resume-notice").textContent =
-        "פרטי הכניסה כבר קיימים. עכשיו משלימים את הפרופיל באותו חשבון.";
-      $("resume-notice").hidden = false;
-
       $("email").value = accountUser.email || "";
       $("password").value = "";
+
+      $("resume-notice").textContent =
+        "פרטי הכניסה כבר קיימים. משלימים את הפרופיל באותו חשבון, בלי להירשם שוב.";
+
+      $("resume-notice").hidden = false;
+    }
+
+    function stopForAccountChange() {
+      blocked = true;
+      $("retry-button").hidden = false;
+
+      showMessage(
+        "החשבון המחובר השתנה. טענו מחדש לפני המשך ההרשמה.",
+        true
+      );
+    }
+
+    function authError(error) {
+      const errors = {
+        "auth/email-already-in-use":
+          "כבר קיים חשבון עם האימייל הזה. היכנסו דרך הקישור ״כניסה״, או חזרו לפרטים והשתמשו באימייל אחר.",
+        "auth/invalid-email":
+          "כתובת האימייל אינה תקינה. חזרו לפרטים ובדקו אותה.",
+        "auth/weak-password":
+          "בחרו סיסמה חזקה יותר, עם לפחות 6 תווים.",
+        "auth/password-does-not-meet-requirements":
+          "הסיסמה אינה עומדת בדרישות. חזרו לפרטים ובחרו סיסמה חזקה יותר.",
+        "auth/network-request-failed":
+          "לא הצלחנו להתחבר. בדקו את האינטרנט ונסו שוב.",
+        "auth/too-many-requests":
+          "בוצעו יותר מדי ניסיונות. המתינו מעט ונסו שוב.",
+        "auth/operation-not-allowed":
+          "יצירת חשבון באמצעות אימייל וסיסמה אינה זמינה כרגע."
+      };
+
+      return errors[error?.code] ||
+        "לא הצלחנו ליצור את החשבון. הפרטים נשארו בטופס. נסו שוב.";
     }
 
     async function createAccount() {
-      const selected = uses();
+      const selectedUses = { ...accountUses };
+
       const name = value("name");
-      const city = value("city");
       const email = value("email");
       const password = $("password").value;
+      const city = value("city");
+      const phone = value("phone");
 
-      const selfProfile = selected.selfLearner
+      const selfLearningProfile = selectedUses.selfLearner
         ? readLearning("self")
         : null;
 
-      const childProfile = selected.parent
+      const childLearningProfile = selectedUses.parent
         ? readLearning("child")
         : null;
 
-      const teacherProfile = selected.teacher
+      const teacherProfile = selectedUses.teacher
         ? {
-            subjects: [...selectedSubjects.teacher],
+            subjects: [...subjects.teacher],
             price: Number(value("teacher-price")),
-            experience: value("teacher-experience"),
-            format: value("teacher-format"),
+            experience: value("experience"),
+            format: value("format"),
             bio: value("teacher-bio"),
-            availability: value("teacher-availability")
+            availability: value("teacher-availability"),
+            active: true
           }
         : null;
 
       busy = true;
-      showStatus("יוצרים את החשבון ושומרים את הפרופיל…");
       refreshControls();
+      showMessage("יוצרים את החשבון ושומרים את הפרופילים…");
 
       try {
         if (!accountUser) {
           if (sdk.auth.currentUser) {
-            showStatus(
-              "חשבון התחבר בחלון אחר. טענו מחדש לפני המשך ההרשמה.",
-              true
-            );
-            canWriteProfile = false;
-            $("retry-button").hidden = false;
+            stopForAccountChange();
             return;
           }
 
-          const result = await sdk.createUserWithEmailAndPassword(
+          const credential = await sdk.createUserWithEmailAndPassword(
             sdk.auth,
             email,
             password
           );
 
-          accountUser = result.user;
+          accountUser = credential.user;
           showResumeNotice();
         }
 
         if (sdk.auth.currentUser?.uid !== accountUser.uid) {
-          canWriteProfile = false;
-          $("retry-button").hidden = false;
-
-          showStatus(
-            "החשבון המחובר השתנה. טענו מחדש כדי להמשיך.",
-            true
-          );
+          stopForAccountChange();
           return;
         }
 
-        /*
-         * אם הפרופיל כבר נוצר בחלון אחר,
-         * עוברים אליו במקום להחליף את הפרטים שלו.
-         */
         const existing = await sdk.getDoc(
           sdk.doc(sdk.db, "users", accountUser.uid)
         );
 
+        // לא מחליפים פרופיל שכבר נוצר בחלון אחר.
         if (existing.exists()) {
           completed = true;
           dirty = false;
@@ -1116,58 +1326,58 @@
           return;
         }
 
-        const learner = selected.selfLearner || selected.parent;
-        const primaryLearning = selected.selfLearner
-          ? selfProfile
-          : childProfile;
+        const learner = selectedUses.selfLearner || selectedUses.parent;
+        const matchingProfile = selfLearningProfile || childLearningProfile;
 
-        const userData = {
+        const profile = {
           uid: accountUser.uid,
           name,
           email: accountUser.email || email,
+          phone,
           city,
-          phone: "",
-          photo: "",
-          role: selected.teacher
+          photo: photoData,
+
+          role: selectedUses.teacher
             ? (learner ? "both" : "teacher")
             : "student",
+
           roles: [
             ...(learner ? ["student"] : []),
-            ...(selected.teacher ? ["teacher"] : [])
+            ...(selectedUses.teacher ? ["teacher"] : [])
           ],
-          accountUses: selected,
-          selfLearningProfile: selfProfile,
-          childLearningProfile: childProfile,
-          studentProfile: selfProfile,
+
+          accountUses: selectedUses,
+          selfLearningProfile,
+          childLearningProfile,
+          studentProfile: selfLearningProfile,
           teacherProfile,
-          subjects: primaryLearning?.subjects || [],
-          level: primaryLearning?.level || "",
-          learningStyle: primaryLearning?.learningStyle || "",
-          goal: primaryLearning?.goal || "",
-          availability: primaryLearning?.availability || "",
+
+          subjects: matchingProfile?.subjects || [],
+          level: matchingProfile?.level || "",
+          learningStyle: matchingProfile?.learningStyle || "",
+          goal: matchingProfile?.goal || "",
+          availability: matchingProfile?.availability || "",
+
           createdAt: sdk.serverTimestamp(),
           updatedAt: sdk.serverTimestamp()
         };
 
-        /*
-         * שומרים יחד את הפרופיל ואת כרטיס המורה,
-         * כדי שלא יישמר רק חלק מהמידע.
-         */
+        // פרופיל המשתמש וכרטיס המורה נשמרים יחד.
         const batch = writeBatch(sdk.db);
 
         batch.set(
           sdk.doc(sdk.db, "users", accountUser.uid),
-          userData
+          profile
         );
 
-        if (selected.teacher) {
+        if (selectedUses.teacher) {
           batch.set(
             sdk.doc(sdk.db, "teachers", accountUser.uid),
             {
               uid: accountUser.uid,
               name,
               city,
-              photo: "",
+              photo: photoData,
               ...teacherProfile,
               active: true,
               acceptingStudents: true,
@@ -1191,18 +1401,18 @@
           console.error("Display name update failed:", error?.code);
         }
 
-        showStatus("החשבון מוכן. מעבירים אותך לאזור האישי…");
+        showMessage("החשבון והפרופילים נוצרו. עוברים לאזור האישי…");
         location.replace("dashboard.html");
       } catch (error) {
         console.error("Registration failed:", error?.code || error);
 
         if (accountUser) {
-          showStatus(
-            "פרטי הכניסה נוצרו, אבל שמירת הפרופיל לא הושלמה. אין צורך להירשם שוב. לחצו על ״שמירת הפרופיל והמשך״ כדי לנסות שוב.",
+          showMessage(
+            "פרטי הכניסה קיימים, אבל שמירת הפרופילים לא הושלמה. אין צורך להירשם שוב. לחצו על ״שמירת הפרופילים והמשך״ כדי לנסות שוב.",
             true
           );
         } else {
-          showStatus(registrationError(error), true);
+          showMessage(authError(error), true);
         }
       } finally {
         busy = false;
@@ -1210,24 +1420,48 @@
       }
     }
 
+    document.querySelectorAll(".use").forEach(button => {
+      button.addEventListener("click", () => {
+        const key = button.dataset.use;
+        accountUses[key] = !accountUses[key];
+
+        button.classList.toggle("selected", accountUses[key]);
+        button.setAttribute("aria-pressed", String(accountUses[key]));
+
+        button.querySelector(".selected-mark").textContent =
+          accountUses[key] ? "✓" : "";
+
+        dirty = true;
+        showMessage("");
+        updateSections();
+      });
+    });
+
     $("join-form").addEventListener("submit", async event => {
       event.preventDefault();
 
-      if (!ready || busy || completed || !canWriteProfile) return;
+      if (
+        !ready ||
+        busy ||
+        photoBusy ||
+        completed ||
+        blocked
+      ) {
+        return;
+      }
+
       if (!validateStep()) return;
 
       if (step < 2) {
         showStep(step + 1);
-        return;
+      } else {
+        await createAccount();
       }
-
-      await createAccount();
     });
 
     $("back-button").addEventListener("click", () => {
-      if (!ready || busy || step === 0) return;
-
-      showStatus("");
+      if (busy || photoBusy || step === 0) return;
+      showMessage("");
       showStep(step - 1);
     });
 
@@ -1239,9 +1473,15 @@
       dirty = true;
     });
 
-    for (const id of ["use-self", "use-parent", "use-teacher"]) {
-      $(id).addEventListener("change", configureGroups);
-    }
+    $("name").addEventListener("input", renderPhoto);
+    $("photo").addEventListener("change", processPhoto);
+
+    $("remove-photo").addEventListener("click", () => {
+      if (busy || photoBusy) return;
+      photoData = "";
+      dirty = true;
+      renderPhoto();
+    });
 
     $("password-toggle").addEventListener("click", () => {
       const visible = $("password").type === "password";
@@ -1249,33 +1489,27 @@
       $("password").type = visible ? "text" : "password";
       $("password-toggle").textContent = visible ? "הסתרה" : "הצגה";
 
-      $("password-toggle").setAttribute(
-        "aria-pressed",
-        String(visible)
-      );
-
+      $("password-toggle").setAttribute("aria-pressed", String(visible));
       $("password-toggle").setAttribute(
         "aria-label",
         visible ? "הסתרת הסיסמה" : "הצגת הסיסמה"
       );
     });
 
-    $("retry-button").addEventListener("click", () => {
-      location.reload();
-    });
+    $("retry-button").addEventListener("click", () => location.reload());
 
     window.addEventListener("beforeunload", event => {
-      if (!completed && (dirty || busy)) {
+      if (!completed && (dirty || busy || photoBusy)) {
         event.preventDefault();
         event.returnValue = "";
       }
     });
 
     async function start() {
-      const timer = window.setTimeout(() => {
+      const timer = setTimeout(() => {
         if (!ready && !completed) {
-          showStatus(
-            "הטעינה מתעכבת. בדקו את החיבור לאינטרנט או נסו לטעון מחדש."
+          showMessage(
+            "הטעינה מתעכבת. בדקו את האינטרנט או נסו לטעון מחדש."
           );
           $("retry-button").hidden = false;
         }
@@ -1303,7 +1537,7 @@
 
           if (existing.exists()) {
             completed = true;
-            showStatus("החשבון שלך כבר קיים. מעבירים אותך לאזור האישי…");
+            showMessage("החשבון כבר קיים. עוברים לאזור האישי…");
             location.replace("dashboard.html");
             return;
           }
@@ -1312,33 +1546,34 @@
           showResumeNotice();
         }
 
-        buildLearningGroups();
+        buildLearningSections();
 
         ready = true;
         dirty = false;
         $("retry-button").hidden = true;
 
+        renderPhoto();
         showStep(0, false);
 
-        showStatus(
+        showMessage(
           accountUser
-            ? "החשבון מחובר. בחרו איך להשתמש בכיוון כדי להשלים את הפרופיל."
+            ? "החשבון מחובר. נותר להשלים את הבחירות ואת הפרופילים."
             : ""
         );
       } catch (error) {
-        console.error("Registration initialization failed:", error);
+        console.error("Registration load failed:", error);
 
         ready = false;
         refreshControls();
 
-        showStatus(
+        showMessage(
           "לא הצלחנו לטעון את ההרשמה. בדקו את החיבור לאינטרנט ונסו שוב.",
           true
         );
 
         $("retry-button").hidden = false;
       } finally {
-        window.clearTimeout(timer);
+        clearTimeout(timer);
       }
     }
 

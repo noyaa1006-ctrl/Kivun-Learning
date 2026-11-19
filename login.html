@@ -3,481 +3,630 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#172442">
+  <meta name="theme-color" content="#121a37">
   <title>כניסה לחשבון — כיוון</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  >
-
-  <link rel="stylesheet" href="./site.css">
-
   <style>
-    .login-main {
-      width: min(1000px, calc(100% - 40px));
-      margin: 64px auto;
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap');
+
+    :root {
+      --navy: #121a37;
+      --ink: #1d2746;
+      --teal: #0b9d78;
+      --coral: #ff6e61;
+      --yellow: #ffd25d;
+      --cloud: #f6f8fe;
+      --line: #e4e9f4;
+      --muted: #6c7691;
+      --white: #fff;
+      --shadow: 0 22px 52px rgba(20,34,75,.12);
     }
 
-    .login-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    * {
+      box-sizing: border-box;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 91% 9%, #ddfff1 0, transparent 28%),
+        radial-gradient(circle at 5% 92%, #fff1d4 0, transparent 30%),
+        var(--cloud);
+      font-family: Heebo, Arial, sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    a {
+      text-underline-offset: 4px;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid #08785c;
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    .nav {
+      min-height: 80px;
+      display: flex;
       align-items: center;
-      gap: 64px;
+      justify-content: space-between;
+      gap: 16px;
     }
 
-    .login-intro {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy);
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: -1.3px;
+      text-decoration: none;
+    }
+
+    .mark {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 10px 10px 10px 2px;
+      color: #fff;
+      background: var(--coral);
+      transform: rotate(-5deg);
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: #08785c;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: calc(100vh - 150px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 460px;
+      gap: 70px;
+      align-items: center;
+      padding: 25px 0 70px;
+    }
+
+    .page > * {
       min-width: 0;
     }
 
-    .login-intro h1 {
-      margin: 0;
-      color: var(--site-heading);
-      font-size: clamp(36px, 4vw, 50px);
+    .intro-label {
+      color: var(--teal);
+      font-size: 14px;
       font-weight: 900;
-      line-height: 1.25;
-      letter-spacing: -1.3px;
     }
 
-    .login-intro h1 span {
-      display: block;
-      color: var(--site-primary);
+    .intro h1 {
+      margin: 10px 0 14px;
+      color: var(--navy);
+      font-size: 58px;
+      line-height: 1.04;
+      letter-spacing: -2.5px;
     }
 
-    .login-description {
-      max-width: 430px;
-      margin: 20px 0 0;
-      color: var(--site-muted);
-      font-size: 17px;
-      line-height: 1.9;
+    .intro h1 em {
+      color: var(--coral);
+      font-style: normal;
     }
 
-    .login-benefits {
-      display: grid;
-      gap: 16px;
-      margin: 28px 0 0;
-      padding: 0;
-      list-style: none;
+    .intro p {
+      max-width: 470px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
     }
 
-    .login-benefits li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
+    .login-card {
+      padding: 30px;
+      border: 1px solid #fff;
+      border-radius: 27px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .login-card h2 {
+      margin: 0 0 5px;
+      color: var(--navy);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .sub {
+      margin: 0 0 22px;
+      color: var(--muted);
       font-size: 14px;
       line-height: 1.8;
     }
 
-    .benefit-check {
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      width: 26px;
-      height: 26px;
-      margin-top: 1px;
-      border-radius: 50%;
-      color: var(--site-primary);
-      background: var(--site-primary-soft);
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      color: #4e5b76;
       font-size: 13px;
       font-weight: 800;
     }
 
-    .login-card {
-      min-width: 0;
-      padding: 32px;
-      border: 1px solid var(--site-border);
-      border-radius: 20px;
-      background: white;
-      box-shadow: var(--site-shadow);
+    .field input {
+      width: 100%;
+      min-height: 49px;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      color: var(--ink);
+      background: #fff;
+      font: inherit;
+      font-size: 16px;
     }
 
-    .login-card h2 {
-      margin: 0;
-      color: var(--site-heading);
-      font-size: 26px;
-      font-weight: 800;
+    .field input:focus {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+      border-color: var(--teal);
     }
 
-    .login-card-description {
-      margin: 9px 0 24px;
-      color: var(--site-muted);
-      font-size: 14px;
-      line-height: 1.8;
+    .field input:disabled {
+      color: var(--muted);
+      background: #f5f7fb;
     }
 
-    .login-fields {
-      display: grid;
-      gap: 20px;
-    }
-
-    .password-wrap {
+    .password-row {
       position: relative;
     }
 
-    .password-wrap input {
+    .password-row input {
       padding-left: 78px;
       text-align: right;
     }
 
-    .password-toggle {
+    .show-password {
       position: absolute;
-      inset-block: 4px;
+      top: 4px;
+      bottom: 4px;
       left: 4px;
       min-width: 64px;
       padding: 8px;
       border: 0;
       border-radius: 8px;
-      color: var(--site-primary);
+      color: #08785c;
       background: transparent;
-      font: inherit;
-      font-size: 13px;
-      font-weight: 700;
+      font-family: inherit;
+      font-weight: 800;
+      cursor: pointer;
     }
 
-    .password-toggle:hover:not(:disabled) {
-      background: var(--site-primary-soft);
+    .show-password:hover:not(:disabled) {
+      background: #effdf7;
     }
 
     .remember-section {
-      margin: 18px 0 22px;
+      margin: 17px 0 18px;
     }
 
-    .remember-section .site-checkbox {
+    .remember-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
       min-height: 36px;
-      padding-block: 4px;
-      font-weight: 600;
+      padding-block: 5px;
+      color: #4e5b76;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.7;
+      cursor: pointer;
     }
 
-    .remember-hint {
-      margin: 3px 29px 0 0;
-      color: var(--site-muted);
+    .remember-label input {
+      width: 19px;
+      height: 19px;
+      margin: 2px 0 0;
+      flex-shrink: 0;
+      accent-color: var(--teal);
+    }
+
+    .remember-note {
+      margin: 2px 29px 0 0;
+      color: var(--muted);
       font-size: 12px;
-      line-height: 1.8;
+      line-height: 1.7;
     }
 
-    .login-submit {
-      min-height: 50px;
-      font-size: 15px;
-    }
-
-    .reset-button {
-      display: block;
-      min-height: 44px;
-      margin: 10px auto 0;
-      padding: 9px 12px;
+    .button {
+      width: 100%;
+      min-height: 49px;
+      margin-top: 8px;
+      padding: 13px 17px;
       border: 0;
-      border-radius: 9px;
-      color: var(--site-primary);
-      background: transparent;
-      font: inherit;
-      font-size: 14px;
-      font-weight: 700;
+      border-radius: 12px;
+      color: #fff;
+      background: var(--navy);
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
     }
 
-    .reset-button:hover:not(:disabled) {
-      background: var(--site-primary-soft);
+    .button:hover:not(:disabled) {
+      background: #202d57;
     }
 
-    .login-signup {
-      margin-top: 22px;
-      padding-top: 22px;
-      border-top: 1px solid var(--site-border-soft);
-      text-align: center;
-    }
-
-    .login-signup p {
-      margin: 0 0 8px;
-      color: var(--site-muted);
-      font-size: 14px;
-    }
-
-    .login-signup a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    #login-status {
-      margin-bottom: 20px;
-    }
-
-    #retry-button {
-      margin-bottom: 20px;
-    }
-
-    .login-card button:disabled {
-      opacity: .55;
+    button:disabled {
+      opacity: .6;
       cursor: not-allowed;
     }
 
-    @media (max-width: 800px) {
-      .login-main {
-        width: min(480px, calc(100% - 32px));
-        margin: 32px auto 44px;
+    .forgot {
+      display: inline-block;
+      min-height: 44px;
+      margin-top: 9px;
+      padding: 8px 0;
+      border: 0;
+      color: #08785c;
+      background: transparent;
+      font-family: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .message {
+      margin: 0 0 18px;
+      padding: 12px;
+      border-radius: 11px;
+      color: #4e5b76;
+      background: #f1f4fa;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .message.error {
+      color: #9e2f2a;
+      background: #fff0ef;
+    }
+
+    .message.success {
+      color: #08785c;
+      background: #e4faef;
+    }
+
+    .retry {
+      margin: 0 0 18px;
+      color: var(--navy);
+      background: #f1f4fa;
+    }
+
+    .retry:hover:not(:disabled) {
+      background: #e7edf7;
+    }
+
+    .join {
+      margin: 22px 0 0;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .join a {
+      display: inline-block;
+      padding-block: 8px;
+      color: #08785c;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .security-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+      color: #54607a;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.8;
+    }
+
+    .security-icon {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      flex: 0 0 29px;
+      border-radius: 50%;
+      color: #08785c;
+      background: #dcf8ed;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 10px;
+      right: 12px;
+      z-index: 100;
+      padding: 12px 18px;
+      border-radius: 10px;
+      color: white;
+      background: var(--navy);
+      transform: translateY(-160%);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        gap: 35px;
+        grid-template-columns: minmax(0, 1fr) 420px;
       }
 
-      .login-layout {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 28px;
-      }
-
-      .login-intro h1 {
-        font-size: 35px;
-      }
-
-      .login-description {
-        margin-top: 12px;
-        font-size: 15px;
-      }
-
-      .login-benefits {
-        display: none;
+      .intro h1 {
+        font-size: 49px;
       }
     }
 
-    @media (max-width: 560px) {
+    @media (max-width: 780px) {
+      .page {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 30px;
+        padding-top: 15px;
+      }
+
+      .intro {
+        text-align: center;
+      }
+
+      .intro h1 {
+        font-size: 43px;
+      }
+
+      .intro p {
+        margin-inline: auto;
+      }
+
+      .security-note {
+        justify-content: center;
+      }
+
       .login-card {
-        padding: 25px 21px;
+        width: 100%;
+        max-width: 460px;
+        margin: auto;
       }
 
-      .login-intro h1 {
-        font-size: 32px;
+      .nav {
+        min-height: 68px;
+      }
+    }
+
+    @media (max-width: 410px) {
+      .container {
+        width: calc(100% - 28px);
       }
 
-      .login-card h2 {
-        font-size: 24px;
+      .intro h1 {
+        font-size: 38px;
+      }
+
+      .login-card {
+        padding: 21px;
       }
     }
   </style>
 </head>
 
 <body>
-  <header class="site-header">
-    <nav
-      class="site-container site-header-inner"
-      aria-label="ניווט ראשי"
-    >
-      <a class="site-brand" href="index.html" aria-label="כיוון — דף הבית">
+  <a class="skip-link" href="#main-content">דילוג לתוכן</a>
+
+  <header>
+    <nav class="container nav" aria-label="ניווט ראשי">
+      <a class="brand" href="index.html">
+        <span class="mark" aria-hidden="true">↗</span>
         כיוון
-        <span class="site-brand-mark" aria-hidden="true">↗</span>
       </a>
 
-      <div class="site-header-actions">
-        <a class="site-btn site-btn-quiet" href="index.html">
-          חזרה לדף הבית
-        </a>
-      </div>
+      <a class="nav-link" href="index.html">
+        עמוד הבית
+      </a>
     </nav>
   </header>
 
-  <main class="login-main" id="main-content">
-    <div class="login-layout">
-      <section class="login-intro" aria-labelledby="welcome-title">
-        <p class="site-eyebrow">ממשיכים בדרך שלך</p>
+  <main class="container page" id="main-content" tabindex="-1">
+    <section class="intro" aria-labelledby="welcome-title">
+      <div class="intro-label">טוב לראות אותך שוב</div>
 
-        <h1 id="welcome-title">
-          טוב שחזרת.
-          <span>ממשיכים מכאן.</span>
-        </h1>
+      <h1 id="welcome-title">
+        ממשיכים בדיוק<br>
+        מה<em>כיוון</em> שלך.
+      </h1>
 
-        <p class="login-description">
-          הפרופיל, הבקשות והשיחות שלך מחכים באזור האישי.
-          נכנסים לחשבון וממשיכים מהשלב הבא.
-        </p>
+      <p>
+        הפרופיל, הבקשות והשיחות שלך במקום אחד.
+        נכנסים לחשבון וממשיכים מהמקום שבו עצרת.
+      </p>
 
-        <ul class="login-benefits">
-          <li>
-            <span class="benefit-check" aria-hidden="true">✓</span>
-            הפרטים והעדפות הלמידה שלך במקום אחד
-          </li>
+      <div class="security-note">
+        <span class="security-icon" aria-hidden="true">✓</span>
+        במכשיר האישי אפשר להישאר מחוברים גם לביקור הבא
+      </div>
+    </section>
 
-          <li>
-            <span class="benefit-check" aria-hidden="true">✓</span>
-            גישה לבקשות ולשיחות קיימות
-          </li>
+    <section class="login-card" aria-labelledby="login-title">
+      <h2 id="login-title">כניסה לחשבון</h2>
 
-          <li>
-            <span class="benefit-check" aria-hidden="true">✓</span>
-            אפשרות להישאר מחוברים במכשיר האישי
-          </li>
-        </ul>
-      </section>
+      <p class="sub">
+        הזינו את האימייל והסיסמה שאיתם נרשמתם.
+      </p>
 
-      <section class="login-card" aria-labelledby="login-title">
-        <h2 id="login-title">כניסה לחשבון</h2>
+      <div
+        class="message"
+        id="message"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        בודקים אם החשבון כבר מחובר…
+      </div>
 
-        <p class="login-card-description">
-          הזינו את כתובת המייל והסיסמה שאיתם נרשמתם.
-        </p>
+      <button
+        class="button retry"
+        id="retry-button"
+        type="button"
+        hidden
+      >
+        טעינה מחדש
+      </button>
 
-        <div
-          class="site-notice"
-          id="login-status"
-          role="status"
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          בודקים אם החשבון כבר מחובר…
+      <form id="login-form" aria-busy="true" novalidate>
+        <div class="field">
+          <label for="email">אימייל</label>
+
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="username"
+            inputmode="email"
+            autocapitalize="none"
+            spellcheck="false"
+            placeholder="name@email.com"
+            dir="ltr"
+            required
+            disabled
+          >
+        </div>
+
+        <div class="field">
+          <label for="password">סיסמה</label>
+
+          <div class="password-row">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="הסיסמה שלך"
+              dir="ltr"
+              required
+              disabled
+            >
+
+            <button
+              class="show-password"
+              id="show-password"
+              type="button"
+              aria-controls="password"
+              aria-label="הצגת הסיסמה"
+              aria-pressed="false"
+              disabled
+            >
+              הצגה
+            </button>
+          </div>
+        </div>
+
+        <div class="remember-section">
+          <label class="remember-label" for="remember-me">
+            <input
+              id="remember-me"
+              name="remember"
+              type="checkbox"
+              aria-describedby="remember-note"
+              disabled
+            >
+            להישאר מחוברים במכשיר הזה
+          </label>
+
+          <p class="remember-note" id="remember-note">
+            מתאים למכשיר אישי. במחשב משותף כדאי להשאיר לא מסומן.
+          </p>
         </div>
 
         <button
-          class="site-btn site-btn-secondary site-btn-full"
-          id="retry-button"
-          type="button"
-          hidden
+          class="button"
+          id="login-button"
+          type="submit"
+          disabled
         >
-          טעינה מחדש
+          כניסה לאזור שלי ←
         </button>
 
-        <form id="login-form" aria-busy="true" novalidate>
-          <div class="login-fields">
-            <div class="site-field">
-              <label class="site-label" for="login-email">
-                כתובת מייל
-              </label>
+        <button
+          class="forgot"
+          id="forgot-password"
+          type="button"
+          disabled
+        >
+          שכחתי את הסיסמה
+        </button>
+      </form>
 
-              <input
-                class="site-input"
-                id="login-email"
-                name="email"
-                type="email"
-                dir="ltr"
-                autocomplete="username"
-                inputmode="email"
-                autocapitalize="none"
-                spellcheck="false"
-                placeholder="name@example.com"
-                required
-                disabled
-              >
-            </div>
+      <p class="join">
+        עדיין אין לך חשבון?
+        <a href="join.html">להרשמה ופתיחת פרופיל</a>
+      </p>
 
-            <div class="site-field">
-              <label class="site-label" for="login-password">
-                סיסמה
-              </label>
-
-              <div class="password-wrap">
-                <input
-                  class="site-input"
-                  id="login-password"
-                  name="password"
-                  type="password"
-                  dir="ltr"
-                  autocomplete="current-password"
-                  required
-                  disabled
-                >
-
-                <button
-                  class="password-toggle"
-                  id="password-toggle"
-                  type="button"
-                  aria-controls="login-password"
-                  aria-label="הצגת הסיסמה"
-                  aria-pressed="false"
-                  disabled
-                >
-                  הצגה
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="remember-section">
-            <label class="site-checkbox" for="remember-me">
-              <input
-                id="remember-me"
-                name="remember"
-                type="checkbox"
-                aria-describedby="remember-hint"
-                disabled
-              >
-              להישאר מחוברים במכשיר הזה
-            </label>
-
-            <p class="remember-hint" id="remember-hint">
-              מתאים למכשיר אישי. במחשב משותף כדאי להשאיר לא מסומן.
-            </p>
-          </div>
-
-          <button
-            class="site-btn site-btn-full login-submit"
-            id="login-button"
-            type="submit"
-            disabled
-          >
-            כניסה לחשבון
-          </button>
-
-          <button
-            class="reset-button"
-            id="reset-button"
-            type="button"
-            disabled
-          >
-            שכחת את הסיסמה?
-          </button>
-        </form>
-
-        <div class="login-signup">
-          <p>עוד אין לך חשבון בכיוון?</p>
-          <a href="join.html">יצירת חשבון</a>
-        </div>
-
-        <noscript>
-          <p class="site-notice">
-            כדי להיכנס לחשבון יש להפעיל JavaScript בדפדפן.
-          </p>
-        </noscript>
-      </section>
-    </div>
+      <noscript>
+        <p class="message error">
+          כדי להיכנס לחשבון יש להפעיל JavaScript בדפדפן.
+        </p>
+      </noscript>
+    </section>
   </main>
-
-  <footer class="site-footer">
-    <div class="site-container site-footer-inner">
-      <span>כיוון — מוצאים את הדרך ללמוד</span>
-      <a href="index.html">לדף הבית</a>
-    </div>
-  </footer>
-
-  <script type="module" src="./navigation.js"></script>
 
   <script type="module">
     const $ = id => document.getElementById(id);
 
     const form = $("login-form");
-    const emailInput = $("login-email");
-    const passwordInput = $("login-password");
+    const emailInput = $("email");
+    const passwordInput = $("password");
     const rememberInput = $("remember-me");
 
     const preferenceKey = "kivun-remember-login";
 
     let sdk;
     let destination = "dashboard.html";
+
     let ready = false;
     let busy = false;
     let leaving = false;
-    let loginInProgress = false;
+    let signingIn = false;
     let unsubscribeAuth = null;
 
-    function showStatus(message, tone = "info") {
-      const box = $("login-status");
-
-      box.textContent = message;
-      box.hidden = !message;
-
-      box.className = "site-notice";
-
-      if (tone === "error") {
-        box.classList.add("site-notice-error");
-      } else if (tone === "success") {
-        box.classList.add("site-notice-success");
-      }
+    function showMessage(text, type = "") {
+      $("message").textContent = text;
+      $("message").className = `message ${type}`;
+      $("message").hidden = !text;
     }
 
     function refreshControls() {
@@ -493,13 +642,13 @@
       );
     }
 
-    function setBusy(value, label = "כניסה לחשבון") {
+    function setBusy(value, label = "כניסה לאזור שלי ←") {
       busy = value;
       $("login-button").textContent = label;
       refreshControls();
     }
 
-    function readRememberPreference() {
+    function loadPreference() {
       try {
         rememberInput.checked =
           localStorage.getItem(preferenceKey) === "yes";
@@ -508,79 +657,78 @@
       }
     }
 
-    function saveRememberPreference() {
+    function savePreference() {
       try {
+        // נשמרת רק הבחירה בתיבה. לא שומרים כאן סיסמה.
         localStorage.setItem(
           preferenceKey,
           rememberInput.checked ? "yes" : "no"
         );
       } catch {
-        // שומרים רק את בחירת המשתמש, ולא את הסיסמה.
-        // כישלון בשמירת ההעדפה לא מונע כניסה לחשבון.
+        // שמירת ההעדפה אינה תנאי לכניסה.
       }
     }
 
-    function goToAccount() {
+    function enterAccount() {
       if (leaving) return;
 
       leaving = true;
       passwordInput.value = "";
 
       refreshControls();
-      showStatus(
+
+      showMessage(
         "החשבון מחובר. מעבירים אותך פנימה…",
         "success"
       );
 
-      window.location.replace(destination);
+      location.replace(destination);
     }
 
-    function loginErrorMessage(error) {
-      switch (error?.code) {
+    function errorMessage(code) {
+      switch (code) {
         case "auth/invalid-email":
-          return "כתובת המייל אינה תקינה. בדקו אותה ונסו שוב.";
+          return "כתובת האימייל אינה תקינה. בדקו אותה ונסו שוב.";
 
         case "auth/invalid-credential":
         case "auth/invalid-login-credentials":
         case "auth/user-not-found":
         case "auth/wrong-password":
-          return "המייל או הסיסמה אינם נכונים. אפשר לנסות שוב או לאפס את הסיסמה.";
+          return "האימייל או הסיסמה אינם נכונים. אפשר לנסות שוב או לאפס את הסיסמה.";
 
         case "auth/user-disabled":
-          return "החשבון הזה מושבת כרגע ולא ניתן להיכנס אליו.";
+          return "החשבון הזה הושבת ולא ניתן להיכנס אליו כרגע.";
 
         case "auth/too-many-requests":
-          return "בוצעו יותר מדי ניסיונות כניסה. המתינו מעט ונסו שוב.";
+          return "בוצעו יותר מדי ניסיונות. המתינו מעט ונסו שוב.";
 
         case "auth/network-request-failed":
           return "לא הצלחנו להתחבר. בדקו את החיבור לאינטרנט ונסו שוב.";
 
         case "auth/web-storage-unsupported":
         case "auth/unsupported-persistence-type":
-          return "הדפדפן לא מאפשר לשמור את ההתחברות. בדקו את הגדרות האחסון שלו או נסו דפדפן אחר.";
+          return "הדפדפן אינו מאפשר לשמור את ההתחברות. בדקו את הגדרות האחסון שלו או נסו דפדפן אחר.";
 
         case "auth/operation-not-allowed":
-          return "הכניסה באמצעות מייל וסיסמה אינה זמינה כרגע באתר.";
+          return "הכניסה באמצעות אימייל וסיסמה אינה זמינה כרגע באתר.";
 
         default:
-          return "לא הצלחנו להשלים את הכניסה. נסו שוב בעוד רגע.";
+          return "לא הצלחנו להיכנס לחשבון. נסו שוב בעוד רגע.";
       }
     }
 
-    $("password-toggle").addEventListener("click", () => {
+    $("show-password").addEventListener("click", () => {
       const visible = passwordInput.type === "password";
 
       passwordInput.type = visible ? "text" : "password";
+      $("show-password").textContent = visible ? "הסתרה" : "הצגה";
 
-      $("password-toggle").textContent =
-        visible ? "הסתרה" : "הצגה";
-
-      $("password-toggle").setAttribute(
+      $("show-password").setAttribute(
         "aria-pressed",
         String(visible)
       );
 
-      $("password-toggle").setAttribute(
+      $("show-password").setAttribute(
         "aria-label",
         visible ? "הסתרת הסיסמה" : "הצגת הסיסמה"
       );
@@ -599,9 +747,9 @@
       const password = passwordInput.value;
       const rememberMe = rememberInput.checked;
 
-      loginInProgress = true;
+      signingIn = true;
       setBusy(true, "נכנסים לחשבון…");
-      showStatus("מתחברים לחשבון שלך…");
+      showMessage("מתחברים לחשבון שלך…");
 
       try {
         await sdk.configureLoginPersistence(rememberMe);
@@ -612,107 +760,88 @@
           password
         );
 
-        saveRememberPreference();
-        goToAccount();
+        savePreference();
+        enterAccount();
       } catch (error) {
         console.error("Login failed:", error?.code);
-        showStatus(loginErrorMessage(error), "error");
+        showMessage(errorMessage(error?.code), "error");
       } finally {
-        loginInProgress = false;
+        signingIn = false;
         setBusy(false);
-
-        if (!leaving && sdk.auth.currentUser) {
-          goToAccount();
-        }
       }
     });
 
-    $("reset-button").addEventListener("click", async () => {
+    $("forgot-password").addEventListener("click", async () => {
       if (!ready || busy || leaving) return;
 
       emailInput.value = emailInput.value.trim();
 
       if (!emailInput.value) {
-        showStatus(
-          "הזינו למעלה את כתובת המייל של החשבון, ואז לחצו שוב על ״שכחת את הסיסמה?״."
+        showMessage(
+          "כתבו למעלה את כתובת האימייל של החשבון, ואז לחצו שוב על ״שכחתי את הסיסמה״."
         );
-
         emailInput.focus();
         return;
       }
 
       if (!emailInput.reportValidity()) return;
 
-      setBusy(true);
-      $("reset-button").textContent = "שולחים קישור…";
-      showStatus("מכינים בקשה לאיפוס הסיסמה…");
+      const email = emailInput.value;
 
-      const successMessage =
-        "אם קיים חשבון מתאים לכתובת הזו, יישלח אליה קישור לאיפוס הסיסמה. כדאי לבדוק גם בתיקיית הספאם.";
+      setBusy(true);
+      $("forgot-password").textContent = "שולחים קישור…";
+      showMessage("מכינים בקשה לאיפוס הסיסמה…");
+
+      const resetMessage =
+        "אם קיים חשבון מתאים לכתובת הזו, יישלח אליה קישור לבחירת סיסמה חדשה. כדאי לבדוק גם בתיקיית הספאם.";
 
       try {
-        await sdk.sendPasswordResetEmail(
-          sdk.auth,
-          emailInput.value
-        );
-
-        showStatus(successMessage, "success");
+        await sdk.sendPasswordResetEmail(sdk.auth, email);
+        showMessage(resetMessage, "success");
       } catch (error) {
         console.error("Password reset failed:", error?.code);
 
-        switch (error?.code) {
-          case "auth/user-not-found":
-            showStatus(successMessage, "success");
-            break;
-
-          case "auth/invalid-email":
-            showStatus(
-              "בדקו שכתובת המייל הוזנה נכון.",
-              "error"
-            );
-            break;
-
-          case "auth/too-many-requests":
-            showStatus(
-              "נשלחו יותר מדי בקשות. המתינו מעט לפני ניסיון נוסף.",
-              "error"
-            );
-            break;
-
-          case "auth/network-request-failed":
-            showStatus(
-              "לא הצלחנו להתחבר. בדקו את האינטרנט ונסו שוב.",
-              "error"
-            );
-            break;
-
-          default:
-            showStatus(
-              "לא הצלחנו לשלוח קישור לאיפוס הסיסמה. נסו שוב בעוד רגע.",
-              "error"
-            );
+        if (error?.code === "auth/user-not-found") {
+          showMessage(resetMessage, "success");
+        } else if (error?.code === "auth/invalid-email") {
+          showMessage("בדקו שכתובת האימייל הוזנה נכון.", "error");
+        } else if (error?.code === "auth/too-many-requests") {
+          showMessage(
+            "נשלחו יותר מדי בקשות. המתינו מעט לפני ניסיון נוסף.",
+            "error"
+          );
+        } else if (error?.code === "auth/network-request-failed") {
+          showMessage(
+            "לא הצלחנו להתחבר. בדקו את האינטרנט ונסו שוב.",
+            "error"
+          );
+        } else {
+          showMessage(
+            "לא הצלחנו לשלוח קישור לאיפוס הסיסמה. נסו שוב בעוד רגע.",
+            "error"
+          );
         }
       } finally {
-        $("reset-button").textContent = "שכחת את הסיסמה?";
+        $("forgot-password").textContent = "שכחתי את הסיסמה";
         setBusy(false);
 
         if (!leaving && sdk.auth.currentUser) {
-          goToAccount();
+          enterAccount();
         }
       }
     });
 
     $("retry-button").addEventListener("click", () => {
-      window.location.reload();
+      location.reload();
     });
 
     async function start() {
-      readRememberPreference();
+      loadPreference();
 
-      const timer = window.setTimeout(() => {
+      const timer = setTimeout(() => {
         if (!ready && !leaving) {
-          showStatus(
-            "החיבור מתעכב. בדקו את האינטרנט או נסו לטעון מחדש."
+          showMessage(
+            "בדיקת ההתחברות מתעכבת. בדקו את האינטרנט או נסו לטעון מחדש."
           );
 
           $("retry-button").hidden = false;
@@ -734,7 +863,7 @@
         }
 
         const next = new URLSearchParams(
-          window.location.search
+          location.search
         ).get("next");
 
         destination = routesModule.safeNext(next);
@@ -742,26 +871,26 @@
         await sdk.auth.authStateReady();
 
         if (sdk.auth.currentUser) {
-          goToAccount();
+          enterAccount();
           return;
         }
 
         ready = true;
         $("retry-button").hidden = true;
-        showStatus("");
+
+        showMessage("");
         refreshControls();
 
-        // מזהים גם כניסה שבוצעה בחלון אחר של אותו דפדפן.
         unsubscribeAuth = sdk.onAuthStateChanged(
           sdk.auth,
           currentUser => {
             if (
               currentUser &&
-              !loginInProgress &&
+              !signingIn &&
               !busy &&
               !leaving
             ) {
-              goToAccount();
+              enterAccount();
             }
           }
         );
@@ -771,14 +900,14 @@
         ready = false;
         refreshControls();
 
-        showStatus(
+        showMessage(
           "לא הצלחנו לטעון את מסך הכניסה. בדקו את החיבור לאינטרנט ונסו לטעון מחדש.",
           "error"
         );
 
         $("retry-button").hidden = false;
       } finally {
-        window.clearTimeout(timer);
+        clearTimeout(timer);
       }
     }
 
@@ -790,7 +919,7 @@
 
     window.addEventListener("pageshow", event => {
       if (event.persisted) {
-        window.location.reload();
+        location.reload();
       }
     });
 

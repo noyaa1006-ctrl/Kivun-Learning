@@ -3,1224 +3,1415 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#172442">
-
+  <meta name="theme-color" content="#111a38">
   <meta
     name="description"
-    content="כיוון מחברת בין תלמידים, הורים ומורים פרטיים. מגדירים את הצורך, מכירים מורים ושולחים בקשה לשיעור."
+    content="כיוון — מוצאים מורה שמתאים למטרה, לאופי ולקצב הלמידה שלך."
   >
-
-  <title>כיוון — מוצאים את הדרך ללמוד</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  >
-
-  <link rel="stylesheet" href="./site.css">
+  <title>כיוון — למצוא מורה שמבין אותך</title>
 
   <style>
-    .home-main {
-      overflow: clip;
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap');
+
+    :root {
+      --navy: #121a37;
+      --ink: #1c2746;
+      --mint: #e9fff4;
+      --teal: #10a37f;
+      --teal-dark: #08785c;
+      --coral: #ff6e61;
+      --yellow: #ffd25d;
+      --cloud: #f6f8fe;
+      --line: #e6eaf4;
+      --white: #fff;
+      --muted: #6c7691;
+      --shadow: 0 18px 50px rgba(26,39,76,.12);
     }
 
-    .home-hero {
-      padding-block: 72px 76px;
-      background:
-        radial-gradient(
-          ellipse at 12% 22%,
-          #e5f3ea 0,
-          transparent 53%
-        ),
-        #f8fafb;
-      border-bottom: 1px solid var(--site-border-soft);
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 24px;
     }
 
-    .hero-layout {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      align-items: center;
-      gap: 64px;
-    }
-
-    .hero-copy {
-      min-width: 0;
-    }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      margin: 0 0 22px;
-      color: var(--site-primary);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .hero-eyebrow::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--site-primary);
-    }
-
-    .hero-title {
+    body {
       margin: 0;
-      color: var(--site-heading);
-      font-size: clamp(38px, 4.8vw, 62px);
-      font-weight: 900;
-      line-height: 1.18;
-      letter-spacing: -1.8px;
+      background: var(--cloud);
+      color: var(--ink);
+      font-family: Heebo, Arial, sans-serif;
     }
 
-    .hero-title span {
-      display: block;
-      color: var(--site-primary);
+    button { font: inherit; }
+
+    a { text-underline-offset: 4px; }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--teal-dark);
+      outline-offset: 5px;
     }
 
-    .hero-description {
-      max-width: 510px;
-      margin: 24px 0 0;
-      color: var(--site-muted);
-      font-size: 18px;
-      line-height: 1.9;
+    [hidden] { display: none !important; }
+
+    .shell { overflow: hidden; }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin-inline: auto;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
+    .skip-link {
+      position: fixed;
+      top: 10px;
+      right: 15px;
+      z-index: 100;
+      padding: 12px 18px;
+      border-radius: 10px;
+      color: #fff;
+      background: var(--navy);
+      transform: translateY(-160%);
     }
 
-    .hero-actions .site-btn {
-      min-height: 52px;
-      padding-inline: 25px;
-      font-size: 15px;
-    }
+    .skip-link:focus { transform: translateY(0); }
 
-    .hero-caption {
-      margin: 16px 0 0;
-      color: var(--site-muted);
-      font-size: 13px;
-    }
-
-    .hero-caption a {
-      font-weight: 700;
-    }
-
-    /* המחשה של תהליך הלמידה */
-
-    .learning-preview {
-      position: relative;
-      min-width: 0;
-      padding: 26px;
-      border: 1px solid #d5e3db;
-      border-radius: 24px;
-      background: #fff;
-      box-shadow: 0 22px 60px rgb(23 36 66 / 7%);
-    }
-
-    .preview-header {
+    .nav {
+      min-height: 82px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 24px;
+      gap: 18px;
+      position: relative;
+      z-index: 4;
     }
 
-    .preview-title {
-      margin: 0;
-      color: var(--site-heading);
-      font-size: 17px;
-      font-weight: 800;
-    }
-
-    .preview-label {
-      padding: 4px 9px;
-      border-radius: 7px;
-      color: var(--site-muted);
-      background: var(--site-surface-soft);
-      font-size: 11px;
-    }
-
-    .preview-goal {
-      padding: 21px;
-      border: 1px solid #d9eade;
-      border-radius: 16px;
-      background: #f0f8f3;
-    }
-
-    .preview-goal-label {
-      margin: 0 0 8px;
-      color: var(--site-primary);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .preview-goal h2 {
-      margin: 0;
-      color: var(--site-heading);
-      font-size: 22px;
-      line-height: 1.5;
-    }
-
-    .preview-goal p:last-child {
-      margin: 9px 0 0;
-      color: var(--site-muted);
-      font-size: 13px;
-      line-height: 1.8;
-    }
-
-    .preview-tags {
-      margin-top: 16px;
-    }
-
-    .preview-flow {
-      display: grid;
-      gap: 0;
-      margin: 21px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .preview-flow li {
+    .brand {
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: -1.4px;
       display: flex;
-      align-items: flex-start;
-      gap: 13px;
-      padding: 15px 0;
+      gap: 8px;
+      align-items: center;
+      color: var(--navy);
+      text-decoration: none;
+      flex-shrink: 0;
     }
 
-    .preview-flow li + li {
-      border-top: 1px solid var(--site-border-soft);
-    }
-
-    .preview-number {
+    .brand-mark {
+      width: 29px;
+      height: 29px;
+      border-radius: 10px 10px 10px 2px;
+      background: var(--coral);
       display: grid;
       place-items: center;
-      flex-shrink: 0;
-      width: 34px;
-      height: 34px;
-      border: 1px solid var(--site-border);
-      border-radius: 10px;
-      color: var(--site-primary);
-      background: white;
-      font-size: 13px;
-      font-weight: 800;
+      color: #fff;
+      font-size: 18px;
+      transform: rotate(-5deg);
     }
 
-    .preview-flow h3 {
-      margin: 0;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .preview-flow p {
-      margin: 3px 0 0;
-      color: var(--site-muted);
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    /* קישורים למקטעי העמוד */
-
-    .home-section-nav {
-      border-bottom: 1px solid var(--site-border-soft);
-      background: white;
-    }
-
-    .home-section-nav-inner {
+    .nav-links {
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px 32px;
-      padding-block: 10px;
+      gap: 24px;
+      align-items: center;
     }
 
-    .home-section-nav a {
+    .nav-links a {
       display: inline-flex;
       align-items: center;
       min-height: 44px;
-      color: var(--site-muted);
-      font-size: 14px;
+      color: var(--muted);
       font-weight: 600;
       text-decoration: none;
     }
 
-    .home-section-nav a:hover {
-      color: var(--site-primary);
-      text-decoration: underline;
+    .nav-links a:hover { color: var(--teal-dark); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    /* מקטעי תוכן */
-
-    .home-section {
-      padding-block: 76px;
-      scroll-margin-top: 24px;
-    }
-
-    .home-section-white {
-      background: white;
-    }
-
-    .home-section-heading {
-      max-width: 660px;
-      margin-bottom: 32px;
-    }
-
-    .home-section-heading h2 {
-      margin: 0;
-      color: var(--site-heading);
-      font-size: clamp(27px, 3vw, 36px);
+    .login-link {
+      padding: 10px;
+      color: var(--navy);
       font-weight: 800;
-      line-height: 1.35;
-      letter-spacing: -.7px;
+      text-decoration: none;
+      white-space: nowrap;
     }
 
-    .home-section-heading > p:last-child {
-      margin: 13px 0 0;
-      color: var(--site-muted);
-      font-size: 16px;
-      line-height: 1.85;
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      border: 0;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      border-radius: 14px;
+      padding: 13px 19px;
+      text-decoration: none;
+      text-align: center;
+      transition: .2s transform, .2s box-shadow;
     }
 
-    .home-card {
-      height: 100%;
-      padding: 27px;
+    .button:hover { transform: translateY(-2px); }
+
+    .button-primary {
+      background: var(--navy);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(18,26,55,.2);
     }
 
-    .home-card h3 {
-      margin: 18px 0 10px;
-      color: var(--site-heading);
-      font-size: 20px;
-      line-height: 1.4;
+    .button-coral {
+      background: var(--coral);
+      color: var(--navy);
     }
 
-    .home-card p {
-      margin: 0;
-      color: var(--site-muted);
-      font-size: 14px;
-      line-height: 1.9;
+    .button-light {
+      background: #fff;
+      color: var(--navy);
+      box-shadow: 0 9px 24px rgba(18,26,55,.1);
     }
 
-    .step-number {
-      display: inline-grid;
-      place-items: center;
+    .menu-toggle {
+      display: none;
       width: 44px;
       height: 44px;
-      border-radius: 13px;
-      color: var(--site-primary);
-      background: var(--site-primary-soft);
-      font-size: 18px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: #fff;
+      color: var(--navy);
+      cursor: pointer;
+      font-size: 23px;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 620px;
+      padding: 70px 0 90px;
+      background:
+        radial-gradient(circle at 15% 13%, #fff6db 0, transparent 26%),
+        radial-gradient(circle at 91% 26%, #d7fbef 0, transparent 28%),
+        #f6f8fe;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.03fr;
+      gap: 45px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-grid > * { min-width: 0; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #e4f8ef;
+      color: #098064;
+      padding: 8px 12px;
+      border-radius: 99px;
+      font-size: 14px;
       font-weight: 800;
     }
 
-    .audience-card {
+    .eyebrow i {
+      width: 8px;
+      height: 8px;
+      background: var(--teal);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px #c9efde;
+    }
+
+    .hero h1 {
+      font-size: clamp(49px, 5.8vw, 78px);
+      letter-spacing: -3.6px;
+      line-height: .98;
+      margin: 19px 0;
+      color: var(--navy);
+      font-weight: 900;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--coral);
+      position: relative;
+    }
+
+    .hero h1 em::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: -8px;
+      height: 7px;
+      background: var(--yellow);
+      border-radius: 30px;
+      z-index: -1;
+      transform: rotate(-2deg);
+    }
+
+    .hero-text {
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0;
+    }
+
+    .hero-actions {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0;
+      gap: 12px;
+      align-items: center;
+      margin-top: 27px;
     }
 
-    .audience-card .site-btn {
-      margin-top: auto;
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
     }
 
-    .audience-card p {
-      margin-bottom: 24px;
-    }
+    .faces { display: flex; direction: ltr; }
 
-    .audience-icon {
+    .face {
+      margin-left: -8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid #fff;
       display: grid;
       place-items: center;
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      color: var(--site-primary);
-      background: var(--site-primary-soft);
+      font-size: 12px;
+      color: #fff;
     }
 
-    .audience-icon svg {
-      width: 25px;
-      height: 25px;
+    .f1 { background: #e17e5d; }
+    .f2 { background: #5a82d1; }
+    .f3 { background: #5baf8e; }
+    .f4 { background: #a069bf; }
+
+    .search-card {
+      background: #fff;
+      border: 1px solid #fff;
+      border-radius: 28px;
+      padding: 19px;
+      box-shadow: var(--shadow);
+      position: relative;
     }
 
-    .audience-card-parent .audience-icon {
-      color: #4f608e;
-      background: #edf1fb;
+    .search-card::before {
+      content: "";
+      position: absolute;
+      left: -19px;
+      top: 42px;
+      width: 39px;
+      height: 39px;
+      background: var(--yellow);
+      border-radius: 13px;
+      transform: rotate(13deg);
+      z-index: -1;
     }
 
-    .audience-card-teacher .audience-icon {
-      color: #984c3c;
-      background: #fff0ea;
+    .search-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin: 1px 5px 16px;
     }
 
-    /* אזור אישי */
+    .search-head b { font-size: 19px; }
 
-    .workspace-layout {
+    .progress {
+      font-size: 13px;
+      color: var(--teal-dark);
+      font-weight: 800;
+    }
+
+    .search-fields {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 60px;
+      gap: 10px;
     }
 
-    .workspace-copy .home-section-heading {
-      margin-bottom: 24px;
+    .field {
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 12px;
+      min-height: 69px;
+      background: #fff;
     }
 
-    .feature-list {
-      display: grid;
-      gap: 18px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
+    .field-label {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 3px;
     }
 
-    .feature-list li {
+    .field strong { font-size: 16px; }
+    .full { grid-column: 1 / -1; }
+
+    .choice-row {
       display: flex;
-      align-items: flex-start;
-      gap: 12px;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
-    .feature-check {
+    .choice {
+      font-size: 13px;
+      background: #f1f5ff;
+      color: #53607a;
+      padding: 7px 10px;
+      border-radius: 9px;
+      font-weight: 700;
+    }
+
+    .choice.active {
+      background: #dff8ee;
+      color: #08785c;
+    }
+
+    .match-button {
+      width: 100%;
+      margin-top: 13px;
+      padding: 15px;
+    }
+
+    .magic-card {
+      background: var(--navy);
+      border-radius: 18px;
+      margin-top: 13px;
+      padding: 14px 16px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .magic-star {
+      flex: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: var(--yellow);
+      color: var(--navy);
       display: grid;
       place-items: center;
-      flex-shrink: 0;
-      width: 26px;
-      height: 26px;
-      margin-top: 2px;
-      border-radius: 50%;
-      color: var(--site-primary);
-      background: var(--site-primary-soft);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .feature-list h3 {
-      margin: 0 0 3px;
-      font-size: 15px;
-    }
-
-    .feature-list p {
-      margin: 0;
-      color: var(--site-muted);
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    .workspace-preview {
-      padding: 27px;
-      border: 1px solid var(--site-border);
-      border-radius: 20px;
-      background: var(--site-bg);
-    }
-
-    .workspace-preview-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .workspace-preview-heading h3 {
-      margin: 0;
       font-size: 19px;
     }
 
-    .workspace-preview-item {
+    .magic-card p {
+      font-size: 13px;
+      margin: 2px 0 0;
+      color: #bec8e3;
+    }
+
+    .floating {
+      position: absolute;
+      background: #fff;
+      border-radius: 15px;
+      padding: 10px 13px;
+      box-shadow: 0 14px 30px rgba(23,38,78,.16);
+      font-size: 13px;
+      font-weight: 800;
       display: flex;
+      gap: 8px;
       align-items: center;
-      gap: 14px;
-      margin-top: 12px;
-      padding: 18px;
-      border: 1px solid var(--site-border-soft);
-      border-radius: 12px;
-      background: white;
     }
 
-    .workspace-preview-item > div {
-      min-width: 0;
+    .float-a {
+      left: -30px;
+      bottom: 84px;
+      animation: float 4s ease-in-out infinite;
     }
 
-    .workspace-preview-item strong {
-      display: block;
-      color: var(--site-heading);
-      font-size: 14px;
+    .float-b {
+      right: -21px;
+      top: 80px;
+      animation: float 5s 1s ease-in-out infinite;
     }
 
-    .workspace-preview-item p {
-      margin: 4px 0 0;
-      color: var(--site-muted);
-      font-size: 12px;
-      line-height: 1.75;
-    }
-
-    .workspace-symbol {
+    .float-icon {
+      background: #e4f8ef;
+      color: var(--teal-dark);
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
       display: grid;
       place-items: center;
-      flex-shrink: 0;
-      width: 38px;
-      height: 38px;
-      border-radius: 11px;
-      color: var(--site-primary);
-      background: var(--site-primary-soft);
-      font-size: 18px;
+    }
+
+    @keyframes float {
+      50% { transform: translateY(-10px); }
+    }
+
+    .ticker {
+      background: var(--navy);
+      color: #fff;
+      padding: 14px 0;
+    }
+
+    .ticker-inner {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 12px 35px;
+      color: #cdd5eb;
+      font-size: 14px;
       font-weight: 700;
     }
 
-    /* שאלות נפוצות */
+    .ticker b { color: #fff; }
 
-    .faq-layout {
+    .stats {
+      padding: 75px 0 28px;
       display: grid;
-      grid-template-columns: .75fr 1.25fr;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 80px;
       align-items: start;
-      gap: 64px;
     }
 
-    .faq-list {
+    .section-kicker {
+      color: var(--teal-dark);
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    .section-title {
+      font-size: 42px;
+      line-height: 1.1;
+      letter-spacing: -1.7px;
+      margin: 9px 0 12px;
+      color: var(--navy);
+    }
+
+    .section-copy {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .number-grid {
       display: grid;
-      gap: 12px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
     }
 
-    .faq-item {
-      border: 1px solid var(--site-border);
-      border-radius: 13px;
-      background: white;
+    .number {
+      background: #fff;
+      border-radius: 18px;
+      padding: 22px 18px;
+      box-shadow: 0 8px 30px rgba(18,26,55,.05);
     }
 
-    .faq-item summary {
-      min-height: 60px;
-      padding: 18px 21px;
-      color: var(--site-heading);
+    .number b {
+      font-family: "Space Grotesk", Heebo, sans-serif;
+      font-size: 31px;
+      letter-spacing: -1px;
+      color: var(--coral);
+    }
+
+    .number span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    .how { padding: 84px 0; }
+
+    .section-top {
+      text-align: center;
+      max-width: 655px;
+      margin: auto;
+    }
+
+    .section-top .section-copy {
+      margin-inline: auto;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 38px;
+    }
+
+    .step {
+      padding: 25px;
+      border-radius: 22px;
+      background: #fff;
+      min-height: 248px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step:nth-child(2) { background: var(--mint); }
+    .step:nth-child(3) { background: #fff4e5; }
+
+    .step-num {
+      font-family: "Space Grotesk", Heebo, sans-serif;
       font-size: 15px;
       font-weight: 700;
-      cursor: pointer;
+      color: #ab4138;
     }
 
-    .faq-item summary::marker {
-      color: var(--site-primary);
+    .step-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin: 17px 0;
+      background: #e8efff;
+      font-size: 25px;
     }
 
-    .faq-item p {
+    .step:nth-child(2) .step-icon { background: #cdf5e5; }
+    .step:nth-child(3) .step-icon { background: #ffe0a0; }
+
+    .step h3 { font-size: 21px; margin: 0 0 7px; }
+
+    .step p {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--muted);
       margin: 0;
-      padding: 0 21px 21px;
-      color: var(--site-muted);
+    }
+
+    .spark {
+      position: absolute;
+      left: 17px;
+      bottom: 13px;
+      color: var(--yellow);
+      font-size: 40px;
+      opacity: .8;
+    }
+
+    .teachers { padding: 65px 0 85px; }
+
+    .teachers-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .teacher-card {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 17px;
+      box-shadow: 0 8px 28px rgba(18,26,55,.05);
+    }
+
+    .teacher-card + .teacher-card { margin-top: 12px; }
+
+    .portrait {
+      height: 110px;
+      border-radius: 15px;
+      display: flex;
+      align-items: end;
+      padding: 9px;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 900;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .portrait::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent, rgba(18,26,55,.35));
+    }
+
+    .portrait span { position: relative; z-index: 1; }
+
+    .p-noam { background: linear-gradient(135deg, #fa9d6e, #c64f62); }
+    .p-maya { background: linear-gradient(135deg, #a2d7ea, #5474c1); }
+
+    .teacher-info { min-width: 0; }
+
+    .teacher-name {
+      font-size: 20px;
+      font-weight: 900;
+      margin: 0;
+    }
+
+    .teacher-info p {
+      margin: 4px 0;
+      color: var(--muted);
       font-size: 14px;
-      line-height: 1.9;
     }
 
-    /* קריאה לפעולה */
-
-    .home-cta {
-      padding-bottom: 76px;
+    .teacher-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: end;
+      margin-top: 8px;
     }
 
-    .home-cta-inner {
+    .demo-label {
+      color: var(--teal-dark);
+      background: #e4f8ef;
+      padding: 5px 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .price { font-size: 17px; font-weight: 900; }
+
+    .price small {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .passport {
+      padding: 90px 0;
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .passport-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 65px;
+      align-items: center;
+    }
+
+    .passport .section-title { color: #fff; }
+    .passport .section-copy { color: #b8c4df; }
+
+    .passport-list {
+      list-style: none;
+      padding: 0;
+      margin: 24px 0;
+    }
+
+    .passport-list li {
+      margin: 13px 0;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 28px;
-      padding: 42px;
-      border-radius: 24px;
-      color: white;
-      background: var(--site-navy);
-    }
-
-    .home-cta h2 {
-      margin: 0;
-      color: white;
-      font-size: clamp(25px, 3vw, 34px);
-      line-height: 1.4;
-    }
-
-    .home-cta p {
-      max-width: 580px;
-      margin: 12px 0 0;
-      color: #d4dcec;
-      font-size: 15px;
-      line-height: 1.8;
-    }
-
-    .home-cta-actions {
-      display: flex;
-      flex-wrap: wrap;
       gap: 10px;
+      color: #dbe4f6;
     }
 
-    .home-cta .cta-main {
-      color: var(--site-heading);
-      background: white;
-    }
-
-    .home-cta .cta-main:hover {
-      background: #eaf6f0;
-    }
-
-    .home-cta .cta-secondary {
-      border-color: #77839c;
-      color: white;
-      background: transparent;
-    }
-
-    .home-cta .cta-secondary:hover {
-      background: #293957;
-    }
-
-    /* תחתית */
-
-    .home-footer {
-      padding-block: 34px;
-    }
-
-    .footer-brand {
+    .check {
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      background: #1f805f;
+      color: #fff;
       display: grid;
-      gap: 10px;
-    }
-
-    .footer-brand p {
-      margin: 0;
-      color: var(--site-muted);
+      place-items: center;
       font-size: 13px;
+      font-weight: 900;
+      flex-shrink: 0;
     }
 
-    /* התאמה למסכים */
+    .passport-card {
+      background: #fff;
+      color: var(--navy);
+      border-radius: 24px;
+      padding: 20px;
+      transform: rotate(2deg);
+      box-shadow: 16px 18px 0 #ff6e61;
+    }
+
+    .passport-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .passport-card h3 { margin: 0; font-size: 20px; }
+
+    .lesson-state {
+      background: #e5faf0;
+      color: #08785c;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 6px 9px;
+      border-radius: 8px;
+    }
+
+    .goal {
+      background: #f4f6fb;
+      border-radius: 15px;
+      padding: 13px;
+      margin-top: 17px;
+    }
+
+    .goal span {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .goal b { display: block; font-size: 16px; margin-top: 2px; }
+
+    .timeline {
+      border-right: 2px solid #dce4f1;
+      margin: 18px 7px 3px;
+      padding-right: 19px;
+    }
+
+    .timeline div {
+      position: relative;
+      padding-bottom: 16px;
+      font-size: 14px;
+    }
+
+    .timeline div::before {
+      content: "";
+      position: absolute;
+      right: -25px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      background: var(--teal);
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    .timeline small {
+      display: block;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .next {
+      background: #fff6dd;
+      color: #765500;
+      border-radius: 12px;
+      padding: 11px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .cta {
+      padding: 90px 0;
+      background: linear-gradient(120deg, #ffd361, #ff9d7a);
+    }
+
+    .cta-box {
+      text-align: center;
+      max-width: 680px;
+      margin: auto;
+    }
+
+    .cta h2 {
+      font-size: 50px;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin: 8px 0 14px;
+      color: var(--navy);
+    }
+
+    .cta p {
+      font-size: 18px;
+      color: #603d39;
+      margin: 0 auto 25px;
+    }
+
+    .footer {
+      background: var(--navy);
+      color: #c6d0e7;
+      padding: 30px 0;
+    }
+
+    .footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer .brand { color: #fff; font-size: 24px; }
+    .footer p { font-size: 13px; margin: 0; }
+
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { color: #c6d0e7; font-size: 14px; }
 
     @media (max-width: 1000px) {
-      .hero-layout {
-        gap: 32px;
-      }
-
-      .hero-title {
-        font-size: 48px;
-      }
-
-      .workspace-layout,
-      .faq-layout {
-        gap: 32px;
-      }
-
-      .home-audiences {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      .home-audiences .home-card {
-        padding: 22px;
-      }
+      .nav-links { gap: 14px; }
+      .nav-links a { font-size: 14px; }
     }
 
     @media (max-width: 800px) {
-      .home-hero {
-        padding-block: 46px 48px;
+      .menu-toggle { display: grid; place-items: center; }
+
+      .nav {
+        flex-wrap: wrap;
+        padding-block: 12px;
       }
 
-      .hero-layout,
-      .workspace-layout,
-      .faq-layout {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 34px;
-      }
-
-      .hero-copy {
-        max-width: 620px;
-      }
-
-      .hero-title {
-        font-size: clamp(38px, 7vw, 52px);
-      }
-
-      .hero-description {
-        font-size: 16px;
-      }
-
-      .learning-preview {
+      .nav-links {
+        display: none;
+        order: 3;
         width: 100%;
-        max-width: 560px;
-        margin-inline: auto;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
       }
 
-      .home-section {
-        padding-block: 50px;
+      .nav-links.is-open {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
       }
 
-      .home-audiences {
-        grid-template-columns: minmax(0, 1fr);
+      .nav-links a { padding: 10px; }
+
+      .hero { padding-top: 20px; min-height: auto; }
+
+      .hero-grid,
+      .stats,
+      .passport-grid {
+        grid-template-columns: 1fr;
       }
 
-      .home-audiences .home-card {
-        padding: 24px;
+      .hero-grid { margin-top: 25px; }
+      .hero h1 { font-size: 56px; }
+
+      .hero-visual {
+        max-width: 520px;
+        margin: 0 auto;
+        width: 100%;
       }
 
-      .home-section-heading {
-        margin-bottom: 26px;
+      .floating { display: none; }
+      .stats { gap: 28px; }
+      .number-grid { max-width: 500px; }
+      .steps { grid-template-columns: 1fr; }
+
+      .passport-card {
+        max-width: 430px;
+        margin: 20px auto 0;
+        width: calc(100% - 20px);
       }
 
-      .faq-layout .home-section-heading {
-        margin-bottom: 0;
-      }
-
-      .home-cta {
-        padding-bottom: 48px;
-      }
-
-      .home-cta-inner {
-        padding: 30px;
-      }
+      .cta h2 { font-size: 43px; }
     }
 
-    @media (max-width: 560px) {
-      .hero-title {
-        letter-spacing: -1px;
-      }
+    @media (max-width: 470px) {
+      .container { width: calc(100% - 28px); }
+      .nav { min-height: 67px; gap: 8px; }
+      .brand { font-size: 25px; }
 
-      .hero-actions {
-        gap: 10px;
-      }
-
-      .hero-actions .site-btn {
-        flex: 1 1 145px;
-        padding-inline: 16px;
-      }
-
-      .learning-preview {
-        padding: 20px;
-        border-radius: 18px;
-      }
-
-      .preview-goal {
-        padding: 17px;
-      }
-
-      .preview-goal h2 {
-        font-size: 20px;
-      }
-
-      .home-section-nav-inner {
-        gap: 4px 20px;
-      }
-
-      .home-section-nav a {
+      .nav .button {
+        padding: 10px 12px;
         font-size: 13px;
       }
 
-      .home-card {
-        padding: 23px;
+      .nav-actions { gap: 5px; }
+      .login-link { font-size: 13px; padding: 8px; }
+
+      .hero h1 {
+        font-size: 47px;
+        letter-spacing: -2.5px;
       }
 
-      .workspace-preview {
-        padding: 20px;
+      .hero-text { font-size: 17px; }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
       }
 
-      .workspace-preview-item {
-        padding: 15px;
+      .hero-actions .button { width: 100%; }
+      .search-card { padding: 13px; }
+      .search-fields { grid-template-columns: 1fr; }
+      .field { min-height: 60px; }
+      .full { grid-column: auto; }
+      .number-grid { grid-template-columns: 1fr 1fr; }
+      .number:last-child { grid-column: 1 / -1; }
+
+      .teacher-card {
+        grid-template-columns: 83px 1fr;
+        gap: 12px;
+        padding: 12px;
       }
 
-      .home-cta-inner {
-        padding: 27px 22px;
-        border-radius: 18px;
-      }
+      .portrait { height: 90px; font-size: 18px; }
+      .teacher-name { font-size: 18px; }
+      .section-title { font-size: 35px; }
+      .cta { padding: 68px 0; }
+      .cta h2 { font-size: 38px; }
+      .passport { padding: 65px 0; }
+    }
 
-      .home-cta-actions {
-        width: 100%;
-      }
-
-      .home-cta-actions .site-btn {
-        flex: 1 1 130px;
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
       }
     }
   </style>
-
-  <script type="module" src="./navigation.js"></script>
 </head>
 
 <body>
-  <header data-site-header></header>
+  <a class="skip-link" href="#main-content">דילוג לתוכן העמוד</a>
 
-  <main class="home-main" id="main-content">
-    <section class="home-hero" aria-labelledby="hero-title">
-      <div class="site-container hero-layout">
-        <div class="hero-copy">
-          <p class="hero-eyebrow">
-            לתלמידים, להורים ולמורים
-          </p>
+  <div class="shell">
+    <main id="main-content" tabindex="-1">
+      <section class="hero" aria-labelledby="hero-title">
+        <header class="container nav">
+          <a class="brand" href="index.html" aria-label="כיוון — דף הבית">
+            <span class="brand-mark" aria-hidden="true">↗</span>
+            כיוון
+          </a>
 
-          <h1 class="hero-title" id="hero-title">
-            הדרך ללמוד
-            <span>מתחילה בחיבור נכון.</span>
-          </h1>
+          <nav class="nav-links" id="home-menu" aria-label="ניווט ראשי">
+            <a href="#how">איך זה עובד</a>
+            <a href="#teachers">מכירים את המורים</a>
+            <a href="#passport">החזון שלנו</a>
+          </nav>
 
-          <p class="hero-description">
-            לכל אחד יש מטרה, קצב ודרך ללמוד.
-            בכיוון מגדירים את הצורך, מכירים מורים פרטיים
-            ובוחרים עם מי לעשות את הצעד הבא.
-          </p>
-
-          <div class="hero-actions">
-            <a class="site-btn" href="join.html">
-              מתחילים כאן
+          <div class="nav-actions">
+            <a class="login-link" href="login.html">כניסה</a>
+            <a class="button button-primary" href="join.html">
+              הצטרפו לכיוון
             </a>
 
-            <a
-              class="site-btn site-btn-secondary"
-              href="#how-it-works"
+            <button
+              class="menu-toggle"
+              id="menu-toggle"
+              type="button"
+              aria-controls="home-menu"
+              aria-expanded="false"
+              aria-label="פתיחת תפריט"
             >
-              איך זה עובד?
-            </a>
+              <span aria-hidden="true">☰</span>
+            </button>
           </div>
+        </header>
 
-          <p class="hero-caption">
-            כבר יש לך חשבון?
-            <a href="login.html">כניסה לאזור האישי</a>
-          </p>
-        </div>
-
-        <div
-          class="learning-preview"
-          aria-label="המחשה של תהליך מציאת מורה"
-        >
-          <div class="preview-header">
-            <p class="preview-title">מה תרצו ללמוד?</p>
-            <span class="preview-label">המחשה</span>
-          </div>
-
-          <div class="preview-goal">
-            <p class="preview-goal-label">מתחילים מהמטרה שלך</p>
-
-            <h2>להבין את החומר.<br>להגיע עם יותר ביטחון.</h2>
-
-            <p>
-              למשל: חיזוק הבסיס במתמטיקה,
-              בקצב רגוע ועם מקום לשאלות.
-            </p>
-
-            <div class="site-tags preview-tags">
-              <span class="site-tag">מתמטיקה</span>
-              <span class="site-tag">חיזוק הבסיס</span>
-              <span class="site-tag">אונליין</span>
-            </div>
-          </div>
-
-          <ol class="preview-flow">
-            <li>
-              <span class="preview-number" aria-hidden="true">1</span>
-              <div>
-                <h3>מספרים מה צריך</h3>
-                <p>מקצוע, רמה ומטרת הלמידה.</p>
-              </div>
-            </li>
-
-            <li>
-              <span class="preview-number" aria-hidden="true">2</span>
-              <div>
-                <h3>מכירים את המורים</h3>
-                <p>קוראים על הניסיון ועל דרך ההוראה.</p>
-              </div>
-            </li>
-
-            <li>
-              <span class="preview-number" aria-hidden="true">3</span>
-              <div>
-                <h3>יוצרים קשר</h3>
-                <p>שולחים בקשה, ואחרי אישור מתאמים בשיחה.</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <nav class="home-section-nav" aria-label="מקטעי דף הבית">
-      <div class="site-container home-section-nav-inner">
-        <a href="#how-it-works">איך זה עובד</a>
-        <a href="#for-everyone">למי זה מתאים</a>
-        <a href="#your-space">האזור האישי</a>
-        <a href="#questions">שאלות נפוצות</a>
-      </div>
-    </nav>
-
-    <section
-      class="home-section home-section-white"
-      id="how-it-works"
-      aria-labelledby="how-title"
-    >
-      <div class="site-container">
-        <div class="home-section-heading">
-          <p class="site-eyebrow">מהצורך שלך לשיעור הבא</p>
-          <h2 id="how-title">שלושה צעדים להתחלה</h2>
-          <p>
-            מכירים את האפשרויות ובוחרים את מה שמתאים לך,
-            עם מידע ברור בכל שלב.
-          </p>
-        </div>
-
-        <div class="site-grid">
-          <article class="site-card home-card">
-            <span class="step-number" aria-hidden="true">1</span>
-            <h3>מגדירים מה רוצים ללמוד</h3>
-            <p>
-              יוצרים חשבון ומשלימים פרופיל למידה:
-              מקצועות, רמה, מטרות וזמנים נוחים.
-              הורים יכולים להגדיר פרופיל למידה עבור הילד/ה.
-            </p>
-          </article>
-
-          <article class="site-card home-card">
-            <span class="step-number" aria-hidden="true">2</span>
-            <h3>מוצאים מורה שמתאים לצורך</h3>
-            <p>
-              מחפשים לפי מקצוע, מחיר ואופן הלימוד.
-              פותחים פרופילים וקוראים על הניסיון,
-              הזמינות ודרך ההוראה.
-            </p>
-          </article>
-
-          <article class="site-card home-card">
-            <span class="step-number" aria-hidden="true">3</span>
-            <h3>שולחים בקשה ומתאמים</h3>
-            <p>
-              שולחים למורה בקשה קצרה.
-              אחרי אישור הבקשה אפשר לפתוח שיחה
-              ולתאם את המועד ואת פרטי השיעור.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section
-      class="home-section"
-      id="for-everyone"
-      aria-labelledby="audiences-title"
-    >
-      <div class="site-container">
-        <div class="home-section-heading">
-          <p class="site-eyebrow">לכל אחד יש כיוון</p>
-          <h2 id="audiences-title">מקום למי שלומד ולמי שמלמד</h2>
-          <p>
-            באותו חשבון אפשר ללמוד בעצמך,
-            למצוא מורה לילד/ה וגם ללמד.
-          </p>
-        </div>
-
-        <div class="site-grid home-audiences">
-          <article class="site-card home-card audience-card">
-            <div class="audience-icon" aria-hidden="true">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.7"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M4 4h6a3 3 0 0 1 3 3v14a4 4 0 0 0-4-3H4z"></path>
-                <path d="M20 4h-4a3 3 0 0 0-3 3v14a4 4 0 0 1 4-3h3z"></path>
-              </svg>
-            </div>
-
-            <h3>לתלמידים וללומדים</h3>
-            <p>
-              לחזק נושא שלא יושב טוב, להתכונן למבחן
-              או ללמוד משהו חדש — ולמצוא מורה
-              שדרך ההוראה שלו מתאימה לך.
-            </p>
-
-            <a
-              class="site-btn site-btn-secondary"
-              href="join.html"
-              aria-label="יצירת חשבון כדי ללמוד"
-            >
-              אני רוצה ללמוד
-            </a>
-          </article>
-
-          <article class="site-card home-card audience-card audience-card-parent">
-            <div class="audience-icon" aria-hidden="true">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.7"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <circle cx="8" cy="7" r="3"></circle>
-                <circle cx="17" cy="9" r="2.5"></circle>
-                <path d="M2 21v-3a6 6 0 0 1 12 0v3"></path>
-                <path d="M15 14a5 5 0 0 1 7 4v3"></path>
-              </svg>
-            </div>
-
-            <h3>להורים</h3>
-            <p>
-              מגדירים את הצורך של הילד/ה,
-              מכירים את המורה ועוקבים אחר הבקשות והשיחות
-              מתוך החשבון שלכם.
-            </p>
-
-            <a
-              class="site-btn site-btn-secondary"
-              href="join.html"
-              aria-label="יצירת חשבון להורה"
-            >
-              מחפשים מורה לילד/ה
-            </a>
-          </article>
-
-          <article class="site-card home-card audience-card audience-card-teacher">
-            <div class="audience-icon" aria-hidden="true">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.7"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="3" y="3" width="18" height="13" rx="2"></rect>
-                <path d="M8 21l4-5 4 5M7 8h10M7 11h6"></path>
-              </svg>
-            </div>
-
-            <h3>למורים פרטיים</h3>
-            <p>
-              מציגים את הניסיון ואת המקצועות שלכם,
-              מגדירים מחיר ודרך הוראה,
-              ומנהלים בקשות ושיחות עם תלמידים.
-            </p>
-
-            <a
-              class="site-btn site-btn-secondary"
-              href="join.html"
-              aria-label="יצירת חשבון למורה"
-            >
-              אני רוצה ללמד
-            </a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section
-      class="home-section home-section-white"
-      id="your-space"
-      aria-labelledby="workspace-title"
-    >
-      <div class="site-container workspace-layout">
-        <div class="workspace-copy">
-          <div class="home-section-heading">
-            <p class="site-eyebrow">ממשיכים מאיפה שעצרת</p>
-            <h2 id="workspace-title">הכול מתחיל באזור שלך</h2>
-            <p>
-              אחרי הכניסה, יש מקום קבוע לחזור אליו —
-              בלי לחפש מחדש את הפרטים ואת השיחות.
-            </p>
-          </div>
-
-          <ul class="feature-list">
-            <li>
-              <span class="feature-check" aria-hidden="true">✓</span>
-              <div>
-                <h3>פרופיל שאפשר לעדכן</h3>
-                <p>
-                  המקצועות, המטרות והזמינות משתנים?
-                  מעדכנים את הפרופיל וממשיכים.
-                </p>
-              </div>
-            </li>
-
-            <li>
-              <span class="feature-check" aria-hidden="true">✓</span>
-              <div>
-                <h3>בקשות עם מצב ברור</h3>
-                <p>
-                  רואים אילו בקשות ממתינות לאישור
-                  ואילו בקשות כבר אושרו.
-                </p>
-              </div>
-            </li>
-
-            <li>
-              <span class="feature-check" aria-hidden="true">✓</span>
-              <div>
-                <h3>שיחות לצד פרטי השיעור</h3>
-                <p>
-                  אחרי אישור הבקשה, חוזרים לשיחה
-                  וממשיכים לתאם את הפרטים.
-                </p>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div
-          class="workspace-preview"
-          aria-label="המחשה של המידע באזור האישי"
-        >
-          <div class="workspace-preview-heading">
-            <h3>האזור שלי</h3>
-            <span class="preview-label">המחשה</span>
-          </div>
-
-          <div class="workspace-preview-item">
-            <span class="workspace-symbol" aria-hidden="true">א</span>
-            <div>
-              <strong>הפרופיל שלי</strong>
-              <p>הפרטים, המקצועות והעדפות הלמידה.</p>
-            </div>
-          </div>
-
-          <div class="workspace-preview-item">
-            <span class="workspace-symbol" aria-hidden="true">↗</span>
-            <div>
-              <strong>הבקשות שלי</strong>
-              <p>בקשות ששלחת או קיבלת והמצב של כל אחת.</p>
-            </div>
-          </div>
-
-          <div class="workspace-preview-item">
-            <span class="workspace-symbol" aria-hidden="true">···</span>
-            <div>
-              <strong>השיחות שלי</strong>
-              <p>ממשיכים לתאם אחרי שהבקשה מאושרת.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section
-      class="home-section"
-      id="questions"
-      aria-labelledby="questions-title"
-    >
-      <div class="site-container faq-layout">
-        <div class="home-section-heading">
-          <p class="site-eyebrow">לפני שמתחילים</p>
-          <h2 id="questions-title">כמה דברים שכדאי לדעת</h2>
-          <p>
-            מההרשמה ועד השיחה עם המורה —
-            אלה השלבים העיקריים.
-          </p>
-        </div>
-
-        <div class="faq-list">
-          <details class="faq-item">
-            <summary>צריך חשבון כדי למצוא מורה?</summary>
-            <p>
-              כן. אחרי יצירת חשבון וכניסה אפשר לחפש מורים,
-              לצפות בפרופילים ולשלוח בקשות.
-              הפרופיל מאפשר גם להציג התאמה למקצועות שבחרת.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>אפשר להיות גם תלמיד/ה וגם מורה?</summary>
-            <p>
-              כן. בהרשמה ובעריכת הפרופיל אפשר לבחור יותר
-              משימוש אחד לחשבון: ללמוד בעצמך,
-              למצוא מורה לילד/ה או ללמד.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>מתי אפשר לשוחח עם המורה?</summary>
-            <p>
-              תחילה שולחים בקשה מתוך פרופיל המורה.
-              לאחר שהמורה מאשר/ת אותה, השיחה זמינה
-              דרך האזור האישי.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>שליחת בקשה קובעת שיעור או מבצעת תשלום?</summary>
-            <p>
-              לא. הבקשה היא תחילת התיאום.
-              יש לוודא עם המורה את המועד, משך השיעור,
-              המחיר ושאר הפרטים. בתהליך הנוכחי באתר
-              לא מתבצע תשלום.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>מה הם פרופילי ההדגמה?</summary>
-            <p>
-              אלה פרופילים לדוגמה שממחישים איך האתר עובד.
-              הם מסומנים כהדגמה, ואי אפשר לשלוח אליהם
-              בקשות או הודעות.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>איך נשארים מחוברים?</summary>
-            <p>
-              במסך הכניסה אפשר לסמן
-              „להישאר מחוברים במכשיר הזה”.
-              האפשרות מתאימה למכשיר אישי.
-              לחיצה על התנתקות מסיימת את ההתחברות.
-            </p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="home-cta" aria-labelledby="cta-title">
-      <div class="site-container">
-        <div class="home-cta-inner">
+        <div class="container hero-grid">
           <div>
-            <h2 id="cta-title">מה הכיוון שלך?</h2>
-            <p>
-              ללמוד משהו חדש, לחזק את מה שכבר התחלת
-              או להעביר את הידע שלך הלאה —
-              מתחילים ביצירת חשבון.
+            <div class="eyebrow">
+              <i aria-hidden="true"></i>
+              התאמה שמבינה מה צריך עכשיו
+            </div>
+
+            <h1 id="hero-title">
+              לא עוד מורה.<br>
+              <em>החיבור</em> הנכון.
+            </h1>
+
+            <p class="hero-text">
+              כיוון עוזרת למצוא מורה שמתאים למטרה,
+              לאופי ולקצב של התלמיד.
+              מכירים את המורים, שולחים בקשה ומתחילים לתאם.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button button-coral" href="join.html">
+                בואו נמצא התאמה
+              </a>
+
+              <a class="button button-light" href="#how">
+                איך זה עובד ↓
+              </a>
+            </div>
+
+            <div class="hero-trust">
+              <div class="faces" aria-hidden="true">
+                <span class="face f1">מ</span>
+                <span class="face f2">נ</span>
+                <span class="face f3">ע</span>
+                <span class="face f4">י</span>
+              </div>
+              מקום לתלמידים, להורים ולמורים
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="search-card">
+              <div class="search-head">
+                <b>בואו נכיר אותך</b>
+                <span class="progress">כך זה נראה · המחשה</span>
+              </div>
+
+              <div class="search-fields">
+                <div class="field">
+                  <span class="field-label">מה רוצים ללמוד?</span>
+                  <strong>מתמטיקה</strong>
+                </div>
+
+                <div class="field">
+                  <span class="field-label">באיזו רמה?</span>
+                  <strong>4–5 יח״ל</strong>
+                </div>
+
+                <div class="field full">
+                  <span class="field-label">מה היעד?</span>
+                  <strong>להרגיש בטוח לקראת הבגרות</strong>
+                </div>
+
+                <div class="field full">
+                  <span class="field-label">איך הכי נוח ללמוד?</span>
+                  <div class="choice-row">
+                    <span class="choice active">בגובה העיניים</span>
+                    <span class="choice">מסודר ומדויק</span>
+                    <span class="choice">בקצב מהיר</span>
+                  </div>
+                </div>
+              </div>
+
+              <a class="button button-primary match-button" href="join.html">
+                מתחילים את ההתאמה שלי ←
+              </a>
+
+              <div class="magic-card">
+                <div class="magic-star" aria-hidden="true">✦</div>
+                <div>
+                  <b>מתחילים במה שחשוב לך.</b>
+                  <p>המקצוע, המטרה ודרך הלמידה שלך.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="floating float-a">
+              <span class="float-icon" aria-hidden="true">✓</span>
+              פרופיל שמרכז את הצורך שלך
+            </div>
+
+            <div class="floating float-b">
+              <span class="float-icon" aria-hidden="true">◷</span>
+              מתאמים אחרי אישור הבקשה
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="ticker">
+        <div class="container ticker-inner">
+          <span><b aria-hidden="true">✦</b> מתחילים מהמטרה</span>
+          <span><b aria-hidden="true">✦</b> מכירים את המורה</span>
+          <span><b aria-hidden="true">✦</b> אונליין או פרונטלי</span>
+          <span><b aria-hidden="true">✦</b> בקשות ושיחות במקום אחד</span>
+        </div>
+      </div>
+
+      <section class="container stats" aria-labelledby="problem-title">
+        <div>
+          <div class="section-kicker">הבעיה שאנחנו פותרים</div>
+          <h2 class="section-title" id="problem-title">
+            מורה מעולה הוא לא בהכרח המורה המתאים.
+          </h2>
+          <p class="section-copy">
+            התלמיד או ההורה מספרים מה באמת נדרש.
+            כיוון עוזרת להכיר מורים לפי הצורך,
+            לקרוא על דרך ההוראה ולבחור עם מי להמשיך.
+          </p>
+        </div>
+
+        <div class="number-grid">
+          <div class="number">
+            <b>01</b>
+            <span>מגדירים את הצורך</span>
+          </div>
+          <div class="number">
+            <b>02</b>
+            <span>מכירים את המורים</span>
+          </div>
+          <div class="number">
+            <b>03</b>
+            <span>שולחים בקשה</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="how" id="how" aria-labelledby="how-title">
+        <div class="container">
+          <div class="section-top">
+            <div class="section-kicker">פשוט יותר ממה שחשבת</div>
+            <h2 class="section-title" id="how-title">
+              שלושה צעדים קדימה.
+            </h2>
+            <p class="section-copy">
+              מהצורך שלך ועד השיחה עם המורה — צעד אחרי צעד.
             </p>
           </div>
 
-          <div class="home-cta-actions">
-            <a class="site-btn cta-main" href="join.html">
-              יצירת חשבון
-            </a>
+          <div class="steps">
+            <article class="step">
+              <div class="step-num">01 / מכוונים</div>
+              <div class="step-icon" aria-hidden="true">◎</div>
+              <h3>מספרים מה צריך</h3>
+              <p>
+                יוצרים חשבון ומגדירים מקצוע, רמה,
+                מטרה, זמינות ואיך נוח ללמוד.
+              </p>
+              <span class="spark" aria-hidden="true">✦</span>
+            </article>
 
-            <a class="site-btn cta-secondary" href="login.html">
-              כבר יש לי חשבון
-            </a>
+            <article class="step">
+              <div class="step-num">02 / בוחרים</div>
+              <div class="step-icon" aria-hidden="true">↗</div>
+              <h3>מכירים את המורים</h3>
+              <p>
+                קוראים על הניסיון ודרך ההוראה,
+                ומשווים לפי מקצוע, מחיר ואופן הלימוד.
+              </p>
+              <span class="spark" aria-hidden="true">✦</span>
+            </article>
+
+            <article class="step">
+              <div class="step-num">03 / מתקדמים</div>
+              <div class="step-icon" aria-hidden="true">✓</div>
+              <h3>שולחים בקשה ומתאמים</h3>
+              <p>
+                אחרי שהמורה מאשר/ת את הבקשה,
+                פותחים שיחה ומתאמים את פרטי השיעור.
+              </p>
+              <span class="spark" aria-hidden="true">✦</span>
+            </article>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <footer class="site-footer home-footer">
-    <div class="site-container site-footer-inner">
-      <div class="footer-brand">
-        <a class="site-brand" href="index.html" aria-label="כיוון — דף הבית">
+      <section
+        class="container teachers"
+        id="teachers"
+        aria-labelledby="teachers-title"
+      >
+        <div class="teachers-heading">
+          <div>
+            <div class="section-kicker">השלב הבא</div>
+            <h2 class="section-title" id="teachers-title">
+              פוגשים את המורים שמתאימים לך.
+            </h2>
+          </div>
+
+          <a class="button button-light" href="login.html?next=matches.html">
+            נכנסים ומגלים מורים ←
+          </a>
+        </div>
+
+        <p class="section-copy">
+          כך יכולים להיראות פרופילי המורים.
+          הכרטיסים כאן הם דוגמאות להמחשה, ולא הצעות לשיעורים.
+        </p>
+
+        <div style="margin-top:27px">
+          <article class="teacher-card">
+            <div class="portrait p-noam" aria-hidden="true">
+              <span>נועם</span>
+            </div>
+            <div class="teacher-info">
+              <h3 class="teacher-name">נועם לוי</h3>
+              <p>מתמטיקה 4–5 יח״ל · דוגמה לפרופיל מורה</p>
+
+              <div class="teacher-footer">
+                <span class="demo-label">המחשה בלבד</span>
+                <span class="price">₪120 <small>/ מחיר לדוגמה</small></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="teacher-card">
+            <div class="portrait p-maya" aria-hidden="true">
+              <span>מאיה</span>
+            </div>
+            <div class="teacher-info">
+              <h3 class="teacher-name">מאיה כהן</h3>
+              <p>מתמטיקה ופיזיקה · דוגמה לפרופיל מורה</p>
+
+              <div class="teacher-footer">
+                <span class="demo-label">המחשה בלבד</span>
+                <span class="price">₪135 <small>/ מחיר לדוגמה</small></span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="passport" id="passport" aria-labelledby="passport-title">
+        <div class="container passport-grid">
+          <div>
+            <div class="section-kicker" style="color:var(--yellow)">
+              החזון שלנו · יכולת עתידית
+            </div>
+
+            <h2 class="section-title" id="passport-title">
+              לא מסיימים שיעור.<br>
+              מתקדמים ממנו.
+            </h2>
+
+            <p class="section-copy">
+              דרכון ההתקדמות הוא חלק מהחזון של כיוון:
+              לרכז את המטרה, ההצלחות והצעד הבא.
+              התצוגה כאן היא המחשה; היכולת עדיין אינה פעילה באתר.
+            </p>
+
+            <ul class="passport-list">
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                מטרה ברורה ללמידה
+              </li>
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                מקום לתיעוד ההתקדמות
+              </li>
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                הצעד הבא מול העיניים
+              </li>
+            </ul>
+
+            <a class="button button-coral" href="join.html">
+              מתחילים עם מציאת מורה
+            </a>
+          </div>
+
+          <div class="passport-card">
+            <div class="passport-card-head">
+              <h3>הדרכון של דנה</h3>
+              <span class="lesson-state">דוגמה לעתיד</span>
+            </div>
+
+            <div class="goal">
+              <span>המטרה שלנו</span>
+              <b>להגיע מוכנה לבגרות במתמטיקה</b>
+            </div>
+
+            <div class="timeline">
+              <div>
+                <b>פירוק שאלות מילוליות</b>
+                <small>דוגמה להישג משיעור</small>
+              </div>
+              <div>
+                <b>תרגול פונקציות</b>
+                <small>דוגמה לצעד הבא</small>
+              </div>
+            </div>
+
+            <div class="next">
+              ✦ עוד צעד קטן בדרך למטרה גדולה
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" aria-labelledby="cta-title">
+        <div class="container cta-box">
+          <div class="eyebrow" style="background:#fff4d2;color:#805500">
+            מורה טוב משנה הכול
+          </div>
+
+          <h2 id="cta-title">
+            בואו נמצא את<br>
+            הכיוון שלכם.
+          </h2>
+
+          <p>
+            יוצרים פרופיל, מכירים מורים ובוחרים עם מי להתקדם.
+          </p>
+
+          <a class="button button-primary" href="join.html">
+            התחילו עכשיו ←
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">↗</span>
           כיוון
-          <span class="site-brand-mark" aria-hidden="true">↗</span>
         </a>
-        <p>מוצאים את הדרך ללמוד.</p>
+
+        <nav class="footer-links" aria-label="קישורים נוספים">
+          <a href="login.html">כניסה</a>
+          <a href="join.html">יצירת חשבון</a>
+        </nav>
+
+        <p>© כיוון · ללמוד בדרך שמתאימה לך</p>
       </div>
+    </footer>
+  </div>
 
-      <nav class="site-footer-links" aria-label="קישורים בתחתית העמוד">
-        <a href="#how-it-works">איך זה עובד</a>
-        <a href="#questions">שאלות נפוצות</a>
-        <a href="login.html">כניסה</a>
-        <a href="join.html">יצירת חשבון</a>
-      </nav>
-    </div>
-  </footer>
+  <script>
+    const menuButton = document.getElementById("menu-toggle");
+    const menu = document.getElementById("home-menu");
 
-  <noscript>
-    <div class="site-container site-notice" style="margin-block:20px">
-      אפשר לקרוא את דף הבית, אך כדי להירשם ולהיכנס לחשבון
-      יש להפעיל JavaScript בדפדפן.
-    </div>
-  </noscript>
+    function setMenuOpen(open, returnFocus = false) {
+      menu.classList.toggle("is-open", open);
+
+      menuButton.setAttribute("aria-expanded", String(open));
+      menuButton.setAttribute(
+        "aria-label",
+        open ? "סגירת תפריט" : "פתיחת תפריט"
+      );
+
+      if (returnFocus) menuButton.focus();
+    }
+
+    menuButton.addEventListener("click", () => {
+      setMenuOpen(
+        menuButton.getAttribute("aria-expanded") !== "true"
+      );
+    });
+
+    menu.addEventListener("click", event => {
+      if (event.target.closest("a")) setMenuOpen(false);
+    });
+
+    document.addEventListener("click", event => {
+      if (
+        !menu.contains(event.target) &&
+        !menuButton.contains(event.target)
+      ) {
+        setMenuOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if (
+        event.key === "Escape" &&
+        menuButton.getAttribute("aria-expanded") === "true"
+      ) {
+        setMenuOpen(false, true);
+      }
+    });
+
+    window.matchMedia("(min-width: 801px)")
+      .addEventListener("change", () => setMenuOpen(false));
+  </script>
 </body>
 </html>
