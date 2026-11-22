@@ -1,11 +1,10 @@
 /*
  * כיוון — ניווט משותף
- * navigation.js
  *
- * בדפים החדשים נשתמש באלמנט:
+ * מופעל בכותרת של הדפים הפנימיים:
  * <header data-site-header></header>
  *
- * הקובץ תומך גם בתפריט הישן בזמן המעבר לעיצוב החדש.
+ * משתמש בעיצוב הקיים מתוך site.css.
  */
 
 function startNavigation() {
@@ -15,7 +14,7 @@ function startNavigation() {
   initializeAccessNotice();
 }
 
-/* קישור נגיש לדילוג לתוכן העמוד */
+/* מעבר נגיש לתוכן הראשי */
 
 function addSkipLink() {
   const main =
@@ -36,27 +35,27 @@ function addSkipLink() {
     return;
   }
 
-  const skip = document.createElement("a");
+  const link = document.createElement("a");
 
-  skip.className = "skip-link site-skip-link";
-  skip.href = `#${main.id}`;
-  skip.textContent = "דילוג לתוכן העמוד";
+  link.className = "skip-link site-skip-link";
+  link.href = `#${main.id}`;
+  link.textContent = "דילוג לתוכן העמוד";
 
-  document.body.prepend(skip);
+  document.body.prepend(link);
 }
 
-/* תמיכה בתפריט של הדפים הקיימים */
+/* תמיכה בתפריט הישן, אם הוא קיים בעמוד */
 
 function initializeExistingMenu() {
   const button = document.querySelector(".menu-toggle");
   const menu = document.getElementById("public-menu");
 
-  if (!button || !menu) return;
-
-  connectMobileMenu(button, menu);
+  if (button && menu) {
+    connectMobileMenu(button, menu);
+  }
 }
 
-/* פתיחה וסגירה של תפריט בנייד */
+/* תפריט נייד */
 
 function connectMobileMenu(button, menu) {
   if (button.dataset.navigationReady === "true") return;
@@ -76,7 +75,7 @@ function connectMobileMenu(button, menu) {
       open ? "סגירת תפריט הניווט" : "פתיחת תפריט הניווט"
     );
 
-    if (returnFocus) {
+    if (returnFocus && !button.hidden) {
       button.focus();
     }
   }
@@ -84,14 +83,14 @@ function connectMobileMenu(button, menu) {
   setOpen(false);
 
   button.addEventListener("click", () => {
-    const open = button.getAttribute("aria-expanded") === "true";
-    setOpen(!open);
+    setOpen(button.getAttribute("aria-expanded") !== "true");
   });
 
   menu.addEventListener("click", event => {
-    if (event.target.closest("a")) {
-      setOpen(false);
-    }
+    if (!event.target.closest("a")) return;
+
+    const mobile = window.matchMedia("(max-width: 800px)").matches;
+    setOpen(false, mobile);
   });
 
   document.addEventListener("click", event => {
@@ -114,12 +113,19 @@ function connectMobileMenu(button, menu) {
 
   const desktop = window.matchMedia("(min-width: 801px)");
 
-  desktop.addEventListener("change", () => {
+  function updateScreenSize() {
     setOpen(false);
-  });
+
+    if (button.classList.contains("site-menu-toggle")) {
+      button.hidden = desktop.matches;
+    }
+  }
+
+  desktop.addEventListener("change", updateScreenSize);
+  updateScreenSize();
 }
 
-/* בניית הכותרת המשותפת בדפים החדשים */
+/* כותרת הדפים הפנימיים */
 
 async function initializeSharedHeader() {
   const header = document.querySelector("[data-site-header]");
@@ -152,6 +158,7 @@ async function initializeSharedHeader() {
           <span
             class="site-muted site-small"
             role="status"
+            id="site-auth-loading"
           >
             בודקים התחברות…
           </span>
@@ -187,27 +194,69 @@ async function initializeSharedHeader() {
   connectMobileMenu(menuButton, nav);
 
   let closeAccountMenu = () => {};
+  let updateHeaderProfile = null;
   let accountVersion = 0;
+  let mountedUserId = null;
+  let signingOut = false;
 
-  document.addEventListener("click", event => {
-    const account = accountArea.querySelector(".site-account");
+  const currentPage =
+    location.pathname.split("/").pop() || "index.html";
 
-    if (account && !account.contains(event.target)) {
-      closeAccountMenu();
+  /* סימון המקום הנוכחי */
+
+  function updateActiveLinks() {
+    const hash = location.hash;
+
+    let activeKey = "";
+
+    if (currentPage === "dashboard.html") {
+      if (hash === "#requests") {
+        activeKey = "requests";
+      } else if (hash === "#messages") {
+        activeKey = "messages";
+      } else {
+        activeKey = "dashboard";
+      }
+    } else if (
+      currentPage === "matches.html" ||
+      currentPage === "teacher-profile.html"
+    ) {
+      activeKey = "teachers";
+    } else if (currentPage === "chat.html") {
+      activeKey = "messages";
+    } else if (currentPage === "index.html") {
+      activeKey = "home";
     }
-  });
 
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") {
-      closeAccountMenu(true);
-    }
-  });
+    nav.querySelectorAll("a[data-nav-key]").forEach(link => {
+      if (link.dataset.navKey === activeKey) {
+        const inPageSection =
+          currentPage === "dashboard.html" &&
+          ["requests", "messages"].includes(activeKey);
+
+        link.setAttribute(
+          "aria-current",
+          inPageSection ? "location" : "page"
+        );
+
+        // site.css משתמש ב־aria-current="page" לצביעה.
+        if (inPageSection) {
+          link.style.color = "var(--site-primary)";
+          link.style.background = "var(--site-primary-soft)";
+        } else {
+          link.style.removeProperty("color");
+          link.style.removeProperty("background");
+        }
+      } else {
+        link.removeAttribute("aria-current");
+        link.style.removeProperty("color");
+        link.style.removeProperty("background");
+      }
+    });
+  }
 
   function renderLinks(items) {
     nav.replaceChildren();
-
-    const currentPage =
-      window.location.pathname.split("/").pop() || "index.html";
 
     for (const item of items) {
       const link = document.createElement("a");
@@ -215,21 +264,25 @@ async function initializeSharedHeader() {
       link.className = "site-nav-link";
       link.href = item.href;
       link.textContent = item.label;
-
-      if (item.href === currentPage) {
-        link.setAttribute("aria-current", "page");
-      }
+      link.dataset.navKey = item.key;
 
       nav.appendChild(link);
     }
+
+    updateActiveLinks();
   }
+
+  window.addEventListener("hashchange", updateActiveLinks);
 
   function showPublicNavigation() {
     accountVersion += 1;
+    mountedUserId = null;
+    updateHeaderProfile = null;
     closeAccountMenu = () => {};
 
     renderLinks([
       {
+        key: "home",
         href: "index.html",
         label: "דף הבית"
       }
@@ -250,15 +303,28 @@ async function initializeSharedHeader() {
 
   function showSignedInNavigation(user, sdk) {
     const version = ++accountVersion;
+    mountedUserId = user.uid;
 
     renderLinks([
       {
+        key: "dashboard",
         href: "dashboard.html",
         label: "האזור שלי"
       },
       {
+        key: "teachers",
         href: "matches.html",
         label: "מציאת מורה"
+      },
+      {
+        key: "requests",
+        href: "dashboard.html#requests",
+        label: "הבקשות שלי"
+      },
+      {
+        key: "messages",
+        href: "dashboard.html#messages",
+        label: "השיחות שלי"
       }
     ]);
 
@@ -291,7 +357,9 @@ async function initializeSharedHeader() {
           id="site-account-menu"
           hidden
         >
-          <a href="dashboard.html">האזור האישי שלי</a>
+          <a href="dashboard.html#profile">הפרופיל שלי</a>
+          <a href="dashboard.html#requests">הבקשות שלי</a>
+          <a href="dashboard.html#messages">השיחות שלי</a>
 
           <button
             class="site-logout"
@@ -312,6 +380,7 @@ async function initializeSharedHeader() {
       </div>
     `;
 
+    const account = accountArea.querySelector(".site-account");
     const trigger = accountArea.querySelector("#site-account-trigger");
     const menu = accountArea.querySelector("#site-account-menu");
     const nameElement = accountArea.querySelector("#site-account-name");
@@ -319,7 +388,7 @@ async function initializeSharedHeader() {
     const logoutButton = accountArea.querySelector("#site-logout");
     const status = accountArea.querySelector("#site-account-status");
 
-    let signingOut = false;
+    let identityRevision = 0;
 
     function updateIdentity(name, photo) {
       const displayName =
@@ -329,21 +398,17 @@ async function initializeSharedHeader() {
 
       nameElement.textContent = displayName;
 
-      avatar.replaceChildren();
-
-      const initials = Array.from(displayName)[0] || "כ";
-      avatar.textContent = initials;
+      const initial = Array.from(displayName)[0] || "כ";
+      avatar.textContent = initial;
 
       if (typeof photo !== "string" || !photo) return;
 
-      let allowed = /^data:image\/(?:png|jpeg|webp|gif);base64,/i.test(
-        photo
-      );
+      let allowed =
+        /^data:image\/(?:png|jpeg|webp|gif);base64,/i.test(photo);
 
       if (!allowed) {
         try {
-          const url = new URL(photo);
-          allowed = url.protocol === "https:";
+          allowed = new URL(photo).protocol === "https:";
         } catch {
           allowed = false;
         }
@@ -357,7 +422,9 @@ async function initializeSharedHeader() {
       image.referrerPolicy = "no-referrer";
 
       image.addEventListener("error", () => {
-        avatar.textContent = initials;
+        if (avatar.contains(image)) {
+          avatar.textContent = initial;
+        }
       });
 
       image.src = photo;
@@ -366,8 +433,8 @@ async function initializeSharedHeader() {
 
     function setAccountOpen(open, returnFocus = false) {
       menu.hidden = !open;
-      trigger.setAttribute("aria-expanded", String(open));
 
+      trigger.setAttribute("aria-expanded", String(open));
       trigger.setAttribute(
         "aria-label",
         open ? "סגירת תפריט החשבון" : "פתיחת תפריט החשבון"
@@ -396,7 +463,11 @@ async function initializeSharedHeader() {
       }
     });
 
-    const account = accountArea.querySelector(".site-account");
+    menu.addEventListener("click", event => {
+      if (event.target.closest("a")) {
+        setAccountOpen(false, true);
+      }
+    });
 
     account.addEventListener("focusout", () => {
       queueMicrotask(() => {
@@ -410,8 +481,8 @@ async function initializeSharedHeader() {
       if (signingOut) return;
 
       /*
-       * דף עם שינויים שלא נשמרו יכול לעצור התנתקות
-       * באמצעות האירוע kivun:before-signout.
+       * מאפשר לעמוד לעצור התנתקות בזמן שמירה,
+       * או לשאול לגבי שינויים שלא נשמרו.
        */
       const beforeSignOut = new CustomEvent(
         "kivun:before-signout",
@@ -427,29 +498,41 @@ async function initializeSharedHeader() {
 
       try {
         await sdk.signOut(sdk.auth);
-        window.location.replace("login.html");
+        location.replace("login.html");
       } catch (error) {
         console.error("Sign out failed:", error?.code);
 
-        status.textContent =
-          "לא הצלחנו להתנתק. נסו שוב בעוד רגע.";
-
-        status.hidden = false;
         signingOut = false;
         logoutButton.disabled = false;
         logoutButton.textContent = "התנתקות";
+
+        status.textContent =
+          "לא הצלחנו להתנתק. נסו שוב בעוד רגע.";
+        status.hidden = false;
+
+        setAccountOpen(true);
       }
     });
 
     updateIdentity(user.displayName, user.photoURL);
 
     /*
-     * טעינת השם והתמונה מפרופיל האתר.
-     * אם הטעינה נכשלת, תפריט החשבון נשאר זמין.
+     * לאחר שמירה באזור האישי, מעדכנים מיד
+     * גם את השם והתמונה שבתפריט.
      */
+    updateHeaderProfile = details => {
+      if (version !== accountVersion) return;
+
+      identityRevision += 1;
+      updateIdentity(details.name, details.photo);
+    };
+
+    const revisionAtLoad = identityRevision;
+
     sdk.getDoc(sdk.doc(sdk.db, "users", user.uid))
       .then(snapshot => {
         if (version !== accountVersion) return;
+        if (identityRevision !== revisionAtLoad) return;
         if (sdk.auth.currentUser?.uid !== user.uid) return;
         if (!snapshot.exists()) return;
 
@@ -457,24 +540,30 @@ async function initializeSharedHeader() {
 
         updateIdentity(
           profile.name || user.displayName,
-          profile.photo || user.photoURL
+          profile.photo ?? user.photoURL
         );
       })
       .catch(error => {
-        console.error("Navigation profile load failed:", error?.code);
+        console.error(
+          "Navigation profile load failed:",
+          error?.code
+        );
       });
-
-    /*
-     * מאפשר לעמוד הפרופיל לעדכן את הכותרת לאחר שמירה.
-     */
-    return details => {
-      if (version !== accountVersion) return;
-
-      updateIdentity(details.name, details.photo);
-    };
   }
 
-  let updateHeaderProfile = null;
+  document.addEventListener("click", event => {
+    const account = accountArea.querySelector(".site-account");
+
+    if (account && !account.contains(event.target)) {
+      closeAccountMenu();
+    }
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      closeAccountMenu(true);
+    }
+  });
 
   window.addEventListener("kivun:profile-updated", event => {
     if (event.detail && updateHeaderProfile) {
@@ -482,8 +571,8 @@ async function initializeSharedHeader() {
     }
   });
 
-  const loadingTimer = window.setTimeout(() => {
-    const waiting = accountArea.querySelector("[role='status']");
+  const loadingTimer = setTimeout(() => {
+    const waiting = header.querySelector("#site-auth-loading");
 
     if (waiting) {
       waiting.textContent = "בדיקת ההתחברות מתעכבת…";
@@ -494,16 +583,16 @@ async function initializeSharedHeader() {
     const sdk = await import("./firebase.js");
 
     await sdk.auth.authStateReady();
-
-    window.clearTimeout(loadingTimer);
+    clearTimeout(loadingTimer);
 
     const unsubscribe = sdk.onAuthStateChanged(
       sdk.auth,
       user => {
         if (user) {
-          updateHeaderProfile = showSignedInNavigation(user, sdk);
+          if (mountedUserId !== user.uid) {
+            showSignedInNavigation(user, sdk);
+          }
         } else {
-          updateHeaderProfile = null;
           showPublicNavigation();
         }
       }
@@ -513,14 +602,15 @@ async function initializeSharedHeader() {
       if (!event.persisted) {
         unsubscribe();
       }
-    }, { once: true });
+    });
   } catch (error) {
-    window.clearTimeout(loadingTimer);
+    clearTimeout(loadingTimer);
 
     console.error("Navigation initialization failed:", error);
 
     renderLinks([
       {
+        key: "home",
         href: "index.html",
         label: "דף הבית"
       }
@@ -534,20 +624,23 @@ async function initializeSharedHeader() {
   }
 }
 
-/* הודעה במקרה שבדיקת ההתחברות בעמוד מתעכבת */
+/* הודעה במקרה שבדיקת הכניסה לעמוד מתעכבת */
 
 function initializeAccessNotice() {
-  window.setTimeout(() => {
+  setTimeout(() => {
     const box = document.getElementById("access-status");
 
-    const waiting = document.documentElement.classList.contains(
-      "access-pending"
-    );
+    const waiting =
+      document.documentElement.classList.contains("access-pending");
 
     if (!box || !waiting) return;
 
     const heading = box.querySelector("strong");
     const description = box.querySelector("p");
+
+    if (heading && heading.textContent.includes("לא הצלחנו")) {
+      return;
+    }
 
     if (heading) {
       heading.textContent = "בדיקת הכניסה מתעכבת";

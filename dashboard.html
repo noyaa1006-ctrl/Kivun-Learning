@@ -12,10 +12,13 @@
     href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet"
   >
-
   <link rel="stylesheet" href="./site.css">
 
   <style>
+    [hidden] {
+      display: none !important;
+    }
+
     .access-pending body > :not(#access-status):not(script) {
       display: none !important;
     }
@@ -28,7 +31,7 @@
 
     .dashboard-columns {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 310px;
+      grid-template-columns: minmax(0, 1fr) 290px;
       align-items: start;
       gap: 24px;
     }
@@ -38,8 +41,8 @@
     }
 
     .welcome-card {
-      margin-bottom: 28px;
-      padding: 28px;
+      margin-bottom: 24px;
+      padding: 26px;
       border: 1px solid #d4e7dd;
       border-radius: 20px;
       background: linear-gradient(115deg, #eef8f2, #fff);
@@ -50,14 +53,54 @@
       color: var(--site-muted);
     }
 
+    .dashboard-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 6px;
+      margin-bottom: 20px;
+      border: 1px solid var(--site-border);
+      border-radius: var(--site-radius);
+      background: white;
+    }
+
+    .dashboard-tab {
+      flex: 1;
+      min-width: 0;
+      min-height: 46px;
+      padding: 10px;
+      border: 0;
+      border-radius: var(--site-radius-sm);
+      color: var(--site-muted);
+      background: transparent;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .dashboard-tab:hover,
+    .dashboard-tab[aria-selected="true"] {
+      color: var(--site-primary);
+      background: var(--site-primary-soft);
+    }
+
+    .dashboard-panel {
+      min-width: 0;
+      scroll-margin-top: 24px;
+    }
+
     .profile-summary {
       padding-bottom: 22px;
       border-bottom: 1px solid var(--site-border-soft);
     }
 
-    .profile-summary h2 {
+    .profile-summary h3 {
       margin: 0;
       font-size: 23px;
+    }
+
+    #profile-roles {
+      margin-top: 10px;
     }
 
     .profile-sections {
@@ -83,13 +126,16 @@
     .dashboard-links {
       display: grid;
       gap: 10px;
+      margin-top: 18px;
     }
 
     .dashboard-links a {
       display: flex;
+      align-items: center;
       justify-content: space-between;
+      min-height: 46px;
       gap: 12px;
-      padding: 13px 14px;
+      padding: 12px 14px;
       border-radius: 10px;
       color: var(--site-text);
       background: var(--site-surface-soft);
@@ -101,10 +147,6 @@
     .dashboard-links a:hover {
       color: var(--site-primary);
       background: var(--site-primary-soft);
-    }
-
-    .section-anchor {
-      scroll-margin-top: 24px;
     }
 
     .request-card {
@@ -121,38 +163,39 @@
     }
 
     .request-card p {
-      margin: 7px 0;
+      margin: 8px 0;
       color: var(--site-muted);
       font-size: 14px;
       white-space: pre-line;
+      overflow-wrap: anywhere;
     }
 
-    .request-meta {
-      font-size: 12px !important;
+    .request-card .request-meta {
+      font-size: 12px;
+    }
+
+    .request-card .site-row {
+      margin-top: 12px;
     }
 
     .editor-section {
       min-width: 0;
-      margin: 0;
-      padding: 22px 0;
+      margin: 24px 0 0;
+      padding: 20px 0 0;
       border: 0;
       border-top: 1px solid var(--site-border-soft);
     }
 
     .editor-section legend {
-      padding: 0 0 8px;
+      padding: 0 0 10px;
       font-size: 17px;
       font-weight: 800;
-    }
-
-    .editor-section[hidden] {
-      display: none;
     }
 
     .use-options {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
     }
 
     .use-options .site-checkbox {
@@ -174,16 +217,25 @@
       margin-bottom: 24px;
     }
 
-    .editor-top {
-      margin-bottom: 24px;
+    .photo-controls {
+      min-width: 0;
+      flex: 1 1 180px;
+    }
+
+    .photo-controls input {
+      max-width: 100%;
+    }
+
+    .photo-controls .site-btn {
+      margin-top: 8px;
     }
 
     #page-message,
-    #editor-message {
+    #editor-message,
+    #requests-message {
       margin-bottom: 20px;
     }
 
-    /* בורר המקצועות מתוך catalog.js */
     .subject-picker {
       position: relative;
     }
@@ -204,6 +256,7 @@
       background: var(--site-primary-soft);
       font: inherit;
       font-size: 13px;
+      cursor: pointer;
     }
 
     .tag-picker-empty,
@@ -222,6 +275,7 @@
       color: var(--site-text);
       background: white;
       font: inherit;
+      font-size: 16px;
     }
 
     .tag-picker-options {
@@ -253,6 +307,7 @@
       background: white;
       font: inherit;
       text-align: start;
+      cursor: pointer;
     }
 
     .tag-picker-option:hover,
@@ -271,18 +326,24 @@
         padding: 22px;
       }
 
-      .use-options {
-        flex-direction: column;
-        gap: 8px;
+      .dashboard-tabs {
+        gap: 3px;
+        padding: 4px;
       }
 
-      .photo-tools {
-        align-items: flex-start;
+      .dashboard-tab {
+        padding: 10px 5px;
+        font-size: 12px;
+      }
+
+      .use-options {
+        flex-direction: column;
       }
     }
   </style>
 
   <script type="module" src="./navigation.js"></script>
+  <script type="module" src="./dashboard-ui.js"></script>
 </head>
 
 <body>
@@ -306,21 +367,21 @@
     </div>
 
     <div
-      id="page-message"
       class="site-notice"
+      id="page-message"
       role="status"
       aria-live="polite"
       hidden
     ></div>
 
-    <div id="page-loading" class="site-loading" role="status">
+    <div class="site-loading" id="page-loading" role="status">
       <span class="site-spinner" aria-hidden="true"></span>
       טוענים את הפרטים שלך…
     </div>
 
     <button
-      id="reload-button"
       class="site-btn site-btn-secondary"
+      id="reload-button"
       type="button"
       hidden
     >
@@ -329,283 +390,324 @@
 
     <div id="dashboard" hidden>
       <section class="welcome-card" aria-labelledby="next-title">
-        <h2 class="site-section-title" id="next-title">
-          מה הצעד הבא שלך?
-        </h2>
+        <h2 class="site-section-title" id="next-title"></h2>
         <p id="next-description"></p>
         <div class="site-row" id="next-actions"></div>
       </section>
 
       <div class="dashboard-columns">
-        <div class="site-stack">
-          <section
-            class="site-card section-anchor"
-            id="profile"
-            aria-labelledby="profile-title"
+        <div>
+          <div
+            class="dashboard-tabs"
+            id="dashboard-tabs"
+            role="tablist"
+            aria-label="חלקי האזור האישי"
           >
-            <div class="site-section-head">
-              <h2 class="site-section-title" id="profile-title">
-                הפרופיל שלי
-              </h2>
+            <button
+              class="dashboard-tab"
+              id="tab-profile"
+              type="button"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="true"
+              data-panel="profile"
+            >
+              הפרופיל שלי
+            </button>
 
-              <button
-                class="site-btn site-btn-secondary"
-                id="edit-button"
-                type="button"
-                aria-controls="profile-editor"
-              >
-                עריכת פרופיל
-              </button>
-            </div>
+            <button
+              class="dashboard-tab"
+              id="tab-requests"
+              type="button"
+              role="tab"
+              aria-controls="requests"
+              aria-selected="false"
+              tabindex="-1"
+              data-panel="requests"
+            >
+              הבקשות שלי
+            </button>
 
-            <div class="site-person profile-summary">
-              <div class="site-avatar site-avatar-lg" id="profile-avatar"></div>
+            <button
+              class="dashboard-tab"
+              id="tab-messages"
+              type="button"
+              role="tab"
+              aria-controls="messages"
+              aria-selected="false"
+              tabindex="-1"
+              data-panel="messages"
+            >
+              השיחות שלי
+            </button>
+          </div>
 
-              <div>
-                <h2 id="profile-name"></h2>
-                <p class="site-person-detail" id="profile-email" dir="auto"></p>
-                <p class="site-person-detail" id="profile-city"></p>
-                <div class="site-tags" id="profile-roles"></div>
+          <section
+            class="dashboard-panel"
+            id="profile"
+            role="tabpanel"
+            aria-labelledby="tab-profile"
+          >
+            <div class="site-card" id="profile-view">
+              <div class="site-section-head">
+                <h2 class="site-section-title">הפרופיל שלי</h2>
+                <button
+                  class="site-btn site-btn-secondary"
+                  id="edit-button"
+                  type="button"
+                >
+                  עריכת פרופיל
+                </button>
               </div>
+
+              <div class="site-person profile-summary">
+                <div
+                  class="site-avatar site-avatar-lg"
+                  id="profile-avatar"
+                  aria-hidden="true"
+                ></div>
+
+                <div>
+                  <h3 id="profile-name"></h3>
+                  <p class="site-person-detail" id="profile-email" dir="auto"></p>
+                  <p class="site-person-detail" id="profile-city"></p>
+                  <div class="site-tags" id="profile-roles"></div>
+                </div>
+              </div>
+
+              <div class="profile-sections" id="profile-sections"></div>
             </div>
 
-            <div class="profile-sections" id="profile-sections"></div>
+            <div class="site-card" id="profile-editor" hidden>
+              <div class="site-section-head">
+                <div>
+                  <h2
+                    class="site-section-title"
+                    id="editor-title"
+                    tabindex="-1"
+                  >
+                    עריכת הפרופיל
+                  </h2>
+                  <p class="site-description">
+                    עדכנו את הפרטים ולחצו על שמירת שינויים.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="site-notice"
+                id="editor-message"
+                role="status"
+                aria-live="polite"
+                hidden
+              ></div>
+
+              <form id="profile-form" novalidate>
+                <div class="photo-tools">
+                  <div
+                    class="site-avatar site-avatar-lg"
+                    id="edit-avatar"
+                    aria-hidden="true"
+                  ></div>
+
+                  <div class="photo-controls">
+                    <label class="site-label" for="photo-input">
+                      תמונת פרופיל
+                    </label>
+                    <input
+                      id="photo-input"
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp"
+                    >
+                    <p class="site-field-hint">
+                      JPG, PNG או WebP עד 5MB.
+                      אצל מורים התמונה מוצגת גם בפרופיל הציבורי.
+                    </p>
+                    <button
+                      class="site-btn site-btn-quiet"
+                      id="remove-photo"
+                      type="button"
+                    >
+                      הסרת התמונה
+                    </button>
+                  </div>
+                </div>
+
+                <div class="site-form-grid">
+                  <div class="site-field">
+                    <label class="site-label" for="name">שם לתצוגה</label>
+                    <input
+                      class="site-input"
+                      id="name"
+                      autocomplete="name"
+                      maxlength="80"
+                      required
+                    >
+                  </div>
+
+                  <div class="site-field">
+                    <label class="site-label" for="city">עיר</label>
+                    <input
+                      class="site-input"
+                      id="city"
+                      autocomplete="address-level2"
+                      maxlength="100"
+                    >
+                  </div>
+
+                  <div class="site-field">
+                    <label class="site-label" for="phone">
+                      טלפון — לא חובה
+                    </label>
+                    <input
+                      class="site-input"
+                      id="phone"
+                      type="tel"
+                      autocomplete="tel"
+                      maxlength="30"
+                      dir="ltr"
+                    >
+                  </div>
+
+                  <div class="site-field">
+                    <label class="site-label" for="email">כתובת המייל</label>
+                    <input class="site-input" id="email" type="email" disabled>
+                    <p class="site-field-hint">
+                      כתובת הכניסה לחשבון אינה ניתנת לשינוי בטופס הזה.
+                    </p>
+                  </div>
+                </div>
+
+                <fieldset class="editor-section">
+                  <legend>איך תרצו להשתמש בכיוון?</legend>
+
+                  <div class="use-options">
+                    <label class="site-checkbox">
+                      <input id="use-self" type="checkbox">
+                      ללמוד בעצמי
+                    </label>
+
+                    <label class="site-checkbox">
+                      <input id="use-parent" type="checkbox">
+                      למצוא מורה לילד/ה
+                    </label>
+
+                    <label class="site-checkbox">
+                      <input id="use-teacher" type="checkbox">
+                      ללמד
+                    </label>
+                  </div>
+
+                  <p class="site-field-hint">
+                    אפשר לבחור יותר מאפשרות אחת.
+                  </p>
+                </fieldset>
+
+                <div id="learning-editors"></div>
+
+                <fieldset class="editor-section" id="teacher-editor" hidden>
+                  <legend>פרופיל ההוראה</legend>
+
+                  <div class="site-form-grid">
+                    <div class="site-field site-field-full">
+                      <label class="site-label" id="teacher-subject-label">
+                        מקצועות להוראה
+                      </label>
+                      <div
+                        class="subject-picker"
+                        id="teacher-subject-picker"
+                      ></div>
+                    </div>
+
+                    <div class="site-field">
+                      <label class="site-label" for="teacher-price">
+                        מחיר לשיעור בש״ח
+                      </label>
+                      <input
+                        class="site-input"
+                        id="teacher-price"
+                        type="number"
+                        min="0"
+                        step="1"
+                        required
+                      >
+                      <p class="site-field-hint">
+                        לשיעור ללא עלות, הזינו 0.
+                      </p>
+                    </div>
+
+                    <div class="site-field">
+                      <label class="site-label" for="teacher-format">
+                        אופן הלימוד
+                      </label>
+                      <select class="site-select" id="teacher-format">
+                        <option>אונליין</option>
+                        <option>פרונטלי</option>
+                        <option>גם אונליין וגם פרונטלי</option>
+                      </select>
+                    </div>
+
+                    <div class="site-field">
+                      <label class="site-label" for="teacher-experience">
+                        ניסיון בהוראה
+                      </label>
+                      <input
+                        class="site-input"
+                        id="teacher-experience"
+                        maxlength="300"
+                      >
+                    </div>
+
+                    <div class="site-field">
+                      <label class="site-label" for="teacher-availability">
+                        זמינות כללית
+                      </label>
+                      <input
+                        class="site-input"
+                        id="teacher-availability"
+                        maxlength="300"
+                      >
+                    </div>
+
+                    <div class="site-field site-field-full">
+                      <label class="site-label" for="teacher-bio">
+                        עליי ועל דרך ההוראה שלי
+                      </label>
+                      <textarea
+                        class="site-textarea"
+                        id="teacher-bio"
+                        maxlength="2000"
+                      ></textarea>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <div class="site-form-actions">
+                  <button class="site-btn" id="save-button" type="submit">
+                    שמירת שינויים
+                  </button>
+
+                  <button
+                    class="site-btn site-btn-secondary"
+                    id="cancel-edit"
+                    type="button"
+                  >
+                    ביטול
+                  </button>
+                </div>
+              </form>
+            </div>
           </section>
 
           <section
-            class="site-card section-anchor"
-            id="profile-editor"
-            aria-labelledby="editor-title"
+            class="dashboard-panel site-card"
+            id="requests"
+            role="tabpanel"
+            aria-labelledby="tab-requests"
             hidden
           >
             <div class="site-section-head">
-              <div>
-                <h2
-                  class="site-section-title"
-                  id="editor-title"
-                  tabindex="-1"
-                >
-                  עריכת הפרופיל
-                </h2>
-                <p class="site-description">
-                  אפשר לעדכן את הפרטים ולבחור איך להשתמש בכיוון.
-                </p>
-              </div>
-            </div>
-
-            <div
-              id="editor-message"
-              class="site-notice"
-              role="status"
-              aria-live="polite"
-              hidden
-            ></div>
-
-            <form id="profile-form">
-              <div class="photo-tools">
-                <div
-                  class="site-avatar site-avatar-lg"
-                  id="edit-avatar"
-                  aria-label="תמונת הפרופיל"
-                ></div>
-
-                <div class="site-stack-sm">
-                  <label class="site-label" for="photo-input">
-                    תמונת פרופיל
-                  </label>
-
-                  <input
-                    id="photo-input"
-                    type="file"
-                    accept="image/jpeg,image/png,image/webp"
-                    aria-describedby="photo-hint"
-                  >
-
-                  <p class="site-field-hint" id="photo-hint">
-                    JPG, PNG או WebP, עד 5MB.
-                    אצל מורים התמונה מוצגת גם בפרופיל הציבורי.
-                  </p>
-
-                  <button
-                    class="site-btn site-btn-quiet"
-                    id="remove-photo"
-                    type="button"
-                  >
-                    הסרת התמונה
-                  </button>
-                </div>
-              </div>
-
-              <div class="site-form-grid editor-top">
-                <div class="site-field">
-                  <label class="site-label" for="name">שם לתצוגה</label>
-                  <input
-                    class="site-input"
-                    id="name"
-                    autocomplete="name"
-                    maxlength="80"
-                    required
-                  >
-                </div>
-
-                <div class="site-field">
-                  <label class="site-label" for="city">עיר</label>
-                  <input
-                    class="site-input"
-                    id="city"
-                    autocomplete="address-level2"
-                    maxlength="100"
-                  >
-                </div>
-
-                <div class="site-field">
-                  <label class="site-label" for="phone">טלפון — לא חובה</label>
-                  <input
-                    class="site-input"
-                    id="phone"
-                    type="tel"
-                    autocomplete="tel"
-                    maxlength="30"
-                    dir="ltr"
-                  >
-                </div>
-
-                <div class="site-field">
-                  <label class="site-label" for="email">כתובת המייל</label>
-                  <input class="site-input" id="email" type="email" disabled>
-                  <p class="site-field-hint">
-                    כתובת הכניסה לחשבון. אינה ניתנת לשינוי בטופס הזה.
-                  </p>
-                </div>
-              </div>
-
-              <fieldset class="editor-section">
-                <legend>איך תרצו להשתמש בכיוון?</legend>
-
-                <div class="use-options">
-                  <label class="site-checkbox">
-                    <input id="use-self" type="checkbox">
-                    ללמוד בעצמי
-                  </label>
-
-                  <label class="site-checkbox">
-                    <input id="use-parent" type="checkbox">
-                    למצוא מורה לילד/ה
-                  </label>
-
-                  <label class="site-checkbox">
-                    <input id="use-teacher" type="checkbox">
-                    ללמד
-                  </label>
-                </div>
-
-                <p class="site-field-hint">
-                  אפשר לבחור יותר מאפשרות אחת.
-                </p>
-              </fieldset>
-
-              <div id="learning-editors"></div>
-
-              <fieldset class="editor-section" id="teacher-editor" hidden>
-                <legend>פרופיל ההוראה</legend>
-
-                <div class="site-form-grid">
-                  <div class="site-field site-field-full">
-                    <label class="site-label" id="teacher-subject-label">
-                      מקצועות להוראה
-                    </label>
-                    <div class="subject-picker" id="teacher-subject-picker"></div>
-                  </div>
-
-                  <div class="site-field">
-                    <label class="site-label" for="teacher-price">
-                      מחיר לשיעור בש״ח
-                    </label>
-                    <input
-                      class="site-input"
-                      id="teacher-price"
-                      type="number"
-                      min="0"
-                      step="1"
-                      required
-                    >
-                    <p class="site-field-hint">לשיעור ללא עלות, הזינו 0.</p>
-                  </div>
-
-                  <div class="site-field">
-                    <label class="site-label" for="teacher-format">
-                      אופן הלימוד
-                    </label>
-                    <select class="site-select" id="teacher-format">
-                      <option>אונליין</option>
-                      <option>פרונטלי</option>
-                      <option>גם אונליין וגם פרונטלי</option>
-                    </select>
-                  </div>
-
-                  <div class="site-field">
-                    <label class="site-label" for="teacher-experience">
-                      ניסיון בהוראה
-                    </label>
-                    <input
-                      class="site-input"
-                      id="teacher-experience"
-                      maxlength="300"
-                      placeholder="למשל: חמש שנות הוראה"
-                    >
-                  </div>
-
-                  <div class="site-field">
-                    <label class="site-label" for="teacher-availability">
-                      זמינות כללית
-                    </label>
-                    <input
-                      class="site-input"
-                      id="teacher-availability"
-                      maxlength="300"
-                      placeholder="למשל: ראשון ורביעי אחר הצהריים"
-                    >
-                  </div>
-
-                  <div class="site-field site-field-full">
-                    <label class="site-label" for="teacher-bio">
-                      כמה מילים עליי ועל דרך ההוראה שלי
-                    </label>
-                    <textarea
-                      class="site-textarea"
-                      id="teacher-bio"
-                      maxlength="2000"
-                    ></textarea>
-                  </div>
-                </div>
-              </fieldset>
-
-              <div class="site-form-actions">
-                <button class="site-btn" id="save-button" type="submit">
-                  שמירת שינויים
-                </button>
-
-                <button
-                  class="site-btn site-btn-secondary"
-                  id="cancel-edit"
-                  type="button"
-                >
-                  ביטול
-                </button>
-              </div>
-            </form>
-          </section>
-
-          <section
-            class="site-card section-anchor"
-            id="requests"
-            aria-labelledby="requests-title"
-          >
-            <div class="site-section-head">
-              <h2 class="site-section-title" id="requests-title">
-                הבקשות שלי
-              </h2>
-
+              <h2 class="site-section-title">הבקשות שלי</h2>
               <button
                 class="site-btn site-btn-quiet"
                 id="refresh-requests"
@@ -615,18 +717,33 @@
               </button>
             </div>
 
+            <div
+              class="site-notice"
+              id="requests-message"
+              role="status"
+              aria-live="polite"
+              hidden
+            ></div>
+
             <div id="requests-content" aria-live="polite"></div>
           </section>
 
           <section
-            class="site-card section-anchor"
+            class="dashboard-panel site-card"
             id="messages"
-            aria-labelledby="messages-title"
+            role="tabpanel"
+            aria-labelledby="tab-messages"
+            hidden
           >
             <div class="site-section-head">
-              <h2 class="site-section-title" id="messages-title">
-                השיחות שלי
-              </h2>
+              <h2 class="site-section-title">השיחות שלי</h2>
+              <button
+                class="site-btn site-btn-quiet"
+                id="refresh-messages"
+                type="button"
+              >
+                רענון
+              </button>
             </div>
 
             <div id="messages-content" aria-live="polite"></div>
@@ -637,19 +754,13 @@
           <section class="site-card">
             <h2 class="site-section-title">לאן ממשיכים?</h2>
 
-            <div class="dashboard-links" style="margin-top:18px">
-              <a href="#profile">
-                הפרופיל שלי <span aria-hidden="true">←</span>
-              </a>
+            <div class="dashboard-links">
+              <a href="#profile">הפרופיל שלי <span aria-hidden="true">←</span></a>
               <a href="matches.html" id="find-teacher-link">
                 מציאת מורה <span aria-hidden="true">←</span>
               </a>
-              <a href="#requests">
-                הבקשות שלי <span aria-hidden="true">←</span>
-              </a>
-              <a href="#messages">
-                השיחות שלי <span aria-hidden="true">←</span>
-              </a>
+              <a href="#requests">הבקשות שלי <span aria-hidden="true">←</span></a>
+              <a href="#messages">השיחות שלי <span aria-hidden="true">←</span></a>
               <a id="public-profile-link" hidden>
                 הפרופיל הציבורי שלי <span aria-hidden="true">←</span>
               </a>
@@ -657,10 +768,10 @@
           </section>
 
           <section class="site-card site-card-soft">
-            <h2 class="site-section-title">פרטים קטנים, התאמה טובה יותר</h2>
+            <h2 class="site-section-title">פרופיל מעודכן עוזר להתאים</h2>
             <p class="site-description">
-              מקצועות, מטרת הלמידה וזמינות עוזרים למצוא התאמה.
-              אפשר לעדכן אותם בכל שלב דרך עריכת הפרופיל.
+              מקצועות, מטרות וזמינות עוזרים להכיר את הצורך שלך.
+              אפשר לעדכן אותם בכל שלב.
             </p>
           </section>
         </aside>
@@ -674,948 +785,5 @@
       <a href="index.html">לדף הבית</a>
     </div>
   </footer>
-
-  <script type="module">
-    const $ = id => document.getElementById(id);
-
-    let sdk;
-    let catalog;
-    let writeBatch;
-    let user;
-    let profile = {};
-    let exists = false;
-    let dirty = false;
-    let saving = false;
-    let processingPhoto = false;
-    let photo = "";
-    let requestsLoading = false;
-
-    const selectedSubjects = {};
-    const pickers = {};
-    const learningKinds = ["self", "child"];
-
-    function notice(id, text, error = false) {
-      const element = $(id);
-      element.textContent = text;
-      element.className =
-        "site-notice " +
-        (error ? "site-notice-error" : "site-notice-success");
-      element.hidden = !text;
-    }
-
-    function make(tag, className, text) {
-      const element = document.createElement(tag);
-      if (className) element.className = className;
-      if (text !== undefined) element.textContent = text;
-      return element;
-    }
-
-    function value(id) {
-      return $(id).value.trim();
-    }
-
-    function getUses(data = profile) {
-      if (data.accountUses) {
-        return {
-          selfLearner: Boolean(data.accountUses.selfLearner),
-          parent: Boolean(data.accountUses.parent),
-          teacher: Boolean(data.accountUses.teacher)
-        };
-      }
-
-      return {
-        selfLearner: data.role !== "teacher" && data.role !== "parent",
-        parent: data.role === "parent",
-        teacher: ["teacher", "both"].includes(data.role)
-      };
-    }
-
-    function getLearning(kind) {
-      if (kind === "child") return profile.childLearningProfile || {};
-      return profile.selfLearningProfile || profile.studentProfile || profile;
-    }
-
-    function setAvatar(element, name, source) {
-      const initial = Array.from(name || "כ")[0];
-      element.textContent = initial;
-
-      if (typeof source !== "string" || !source) return;
-
-      let allowed = /^data:image\/(?:png|jpeg|webp|gif);base64,/i.test(source);
-
-      if (!allowed) {
-        try {
-          allowed = new URL(source).protocol === "https:";
-        } catch {
-          allowed = false;
-        }
-      }
-
-      if (!allowed) return;
-
-      const image = document.createElement("img");
-      image.alt = "";
-      image.referrerPolicy = "no-referrer";
-      image.addEventListener("error", () => {
-        element.textContent = initial;
-      });
-      image.src = source;
-      element.replaceChildren(image);
-    }
-
-    function addDetails(section, entries) {
-      const list = make("dl", "site-data-list");
-
-      for (const [label, content] of entries) {
-        const row = document.createElement("div");
-        row.append(
-          make("dt", "", label),
-          make("dd", "", String(content ?? "").trim() || "טרם הוגדר")
-        );
-        list.append(row);
-      }
-
-      section.append(list);
-    }
-
-    function profileSection(title, data, teacher = false) {
-      const section = make("section", "profile-section");
-      section.append(make("h3", "", title));
-
-      const tags = make("div", "site-tags");
-      const subjects = catalog.normalizeList(data.subjects);
-
-      if (subjects.length) {
-        for (const subject of subjects) {
-          tags.append(make("span", "site-tag", subject));
-        }
-      } else {
-        tags.append(make("span", "site-muted site-small", "עדיין לא נבחרו מקצועות"));
-      }
-
-      section.append(tags);
-
-      if (teacher) {
-        const hasPrice =
-          data.price !== undefined &&
-          data.price !== null &&
-          data.price !== "" &&
-          Number.isFinite(Number(data.price));
-
-        addDetails(section, [
-          ["מחיר לשיעור", hasPrice ? `${data.price} ₪` : ""],
-          ["אופן הלימוד", data.format],
-          ["ניסיון בהוראה", data.experience],
-          ["זמינות", data.availability]
-        ]);
-
-        if (data.bio) {
-          section.append(make("p", "site-profile-bio", data.bio));
-        }
-      } else {
-        addDetails(section, [
-          ["רמה או כיתה", data.level],
-          ["סגנון למידה", data.learningStyle],
-          ["מטרת הלמידה", data.goal],
-          ["זמינות", data.availability]
-        ]);
-      }
-
-      return section;
-    }
-
-    function renderProfile() {
-      const uses = getUses();
-      const name = profile.name || user.displayName || "החשבון שלי";
-
-      $("welcome").textContent = `שלום, ${name}`;
-      $("profile-name").textContent = name;
-      $("profile-email").textContent = user.email || "";
-      $("profile-city").textContent = profile.city || "העיר עדיין לא הוגדרה";
-
-      setAvatar(
-        $("profile-avatar"),
-        name,
-        profile.photo || user.photoURL
-      );
-
-      $("profile-roles").replaceChildren();
-
-      const roles = [
-        [uses.selfLearner, "לומד/ת"],
-        [uses.parent, "הורה"],
-        [uses.teacher, "מורה"]
-      ];
-
-      for (const [enabled, label] of roles) {
-        if (enabled) {
-          $("profile-roles").append(
-            make("span", "site-badge site-badge-success", label)
-          );
-        }
-      }
-
-      const sections = $("profile-sections");
-      sections.replaceChildren();
-
-      if (uses.selfLearner) {
-        sections.append(profileSection("הלמידה שלי", getLearning("self")));
-      }
-
-      if (uses.parent) {
-        sections.append(profileSection("הלמידה של הילד/ה", getLearning("child")));
-      }
-
-      if (uses.teacher) {
-        sections.append(
-          profileSection("ההוראה שלי", profile.teacherProfile || profile, true)
-        );
-      }
-
-      const publicLink = $("public-profile-link");
-      publicLink.hidden = !uses.teacher;
-      publicLink.href = `teacher-profile.html?id=${encodeURIComponent(user.uid)}`;
-
-      $("find-teacher-link").hidden = !(uses.selfLearner || uses.parent);
-
-      const actions = $("next-actions");
-      actions.replaceChildren();
-
-      const incomplete =
-        !exists ||
-        (uses.selfLearner && !catalog.normalizeList(getLearning("self").subjects).length) ||
-        (uses.parent && !catalog.normalizeList(getLearning("child").subjects).length) ||
-        (uses.teacher && !catalog.normalizeList((profile.teacherProfile || profile).subjects).length);
-
-      if (incomplete) {
-        $("next-title").textContent = "נשלים את הפרופיל שלך";
-        $("next-description").textContent =
-          "כמה פרטים על המקצועות והמטרות יעזרו להתחיל.";
-
-        const button = make("button", "site-btn", "השלמת הפרופיל");
-        button.type = "button";
-        button.addEventListener("click", openEditor);
-        actions.append(button);
-      } else if (uses.selfLearner || uses.parent) {
-        $("next-title").textContent = "מוצאים את המורה שמתאים לך";
-        $("next-description").textContent =
-          "אפשר לחפש מורה לפי הצורך שלך, או לחזור לבקשות שכבר שלחת.";
-
-        const link = make("a", "site-btn", "מציאת מורה");
-        link.href = "matches.html";
-        actions.append(link);
-      } else {
-        $("next-title").textContent = "ממשיכים מהבקשות שלך";
-        $("next-description").textContent =
-          "כאן אפשר לבדוק בקשות מתלמידים ולאשר שיעורים שמתאימים לך.";
-
-        const link = make("a", "site-btn", "לצפייה בבקשות");
-        link.href = "#requests";
-        actions.append(link);
-      }
-
-      const messagesLink = make(
-        "a",
-        "site-btn site-btn-secondary",
-        "השיחות שלי"
-      );
-      messagesLink.href = "#messages";
-      actions.append(messagesLink);
-    }
-
-    function buildLearningEditors() {
-      for (const kind of learningKinds) {
-        const section = document.createElement("fieldset");
-        section.className = "editor-section";
-        section.id = `${kind}-editor`;
-
-        section.innerHTML = `
-          <legend>${kind === "self" ? "הלמידה שלי" : "הלמידה של הילד/ה"}</legend>
-          <div class="site-form-grid">
-            <div class="site-field site-field-full">
-              <label class="site-label" id="${kind}-subject-label">
-                מקצועות ללמידה
-              </label>
-              <div class="subject-picker" id="${kind}-subject-picker"></div>
-            </div>
-
-            <div class="site-field">
-              <label class="site-label" for="${kind}-level">רמה או כיתה</label>
-              <input class="site-input" id="${kind}-level" maxlength="100">
-            </div>
-
-            <div class="site-field">
-              <label class="site-label" for="${kind}-style">סגנון למידה</label>
-              <select class="site-select" id="${kind}-style">
-                <option value="">בחירה</option>
-                <option>הסברים ותרגול</option>
-                <option>למידה חזותית</option>
-                <option>למידה בקצב מהיר</option>
-                <option>למידה רגועה ומסודרת</option>
-              </select>
-            </div>
-
-            <div class="site-field site-field-full">
-              <label class="site-label" for="${kind}-goal">מטרת הלמידה</label>
-              <textarea class="site-textarea" id="${kind}-goal" maxlength="1000"></textarea>
-            </div>
-
-            <div class="site-field site-field-full">
-              <label class="site-label" for="${kind}-availability">
-                ימים ושעות נוחים
-              </label>
-              <input class="site-input" id="${kind}-availability" maxlength="300">
-            </div>
-          </div>
-        `;
-
-        $("learning-editors").append(section);
-      }
-
-      for (const kind of ["self", "child", "teacher"]) {
-        selectedSubjects[kind] = [];
-
-        pickers[kind] = catalog.createTagPicker({
-          root: $(`${kind}-subject-picker`),
-          options: catalog.SUBJECTS,
-          selected: [],
-          placeholder: "חיפוש ובחירת מקצועות…",
-          maximum: 12,
-          onChange(subjects) {
-            selectedSubjects[kind] = [...subjects];
-            dirty = true;
-          }
-        });
-
-        const search = $(`${kind}-subject-picker`).querySelector("input");
-
-        if (search) {
-          search.id = `${kind}-subject-search`;
-          $(`${kind}-subject-label`).htmlFor = search.id;
-        }
-      }
-    }
-
-    function setSelect(id, content) {
-      const select = $(id);
-      const next = content || "";
-
-      if (next && !Array.from(select.options).some(option => option.value === next)) {
-        select.add(new Option(next, next));
-      }
-
-      select.value = next;
-    }
-
-    function toggleEditorSections() {
-      const sections = [
-        ["self", $("use-self").checked],
-        ["child", $("use-parent").checked],
-        ["teacher", $("use-teacher").checked]
-      ];
-
-      for (const [kind, enabled] of sections) {
-        const section = $(`${kind}-editor`);
-        section.hidden = !enabled;
-        section.disabled = !enabled;
-      }
-    }
-
-    function openEditor() {
-      if (saving || processingPhoto) return;
-      if (!$("profile-editor").hidden) {
-        $("editor-title").focus();
-        return;
-      }
-
-      notice("editor-message", "");
-      const uses = getUses();
-
-      $("name").value = profile.name || user.displayName || "";
-      $("email").value = user.email || "";
-      $("city").value = profile.city || "";
-      $("phone").value = profile.phone || "";
-
-      $("use-self").checked = uses.selfLearner;
-      $("use-parent").checked = uses.parent;
-      $("use-teacher").checked = uses.teacher;
-
-      photo = profile.photo ?? user.photoURL ?? "";
-      $("photo-input").value = "";
-
-      setAvatar($("edit-avatar"), $("name").value, photo);
-
-      for (const kind of learningKinds) {
-        const data = getLearning(kind);
-
-        $(`${kind}-level`).value = data.level || "";
-        $(`${kind}-goal`).value = data.goal || "";
-        $(`${kind}-availability`).value = data.availability || "";
-        setSelect(`${kind}-style`, data.learningStyle);
-
-        selectedSubjects[kind] = catalog.normalizeList(data.subjects);
-        pickers[kind].setSelected(selectedSubjects[kind]);
-      }
-
-      const teacher = profile.teacherProfile || (
-        uses.teacher ? profile : {}
-      );
-
-      $("teacher-price").value = teacher.price ?? "";
-      $("teacher-experience").value = teacher.experience || "";
-      $("teacher-availability").value = teacher.availability || "";
-      $("teacher-bio").value = teacher.bio || "";
-      setSelect("teacher-format", teacher.format || "אונליין");
-
-      selectedSubjects.teacher = catalog.normalizeList(teacher.subjects);
-      pickers.teacher.setSelected(selectedSubjects.teacher);
-
-      document.querySelectorAll(".tag-picker-options").forEach(element => {
-        element.classList.add("hidden");
-      });
-
-      toggleEditorSections();
-      dirty = false;
-      $("profile").hidden = true;
-      $("profile-editor").hidden = false;
-      $("editor-title").focus();
-    }
-
-    function closeEditor() {
-      $("profile-editor").hidden = true;
-      $("profile").hidden = false;
-      dirty = false;
-      $("edit-button").focus();
-    }
-
-    function learningData(kind) {
-      return {
-        ...getLearning(kind),
-        subjects: [...selectedSubjects[kind]],
-        level: value(`${kind}-level`),
-        learningStyle: value(`${kind}-style`),
-        goal: value(`${kind}-goal`),
-        availability: value(`${kind}-availability`)
-      };
-    }
-
-    async function saveProfile(event) {
-      event.preventDefault();
-      if (saving || processingPhoto) return;
-
-      $("name").value = value("name");
-      if (!$("profile-form").reportValidity()) return;
-
-      const uses = {
-        selfLearner: $("use-self").checked,
-        parent: $("use-parent").checked,
-        teacher: $("use-teacher").checked
-      };
-
-      if (!Object.values(uses).some(Boolean)) {
-        notice("editor-message", "בחרו לפחות שימוש אחד לחשבון.", true);
-        return;
-      }
-
-      for (const [kind, active] of [
-        ["self", uses.selfLearner],
-        ["child", uses.parent],
-        ["teacher", uses.teacher]
-      ]) {
-        if (active && !selectedSubjects[kind].length) {
-          notice("editor-message", "בחרו לפחות מקצוע אחד בכל פרופיל פעיל.", true);
-          $(`${kind}-subject-search`)?.focus();
-          return;
-        }
-      }
-
-      const selfProfile = uses.selfLearner
-        ? learningData("self")
-        : (profile.selfLearningProfile || profile.studentProfile || null);
-
-      const childProfile = uses.parent
-        ? learningData("child")
-        : (profile.childLearningProfile || null);
-
-      const teacherProfile = uses.teacher
-        ? {
-            ...(profile.teacherProfile || {}),
-            subjects: [...selectedSubjects.teacher],
-            price: Number(value("teacher-price")),
-            experience: value("teacher-experience"),
-            availability: value("teacher-availability"),
-            format: value("teacher-format"),
-            bio: value("teacher-bio")
-          }
-        : (profile.teacherProfile || null);
-
-      const learner = uses.selfLearner || uses.parent;
-      const primaryLearning = uses.selfLearner ? selfProfile : childProfile;
-
-      const next = {
-        uid: user.uid,
-        name: value("name"),
-        email: user.email || "",
-        phone: value("phone"),
-        city: value("city"),
-        photo,
-        accountUses: uses,
-        role: uses.teacher ? (learner ? "both" : "teacher") : "student",
-        roles: [
-          ...(learner ? ["student"] : []),
-          ...(uses.teacher ? ["teacher"] : [])
-        ],
-        selfLearningProfile: selfProfile,
-        childLearningProfile: childProfile,
-        studentProfile: selfProfile,
-        teacherProfile,
-        subjects: primaryLearning?.subjects || [],
-        level: primaryLearning?.level || "",
-        learningStyle: primaryLearning?.learningStyle || "",
-        goal: primaryLearning?.goal || "",
-        availability: primaryLearning?.availability || "",
-        updatedAt: sdk.serverTimestamp()
-      };
-
-      if (!exists) next.createdAt = sdk.serverTimestamp();
-
-      saving = true;
-      $("profile-form").inert = true;
-      $("profile-form").setAttribute("aria-busy", "true");
-      $("save-button").textContent = "שומרים…";
-      notice("editor-message", "");
-
-      try {
-        if (sdk.auth.currentUser?.uid !== user.uid) {
-          throw new Error("Account changed");
-        }
-
-        // פרטי המשתמש ופרופיל המורה נשמרים יחד.
-        const batch = writeBatch(sdk.db);
-        batch.set(sdk.doc(sdk.db, "users", user.uid), next, { merge: true });
-
-        if (uses.teacher) {
-          batch.set(
-            sdk.doc(sdk.db, "teachers", user.uid),
-            {
-              uid: user.uid,
-              name: next.name,
-              city: next.city,
-              photo: next.photo,
-              subjects: teacherProfile.subjects,
-              price: teacherProfile.price,
-              experience: teacherProfile.experience,
-              availability: teacherProfile.availability,
-              format: teacherProfile.format,
-              bio: teacherProfile.bio,
-              active: true,
-              acceptingStudents: true,
-              updatedAt: sdk.serverTimestamp()
-            },
-            { merge: true }
-          );
-        } else if (getUses().teacher) {
-          batch.set(
-            sdk.doc(sdk.db, "teachers", user.uid),
-            {
-              active: false,
-              acceptingStudents: false,
-              updatedAt: sdk.serverTimestamp()
-            },
-            { merge: true }
-          );
-        }
-
-        await batch.commit();
-
-        profile = { ...profile, ...next };
-        exists = true;
-        dirty = false;
-
-        try {
-          await sdk.updateProfile(user, { displayName: next.name });
-        } catch (error) {
-          console.error("Auth display name update failed:", error?.code);
-        }
-
-        renderProfile();
-        closeEditor();
-
-        window.dispatchEvent(new CustomEvent("kivun:profile-updated", {
-          detail: { name: next.name, photo: next.photo }
-        }));
-
-        notice("page-message", "הפרופיל עודכן בהצלחה.");
-      } catch (error) {
-        console.error("Profile save failed:", error);
-        notice(
-          "editor-message",
-          "לא הצלחנו לשמור את השינויים. הפרטים שהזנת נשארו בטופס. בדקו את החיבור ונסו שוב.",
-          true
-        );
-      } finally {
-        saving = false;
-        $("profile-form").inert = false;
-        $("profile-form").setAttribute("aria-busy", "false");
-        $("save-button").textContent = "שמירת שינויים";
-      }
-    }
-
-    async function processPhoto() {
-      const file = $("photo-input").files[0];
-      if (!file || saving || processingPhoto) return;
-
-      if (
-        !["image/jpeg", "image/png", "image/webp"].includes(file.type) ||
-        file.size > 5 * 1024 * 1024
-      ) {
-        notice("editor-message", "בחרו תמונת JPG, PNG או WebP עד 5MB.", true);
-        $("photo-input").value = "";
-        return;
-      }
-
-      processingPhoto = true;
-      $("profile-form").inert = true;
-      notice("editor-message", "מכינים את התמונה…");
-
-      const url = URL.createObjectURL(file);
-
-      try {
-        const image = new Image();
-        image.src = url;
-        await image.decode();
-
-        const scale = Math.min(1, 600 / Math.max(image.width, image.height));
-        const canvas = document.createElement("canvas");
-        canvas.width = Math.max(1, Math.round(image.width * scale));
-        canvas.height = Math.max(1, Math.round(image.height * scale));
-
-        const context = canvas.getContext("2d");
-        context.fillStyle = "#ffffff";
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-        photo = canvas.toDataURL("image/jpeg", .82);
-        dirty = true;
-        setAvatar($("edit-avatar"), value("name"), photo);
-        notice("editor-message", "התמונה מוכנה. לחצו על שמירת שינויים כדי לשמור אותה.");
-      } catch {
-        notice("editor-message", "לא הצלחנו לקרוא את התמונה. נסו תמונה אחרת.", true);
-      } finally {
-        URL.revokeObjectURL(url);
-        processingPhoto = false;
-        $("profile-form").inert = false;
-        $("photo-input").value = "";
-      }
-    }
-
-    function emptyState(target, title, description) {
-      const box = make("div", "site-empty");
-      box.append(make("h3", "", title), make("p", "", description));
-      target.replaceChildren(box);
-    }
-
-    function requestCard(request, conversation = false) {
-      const incoming = request.teacherId === user.uid;
-      const name = incoming ? request.studentName : request.teacherName;
-
-      const card = make("article", "request-card");
-      const top = make("div", "site-between");
-
-      top.append(make("h3", "", name || "משתמש/ת בכיוון"));
-
-      const labels = {
-        pending: ["ממתינה לאישור", "site-badge-pending"],
-        accepted: ["הבקשה אושרה", "site-badge-success"],
-        declined: ["הבקשה לא אושרה", "site-badge-danger"],
-        cancelled: ["הבקשה בוטלה", ""]
-      };
-
-      const [label, style] = labels[request.status] || ["מצב לא מוכר", ""];
-      top.append(make("span", `site-badge ${style}`, label));
-      card.append(top);
-
-      const detail = [request.subject, request.preferredTime].filter(Boolean).join(" · ");
-      if (detail) card.append(make("p", "", detail));
-
-      if (!conversation && request.message) {
-        card.append(make("p", "", request.message));
-      }
-
-      const date = request.createdAt?.toDate?.();
-
-      card.append(make(
-        "p",
-        "request-meta",
-        [
-          incoming ? "בקשה שהתקבלה" : "בקשה ששלחת",
-          date ? date.toLocaleDateString("he-IL") : ""
-        ].filter(Boolean).join(" · ")
-      ));
-
-      const actions = make("div", "site-row");
-
-      if (request.status === "accepted") {
-        const link = make("a", "site-btn site-btn-secondary", "פתיחת השיחה");
-        link.href = `chat.html?id=${encodeURIComponent(request.id)}`;
-        actions.append(link);
-
-        const unread = Number(
-          incoming ? request.unreadForTeacher : request.unreadForStudent
-        );
-
-        if (unread > 0) {
-          actions.append(make(
-            "span",
-            "site-badge site-badge-info",
-            `${unread} הודעות חדשות`
-          ));
-        }
-      }
-
-      if (incoming && request.status === "pending") {
-        for (const [status, text, className] of [
-          ["accepted", "אישור הבקשה", "site-btn"],
-          ["declined", "דחיית הבקשה", "site-btn site-btn-secondary"]
-        ]) {
-          const button = make("button", className, text);
-          button.type = "button";
-
-          button.addEventListener("click", async () => {
-            actions.querySelectorAll("button").forEach(item => {
-              item.disabled = true;
-            });
-
-            try {
-              await sdk.updateDoc(
-                sdk.doc(sdk.db, "requests", request.id),
-                { status, updatedAt: sdk.serverTimestamp() }
-              );
-
-              notice("page-message", "מצב הבקשה עודכן.");
-              await loadRequests();
-            } catch (error) {
-              console.error("Request update failed:", error?.code);
-              notice("page-message", "לא הצלחנו לעדכן את הבקשה. נסו שוב.", true);
-
-              actions.querySelectorAll("button").forEach(item => {
-                item.disabled = false;
-              });
-            }
-          });
-
-          actions.append(button);
-        }
-      }
-
-      card.append(actions);
-      return card;
-    }
-
-    async function loadRequests() {
-      if (requestsLoading) return;
-      requestsLoading = true;
-      $("refresh-requests").disabled = true;
-
-      const requestBox = $("requests-content");
-      const messageBox = $("messages-content");
-
-      requestBox.textContent = "טוענים בקשות…";
-      messageBox.textContent = "טוענים שיחות…";
-
-      try {
-        const snapshots = await Promise.all([
-          sdk.getDocs(sdk.query(
-            sdk.collection(sdk.db, "requests"),
-            sdk.where("studentId", "==", user.uid)
-          )),
-          sdk.getDocs(sdk.query(
-            sdk.collection(sdk.db, "requests"),
-            sdk.where("teacherId", "==", user.uid)
-          ))
-        ]);
-
-        const unique = new Map();
-
-        for (const snapshot of snapshots) {
-          for (const item of snapshot.docs) {
-            unique.set(item.id, { ...item.data(), id: item.id });
-          }
-        }
-
-        const requests = [...unique.values()].sort((a, b) =>
-          (b.createdAt?.toMillis?.() || 0) -
-          (a.createdAt?.toMillis?.() || 0)
-        );
-
-        requestBox.replaceChildren();
-        messageBox.replaceChildren();
-
-        if (!requests.length) {
-          emptyState(
-            requestBox,
-            "עדיין אין בקשות",
-            "בקשות שתשלחו או תקבלו יופיעו כאן עם המצב שלהן."
-          );
-        } else {
-          for (const request of requests) {
-            requestBox.append(requestCard(request));
-          }
-        }
-
-        const conversations = requests
-          .filter(request => request.status === "accepted")
-          .sort((a, b) =>
-            (b.lastMessageAt?.toMillis?.() || b.createdAt?.toMillis?.() || 0) -
-            (a.lastMessageAt?.toMillis?.() || a.createdAt?.toMillis?.() || 0)
-          );
-
-        if (!conversations.length) {
-          emptyState(
-            messageBox,
-            "השיחות יתחילו כאן",
-            "אחרי אישור בקשה, אפשר לפתוח שיחה ולתאם את פרטי השיעור."
-          );
-        } else {
-          for (const request of conversations) {
-            messageBox.append(requestCard(request, true));
-          }
-        }
-      } catch (error) {
-        console.error("Request load failed:", error?.code);
-        requestBox.textContent =
-          "לא הצלחנו לטעון את הבקשות. לחצו על רענון כדי לנסות שוב.";
-        messageBox.textContent =
-          "השיחות לא נטענו. אפשר לנסות שוב באמצעות רענון הבקשות.";
-      } finally {
-        requestsLoading = false;
-        $("refresh-requests").disabled = false;
-      }
-    }
-
-    $("edit-button").addEventListener("click", openEditor);
-    $("profile-form").addEventListener("submit", saveProfile);
-    $("photo-input").addEventListener("change", processPhoto);
-    $("refresh-requests").addEventListener("click", loadRequests);
-    $("reload-button").addEventListener("click", () => location.reload());
-
-    $("profile-form").addEventListener("input", () => {
-      dirty = true;
-    });
-
-    $("profile-form").addEventListener("change", () => {
-      dirty = true;
-    });
-
-    for (const id of ["use-self", "use-parent", "use-teacher"]) {
-      $(id).addEventListener("change", toggleEditorSections);
-    }
-
-    $("cancel-edit").addEventListener("click", () => {
-      if (saving || processingPhoto) return;
-      if (dirty && !confirm("לבטל את השינויים שלא נשמרו?")) return;
-      closeEditor();
-    });
-
-    $("remove-photo").addEventListener("click", () => {
-      if (saving || processingPhoto) return;
-      photo = "";
-      dirty = true;
-      setAvatar($("edit-avatar"), value("name"), "");
-    });
-
-    window.addEventListener("beforeunload", event => {
-      if (dirty || saving || processingPhoto) {
-        event.preventDefault();
-        event.returnValue = "";
-      }
-    });
-
-    window.addEventListener("kivun:before-signout", event => {
-      if (saving || processingPhoto) {
-        event.preventDefault();
-        notice("editor-message", "יש להמתין לסיום הפעולה לפני התנתקות.", true);
-        return;
-      }
-
-      if (dirty) {
-        if (!confirm("יש שינויים שלא נשמרו. להתנתק ולוותר עליהם?")) {
-          event.preventDefault();
-          return;
-        }
-
-        dirty = false;
-      }
-    });
-
-    async function start() {
-      try {
-        const access = await import("./access.js");
-        await access.requireAccess();
-
-        const modules = await Promise.all([
-          import("./firebase.js"),
-          import("./catalog.js"),
-          import("https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js")
-        ]);
-
-        [sdk, catalog] = modules;
-        writeBatch = modules[2].writeBatch;
-
-        user = sdk.auth.currentUser;
-
-        if (!user) {
-          location.replace("login.html");
-          return;
-        }
-
-        sdk.onAuthStateChanged(sdk.auth, current => {
-          if (current?.uid !== user.uid) {
-            dirty = false;
-            location.replace("login.html");
-          }
-        });
-
-        const snapshot = await sdk.getDoc(
-          sdk.doc(sdk.db, "users", user.uid)
-        );
-
-        exists = snapshot.exists();
-        profile = exists ? snapshot.data() : {
-          name: user.displayName || "",
-          accountUses: {
-            selfLearner: true,
-            parent: false,
-            teacher: false
-          }
-        };
-
-        buildLearningEditors();
-        renderProfile();
-
-        $("page-loading").hidden = true;
-        $("dashboard").hidden = false;
-
-        if (!exists) {
-          notice("page-message", "החשבון מחובר. השלימו את הפרופיל כדי להתחיל.");
-        }
-
-        await loadRequests();
-      } catch (error) {
-        console.error("Dashboard initialization failed:", error);
-
-        $("page-loading").hidden = true;
-        $("reload-button").hidden = false;
-
-        notice(
-          "page-message",
-          "לא הצלחנו לטעון את האזור האישי. בדקו את החיבור לאינטרנט ונסו שוב.",
-          true
-        );
-      }
-    }
-
-    start();
-  </script>
 </body>
 </html>
